@@ -43,6 +43,60 @@
 .header-bar .login-bar .login-content {
   margin-left: 25rpx;
   color: #fff;
+  font-size: 26rpx;
+}
+.header-bar .login-bar .login-tips {
+  margin-left: 36rpx;
+}
+.header-bar .login-bar .login-tips .tips-title {
   font-size: 36rpx;
+  font-weight: bold;
+  color: #fff;
+}
+.header-bar .login-bar .login-tips .resume-online {
+  margin-top: 25rpx;
+  display: flex;
+  align-items: center;
+}
+.header-bar .login-bar .login-tips .resume-online image {
+  width: 24rpx;
+  height: 24rpx;
+}
+.header-bar .login-bar .login-tips .resume-online .resume-content {
+  margin-left: 15rpx;
+  font-size: 24rpx;
+  color: #fff;
+}
+.header-bar .mine-info {
+  margin-top: 25rpx;
+  display: flex;
+  justify-content: space-around;
+  color: #fff;
+}
+.header-bar .mine-info .mine-info-item {
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-bar .mine-info .mine-info-item .item-num {
+  font-weight: bold;
+  margin-bottom: 5rpx;
+}
+.header-bar .mine-info-box {
+  background-color: #fff;
+}
+.header-bar .mine-info-box .mine-info-item {
+  width: 500rpx;
+  font-size: 26rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.header-bar .mine-info-box .mine-info-item .item-num {
+  font-weight: bold;
+  margin-bottom: 5rpx;
 }
 

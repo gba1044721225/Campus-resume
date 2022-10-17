@@ -80,12 +80,13 @@
 
 		<tui-fab :bottom="10" :right="20" :btnList="btnList" @click="fabClick"></tui-fab>
 
-		<my-login ref="loginBox" v-model="showwindow"></my-login>
+		<my-login ref="loginBox"></my-login>
 	</view>
 </template>
 
 <script>
-	import MyLogin from "@/mycomponents/login.vue"
+	import MyLogin from "@/loginView/login.vue"
+	import { mapState } from 'vuex'
 	export default {
 		components: {
 			MyLogin
@@ -144,9 +145,8 @@
 		methods: {
 			fabClick(e) {
 				// console.log(e)
-				console.log(this.$isLogin())
-				if (this.$isLogin() == true) {
-					switch (e.index) {
+				if (this.token) {
+					switch (e.index) {	
 						case 0:
 							this.linkToRecruitment()
 							break;
@@ -186,6 +186,9 @@
 					url: "/IndexLink/findJob/findJob"
 				})
 			}
+		},
+		computed:{
+			...mapState(['token'])
 		}
 	}
 </script>

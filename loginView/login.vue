@@ -27,42 +27,14 @@
 
 <script>
 	export default {
-		// props:{
-		// 	showwindow:Boolean
-		// },
-		//  model: {
-		//     prop: 'showwindow',        // 指定 v-model 要绑定的参数叫什么名字，来自于 props 中定义的参数
-		//     event: 'windowChange',    // 指定要触发的事件名字，将被用于 $emit
-		//   },
 		data() {
 			return {
 				showAgreement: false,
 				maskClosable:true,
 				agreementChoose:false,
-				// styles: {
-				// 	position: 'fixed',
-				// 	bottom: 0,
-				// 	top: 0,
-				// 	left: 0,
-				// 	right: 0,
-				// 	display: 'flex',
-				// 	'justify-content': 'center',
-				// 	'align-items': 'center'
-				// }
 			}
 		},
-		// computed:{
-		// 	showAgreement:{
-		// 		get(){
-		// 			console.log(1111)
-		// 			return this.showwindow
-		// 		},
-		// 		set(val){
-		// 			console.log(2222)
-		// 			this.$emit("windowChange",val)
-		// 		}
-		// 	}
-		// },
+
 		methods:{
 			linkToUserAgreement(){
 				uni.navigateTo({
@@ -139,7 +111,7 @@
 
 					text {
 						font-size: 26rpx;
-						color: #866761;
+						color: #1296db;
 					}
 				}
 
@@ -147,7 +119,7 @@
 					margin-top: 20rpx;
 					font-size: 30rpx;
 					color: #FFFFFF;
-					background-color: #866761;
+					background-color: #1296db;
 					height: 80rpx;
 					width: 100%;
 					text-align: center;

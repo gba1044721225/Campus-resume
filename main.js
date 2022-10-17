@@ -4,31 +4,20 @@ import App from './App'
 import Vue from 'vue'
 import helper from "common/helper.js"
 import uView from '@/uni_modules/uview-ui'
+import store from '@/store/index.js'
+// console.log(store)
 Vue.config.productionTip = false
 Vue.use(uView)
 Object.keys(helper).forEach(v => {
 	Vue.prototype['$' + v] = helper[v]
 })
 
-Vue.prototype.$isLogin = function() {
-	wx.checkSession({
-	  success () {
-	    //session_key 未过期，并且在本生命周期一直有效
-	  },
-	  fail () {
-		loginFlag=false
-	  }
-	})
-	
-	return loginFlag
-}
-
 Vue.prototype.$wxLogin = function() {
 	return new Promise((resolve, reject) => {
 		uni.getUserProfile({
 			desc: "wx",
 			success: getUserProfileRes => {
-				console.log("getUserProfileRes", getUserProfileRes)
+				// console.log("getUserProfileRes", getUserProfileRes)
 				uni.showModal({
 					title: "微信授权登录",
 					content: "是否同意微信授权登录",
@@ -43,6 +32,7 @@ Vue.prototype.$wxLogin = function() {
 									...loginRes
 								}
 								console.log("data", data)
+								uni.setStorageSync('rawData',data.rawData)
 								resolve(data)
 							}
 						});
@@ -57,7 +47,8 @@ Vue.prototype.$wxLogin = function() {
 
 App.mpType = 'app'
 const app = new Vue({
-	...App
+	...App,
+	store:store
 })
 app.$mount()
 // #endif
