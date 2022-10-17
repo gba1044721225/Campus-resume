@@ -1,0 +1,1 @@
+<view class="mine"><view class="header-bar"><view class="login-bar"><image class="mine-avatar" src="/static/mine_def_touxiang_3x.png" mode data-event-opts="{{[['tap',[['userLogin',['$event']]]]]}}" bindtap="__e"></image><view data-event-opts="{{[['tap',[['userLogin',['$event']]]]]}}" class="login-content" bindtap="__e">登录/注册 ></view></view></view></view>

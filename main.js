@@ -3,18 +3,14 @@ import App from './App'
 // #ifndef VUE3
 import Vue from 'vue'
 import helper from "common/helper.js"
+import uView from '@/uni_modules/uview-ui'
 Vue.config.productionTip = false
-
+Vue.use(uView)
 Object.keys(helper).forEach(v => {
 	Vue.prototype['$' + v] = helper[v]
 })
 
 Vue.prototype.$isLogin = function() {
-	let loginFlag=true
-	if(uni.getStorageSync('token') === ''){
-		loginFlag=false
-	}
-	
 	wx.checkSession({
 	  success () {
 	    //session_key 未过期，并且在本生命周期一直有效
@@ -45,38 +41,6 @@ Vue.prototype.$wxLogin = function() {
 								let data = {
 									...getUserProfileRes,
 									...loginRes
-								}
-								if (uni.getStorageSync('code') === '') {
-									uni.setStorageSync('code', data
-										.code)
-								} else {
-									uni.checkSession({
-										success: res => {
-											console.log(
-												"res",
-												res)
-											if (res
-												.errMsg ===
-												'checkSession:ok'
-												)
-												data.code =
-												uni
-												.getStorageSync(
-													'code')
-											else {
-												uni.clearStorage()
-												uni.setStorageSync(
-													'code',
-													data
-													.code
-													)
-											}
-
-										},
-										fail: res => {
-
-										}
-									})
 								}
 								console.log("data", data)
 								resolve(data)
