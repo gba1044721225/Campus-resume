@@ -2,22 +2,23 @@
 	<view class="mine">
 		<view class="header-bar">
 			<!-- 未登录 -->
-			<!-- 			<view class='login-bar'>
+			<view class='login-bar' v-if='!openId'>
 				<image class="mine-avatar" src="/static/mine_def_touxiang_3x.png" mode="" @click="userLogin"></image>
 				<view class="login-content" @click="userLogin">
 					登录/注册 >
 				</view>
-			</view> -->
+			</view>
 
 			<!-- 已登录 -->
-			<view class="login-bar">
-				<image class="mine-avatar" src="/static/mine_def_touxiang_3x.png" mode="" @click="userLogin"></image>
+			<view class="login-bar" v-if='openId'>
+				<image class="mine-avatar" :src="userInfo.avatarUrl" mode="" @click="reqAavatar">
+				</image>
 				<view class="login-tips">
 					<view class="tips-title">
-						请完善信息
+						{{userInfo.nickName}}
 					</view>
 					<view class="resume-online">
-						<image class="edit-icon" src="/static/edit.png" mode=""></image>
+						<image class="edit-icon" :src="`${imageBaseSrc}edit.png`" mode=""></image>
 						<view class="resume-content">
 							我的在线简历
 						</view>
@@ -40,11 +41,15 @@
 				<view class="mine-info-item">
 					<image src="/static/resume.png" mode=""></image>
 					<view class="item-content">
-						{{item.label}}
+						测试
 					</view>
 				</view>
 			</view>
 		</view>
+		<view class="">
+			<image src="http://tmp/s5aXBw7WESEi319dea2e069cdf3774c42e9b106e76ad.jpg" mode=""></image>
+		</view>
+		
 		<my-login ref="loginBox"></my-login>
 	</view>
 </template>
@@ -60,6 +65,7 @@
 		},
 		data() {
 			return {
+				imageBaseSrc: this.$imageBaseSrc,
 				infoItem: [{
 						num: 0,
 						label: '已投递'
@@ -83,7 +89,7 @@
 			userLogin() {
 				uni.showModal({
 					title: "登录提醒",
-					content: '请先完成登录后使用',
+					content: '您即将授权并登录小程序',
 					success: (res) => {
 						if (res.confirm) {
 							console.log('用户点击确定');
@@ -94,8 +100,29 @@
 						}
 					},
 				})
+			},
+
+			async reqAavatar() {
+				const upLoadRes = await this.$chooseImage()
+				console.log('reqAavatar', upLoadRes)
+
+				this.$upLoadFile(`/file/upload/${this.openId}/3`, upLoadRes.tempFilePaths[0],{},res => {
+					console.log('reqAavatar', res)
+				})
+				// const data = new FormData()
+				// data.append('file', pLoadRes[1].tempFiles[0])
+				// const header = {
+				// 	'content-type': 'multipart/form-data'
+				// }
+				// this.$http(`/file/upload/${this.openId}/3`, data, res => {
+				// 	console.log('reqAavatar', res)
+				// }, header)
 			}
 		},
+		mounted() {},
+		computed: {
+			...mapState(['openId', 'userInfo'])
+		}
 	}
 </script>
 
@@ -106,6 +133,7 @@
 		background-color: #1296db;
 		padding-top: 35rpx;
 		box-sizing: border-box;
+		position: relative;
 
 		.login-bar {
 
@@ -116,6 +144,7 @@
 			.mine-avatar {
 				width: 140rpx;
 				height: 140rpx;
+				border-radius: 50%;
 			}
 
 			.login-content {
@@ -171,20 +200,36 @@
 				}
 			}
 		}
-		
-		.mine-info-box{
+
+		.mine-info-box {
 			background-color: #fff;
+			width: 500rpx;
+			position: absolute;
+			border-radius: 15rpx;
+			box-shadow: 0rpx 0rpx 10rpx 10rpx rgba(0, 0, 0, .1);
+			bottom: -200rpx;
+			left: 50%;
+			right: 50%;
+			transform: translate(-50%, -50%);
+			padding: 50rpx 100rpx;
+			display: flex;
+			justify-content: space-between;
+
 			.mine-info-item {
-				width: 500rpx;
-				font-size: 26rpx;
+				font-size: 24rpx;
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-			
-				.item-num {
-					font-weight: bold;
-					margin-bottom: 5rpx;
+				color: rgba(0, 0, 0, .7);
+
+				image {
+					width: 50rpx;
+					height: 50rpx;
+				}
+
+				.item-content {
+					margin-top: 15rpx;
 				}
 			}
 		}

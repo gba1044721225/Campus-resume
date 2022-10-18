@@ -1,5 +1,5 @@
 <template>
-	<view class="login">	
+	<view class="login">
 		<tui-landscape :show="showAgreement" :maskClosable="maskClosable" @close="closeWindow">
 			<view class="tui-text">
 				<view class="agreement-box">
@@ -26,49 +26,96 @@
 </template>
 
 <script>
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		data() {
 			return {
 				showAgreement: false,
-				maskClosable:true,
-				agreementChoose:false,
+				maskClosable: true,
+				agreementChoose: false,
 			}
 		},
 
-		methods:{
-			linkToUserAgreement(){
+		methods: {
+			linkToUserAgreement() {
 				uni.navigateTo({
-					url:"/IndexLink/rules/userAgreement"
+					url: "/IndexLink/rules/userAgreement"
 				})
 			},
-			
-			linkToPrivacy(){
+
+			linkToPrivacy() {
 				uni.navigateTo({
-					url:"/IndexLink/rules/privacy"
+					url: "/IndexLink/rules/privacy"
 				})
 			},
-			
-			closeWindow(e){
+
+			closeWindow(e) {
 				// console.log(e,"e")
-				this.showAgreement=false
+				this.showAgreement = false
 			},
-			
-			agreenIt(){
-				this.agreementChoose=!this.agreementChoose
+
+			agreenIt() {
+				this.agreementChoose = !this.agreementChoose
 			},
-			
-			closeAgreementBox(){
-				if(this.agreementChoose===true){
-					this.showAgreement=false
-					this.$wxLogin()
-				}else{
+
+			//点击确定
+			closeAgreementBox() {
+				if (this.agreementChoose === true) {
+					this.$wxLogin().then(loginData => {
+						// console.log("loginData", loginData)
+
+						this.$getHttp(`/recruit/user/login/${loginData.code}/1`, {}, (res) => {
+							console.log('res', res)
+							if (res.meta.code === '200') {
+								uni.setStorageSync('rawData', loginData
+									.rawData)
+								uni.setStorageSync('openId', res.meta.openId)
+								this.$store.commit('reSetOpenId', res.meta.openId)
+								this.$store.commit('setUserInfo',uni.getStorageSync('rawData'))
+								this.reqSaveUserInfo()
+							}
+						})
+					})
+					this.showAgreement = false
+				} else {
 					uni.showToast({
-						icon:"none",
-						title:"请阅读内容后勾选同意",
-						duration:2000
+						icon: "none",
+						title: "请阅读内容后勾选同意",
+						duration: 2000
 					})
 				}
 			},
+
+			reqSaveUserInfo() {
+				const userInfo = JSON.parse(uni.getStorageSync('rawData'))
+				const data = {
+					data: {
+						nickname: userInfo.nickName,
+						avatarUrl: userInfo.avatarUrl,
+						gender: userInfo.gender,
+						country: userInfo.country,
+						province: userInfo.province,
+						city: userInfo.city,
+					},
+					meta: {
+						openId: this.openId,
+						role: 1,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				console.log("data", data)
+				this.$http('/recruit/user/add', data, res => {
+					console.log('reqSaveUserInfo', res)
+				}, header)
+			}
+		},
+
+		computed: {
+			...mapState(['openId'])
 		}
 	}
 </script>
@@ -79,9 +126,9 @@
 			width: 500rpx;
 			height: 450rpx;
 			border-radius: 20rpx;
-			
+
 			background-color: #fff;
-			
+
 			.agreement-box {
 				padding: 50rpx 25rpx;
 

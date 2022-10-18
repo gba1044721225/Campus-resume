@@ -1464,7 +1464,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8556,7 +8556,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8577,14 +8577,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8670,7 +8670,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"Recruitment platform","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9085,7 +9085,7 @@ internalMixin(Vue);
 /***/ }),
 /* 5 */
 /*!********************************************************!*\
-  !*** D:/project/private_work/Campus-resume/pages.json ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/pages.json ***!
   \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
@@ -9228,16 +9228,17 @@ function normalizeComponent (
 /***/ }),
 /* 12 */
 /*!**************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/common/helper.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/common/helper.js ***!
   \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(uni) {module.exports = {
+/* WEBPACK VAR INJECTION */(function(uni) {function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}module.exports = {
+  imageBaseSrc: '/static/',
 
   //设置全局api请求地址h
   hostname: function hostname() {
-    return "https://www.gzzzzb.com/app/index.php?i=1&c=entry&m=ewei_shopv2&do=mobile&r=";
+    return "http://192.168.43.93:8888";
   },
 
   //设置全局api请求路径
@@ -9246,11 +9247,12 @@ function normalizeComponent (
     return url + '';
   },
 
-  //请求api,fun(请求的页面文件名)，data（请求参数），succ（funciton，用于接收api返回的数据），t（是否显示加载中，可不传）
-  http: function http(fun, data, succ, t) {
-    var header = {
-      'content-type': 'application/x-www-form-urlencoded' };
+  header: {
+    'content-type': 'application/x-www-form-urlencoded' },
 
+
+  //请求api,fun(请求的页面文件名)，data（请求参数），succ（funciton，用于接收api返回的数据），t（是否显示加载中，可不传）
+  http: function http(fun, data, succ, header, t) {
     if (t) {
       uni.showLoading({
         "title": "加载中",
@@ -9262,7 +9264,7 @@ function normalizeComponent (
       "url": this.$baseurl() + fun,
       "method": "POST",
       "data": data,
-      "header": header,
+      "header": header ? header : this.$header,
       "success": function success(res) {
         uni.stopPullDownRefresh();
         if (t) {
@@ -9283,10 +9285,7 @@ function normalizeComponent (
 
   },
   //请求api,fun(请求的页面文件名)，data（请求参数），succ（funciton，用于接收api返回的数据），t（是否显示加载中，可不传）
-  getHttp: function getHttp(fun, data, succ, t) {
-    var header = {
-      'content-type': 'application/x-www-form-urlencoded' };
-
+  getHttp: function getHttp(fun, data, succ, header, t) {
     if (t) {
       uni.showLoading({
         "title": "加载中",
@@ -9298,7 +9297,7 @@ function normalizeComponent (
       "url": this.$baseurl() + fun,
       "method": "GET",
       "data": data,
-      "header": header,
+      "header": header ? header : this.$header,
       "success": function success(res) {
         uni.stopPullDownRefresh();
         if (t) {
@@ -9329,13 +9328,40 @@ function normalizeComponent (
         fun();
       }, 2000);
     }
+  },
+
+  //上传
+  //1:证书 2简历 3头像 4活动宣传图
+  upLoadFile: function upLoadFile(url, file, data, succ) {
+    console.log("this.hostname()", this.$hostname() + url);
+    wx.uploadFile({
+      url: this.$hostname() + url, //仅为示例，非真实的接口地址
+      filePath: file, //tempFilePaths[0]
+      name: 'file',
+      formData: _objectSpread({},
+      data),
+
+      success: succ });
+
+  },
+
+  //获取本地图片
+  chooseImage: function chooseImage() {
+    // console.log(1111)
+    return wx.chooseImage({ //选择要发送的图片
+      count: 1,
+      sizeType: ["original", "compressed"],
+      sourceType: ["album", "camera"],
+      type: 'image' });
+
+
   } };
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 13 */
 /*!***************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/index.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/index.js ***!
   \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9424,7 +9450,7 @@ var install = function install(Vue) {
 /***/ }),
 /* 14 */
 /*!**************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/mixin/mixin.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/mixin/mixin.js ***!
   \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9593,7 +9619,7 @@ var install = function install(Vue) {
 /***/ }),
 /* 15 */
 /*!****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/mixin/mpMixin.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/mixin/mpMixin.js ***!
   \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9608,7 +9634,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 16 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/index.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/index.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9621,7 +9647,7 @@ _Request.default;exports.default = _default;
 /***/ }),
 /* 17 */
 /*!****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/Request.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/Request.js ***!
   \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9829,7 +9855,7 @@ Request = /*#__PURE__*/function () {
 /***/ }),
 /* 18 */
 /*!************************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
   \************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9842,7 +9868,7 @@ function _default(config) {return (0, _index.default)(config);};exports.default 
 /***/ }),
 /* 19 */
 /*!******************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/adapters/index.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/adapters/index.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -9950,7 +9976,7 @@ function _default(config) {return new Promise(function (resolve, reject) {
 /***/ }),
 /* 20 */
 /*!********************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10029,7 +10055,7 @@ function buildURL(url, params) {
 /***/ }),
 /* 21 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/utils.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/utils.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10170,7 +10196,7 @@ function isUndefined(val) {
 /***/ }),
 /* 22 */
 /*!**********************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
   \**********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10200,7 +10226,7 @@ function buildFullPath(baseURL, requestedURL) {
 /***/ }),
 /* 23 */
 /*!*************************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
   \*************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10224,7 +10250,7 @@ function isAbsoluteURL(url) {
 /***/ }),
 /* 24 */
 /*!***********************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
   \***********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10248,7 +10274,7 @@ function combineURLs(baseURL, relativeURL) {
 /***/ }),
 /* 25 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/settle.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/settle.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10274,7 +10300,7 @@ function settle(resolve, reject, response) {var
 /***/ }),
 /* 26 */
 /*!***************************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
   \***************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10334,7 +10360,7 @@ InterceptorManager;exports.default = _default;
 /***/ }),
 /* 27 */
 /*!********************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10447,7 +10473,7 @@ function _default(globalsConfig) {var config2 = arguments.length > 1 && argument
 /***/ }),
 /* 28 */
 /*!*****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/defaults.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/core/defaults.js ***!
   \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10485,7 +10511,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 29 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/luch-request/utils/clone.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/luch-request/utils/clone.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -10755,7 +10781,7 @@ var clone = function () {
 }();var _default =
 
 clone;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/buffer/index.js */ 30).Buffer))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../BaiduNetdiskDownload/HBuilderX.3.4.14.20220607/HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 30).Buffer))
 
 /***/ }),
 /* 30 */
@@ -12833,16 +12859,16 @@ module.exports = Array.isArray || function (arr) {
 /***/ }),
 /* 34 */
 /*!*************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/util/route.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/util/route.js ***!
   \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 35));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               * 并且带有路由拦截功能
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               */var
 
 Router = /*#__PURE__*/function () {
   function Router() {_classCallCheck(this, Router);
@@ -13756,7 +13782,7 @@ if (hadRuntime) {
 /***/ }),
 /* 38 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/colorGradient.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/colorGradient.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -13899,7 +13925,7 @@ function colorToRgba(color, alpha) {
 /***/ }),
 /* 39 */
 /*!****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/test.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/test.js ***!
   \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14196,7 +14222,7 @@ function regExp(o) {
 /***/ }),
 /* 40 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/debounce.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/debounce.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14235,7 +14261,7 @@ debounce;exports.default = _default;
 /***/ }),
 /* 41 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/throttle.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/throttle.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14275,7 +14301,7 @@ throttle;exports.default = _default;
 /***/ }),
 /* 42 */
 /*!*****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/index.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/index.js ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -14990,7 +15016,7 @@ function setConfig(_ref3)
 /***/ }),
 /* 43 */
 /*!*****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/digit.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/digit.js ***!
   \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15165,7 +15191,7 @@ function enableBoundaryChecking() {var flag = arguments.length > 0 && arguments[
 /***/ }),
 /* 44 */
 /*!****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/config.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/config.js ***!
   \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15208,7 +15234,7 @@ if (true) {
 /***/ }),
 /* 45 */
 /*!***************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props.js ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15407,7 +15433,7 @@ _upload.default);exports.default = _default;
 /***/ }),
 /* 46 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/actionSheet.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/actionSheet.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15440,7 +15466,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 47 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/album.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/album.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15473,7 +15499,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 48 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/alert.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/alert.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15503,7 +15529,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 49 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/avatar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/avatar.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15539,7 +15565,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 50 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/avatarGroup.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/avatarGroup.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15570,7 +15596,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 51 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/backtop.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/backtop.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15604,7 +15630,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 52 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/badge.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/badge.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15639,7 +15665,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 53 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/button.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/button.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15689,7 +15715,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 54 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/calendar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/calendar.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15739,7 +15765,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 55 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/carKeyboard.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/carKeyboard.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15762,7 +15788,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 56 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/cell.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/cell.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15805,7 +15831,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 57 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/cellGroup.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/cellGroup.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15830,7 +15856,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 58 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/checkbox.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/checkbox.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15865,7 +15891,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 59 */
 /*!*****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
   \*****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15902,7 +15928,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 60 */
 /*!******************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/circleProgress.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/circleProgress.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15925,7 +15951,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 61 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/code.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/code.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15954,7 +15980,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 62 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/codeInput.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/codeInput.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -15991,7 +16017,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 63 */
 /*!*******************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/col.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/col.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16018,7 +16044,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 64 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/collapse.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/collapse.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16043,7 +16069,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 65 */
 /*!****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/collapseItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/collapseItem.js ***!
   \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16076,7 +16102,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 66 */
 /*!****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/columnNotice.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/columnNotice.js ***!
   \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16108,7 +16134,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 67 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/countDown.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/countDown.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16134,7 +16160,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 68 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/countTo.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/countTo.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16167,7 +16193,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 69 */
 /*!******************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/datetimePicker.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/datetimePicker.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16211,7 +16237,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 70 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/divider.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/divider.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16241,7 +16267,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 71 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/empty.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/empty.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16274,7 +16300,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 72 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/form.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/form.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16304,7 +16330,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 73 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/formItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/formItem.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16335,7 +16361,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 74 */
 /*!*******************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/gap.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/gap.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16362,7 +16388,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 75 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/grid.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/grid.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16387,7 +16413,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 76 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/gridItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/gridItem.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16411,7 +16437,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 77 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/icon.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/icon.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16455,7 +16481,7 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 44));f
 /***/ }),
 /* 78 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/image.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/image.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16493,7 +16519,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 79 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/indexAnchor.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/indexAnchor.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16520,7 +16546,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 80 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/indexList.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/indexList.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16547,7 +16573,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 81 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/input.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/input.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16603,7 +16629,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 82 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/keyboard.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/keyboard.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16641,7 +16667,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 83 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/line.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/line.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16669,7 +16695,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 84 */
 /*!****************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/lineProgress.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/lineProgress.js ***!
   \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16696,7 +16722,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 85 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/link.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/link.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16730,7 +16756,7 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 44));f
 /***/ }),
 /* 86 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/list.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/list.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16766,7 +16792,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 87 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/listItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/listItem.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16789,7 +16815,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 88 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/loadingIcon.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/loadingIcon.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16827,7 +16853,7 @@ var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 44));f
 /***/ }),
 /* 89 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/loadingPage.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/loadingPage.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16858,7 +16884,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 90 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/loadmore.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/loadmore.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16898,7 +16924,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 91 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/modal.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/modal.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16936,7 +16962,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 92 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/navbar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/navbar.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -16975,7 +17001,7 @@ var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 93));fun
 /***/ }),
 /* 93 */
 /*!***************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/color.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/color.js ***!
   \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17002,7 +17028,7 @@ color;exports.default = _default;
 /***/ }),
 /* 94 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/noNetwork.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/noNetwork.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17027,7 +17053,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 95 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/noticeBar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/noticeBar.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17062,7 +17088,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 96 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/notify.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/notify.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17092,7 +17118,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 97 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/numberBox.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/numberBox.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17135,7 +17161,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 98 */
 /*!******************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
   \******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17160,7 +17186,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 99 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/overlay.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/overlay.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17186,7 +17212,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 100 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/parse.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/parse.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17216,7 +17242,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 101 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/picker.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/picker.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17253,7 +17279,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 102 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/popup.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/popup.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17290,7 +17316,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 103 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/radio.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/radio.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17325,7 +17351,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 104 */
 /*!**************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/radioGroup.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/radioGroup.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17363,7 +17389,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 105 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/rate.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/rate.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17397,7 +17423,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 106 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/readMore.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/readMore.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17427,7 +17453,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 107 */
 /*!*******************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/row.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/row.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17452,7 +17478,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 108 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/rowNotice.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/rowNotice.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17481,7 +17507,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 109 */
 /*!**************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/scrollList.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/scrollList.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17509,7 +17535,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 110 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/search.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/search.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17554,7 +17580,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 111 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/section.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/section.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17586,7 +17612,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 112 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/skeleton.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/skeleton.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17619,7 +17645,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 113 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/slider.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/slider.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17652,7 +17678,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 114 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/statusBar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/statusBar.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17675,7 +17701,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 115 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/steps.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/steps.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17704,7 +17730,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 116 */
 /*!*************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/stepsItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/stepsItem.js ***!
   \*************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17730,7 +17756,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 117 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/sticky.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/sticky.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17758,7 +17784,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 118 */
 /*!**************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/subsection.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/subsection.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17789,7 +17815,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 119 */
 /*!***************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/swipeAction.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/swipeAction.js ***!
   \***************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17812,7 +17838,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 120 */
 /*!*******************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
   \*******************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17841,7 +17867,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 121 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/swiper.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/swiper.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17887,7 +17913,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 122 */
 /*!********************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
   \********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17914,7 +17940,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 123 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/switch.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/switch.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17946,7 +17972,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 124 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/tabbar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/tabbar.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -17976,7 +18002,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 125 */
 /*!**************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/tabbarItem.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/tabbarItem.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18004,7 +18030,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 126 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/tabs.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/tabs.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18044,7 +18070,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 127 */
 /*!*******************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/tag.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/tag.js ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18081,7 +18107,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 128 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/text.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/text.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18126,7 +18152,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 129 */
 /*!************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/textarea.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/textarea.js ***!
   \************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18170,7 +18196,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 130 */
 /*!*********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/toast.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/toast.js ***!
   \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18207,7 +18233,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 131 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/toolbar.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/toolbar.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18235,7 +18261,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 132 */
 /*!***********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/tooltip.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/tooltip.js ***!
   \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18268,7 +18294,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 133 */
 /*!**************************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/transition.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/transition.js ***!
   \**************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18294,7 +18320,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 134 */
 /*!**********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/props/upload.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/props/upload.js ***!
   \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18338,7 +18364,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 135 */
 /*!****************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/config/zIndex.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/config/zIndex.js ***!
   \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18367,7 +18393,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 /* 136 */
 /*!********************************************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/uni_modules/uview-ui/libs/function/platform.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/uni_modules/uview-ui/libs/function/platform.js ***!
   \********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
@@ -18450,103 +18476,36 @@ platform = 'mp';var _default =
 platform;exports.default = _default;
 
 /***/ }),
-/* 137 */,
-/* 138 */,
-/* 139 */,
-/* 140 */,
-/* 141 */,
-/* 142 */,
-/* 143 */,
-/* 144 */,
-/* 145 */,
-/* 146 */,
-/* 147 */,
-/* 148 */,
-/* 149 */,
-/* 150 */,
-/* 151 */,
-/* 152 */,
-/* 153 */,
-/* 154 */,
-/* 155 */,
-/* 156 */,
-/* 157 */,
-/* 158 */,
-/* 159 */,
-/* 160 */,
-/* 161 */,
-/* 162 */,
-/* 163 */,
-/* 164 */,
-/* 165 */,
-/* 166 */,
-/* 167 */,
-/* 168 */,
-/* 169 */,
-/* 170 */,
-/* 171 */,
-/* 172 */,
-/* 173 */,
-/* 174 */,
-/* 175 */,
-/* 176 */,
-/* 177 */,
-/* 178 */,
-/* 179 */,
-/* 180 */,
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */
+/* 137 */
 /*!************************************************************!*\
-  !*** D:/project/private_work/Campus-resume/store/index.js ***!
+  !*** D:/Mr WenBenChi/project/Campus-resume/store/index.js ***!
   \************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 4));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 219));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 138));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 _vue.default.use(_vuex.default);
 
 var store = new _vuex.default.Store({
   state: {
-    token: uni.getStorageSync('token') } });var _default =
+    token: uni.getStorageSync('token') || '',
+    openId: uni.getStorageSync('openId') || '',
+    role: 1,
+    userInfo: uni.getStorageSync('rawData') ? JSON.parse(uni.getStorageSync('rawData')) : null },
+
+  mutations: {
+    reSetOpenId: function reSetOpenId(state, payload) {
+      state.openId = payload;
+    },
+    reSetRole: function reSetRole(state, payload) {
+      state.role = payload;
+    },
+    setUserInfo: function setUserInfo(state, payload) {
+      state.userInfo = JSON.parse(payload);
+    } } });var _default =
 
 
 
@@ -18554,7 +18513,7 @@ store;exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 219 */
+/* 138 */
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
   \**************************************************************************************/

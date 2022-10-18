@@ -24,21 +24,25 @@ Vue.prototype.$wxLogin = function() {
 					confirmText: "同意",
 					cancelText: "拒绝",
 					success: res => {
-						uni.login({
-							provider: 'weixin',
-							success: function(loginRes) {
-								let data = {
-									...getUserProfileRes,
-									...loginRes
+						if (res.confirm) {
+							console.log('用户点击确定');
+							uni.login({
+								provider: 'weixin',
+								success: function(loginRes) {
+									let data = {
+										...getUserProfileRes,
+										...loginRes
+									}
+									// console.log("data", data)
+
+									resolve(data)
 								}
-								console.log("data", data)
-								uni.setStorageSync('rawData',data.rawData)
-								resolve(data)
-							}
-						});
+							});
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
 					}
 				})
-
 			}
 		})
 	})
@@ -48,7 +52,7 @@ Vue.prototype.$wxLogin = function() {
 App.mpType = 'app'
 const app = new Vue({
 	...App,
-	store:store
+	store: store
 })
 app.$mount()
 // #endif

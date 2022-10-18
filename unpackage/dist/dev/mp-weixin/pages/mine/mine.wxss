@@ -30,6 +30,7 @@
   background-color: #1296db;
   padding-top: 35rpx;
   box-sizing: border-box;
+  position: relative;
 }
 .header-bar .login-bar {
   margin-left: 25rpx;
@@ -39,6 +40,7 @@
 .header-bar .login-bar .mine-avatar {
   width: 140rpx;
   height: 140rpx;
+  border-radius: 50%;
 }
 .header-bar .login-bar .login-content {
   margin-left: 25rpx;
@@ -86,17 +88,32 @@
 }
 .header-bar .mine-info-box {
   background-color: #fff;
+  width: 500rpx;
+  position: absolute;
+  border-radius: 15rpx;
+  box-shadow: 0rpx 0rpx 10rpx 10rpx rgba(0, 0, 0, 0.1);
+  bottom: -200rpx;
+  left: 50%;
+  right: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  padding: 50rpx 100rpx;
+  display: flex;
+  justify-content: space-between;
 }
 .header-bar .mine-info-box .mine-info-item {
-  width: 500rpx;
-  font-size: 26rpx;
+  font-size: 24rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  color: rgba(0, 0, 0, 0.7);
 }
-.header-bar .mine-info-box .mine-info-item .item-num {
-  font-weight: bold;
-  margin-bottom: 5rpx;
+.header-bar .mine-info-box .mine-info-item image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.header-bar .mine-info-box .mine-info-item .item-content {
+  margin-top: 15rpx;
 }
 
