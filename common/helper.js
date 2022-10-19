@@ -97,11 +97,11 @@ module.exports = {
 
 	//上传
 	//1:证书 2简历 3头像 4活动宣传图
-	upLoadFile(url, file, data, succ) {
+	upLoadFile(url, filePath, data, succ) {
 		console.log("this.hostname()",this.$hostname() + url)
 		wx.uploadFile({
 			url: this.$hostname() + url, //仅为示例，非真实的接口地址
-			filePath: file, //tempFilePaths[0]
+			filePath, //tempFilePaths[0]
 			name: 'file',
 			formData: {
 				...data
@@ -112,8 +112,7 @@ module.exports = {
 
 	//获取本地图片
 	chooseImage() {
-		// console.log(1111)
-		return wx.chooseImage({ //选择要发送的图片
+		return wx.chooseImage({
 			count: 1,
 			sizeType: ["original", "compressed"],
 			sourceType: ["album","camera"],

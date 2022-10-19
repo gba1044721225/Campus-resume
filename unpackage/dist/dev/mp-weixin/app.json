@@ -5,12 +5,18 @@
   ],
   "subPackages": [
     {
-      "root": "IndexLink",
+      "root": "HomeLink",
       "pages": [
         "recruitment/recruitment",
         "findJob/findJob",
         "rules/userAgreement",
         "rules/privacy"
+      ]
+    },
+    {
+      "root": "MineLink",
+      "pages": [
+        "resumeOnline/resumeOnline"
       ]
     }
   ],

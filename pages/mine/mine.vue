@@ -38,16 +38,13 @@
 			</view>
 
 			<view class="mine-info-box">
-				<view class="mine-info-item">
+				<view class="mine-info-item" @click="linkToResumeOnline">
 					<image src="/static/resume.png" mode=""></image>
 					<view class="item-content">
-						测试
+						在线简历
 					</view>
 				</view>
 			</view>
-		</view>
-		<view class="">
-			<image src="http://tmp/s5aXBw7WESEi319dea2e069cdf3774c42e9b106e76ad.jpg" mode=""></image>
 		</view>
 		
 		<my-login ref="loginBox"></my-login>
@@ -104,19 +101,18 @@
 
 			async reqAavatar() {
 				const upLoadRes = await this.$chooseImage()
-				console.log('reqAavatar', upLoadRes)
-
+				// console.log('reqAavatar', upLoadRes)
 				this.$upLoadFile(`/file/upload/${this.openId}/3`, upLoadRes.tempFilePaths[0],{},res => {
-					console.log('reqAavatar', res)
+					console.log('reqAavatar', res.data)
+					
 				})
-				// const data = new FormData()
-				// data.append('file', pLoadRes[1].tempFiles[0])
-				// const header = {
-				// 	'content-type': 'multipart/form-data'
-				// }
-				// this.$http(`/file/upload/${this.openId}/3`, data, res => {
-				// 	console.log('reqAavatar', res)
-				// }, header)
+
+			},
+			
+			linkToResumeOnline(){
+				uni.navigateTo({
+					url:'/MineLink/resumeOnline/resumeOnline'
+				})
 			}
 		},
 		mounted() {},

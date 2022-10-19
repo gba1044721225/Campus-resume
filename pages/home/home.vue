@@ -177,13 +177,13 @@
 
 			linkToRecruitment() {
 				uni.navigateTo({
-					url: "/IndexLink/recruitment/recruitment"
+					url: "/HomeLink/recruitment/recruitment"
 				})
 			},
 
 			linkToFindJob() {
 				uni.navigateTo({
-					url: "/IndexLink/findJob/findJob"
+					url: "/HomeLink/findJob/findJob"
 				})
 			}
 		},

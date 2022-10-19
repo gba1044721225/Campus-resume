@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "在线简历",
+  "usingComponents": {
+    "resume-item": "/MineLink/resumeOnline/components/resumeItem"
+  }
+}

@@ -41,13 +41,13 @@
 		methods: {
 			linkToUserAgreement() {
 				uni.navigateTo({
-					url: "/IndexLink/rules/userAgreement"
+					url: "/HomeLink/rules/userAgreement"
 				})
 			},
 
 			linkToPrivacy() {
 				uni.navigateTo({
-					url: "/IndexLink/rules/privacy"
+					url: "/HomeLink/rules/privacy"
 				})
 			},
 
@@ -69,6 +69,15 @@
 						this.$getHttp(`/recruit/user/login/${loginData.code}/1`, {}, (res) => {
 							console.log('res', res)
 							if (res.meta.code === '200') {
+								if(res.data){
+									console.log("loginData",loginData)
+									console.log(JSON.parse(res.data))
+									loginData.rawData=JSON.stringify({
+										...JSON.parse(loginData.rawData),
+										avatarUrl:JSON.parse(res.data).avatarUrl
+									})
+								}
+
 								uni.setStorageSync('rawData', loginData
 									.rawData)
 								uni.setStorageSync('openId', res.meta.openId)
@@ -107,9 +116,9 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				console.log("data", data)
+				// console.log("data", data)
 				this.$http('/recruit/user/add', data, res => {
-					console.log('reqSaveUserInfo', res)
+					// console.log('reqSaveUserInfo', res)
 				}, header)
 			}
 		},

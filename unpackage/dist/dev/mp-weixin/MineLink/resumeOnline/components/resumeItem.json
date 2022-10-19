@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "tui-input": "/components/thorui/tui-input/tui-input",
+    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar"
+  },
+  "component": true
+}

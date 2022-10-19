@@ -22,9 +22,11 @@
 		// 	}
 		// }
 	],
-	"subPackages": [{
-		"root": "IndexLink",
-		"pages": [{
+	"subPackages": [
+		{
+		"root": "HomeLink",
+		"pages": [
+			{
 				"path": "recruitment/recruitment",
 				"style": {
 					"navigationBarTitleText": "发布招聘信息"
@@ -49,7 +51,19 @@
 				}
 			}
 		]
-	}],
+		},
+		{
+		"root": "MineLink",
+		"pages": [
+			{
+				"path": "resumeOnline/resumeOnline",
+				"style": {
+					"navigationBarTitleText": "在线简历"
+				}
+			}
+		]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
