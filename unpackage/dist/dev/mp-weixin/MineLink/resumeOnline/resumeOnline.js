@@ -156,6 +156,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 {
   components: {
     ResumeItem: ResumeItem },
@@ -163,24 +164,59 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       imageBaseSrc: this.$imageBaseSrc,
+      resumeList: 'gaga',
       tabList: [{
         label: '简历1',
-        resumeList: {} },
-
+        resumeList: 'gaga'
+        // {
+        // 	pnInfo: {
+        // 		name: 'ljc',
+        // 		phone: '',
+        // 		school: '',
+        // 		education: '',
+        // 		major: '',
+        // 		jobIntention: '',
+        // 		graduationTime: '',
+        // 	}
+        // }
+      },
       {
         label: '简历2',
-        resumeList: {} },
+        resumeList: {
+          pnInfo: {
+            name: '',
+            phone: '',
+            school: '',
+            education: '',
+            major: '',
+            jobIntention: '',
+            graduationTime: '' } } },
+
+
 
       {
         label: '简历3',
-        resumeList: {} }],
+        resumeList: {
+          pnInfo: {
+            name: '',
+            phone: '',
+            school: '',
+            education: '',
+            major: '',
+            jobIntention: '',
+            graduationTime: '' } } }],
+
+
 
 
       currentResume: 0,
       indicatorDots: false,
       interval: 2000,
       duration: 500,
-      swiperHeight: 0 };
+      swiperHeight: 0,
+      showItem: false };
+
+
 
   },
   methods: {
@@ -195,13 +231,14 @@ __webpack_require__.r(__webpack_exports__);
       var query = uni.createSelectorQuery().in(this);
       // console.log(query.select('.swiper-item'))
       query.select('.swiper-item').boundingClientRect(function (data) {
-        console.log("data", data);
-        _this.swiperHeight = data.height;
+        // console.log("data", data)
+        _this.swiperHeight = data.height + 25 + 'px';
       }).exec();
     } },
 
   onReady: function onReady() {
     this.getHeight();
+    this.showItem = true;
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

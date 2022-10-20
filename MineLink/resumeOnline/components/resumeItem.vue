@@ -1,81 +1,57 @@
 <template>
 	<view class="resume-item">
 		<view class="resume-item-info">
-			<view class="item-title">
-				个人信息
-			</view>
-			<view class="info-content">
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="姓名" placeholder="请输入姓名">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="手机" placeholder="请输入手机">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学校" placeholder="请输入学校">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学历" placeholder="请输入学历">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="专业" placeholder="请输入专业">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="求职意向" placeholder="请输入求职意向">
-					</tui-input>
-				</view>
+			<tui-collapse :index="0" :current="collapseList.personalInfo" @click="changeCollapse(0)">
+				<template v-slot:title>
+					<view class="item-title">
+						个人信息
+					</view>
+				</template>
+				<template v-slot:content>
+					<view class="info-content">
+						<view class="content-item">
+							<tui-input :isFillet='true'  :inputBorder='true' :required='true' label="姓名"
+								placeholder="请输入姓名">
+							</tui-input>
+						</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' :inputBorder='true' :required='true' label="手机"
+								placeholder="请输入手机">
+							</tui-input>
+						</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学校"
+								placeholder="请输入学校">
+							</tui-input>
+						</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学历"
+								placeholder="请输入学历">
+							</tui-input>
+						</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' :inputBorder='true' :required='true' label="专业"
+								placeholder="请输入专业">
+							</tui-input>
+						</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' :inputBorder='true' :required='true' label="求职意向"
+								placeholder="请输入求职意向">
+							</tui-input>
+						</view>
 
-				<view class="content-item">
-					<tui-input :isFillet='true' @click="calendarHandler" :inputBorder='true' :required='true'
-						label="毕业时间" :disabled='true' placeholder="请选择毕业时间"></tui-input>
-					<tui-calendar ref="calendar" isFixed :type="1" @change="changeDate"></tui-calendar>
-				</view>
-			</view>
+						<view class="content-item">
+							<tui-input :isFillet='true' @click="calendarHandler" :inputBorder='true' :required='true'
+								label="毕业时间" :disabled='true' placeholder="请选择毕业时间"></tui-input>
+							<tui-calendar ref="calendar" isFixed :type="1" @change="changeDate"></tui-calendar>
+						</view>
+					</view>
+				</template>
+			</tui-collapse>
 		</view>
 
 
-		<view class="resume-item-info">
-			<view class="item-title">
-				补充信息
-			</view>
-			<view class="info-content">
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="姓名" placeholder="请输入姓名">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="手机" placeholder="请输入手机">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学校" placeholder="请输入学校">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="学历" placeholder="请输入学历">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="专业" placeholder="请输入专业">
-					</tui-input>
-				</view>
-				<view class="content-item">
-					<tui-input :isFillet='true' :inputBorder='true' :required='true' label="求职意向" placeholder="请输入求职意向">
-					</tui-input>
-				</view>
 
-				<view class="content-item">
-					<tui-input :isFillet='true' @click="calendarHandler" :inputBorder='true' :required='true'
-						label="毕业时间" :disabled='true' placeholder="请选择毕业时间"></tui-input>
-					<tui-calendar ref="calendar" isFixed :type="1" @change="changeDate"></tui-calendar>
-				</view>
-			</view>
-		</view>
 	</view>
 </template>
 
@@ -86,12 +62,31 @@
 			event: 'changeResumeList'
 		},
 		props: {
-			resumeList() {
-				return {}
+			resumeList:{
+				type:[String,Number],
+				default:'902323'
+				// default(){
+				// 	return {
+				// 		pnInfo: {
+				// 			name: '',
+				// 			phone: '',
+				// 			school: '',
+				// 			education: '',
+				// 			major: '',
+				// 			jobIntention: '',
+				// 			graduationTime: '',
+				// 		}
+				// 	}
+				// }			
 			}
 		},
 		data() {
-			return {}
+			return {
+				collapseList:{
+					personalInfo:-1
+				},
+				
+			}
 		},
 		methods: {
 			calendarHandler() {
@@ -99,7 +94,30 @@
 			},
 			changeDate(e) {
 				console.log("e", e)
+			},
+			changeCollapse(e){
+				// console.log(e)
+				if(this.collapseList.personalInfo==-1){
+					this.$set(this.collapseList,'personalInfo',e)
+				}else{
+					this.$set(this.collapseList,'personalInfo',-1)
+				}
+				// console.log('this.collapseList',this.collapseList)
 			}
+		},
+		// computed:{
+		// 	pnInfo:{
+		// 		get(){
+		// 			// console.log("this.resumeList",this.resumeList)
+		// 			return this.resumeList.pnInfo
+		// 		},
+		// 		set(e){
+		// 			console.log("pnInfo",e)
+		// 		}
+		// 	}
+		// },
+		mounted(){
+			console.log('123123123123',this.resumeList)
 		}
 	}
 </script>
@@ -107,6 +125,7 @@
 <style lang="scss" scoped>
 	.resume-item {
 		min-height: 100vh;
+
 		.resume-item-info {
 			margin-top: 25rpx;
 

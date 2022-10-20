@@ -8,11 +8,12 @@
 		</view>
 
 		<view class="resume-swiper">
-			<swiper class="swiper" :style="{height:swiperHeight+'rpx'}" :current="currentResume" circular :indicator-dots="indicatorDots"
-				:interval="interval" :duration="duration" @change='changeTabItemBySwiper'>
+			<swiper class="swiper" :style="{height:swiperHeight}" :current="currentResume" circular
+				:indicator-dots="indicatorDots" :interval="interval" :duration="duration"
+				@change='changeTabItemBySwiper'>
 				<swiper-item v-for="(item,index) in tabList" :key="index">
 					<view class="swiper-item">
-						<resume-item v-model='item.resumeList'></resume-item>
+						<resume-item v-if='showItem' v-model='resumeList'></resume-item>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -29,24 +30,59 @@
 		data() {
 			return {
 				imageBaseSrc: this.$imageBaseSrc,
+				resumeList: 'gaga',
 				tabList: [{
 						label: '简历1',
-						resumeList: {}
+						resumeList: 'gaga'
+						// {
+						// 	pnInfo: {
+						// 		name: 'ljc',
+						// 		phone: '',
+						// 		school: '',
+						// 		education: '',
+						// 		major: '',
+						// 		jobIntention: '',
+						// 		graduationTime: '',
+						// 	}
+						// }
 					},
 					{
 						label: '简历2',
-						resumeList: {}
+						resumeList: {
+							pnInfo: {
+								name: '',
+								phone: '',
+								school: '',
+								education: '',
+								major: '',
+								jobIntention: '',
+								graduationTime: '',
+							}
+						}
 					},
 					{
 						label: '简历3',
-						resumeList: {}
+						resumeList: {
+							pnInfo: {
+								name: '',
+								phone: '',
+								school: '',
+								education: '',
+								major: '',
+								jobIntention: '',
+								graduationTime: '',
+							}
+						}
 					},
 				],
 				currentResume: 0,
 				indicatorDots: false,
 				interval: 2000,
 				duration: 500,
-				swiperHeight:0
+				swiperHeight: 0,
+				showItem:false
+
+
 			}
 		},
 		methods: {
@@ -61,20 +97,21 @@
 				const query = uni.createSelectorQuery().in(this);
 				// console.log(query.select('.swiper-item'))
 				query.select('.swiper-item').boundingClientRect(data => {
-					console.log("data",data)
-					this.swiperHeight=data.height
+					// console.log("data", data)
+					this.swiperHeight = data.height + 25 + 'px'
 				}).exec();
 			}
 		},
 		onReady() {
 			this.getHeight()
+			this.showItem=true
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.resume-oneline {
-		min-height: 100vh;
+		margin-bottom: 5vh;
 
 		.resume-online-tab {
 			display: flex;

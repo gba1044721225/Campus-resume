@@ -79,11 +79,14 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    tuiCollapse: function() {
+      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 226))
+    },
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 226))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 233))
     },
     tuiCalendar: function() {
-      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 233))
+      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 240))
     }
   }
 } catch (e) {
@@ -197,30 +200,6 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 var _default =
 {
   model: {
@@ -228,12 +207,31 @@ var _default =
     event: 'changeResumeList' },
 
   props: {
-    resumeList: function resumeList() {
-      return {};
+    resumeList: {
+      type: [String, Number],
+      default: '902323'
+      // default(){
+      // 	return {
+      // 		pnInfo: {
+      // 			name: '',
+      // 			phone: '',
+      // 			school: '',
+      // 			education: '',
+      // 			major: '',
+      // 			jobIntention: '',
+      // 			graduationTime: '',
+      // 		}
+      // 	}
+      // }			
     } },
 
   data: function data() {
-    return {};
+    return {
+      collapseList: {
+        personalInfo: -1 } };
+
+
+
   },
   methods: {
     calendarHandler: function calendarHandler() {
@@ -241,7 +239,31 @@ var _default =
     },
     changeDate: function changeDate(e) {
       console.log("e", e);
-    } } };exports.default = _default;
+    },
+    changeCollapse: function changeCollapse(e) {
+      // console.log(e)
+      if (this.collapseList.personalInfo == -1) {
+        this.$set(this.collapseList, 'personalInfo', e);
+      } else {
+        this.$set(this.collapseList, 'personalInfo', -1);
+      }
+      // console.log('this.collapseList',this.collapseList)
+    } },
+
+  // computed:{
+  // 	pnInfo:{
+  // 		get(){
+  // 			// console.log("this.resumeList",this.resumeList)
+  // 			return this.resumeList.pnInfo
+  // 		},
+  // 		set(e){
+  // 			console.log("pnInfo",e)
+  // 		}
+  // 	}
+  // },
+  mounted: function mounted() {
+    console.log('123123123123', this.resumeList);
+  } };exports.default = _default;
 
 /***/ }),
 
