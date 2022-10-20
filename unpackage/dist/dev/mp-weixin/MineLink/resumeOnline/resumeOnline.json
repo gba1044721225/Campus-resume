@@ -1,6 +1,8 @@
 {
   "navigationBarTitleText": "在线简历",
   "usingComponents": {
-    "resume-item": "/MineLink/resumeOnline/components/resumeItem"
+    "tui-collapse": "/components/thorui/tui-collapse/tui-collapse",
+    "tui-input": "/components/thorui/tui-input/tui-input",
+    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar"
   }
 }

@@ -59,4 +59,25 @@
   display: block;
   min-height: 100vh;
 }
+.resume-oneline .resume-swiper .swiper-item .resume-item-info.data-v-94a2068a {
+  margin-top: 25rpx;
+}
+.resume-oneline .resume-swiper .swiper-item .resume-item-info .item-title.data-v-94a2068a {
+  margin-left: 25rpx;
+  font-size: 36rpx;
+  padding: 5rpx 25rpx;
+  box-sizing: border-box;
+  font-weight: bold;
+  border-left: 8rpx solid #1296db;
+}
+.resume-oneline .resume-swiper .swiper-item .resume-item-info .info-content.data-v-94a2068a {
+  margin-top: 20rpx;
+}
+.resume-oneline .resume-swiper .swiper-item .resume-item-info .info-content .content-item.data-v-94a2068a {
+  padding: 0 25rpx;
+  margin-top: 25rpx;
+}
+.resume-oneline .resume-swiper .swiper-item .resume-item-info .info-content .content-item .tui-input__wrap.data-v-94a2068a {
+  background-color: red;
+}
 

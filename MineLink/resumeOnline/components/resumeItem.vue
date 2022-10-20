@@ -10,8 +10,8 @@
 				<template v-slot:content>
 					<view class="info-content">
 						<view class="content-item">
-							<tui-input :isFillet='true'  :inputBorder='true' :required='true' label="姓名"
-								placeholder="请输入姓名">
+							<tui-input v-model="itemResumeList.pnInfo.name" :isFillet='true' :inputBorder='true'
+								:required='true' label="姓名" placeholder="请输入姓名">
 							</tui-input>
 						</view>
 						<view class="content-item">
@@ -57,35 +57,31 @@
 
 <script>
 	export default {
-		model: {
-			prop: 'resumeList',
-			event: 'changeResumeList'
-		},
+
 		props: {
-			resumeList:{
-				type:[String,Number],
-				default:'902323'
-				// default(){
-				// 	return {
-				// 		pnInfo: {
-				// 			name: '',
-				// 			phone: '',
-				// 			school: '',
-				// 			education: '',
-				// 			major: '',
-				// 			jobIntention: '',
-				// 			graduationTime: '',
-				// 		}
-				// 	}
-				// }			
+			resumeList: {
+				type: Object,
+				default () {
+					return {
+						pnInfo: {
+							name: '',
+							phone: '',
+							school: '',
+							education: '',
+							major: '',
+							jobIntention: '',
+							graduationTime: '',
+						}
+					}
+				}
 			}
 		},
 		data() {
 			return {
-				collapseList:{
-					personalInfo:-1
+				collapseList: {
+					personalInfo: -1
 				},
-				
+				itemResumeList: {}
 			}
 		},
 		methods: {
@@ -95,29 +91,28 @@
 			changeDate(e) {
 				console.log("e", e)
 			},
-			changeCollapse(e){
+			changeCollapse(e) {
 				// console.log(e)
-				if(this.collapseList.personalInfo==-1){
-					this.$set(this.collapseList,'personalInfo',e)
-				}else{
-					this.$set(this.collapseList,'personalInfo',-1)
+				if (this.collapseList.personalInfo == -1) {
+					this.$set(this.collapseList, 'personalInfo', e)
+				} else {
+					this.$set(this.collapseList, 'personalInfo', -1)
 				}
 				// console.log('this.collapseList',this.collapseList)
 			}
 		},
-		// computed:{
-		// 	pnInfo:{
-		// 		get(){
-		// 			// console.log("this.resumeList",this.resumeList)
-		// 			return this.resumeList.pnInfo
-		// 		},
-		// 		set(e){
-		// 			console.log("pnInfo",e)
-		// 		}
-		// 	}
-		// },
-		mounted(){
-			console.log('123123123123',this.resumeList)
+		watch: {
+			itemResumeList: {
+				deep: true,
+				immediate: true,
+				handler(nw) {
+					console.log('nw', nw)
+					this.$emit('changeResumeList',JSON.parse(JSON.stringify(nw)))
+				}
+			}
+		},
+		mounted() {
+			this.itemResumeList = JSON.parse(JSON.stringify(this.resumeList))
 		}
 	}
 </script>
