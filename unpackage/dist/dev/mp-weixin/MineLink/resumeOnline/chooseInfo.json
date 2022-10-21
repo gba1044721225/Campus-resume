@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "在线简历",
+  "usingComponents": {
+    "chooseInfo-tui-index-list-item": "/MineLink/resumeOnline/chooseInfo-tui-index-list-item",
+    "tui-searchbar": "/components/thorui/tui-searchbar/tui-searchbar"
+  }
+}

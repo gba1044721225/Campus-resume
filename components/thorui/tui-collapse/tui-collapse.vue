@@ -41,12 +41,12 @@
 			},
 			//索引
 			index: {
-				type: Number,
+				type: [Number,String],
 				default: 0
 			},
 			//当前索引，index==current时展开
 			current: {
-				type: Number,
+				type: [Number,String],
 				default: -1
 			},
 			// 是否禁用

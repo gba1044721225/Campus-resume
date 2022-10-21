@@ -16,7 +16,8 @@
     {
       "root": "MineLink",
       "pages": [
-        "resumeOnline/resumeOnline"
+        "resumeOnline/resumeOnline",
+        "resumeOnline/chooseInfo"
       ]
     }
   ],

@@ -1,8 +1,0 @@
-{
-  "usingComponents": {
-    "tui-collapse": "/components/thorui/tui-collapse/tui-collapse",
-    "tui-input": "/components/thorui/tui-input/tui-input",
-    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar"
-  },
-  "component": true
-}
