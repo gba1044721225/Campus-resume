@@ -1,0 +1,1 @@
+<view class="choose-info-two"><button type="default" data-event-opts="{{[['tap',[['mapFun',['$event']]]]]}}" bindtap="__e">唤醒地图</button></view>

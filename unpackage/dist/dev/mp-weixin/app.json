@@ -17,7 +17,8 @@
       "root": "MineLink",
       "pages": [
         "resumeOnline/resumeOnline",
-        "resumeOnline/chooseInfo"
+        "resumeOnline/chooseInfo",
+        "resumeOnline/chooseInfoTwo"
       ]
     }
   ],
@@ -48,5 +49,10 @@
     ]
   },
   "lazyCodeLoading": "requiredComponents",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "一件获取用户位置方面用户使用"
+    }
+  },
   "usingComponents": {}
 }

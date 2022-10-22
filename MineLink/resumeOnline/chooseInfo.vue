@@ -43,11 +43,12 @@
 							id: 3,
 							label: "物理"
 						},
-					]
+					],
 				},
 				searchData:[],
 				infoType: '',
-				infoIndex: ''
+				infoIndex: '',
+				infoKey:'',
 			}
 		},
 		methods:{
@@ -56,7 +57,7 @@
 				// this.getPos(e.value)
 				
 				const reg=this.getReg(e.value)
-				this.searchData= this.dataList[this.infoType].filter(v=>{
+				this.searchData= this.dataList[this.infoKey].filter(v=>{
 					if(reg.test(v.label)){
 						return v
 					}
@@ -69,7 +70,7 @@
 				return reg
 			},
 			init(){
-				this.searchData=this.dataList[this.infoType]
+				this.searchData=this.dataList[this.infoKey]
 			},
 			chooseItem(label){
 				uni.navigateBack({
@@ -77,7 +78,7 @@
 					success:(res)=>{
 						console.log("res",getCurrentPages())
 						const currentPage=getCurrentPages()
-						currentPage[0].$vm.comfirmInfo(this.infoIndex,this.infoType,label)
+						currentPage[0].$vm.comfirmInfo(this.infoIndex,this.infoType,this.infoKey,label)
 					}
 				})
 			}
@@ -86,6 +87,7 @@
 			console.log("payload", payload)
 			this.infoType = payload.type
 			this.infoIndex = payload.index
+			this.infoKey=payload.key
 			this.init()
 		}
 	}

@@ -66,6 +66,12 @@
 				"style": {
 					"navigationBarTitleText": "在线简历"
 				}
+			},
+			{
+				"path": "resumeOnline/chooseInfoTwo",
+				"style": {
+					"navigationBarTitleText": "在线简历"
+				}
 			}
 		]
 		}

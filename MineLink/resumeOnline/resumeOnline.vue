@@ -13,11 +13,12 @@
 				@change='changeTabItemBySwiper'>
 				<swiper-item v-for="(item,index) in tabList" :key="index">
 					<view class="swiper-item">
-						<view class="resume-item-info" v-for="(info,key) in item.resumeList" :key="key">
-							<tui-collapse :index="key+index" :current="info.personalInfo"
-								@click="changeCollapse(key+index,index)">
+						<!-- 个人信息 -->
+						<view class="resume-item-info">
+							<tui-collapse :index="'pnInfo'+index" :current="item.resumeList.pnInfo.columnIndex"
+								@click="changeCollapse('pnInfo'+index,index,'pnInfo')">
 								<template v-slot:title>
-									<view class="item-title" v-if='info.personalInfo==-1'>
+									<view class="item-title" v-if='item.resumeList.pnInfo.columnIndex==-1'>
 										个人信息
 									</view>
 								</template>
@@ -27,54 +28,103 @@
 									</view>
 									<view class="info-content">
 										<view class="content-item">
-											<tui-input v-model="info.name" :isFillet='true' :inputBorder='true'
-												:required='true' label="姓名" placeholder="请输入姓名">
+											<tui-input v-model="item.resumeList.pnInfo.name" :isFillet='true'
+												:inputBorder='true' :required='true' label="姓名" placeholder="请输入姓名">
 											</tui-input>
 										</view>
 										<view class="content-item">
-											<tui-input v-model="info.phone" :isFillet='true' :inputBorder='true'
-												:required='true' label="手机" placeholder="请输入手机">
+											<tui-input v-model="item.resumeList.pnInfo.phone" :isFillet='true'
+												:inputBorder='true' :required='true' label="手机" placeholder="请输入手机">
 											</tui-input>
 										</view>
 										<view class="content-item">
-											<tui-input v-model="info.school" :disabled="true" :isFillet='true'
-												:inputBorder='true' :required='true' label="学校" placeholder="请输入学校"
-												@click="linkToChooseInfo(index,'school')">
+											<tui-input v-model="item.resumeList.pnInfo.school" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="学校"
+												placeholder="请输入学校" @click="linkToChooseInfo(index,'pnInfo','school')">
 											</tui-input>
 										</view>
 										<view class="content-item">
-											<tui-input v-model="info.education" :disabled="true" :isFillet='true'
-												:inputBorder='true' :required='true' label="学历" placeholder="请输入学历"
-												@click="openEducation(index)">
+											<tui-input v-model="item.resumeList.pnInfo.education" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="学历"
+												placeholder="请输入学历" @click="openPicker(index,'pnInfo','education')">
 											</tui-input>
 										</view>
 										<view class="content-item">
-											<tui-input v-model="info.major" :disabled="true" :isFillet='true'
-												:inputBorder='true' :required='true' label="专业" placeholder="请输入专业"
-												@click="linkToChooseInfo(index,'major')">
+											<tui-input v-model="item.resumeList.pnInfo.major" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="专业"
+												placeholder="请输入专业" @click="linkToChooseInfo(index,'pnInfo','major')">
 											</tui-input>
 										</view>
 
 										<view class="content-item">
-											<tui-input :isFillet='true' v-model="info.graduationTime"
-												@click="calendarHandler(index)" :inputBorder='true' :required='true'
+											<tui-input :isFillet='true' v-model="item.resumeList.pnInfo.graduationTime"
+												@click="calendarHandler(index,'pnInfo','graduationTime')" :inputBorder='true' :required='true'
 												label="毕业时间" :disabled='true' placeholder="请选择毕业时间">
 											</tui-input>
 										</view>
 
 										<view class="content-item">
-											<tui-input v-model="info.jobIntention" :isFillet='true' :inputBorder='true'
-												:required='true' label="求职意向" placeholder="请输入求职意向">
+											<tui-input v-model="item.resumeList.pnInfo.jobIntention" :isFillet='true'
+												:inputBorder='true' :required='true' label="求职意向" placeholder="请输入求职意向">
 											</tui-input>
 										</view>
 									</view>
 								</template>
 							</tui-collapse>
 						</view>
-															
+
+						<!-- 补充信息 -->
+						<view class="resume-item-info">
+							<tui-collapse :index="'addInfo'+index" :current="item.resumeList.addInfo.columnIndex"
+								@click="changeCollapse('addInfo'+index,index,'addInfo')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.resumeList.addInfo.columnIndex==-1'>
+										补充信息
+									</view>
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										补充信息
+									</view>
+									<view class="info-content">
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.addInfo.email" :isFillet='true'
+												:inputBorder='true' :required='true' label="邮箱" placeholder="请输入邮箱">
+											</tui-input>
+										</view>
+										<view class="content-item">
+											<tui-input :disabled="true" v-model="item.resumeList.addInfo.politicalStatus"
+												:isFillet='true' :inputBorder='true' :required='true' label="政治面貌"
+												placeholder="请输入政治面貌" @click="openPicker(index,'addInfo','politicalStatus')">
+											</tui-input>
+										</view>
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.addInfo.birthday" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="出生日期"
+												placeholder="请输入出生日期" @click="calendarHandler(index,'addInfo','birthday')">
+											</tui-input>
+										</view>
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.addInfo.hometown" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="籍贯"
+												placeholder="请输入籍贯" @click="linkToChooseInfoTwo(index,'addInfo','hometown')">
+											</tui-input>
+										</view>
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.addInfo.dwelling" :disabled="true"
+												:isFillet='true' :inputBorder='true' :required='true' label="居住地"
+												placeholder="请输入居住地" @click="linkToChooseInfoTwo(index,'addInfo','dwelling')">
+											</tui-input>
+										</view>
+
+									</view>
+								</template>
+							</tui-collapse>
+						</view>
+
 						<!-- 学历 -->
-						<u-picker :show="item.showEducationPick" :columns="item.educationColumns"
-							@confirm="confirmEducation(index,$event)"></u-picker>
+						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
+							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
 
 						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
 						</tui-calendar>
@@ -92,9 +142,11 @@
 				imageBaseSrc: this.$imageBaseSrc,
 				tabList: [{
 						label: '简历1',
-						showSchoolPicker: false,
-						showEducationPick: false,
-						showMajorPick: false,
+						showPicker: false,
+						pickKey:{
+							type:'',//记录类型
+							key:''
+						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
 						],
@@ -104,24 +156,37 @@
 						majorColumns: [
 							['计算机', '数学', '生物工程']
 						],
+						politicalStatusColumns: [
+							['党员', '团员', '群众']
+						],
 						resumeList: {
 							pnInfo: {
-								name: 'ljc',
+								name: '',
 								phone: '',
 								school: '',
 								education: '',
 								major: '',
 								jobIntention: '',
 								graduationTime: '',
-								personalInfo: -1
+								columnIndex: -1
+							},
+							addInfo: {
+								email: '',
+								politicalStatus: '',
+								birthday: '',
+								hometown: '',
+								dwelling: '',
+								columnIndex: -1
 							}
 						}
 					},
 					{
 						label: '简历2',
-						showSchoolPicker: false,
-						showEducationPick: false,
-						showMajorPick: false,
+						showPicker: false,
+						pickKey:{
+							type:'',//记录类型
+							key:''
+						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
 						],
@@ -131,24 +196,37 @@
 						majorColumns: [
 							['计算机', '数学', '生物工程']
 						],
+						politicalStatusColumns: [
+							['党员', '团员', '群众']
+						],
 						resumeList: {
 							pnInfo: {
-								name: 'ljc',
+								name: '',
 								phone: '',
 								school: '',
 								education: '',
 								major: '',
 								jobIntention: '',
 								graduationTime: '',
-								personalInfo: -1
+								columnIndex: -1
+							},
+							addInfo: {
+								email: '',
+								politicalStatus: '',
+								birthday: '',
+								hometown: '',
+								dwelling: '',
+								columnIndex: -1
 							}
 						}
 					},
 					{
 						label: '简历3',
-						showSchoolPicker: false,
-						showEducationPick: false,
-						showMajorPick: false,
+						showPicker: false,
+						pickKey:{
+							type:'',//记录类型
+							key:''
+						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
 						],
@@ -158,16 +236,27 @@
 						majorColumns: [
 							['计算机', '数学', '生物工程']
 						],
+						politicalStatusColumns: [
+							['党员', '团员', '群众']
+						],
 						resumeList: {
 							pnInfo: {
-								name: 'ljc',
+								name: '',
 								phone: '',
 								school: '',
 								education: '',
 								major: '',
 								jobIntention: '',
 								graduationTime: '',
-								personalInfo: -1
+								columnIndex: -1
+							},
+							addInfo: {
+								email: '',
+								politicalStatus: '',
+								birthday: '',
+								hometown: '',
+								dwelling: '',
+								columnIndex: -1
 							}
 						}
 					},
@@ -193,78 +282,112 @@
 			//页面高度初始化
 			setHeight() {
 				const query = uni.createSelectorQuery().in(this);
-				const res = wx.getSystemInfoSync()
-				let statusHeight = res.statusBarHeight
-				let windowHeight = res.windowHeight
-				// console.log("res",res)
 				// console.log(query.select('.swiper-item'))
 				query.select('.swiper-item').boundingClientRect(data => {
 					// console.log("data", data)
 					this.swiperHeight = data.height + 25 + 'px'
-					this.swiperMinHeight = windowHeight - statusHeight + 'px'
-				}).exec();
 
+				}).exec();
 			},
-			
+			//设置最小高度初始化
+			setMinHeight() {
+				// console.log("res",res)
+				const res = wx.getSystemInfoSync()
+				let statusHeight = res.statusBarHeight
+				let windowHeight = res.windowHeight
+				this.swiperMinHeight = windowHeight - statusHeight + 'px'
+			},
+			//操作折叠层
+			changeCollapse(val, index, key) {
+				// console.log("val", val)
+				// console.log("index", index)
+
+				if (this.tabList[index]['resumeList'][key]['columnIndex'] == -1) {
+					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', val)
+				} else {
+					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', -1)
+				}
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
+				// console.log("this.tabList", this.tabList)
+			},
 			//跳到学校/专业选择
-			linkToChooseInfo(index,type) {
+			linkToChooseInfo(index, type,key) {
+				// console.log("index",index)
+				// console.log("type",type)
 				uni.navigateTo({
-					url:`/MineLink/resumeOnline/chooseInfo?index=${index}&type=${type}`
+					url: `/MineLink/resumeOnline/chooseInfo?index=${index}&type=${type}&key=${key}`
 				})
 			},
-			comfirmInfo(index,type,value){
-				this.tabList[index].resumeList.pnInfo[type]=value
-				console.log("this.tabList[index].resumeList.pnInfo[type]",this.tabList[index].resumeList.pnInfo[type])
+			//确认学校/专业
+			comfirmInfo(index, type, key ,value) {
+				this.tabList[index].resumeList[type][key] = value
+			},
+
+			//弹出学历
+			openPicker(index,type,key) {
+				this.tabList[index].pickKey.type=type
+				this.tabList[index].pickKey.key=key
+				this.tabList[index].showPicker = true
+			},
+			//选择Picker
+			confirmPicker(index, e) {
+				// console.log("e", e)
+				const type=this.tabList[index]['pickKey']['type']
+				const key=this.tabList[index]['pickKey']['key']
+				this.tabList[index].resumeList[type][key] = e.value[0]
+				this.tabList[index].showPicker = false
+				this.tabList[index]['pickKey']['type']=''
+				this.tabList[index]['pickKey']['key']=''
+			},
+			//取消Picker
+			cancelPicker(index){
+				this.tabList[index].showPicker = false
+				const type=this.tabList[index]['pickKey']['type']
+				const key=this.tabList[index]['pickKey']['key']
+				this.tabList[index]['pickKey']['type']=''
+				this.tabList[index]['pickKey']['key']=''
 			},
 			
-			//弹出学历
-			openEducation(index) {
-				this.tabList[index].showEducationPick = true
-			},
-			//选择学历
-			confirmEducation(index, e) {
-				// console.log("e", e)
-				this.tabList[index].resumeList.pnInfo.education = e.value[0]
-				this.tabList[index].showEducationPick = false
-			},
 			//弹出日期选择
-			calendarHandler(index) {
+			calendarHandler(index,type,key) {
 				// console.log(this.$refs.calendar)
+				this.tabList[index].pickKey.type=type
+				this.tabList[index].pickKey.key=key
 				this.$refs.calendar[index].show()
 			},
 			//选择日期
 			chooseDate(index, e) {
-				this.tabList[index].resumeList.pnInfo.graduationTime = e.result
+				const type=this.tabList[index]['pickKey']['type']
+				const key=this.tabList[index]['pickKey']['key']
+				this.tabList[index].resumeList[type][key] = e.result
+				this.tabList[index]['pickKey']['type']=''
+				this.tabList[index]['pickKey']['key']=''
 				// console.log("e", e)
 			},
-			//操作折叠层
-			changeCollapse(val, index) {
-				// console.log("val", val)
-				// console.log("index", index)
-
-				if (this.tabList[index]['resumeList']['pnInfo']['personalInfo'] == -1) {
-					this.$set(this.tabList[index]['resumeList']['pnInfo'], 'personalInfo', val)
-				} else {
-					this.$set(this.tabList[index]['resumeList']['pnInfo'], 'personalInfo', -1)
-				}
-
-				console.log("this.tabList", this.tabList)
-			},
+			
+			//选择两列的
+			linkToChooseInfoTwo(index, type,key){
+				uni.navigateTo({
+					url: `/MineLink/resumeOnline/chooseInfoTwo?index=${index}&type=${type}&key=${key}`
+				})
+			}
 		},
 		onReady() {
 			this.setHeight()
 		},
 		onLoad() {
-
+			this.setMinHeight()
+		},
+		watch: {
+			tabList: {
+				deep: true,
+				handler(nw) {
+					console.log("nw", nw)
+				}
+			}
 		}
-		// watch: {
-		// 	tabList: {
-		// 		deep: true,
-		// 		handler(nw) {
-		// 			console.log("nw", nw)
-		// 		}
-		// 	}
-		// }
 	}
 </script>
 
@@ -331,12 +454,14 @@
 							padding: 0 25rpx;
 							margin-top: 25rpx;
 
-							.tui-input__wrap {
-								background-color: red;
+							::v-deep .tui-input__wrap {
+								border: 1rpx solid #1296db;
 							}
 						}
 					}
 				}
+
+
 			}
 		}
 

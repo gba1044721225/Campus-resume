@@ -58,7 +58,12 @@
             "es6" : true
         },
         "usingComponents" : true,
-		"lazyCodeLoading": "requiredComponents"
+        "lazyCodeLoading" : "requiredComponents",
+        "permission" : {
+            "scope.userLocation" : {
+                "desc" : "一件获取用户位置方面用户使用"
+            }
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

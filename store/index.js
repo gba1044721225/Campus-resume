@@ -9,11 +9,7 @@ const store = new Vuex.Store({
 	openId:uni.getStorageSync('openId')||'',
 	role:1,
 	userInfo:uni.getStorageSync('rawData')?JSON.parse(uni.getStorageSync('rawData')):null,
-	pageInfo:{
-		index:999,
-		type:"",
-		value:""
-	}
+
   },
   mutations:{
 	  reSetOpenId(state,payload){

@@ -76,7 +76,7 @@
   padding: 0 25rpx;
   margin-top: 25rpx;
 }
-.resume-oneline .resume-swiper .swiper-item .resume-item-info .info-content .content-item .tui-input__wrap.data-v-94a2068a {
-  background-color: red;
+.resume-oneline .resume-swiper .swiper-item .resume-item-info .info-content .content-item.data-v-94a2068a  .tui-input__wrap {
+  border: 1rpx solid #1296db;
 }
 
