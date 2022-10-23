@@ -22,58 +22,63 @@
 		// 	}
 		// }
 	],
-	"subPackages": [
-		{
-		"root": "HomeLink",
-		"pages": [
-			{
-				"path": "recruitment/recruitment",
-				"style": {
-					"navigationBarTitleText": "发布招聘信息"
+	"permission": {
+		"scope.userLocation": {
+			"desc": "你的位置信息将用于小程序位置接口的效果展示"
+		}
+	},
+	"requiredPrivateInfos": [
+		"getLocation"
+	],
+	"subPackages": [{
+			"root": "HomeLink",
+			"pages": [{
+					"path": "recruitment/recruitment",
+					"style": {
+						"navigationBarTitleText": "发布招聘信息"
+					}
+				},
+				{
+					"path": "findJob/findJob",
+					"style": {
+						"navigationBarTitleText": "填写应聘简历"
+					}
+				},
+				{
+					"path": "rules/userAgreement",
+					"style": {
+						"navigationBarTitleText": "用户协议"
+					}
+				},
+				{
+					"path": "rules/privacy",
+					"style": {
+						"navigationBarTitleText": "隐私政策"
+					}
 				}
-			},
-			{
-				"path": "findJob/findJob",
-				"style": {
-					"navigationBarTitleText": "填写应聘简历"
-				}
-			},
-			{
-				"path": "rules/userAgreement",
-				"style": {
-					"navigationBarTitleText": "用户协议"
-				}
-			},
-			{
-				"path": "rules/privacy",
-				"style": {
-					"navigationBarTitleText": "隐私政策"
-				}
-			}
-		]
+			]
 		},
 		{
-		"root": "MineLink",
-		"pages": [
-			{
-				"path": "resumeOnline/resumeOnline",
-				"style": {
-					"navigationBarTitleText": "在线简历"
+			"root": "MineLink",
+			"pages": [{
+					"path": "resumeOnline/resumeOnline",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/chooseInfo",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/chooseInfoTwo",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
 				}
-			},
-			{
-				"path": "resumeOnline/chooseInfo",
-				"style": {
-					"navigationBarTitleText": "在线简历"
-				}
-			},
-			{
-				"path": "resumeOnline/chooseInfoTwo",
-				"style": {
-					"navigationBarTitleText": "在线简历"
-				}
-			}
-		]
+			]
 		}
 	],
 	"globalStyle": {

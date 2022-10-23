@@ -58,8 +58,9 @@
 
 										<view class="content-item">
 											<tui-input :isFillet='true' v-model="item.resumeList.pnInfo.graduationTime"
-												@click="calendarHandler(index,'pnInfo','graduationTime')" :inputBorder='true' :required='true'
-												label="毕业时间" :disabled='true' placeholder="请选择毕业时间">
+												@click="calendarHandler(index,'pnInfo','graduationTime')"
+												:inputBorder='true' :required='true' label="毕业时间" :disabled='true'
+												placeholder="请选择毕业时间">
 											</tui-input>
 										</view>
 
@@ -93,27 +94,31 @@
 											</tui-input>
 										</view>
 										<view class="content-item">
-											<tui-input :disabled="true" v-model="item.resumeList.addInfo.politicalStatus"
-												:isFillet='true' :inputBorder='true' :required='true' label="政治面貌"
-												placeholder="请输入政治面貌" @click="openPicker(index,'addInfo','politicalStatus')">
+											<tui-input :disabled="true"
+												v-model="item.resumeList.addInfo.politicalStatus" :isFillet='true'
+												:inputBorder='true' :required='true' label="政治面貌" placeholder="请输入政治面貌"
+												@click="openPicker(index,'addInfo','politicalStatus')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.birthday" :disabled="true"
 												:isFillet='true' :inputBorder='true' :required='true' label="出生日期"
-												placeholder="请输入出生日期" @click="calendarHandler(index,'addInfo','birthday')">
+												placeholder="请输入出生日期"
+												@click="calendarHandler(index,'addInfo','birthday')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.hometown" :disabled="true"
 												:isFillet='true' :inputBorder='true' :required='true' label="籍贯"
-												placeholder="请输入籍贯" @click="linkToChooseInfoTwo(index,'addInfo','hometown')">
+												placeholder="请输入籍贯"
+												@click="openCityPicker(index,'addInfo','hometown')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.dwelling" :disabled="true"
 												:isFillet='true' :inputBorder='true' :required='true' label="居住地"
-												placeholder="请输入居住地" @click="linkToChooseInfoTwo(index,'addInfo','dwelling')">
+												placeholder="请输入居住地"
+												@click="openCityPicker(index,'addInfo','dwelling')">
 											</tui-input>
 										</view>
 
@@ -124,10 +129,15 @@
 
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
-							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
+							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)" @change="changeHandler"></u-picker>
 
+						<!-- 时间 -->
 						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
 						</tui-calendar>
+						
+						<!-- 地区 -->
+						<u-picker ref="uPicker" :show="item.showCityPicker" :columns="cityList"
+							@confirm="confirmCityPicker(index,$event)" @cancel="cancelCityPicker(index)" @change="changeHandler(index,$event)"></u-picker>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -136,16 +146,23 @@
 </template>
 
 <script>
+	import cityData from '@/utils/city.js'
 	export default {
+
 		data() {
 			return {
 				imageBaseSrc: this.$imageBaseSrc,
+				cityList: [],
+				cityLevel1: [],
+				cityLevel2: [],
+				cityLevel3: [],		
 				tabList: [{
 						label: '简历1',
 						showPicker: false,
-						pickKey:{
-							type:'',//记录类型
-							key:''
+						showCityPicker:false,
+						pickKey: {
+							type: '', //记录类型
+							key: ''
 						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
@@ -183,9 +200,10 @@
 					{
 						label: '简历2',
 						showPicker: false,
-						pickKey:{
-							type:'',//记录类型
-							key:''
+						showCityPicker:false,
+						pickKey: {
+							type: '', //记录类型
+							key: ''
 						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
@@ -223,9 +241,10 @@
 					{
 						label: '简历3',
 						showPicker: false,
-						pickKey:{
-							type:'',//记录类型
-							key:''
+						showCityPicker:false,
+						pickKey: {
+							type: '', //记录类型
+							key: ''
 						},
 						schoolColumns: [
 							['北师大', '北理工', '华南师范']
@@ -307,13 +326,13 @@
 				} else {
 					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', -1)
 				}
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 				// console.log("this.tabList", this.tabList)
 			},
 			//跳到学校/专业选择
-			linkToChooseInfo(index, type,key) {
+			linkToChooseInfo(index, type, key) {
 				// console.log("index",index)
 				// console.log("type",type)
 				uni.navigateTo({
@@ -321,54 +340,131 @@
 				})
 			},
 			//确认学校/专业
-			comfirmInfo(index, type, key ,value) {
+			comfirmInfo(index, type, key, value) {
 				this.tabList[index].resumeList[type][key] = value
 			},
 
-			//弹出学历
-			openPicker(index,type,key) {
-				this.tabList[index].pickKey.type=type
-				this.tabList[index].pickKey.key=key
+			//弹出picker
+			openPicker(index, type, key) {
+				this.tabList[index].pickKey.type = type
+				this.tabList[index].pickKey.key = key
 				this.tabList[index].showPicker = true
 			},
-			//选择Picker
+			//选择picker
 			confirmPicker(index, e) {
 				// console.log("e", e)
-				const type=this.tabList[index]['pickKey']['type']
-				const key=this.tabList[index]['pickKey']['key']
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0]
 				this.tabList[index].showPicker = false
-				this.tabList[index]['pickKey']['type']=''
-				this.tabList[index]['pickKey']['key']=''
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
 			},
+			
 			//取消Picker
-			cancelPicker(index){
+			cancelPicker(index) {
 				this.tabList[index].showPicker = false
-				const type=this.tabList[index]['pickKey']['type']
-				const key=this.tabList[index]['pickKey']['key']
-				this.tabList[index]['pickKey']['type']=''
-				this.tabList[index]['pickKey']['key']=''
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
+			},
+			
+			//弹出citypicker
+			openCityPicker(index, type, key) {
+				console.log(this.cityList)
+				this.tabList[index].pickKey.type = type
+				this.tabList[index].pickKey.key = key
+				this.tabList[index].showCityPicker = true
+			},
+			//选择cityPicker
+			confirmCityPicker(index, e) {
+				console.log("e", e)
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				this.tabList[index].resumeList[type][key] = e.value[0]+e.value[1]+e.value[2]
+				this.tabList[index].showCityPicker = false
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
+			},
+			
+			//取消citypicker
+			cancelCityPicker(index) {
+				this.tabList[index].showCityPicker = false
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
+			},
+			
+			//初始化地区数据
+			initCityData() {
+				// 遍历城市js
+				cityData.forEach((item1, index1) => {
+					let temp2 = [];
+					this.cityLevel1.push(item1.provinceName);
+
+					let temp4 = [];
+					let temp3 = [];
+					// 遍历市
+					item1.cities.forEach((item2, index2) => {
+						temp2.push(item2.cityName);
+						// 遍历区
+						item2.counties.forEach((item3, index3) => {
+							temp3.push(item3.countyName);
+						})
+						temp4[index2] = temp3;
+						temp3 = [];
+					})
+					this.cityLevel3[index1] = temp4;
+
+					this.cityLevel2[index1] = temp2;
+				})
+				// 选择器默认城市
+				this.cityList.push(this.cityLevel1, this.cityLevel2[0], this.cityLevel3[0][0]);
+			},
+			// 选中时执行
+			changeHandler(ind,e) {
+				const {
+					columnIndex,
+					index,
+					indexs,
+					value,
+					values,
+					// 微信小程序无法将picker实例传出来，只能通过ref操作
+				} = e;
+				const picker = this.$refs.uPicker[ind]
+				console.log("picker",picker)
+				if (columnIndex === 0) { // 选择第一列数据时
+					// 设置第二列关联数据
+					picker.setColumnValues(1, this.cityLevel2[index]);
+					// 设置第三列关联数据
+					picker.setColumnValues(2, this.cityLevel3[index][columnIndex]);
+				} else if (columnIndex === 1) { // 选择第二列数据时
+					// 设置第三列关联数据
+					picker.setColumnValues(2, this.cityLevel3[indexs[0]][index]);
+				}
 			},
 			
 			//弹出日期选择
-			calendarHandler(index,type,key) {
+			calendarHandler(index, type, key) {
 				// console.log(this.$refs.calendar)
-				this.tabList[index].pickKey.type=type
-				this.tabList[index].pickKey.key=key
+				this.tabList[index].pickKey.type = type
+				this.tabList[index].pickKey.key = key
 				this.$refs.calendar[index].show()
 			},
 			//选择日期
 			chooseDate(index, e) {
-				const type=this.tabList[index]['pickKey']['type']
-				const key=this.tabList[index]['pickKey']['key']
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.result
-				this.tabList[index]['pickKey']['type']=''
-				this.tabList[index]['pickKey']['key']=''
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
 				// console.log("e", e)
 			},
-			
+
 			//选择两列的
-			linkToChooseInfoTwo(index, type,key){
+			linkToChooseInfoTwo(index, type, key) {
 				uni.navigateTo({
 					url: `/MineLink/resumeOnline/chooseInfoTwo?index=${index}&type=${type}&key=${key}`
 				})
@@ -379,6 +475,7 @@
 		},
 		onLoad() {
 			this.setMinHeight()
+			this.initCityData()
 		},
 		watch: {
 			tabList: {
