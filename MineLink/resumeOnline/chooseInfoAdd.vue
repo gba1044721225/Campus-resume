@@ -81,7 +81,13 @@
 						console.log("res",getCurrentPages())
 						const currentPage=getCurrentPages()
 						// this.infokey
-						currentPage[1].$vm.comfirmInfoAdd(this.infoIndex,this.infoInd,this.infoType ,label)
+						let curInd
+						currentPage.forEach((v,i)=>{
+							if(v.route==='MineLink/resumeOnline/addEducation')
+							curInd=i
+						})
+						// console.log(curInd)
+						currentPage[curInd].$vm.comfirmInfoAdd(this.infoIndex,this.infoInd,this.infoType ,label)
 					}
 				})
 			}

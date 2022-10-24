@@ -78,7 +78,13 @@
 					success:(res)=>{
 						console.log("res",getCurrentPages())
 						const currentPage=getCurrentPages()
-						currentPage[0].$vm.comfirmInfo(this.infoIndex,this.infoType,this.infoKey,label)
+						let curInd
+						currentPage.forEach((v,i)=>{
+							if(v.route==='MineLink/resumeOnline/resumeOnline')
+							curInd=i
+						})
+						console.log(curInd)
+						currentPage[curInd].$vm.comfirmInfo(this.infoIndex,this.infoType,this.infoKey,label)
 					}
 				})
 			}

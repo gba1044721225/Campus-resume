@@ -60,7 +60,7 @@
 		</u-picker>
 
 		<!-- 时间选择器 -->
-		<u-datetime-picker :show="showTimerPicker" mode="year-month" @close="cancelTimerPicker"
+		<u-datetime-picker :show="showTimerPicker" mode="year-month" @cancel="cancelTimerPicker"
 			@confirm="confirmTimerPicker"></u-datetime-picker>
 	</view>
 </template>
@@ -83,7 +83,7 @@
 					major: '',
 					beginTime: '',
 					endTime: '',
-					allTime:'',
+					// allTime:'',
 					discribe: ''
 				},
 			}
@@ -92,6 +92,11 @@
 			console.log("payload",payload)
 			this.index=payload.index
 			this.ind=payload.ind
+			let data=payload.data
+			if(data){
+				console.log(data)
+				this.educationHistory=JSON.parse(data)
+			}
 		},
 		methods: {
 			linkToChooseInfo(type) {
@@ -153,15 +158,19 @@
 			},
 			
 			comfirmEducationHistory(){
-				this.educationHistory.allTime=this.educationHistory.beginTime+this.educationHistory.endTime
-				delete this.educationHistory.beginTime	
-				delete this.educationHistory.endTime
+				// this.educationHistory.allTime=this.educationHistory.beginTime+this.educationHistory.endTime
 				uni.navigateBack({
 					delta:1,
 					success:(res)=>{
 						console.log("res",getCurrentPages())
 						const currentPage=getCurrentPages()
-						currentPage[0].$vm.comfirmEducationHistory(this.index,this.ind,JSON.stringify(this.educationHistory))
+						let curInd
+						currentPage.forEach((v,i)=>{
+							if(v.route==='MineLink/resumeOnline/resumeOnline')
+							curInd=i
+						})
+						console.log(curInd)
+						currentPage[curInd].$vm.comfirmEducationHistory(this.index,this.ind,JSON.stringify(this.educationHistory))
 					}
 				})
 			},

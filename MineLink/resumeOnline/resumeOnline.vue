@@ -137,17 +137,17 @@
 									</view>
 								</view>
 								<view class="add-btns">
-									<view class="btns-item">
+									<view class="btns-item" @click="linkAddEducation(index,eduIndex,eduBox)">
 										修改
 									</view>
-									<view class="btns-item">
+									<view class="btns-item" @click="deleteEducation(index,eduIndex)">
 										删除
 									</view>
 								</view>
 							</view>
 
 							<view class="add-item" @click="linkAddEducation(index)">
-								<view class="add"> + </view>
+								<view class="add"> ＋ </view>
 								<view class="content"> 添加教育经历 </view>
 							</view>
 						</view>
@@ -161,11 +161,11 @@
 								v-for='(workBox,workIndex) in item.addWorkExp' :key="workIndex">
 								<view class="item-left">
 									<view class="item-content" v-for='(work,workKey) in workBox' :key="workKey">
-										{{keyToCnEdu[workKey]}} : {{work}}
+										{{keyToCnWork[workKey]}} : {{work}}
 									</view>
 								</view>
 								<view class="add-btns">
-									<view class="btns-item">
+									<view class="btns-item" @click="linkAddWork(index,workIndex,workBox)">
 										修改
 									</view>
 									<view class="btns-item">
@@ -306,9 +306,20 @@
 					school: '学校',
 					education: '教育',
 					major: '专业',
-					allTime: '就读时间',
+					// allTime: '就读时间',
+					beginTime:'入学时间',
+					endTime:'毕业时间',
 					discribe: '专业描述'
-				}
+				},
+				keyToCnWork: {
+					companyName: '公司名称',
+					jobName: '职业名称',
+					department: '所属部门',
+					// allTime: '就读时间',
+					beginTime:'入学时间',
+					endTime:'毕业时间',
+					discribe: '专业描述'
+				},
 				// testValue:""
 			}
 		},
@@ -486,67 +497,89 @@
 			},
 
 			//跳转到选择教育经历
-			linkAddEducation(index, ind) {
+			linkAddEducation(index,ind,item) {
+				// console.log("item",item)
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=''`
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=${ind}`
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
 
 			//确认教育经历
 			comfirmEducationHistory(index, ind, value) {
-				console.log("index", index)
-				console.log("ind", typeof(ind))
-				if (typeof(ind)) {
+				// console.log("index", index)
+				// console.log("indkkkk", ind)
+				if (Number(ind)===99999) {
 					// console.log(2222222)
 					this.tabList[index].addEducation.push(JSON.parse(value))
 
 				} else {
 					// console.log(1111111)
-					this.$set(this.tabList[index].addEducation, index, JSON.parse(value))
+					this.$set(this.tabList[index].addEducation, ind, JSON.parse(value))
 				}
+				
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
+				
 				// this.testValue=value
 				// console.log(this.testValue)
-				this.$forceUpdate()
 
 				// console.log(this.tabList)
 			},
 			
+			//删除教育经历
+			deleteEducation(index,eduIndex){
+				this.tabList[index].addEducation.splice(eduIndex,1)
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
+			},
+						
 			//跳转到添加工作页面
-			linkAddWork(index,ind){
+			linkAddWork(index,ind,item){
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=''`
+						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=${ind}`
+						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
 			
 			//确认工作经历
 			comfirmWorkHistory(index, ind, value) {
-				console.log("index", index)
-				console.log("ind", typeof(ind))
-			// 	if (typeof(ind)) {
-			// 		// console.log(2222222)
-			// 		this.tabList[index].addEducation.push(JSON.parse(value))
+				// console.log("index", index)
+				console.log("ind", ind)
+				if (Number(ind)===99999) {
+					// console.log(2222222)
+					this.tabList[index].addWorkExp.push(JSON.parse(value))
 			
-			// 	} else {
-			// 		// console.log(1111111)
-			// 		this.$set(this.tabList[index].addEducation, index, JSON.parse(value))
-			// 	}
+				} else {
+					// console.log(1111111)
+					this.$set(this.tabList[index].addWorkExp, ind, JSON.parse(value))
+				}
 				// this.testValue=value
-				// console.log(this.testValue)
-				// this.$forceUpdate()
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
 			
 				// console.log(this.tabList)
+			},
+			
+			//删除工作经历
+			deleteWork(index,workIndex){
+				this.tabList[index].addWorkExp.splice(workIndex,1)
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
 			},
 		},
 		onReady() {
@@ -670,6 +703,7 @@
 					}
 
 					.add-item {
+						margin-top: 20rpx;
 						display: flex;
 						justify-content: center;
 						align-items: center;
@@ -688,9 +722,8 @@
 							border: 1px solid #1296db;
 							border-radius: 50%;
 							margin-right: 25rpx;
-							display: flex;
-							justify-content: center;
-							align-items: center;
+							line-height: 26rpx;
+							text-align: center;
 						}
 
 						.content {

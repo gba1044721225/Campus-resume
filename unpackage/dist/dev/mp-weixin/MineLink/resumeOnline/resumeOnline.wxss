@@ -107,6 +107,7 @@
   border-radius: 15rpx;
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules .add-item.data-v-94a2068a {
+  margin-top: 20rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -124,9 +125,8 @@
   border: 1px solid #1296db;
   border-radius: 50%;
   margin-right: 25rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  line-height: 26rpx;
+  text-align: center;
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules .add-item .content.data-v-94a2068a {
   font-size: 26rpx;
