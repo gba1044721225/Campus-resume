@@ -127,9 +127,17 @@
 							</tui-collapse>
 						</view>
 
+						<!-- 教育经历 -->
+						<view class="education-history">
+							<view class="add-item">
+								<text>添加教育经历</text>
+								<text>+</text>
+							</view>
+						</view>
+
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
-							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)" @change="changeHandler"></u-picker>
+							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
 
 						<!-- 时间 -->
 						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
@@ -301,11 +309,8 @@
 			//页面高度初始化
 			setHeight() {
 				const query = uni.createSelectorQuery().in(this);
-				// console.log(query.select('.swiper-item'))
 				query.select('.swiper-item').boundingClientRect(data => {
-					// console.log("data", data)
 					this.swiperHeight = data.height + 25 + 'px'
-
 				}).exec();
 			},
 			//设置最小高度初始化
@@ -377,6 +382,7 @@
 				this.tabList[index].pickKey.key = key
 				this.tabList[index].showCityPicker = true
 			},
+			
 			//选择cityPicker
 			confirmCityPicker(index, e) {
 				console.log("e", e)
