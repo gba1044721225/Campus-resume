@@ -130,7 +130,7 @@
 						<!-- 教育经历 -->
 						<view class="education-history">
 							<view class="add-item">
-								<view>+</view>
+								<view> + </view>
 								<view>添加教育经历</view>
 							</view>
 						</view>
