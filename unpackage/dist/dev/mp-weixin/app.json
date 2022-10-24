@@ -18,7 +18,9 @@
       "pages": [
         "resumeOnline/resumeOnline",
         "resumeOnline/chooseInfo",
-        "resumeOnline/chooseInfoTwo"
+        "resumeOnline/addEducation",
+        "resumeOnline/addWork",
+        "resumeOnline/chooseInfoAdd"
       ]
     }
   ],

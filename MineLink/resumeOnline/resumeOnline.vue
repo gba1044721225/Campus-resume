@@ -90,34 +90,31 @@
 									<view class="info-content">
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.email" :isFillet='true'
-												:inputBorder='true' :required='true' label="邮箱" placeholder="请输入邮箱">
+												:inputBorder='true' label="邮箱" placeholder="请输入邮箱">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input :disabled="true"
 												v-model="item.resumeList.addInfo.politicalStatus" :isFillet='true'
-												:inputBorder='true' :required='true' label="政治面貌" placeholder="请输入政治面貌"
+												:inputBorder='true' label="政治面貌" placeholder="请输入政治面貌"
 												@click="openPicker(index,'addInfo','politicalStatus')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.birthday" :disabled="true"
-												:isFillet='true' :inputBorder='true' :required='true' label="出生日期"
-												placeholder="请输入出生日期"
+												:isFillet='true' :inputBorder='true' label="出生日期" placeholder="请输入出生日期"
 												@click="calendarHandler(index,'addInfo','birthday')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.hometown" :disabled="true"
-												:isFillet='true' :inputBorder='true' :required='true' label="籍贯"
-												placeholder="请输入籍贯"
+												:isFillet='true' :inputBorder='true' label="籍贯" placeholder="请输入籍贯"
 												@click="openCityPicker(index,'addInfo','hometown')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.dwelling" :disabled="true"
-												:isFillet='true' :inputBorder='true' :required='true' label="居住地"
-												placeholder="请输入居住地"
+												:isFillet='true' :inputBorder='true' label="居住地" placeholder="请输入居住地"
 												@click="openCityPicker(index,'addInfo','dwelling')">
 											</tui-input>
 										</view>
@@ -126,12 +123,60 @@
 								</template>
 							</tui-collapse>
 						</view>
+						
+						<!-- 分割线 -->
+						<view class="line-show"></view>
 
 						<!-- 教育经历 -->
-						<view class="education-history">
-							<view class="add-item">
-								<view> + </view>
-								<view> 添加教育经历 </view>
+						<view class="add-modules">
+							<view class="show-item-box" v-if="item.addEducation.length!=0"
+								v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
+								<view class="item-left">
+									<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
+										{{keyToCnEdu[eduKey]}} : {{edu}}
+									</view>
+								</view>
+								<view class="add-btns">
+									<view class="btns-item">
+										修改
+									</view>
+									<view class="btns-item">
+										删除
+									</view>
+								</view>
+							</view>
+
+							<view class="add-item" @click="linkAddEducation(index)">
+								<view class="add"> + </view>
+								<view class="content"> 添加教育经历 </view>
+							</view>
+						</view>
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
+
+						<!-- 工作经验 -->
+						<view class="add-modules">
+							<view class="show-item-box" v-if="item.addWorkExp.length!=0"
+								v-for='(workBox,workIndex) in item.addWorkExp' :key="workIndex">
+								<view class="item-left">
+									<view class="item-content" v-for='(work,workKey) in workBox' :key="workKey">
+										{{keyToCnEdu[workKey]}} : {{work}}
+									</view>
+								</view>
+								<view class="add-btns">
+									<view class="btns-item">
+										修改
+									</view>
+									<view class="btns-item">
+										删除
+									</view>
+								</view>
+							</view>
+
+							<view class="add-item" @click="linkAddWork(index)">
+								<view class="add"> + </view>
+								<view class="content"> 添加教育经历 </view>
 							</view>
 						</view>
 
@@ -142,10 +187,11 @@
 						<!-- 时间 -->
 						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
 						</tui-calendar>
-						
+
 						<!-- 地区 -->
 						<u-picker ref="uPicker" :show="item.showCityPicker" :columns="cityList"
-							@confirm="confirmCityPicker(index,$event)" @cancel="cancelCityPicker(index)" @change="changeHandler(index,$event)"></u-picker>
+							@confirm="confirmCityPicker(index,$event)" @cancel="cancelCityPicker(index)"
+							@change="changeHandler(index,$event)"></u-picker>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -163,18 +209,16 @@
 				cityList: [],
 				cityLevel1: [],
 				cityLevel2: [],
-				cityLevel3: [],		
+				cityLevel3: [],
 				tabList: [{
 						label: '简历1',
 						showPicker: false,
-						showCityPicker:false,
+						showCityPicker: false,
 						pickKey: {
 							type: '', //记录类型
 							key: ''
 						},
-						schoolColumns: [
-							['北师大', '北理工', '华南师范']
-						],
+
 						educationColumns: [
 							['博士', '研究生', '本科', '专科', '高中', '中专']
 						],
@@ -202,13 +246,15 @@
 								hometown: '',
 								dwelling: '',
 								columnIndex: -1
-							}
-						}
+							},
+						},
+						addEducation: [],
+						addWorkExp:[],
 					},
 					{
 						label: '简历2',
 						showPicker: false,
-						showCityPicker:false,
+						showCityPicker: false,
 						pickKey: {
 							type: '', //记录类型
 							key: ''
@@ -244,48 +290,9 @@
 								dwelling: '',
 								columnIndex: -1
 							}
-						}
-					},
-					{
-						label: '简历3',
-						showPicker: false,
-						showCityPicker:false,
-						pickKey: {
-							type: '', //记录类型
-							key: ''
 						},
-						schoolColumns: [
-							['北师大', '北理工', '华南师范']
-						],
-						educationColumns: [
-							['博士', '研究生', '本科', '专科', '高中', '中专']
-						],
-						majorColumns: [
-							['计算机', '数学', '生物工程']
-						],
-						politicalStatusColumns: [
-							['党员', '团员', '群众']
-						],
-						resumeList: {
-							pnInfo: {
-								name: '',
-								phone: '',
-								school: '',
-								education: '',
-								major: '',
-								jobIntention: '',
-								graduationTime: '',
-								columnIndex: -1
-							},
-							addInfo: {
-								email: '',
-								politicalStatus: '',
-								birthday: '',
-								hometown: '',
-								dwelling: '',
-								columnIndex: -1
-							}
-						}
+						addEducation: [],
+						addWorkExp:[],
 					},
 				],
 				currentResume: 0,
@@ -294,6 +301,15 @@
 				duration: 500,
 				swiperHeight: 0,
 				swiperMinHeight: 0,
+				//映射表
+				keyToCnEdu: {
+					school: '学校',
+					education: '教育',
+					major: '专业',
+					allTime: '就读时间',
+					discribe: '专业描述'
+				}
+				// testValue:""
 			}
 		},
 		methods: {
@@ -365,7 +381,7 @@
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
 			},
-			
+
 			//取消Picker
 			cancelPicker(index) {
 				this.tabList[index].showPicker = false
@@ -374,7 +390,7 @@
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
 			},
-			
+
 			//弹出citypicker
 			openCityPicker(index, type, key) {
 				console.log(this.cityList)
@@ -382,18 +398,18 @@
 				this.tabList[index].pickKey.key = key
 				this.tabList[index].showCityPicker = true
 			},
-			
+
 			//选择cityPicker
 			confirmCityPicker(index, e) {
 				console.log("e", e)
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.value[0]+e.value[1]+e.value[2]
+				this.tabList[index].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
 				this.tabList[index].showCityPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
 			},
-			
+
 			//取消citypicker
 			cancelCityPicker(index) {
 				this.tabList[index].showCityPicker = false
@@ -402,7 +418,7 @@
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
 			},
-			
+
 			//初始化地区数据
 			initCityData() {
 				// 遍历城市js
@@ -430,7 +446,7 @@
 				this.cityList.push(this.cityLevel1, this.cityLevel2[0], this.cityLevel3[0][0]);
 			},
 			// 选中时执行
-			changeHandler(ind,e) {
+			changeHandler(ind, e) {
 				const {
 					columnIndex,
 					index,
@@ -440,7 +456,7 @@
 					// 微信小程序无法将picker实例传出来，只能通过ref操作
 				} = e;
 				const picker = this.$refs.uPicker[ind]
-				console.log("picker",picker)
+				console.log("picker", picker)
 				if (columnIndex === 0) { // 选择第一列数据时
 					// 设置第二列关联数据
 					picker.setColumnValues(1, this.cityLevel2[index]);
@@ -451,7 +467,7 @@
 					picker.setColumnValues(2, this.cityLevel3[indexs[0]][index]);
 				}
 			},
-			
+
 			//弹出日期选择
 			calendarHandler(index, type, key) {
 				// console.log(this.$refs.calendar)
@@ -469,12 +485,69 @@
 				// console.log("e", e)
 			},
 
-			//选择两列的
-			linkToChooseInfoTwo(index, type, key) {
-				uni.navigateTo({
-					url: `/MineLink/resumeOnline/chooseInfoTwo?index=${index}&type=${type}&key=${key}`
-				})
-			}
+			//跳转到选择教育经历
+			linkAddEducation(index, ind) {
+				if (ind == undefined) {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=''`
+					})
+				} else {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=${ind}`
+					})
+				}
+			},
+
+			//确认教育经历
+			comfirmEducationHistory(index, ind, value) {
+				console.log("index", index)
+				console.log("ind", typeof(ind))
+				if (typeof(ind)) {
+					// console.log(2222222)
+					this.tabList[index].addEducation.push(JSON.parse(value))
+
+				} else {
+					// console.log(1111111)
+					this.$set(this.tabList[index].addEducation, index, JSON.parse(value))
+				}
+				// this.testValue=value
+				// console.log(this.testValue)
+				this.$forceUpdate()
+
+				// console.log(this.tabList)
+			},
+			
+			//跳转到添加工作页面
+			linkAddWork(index,ind){
+				if (ind == undefined) {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=''`
+					})
+				} else {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=${ind}`
+					})
+				}
+			},
+			
+			//确认工作经历
+			comfirmWorkHistory(index, ind, value) {
+				console.log("index", index)
+				console.log("ind", typeof(ind))
+			// 	if (typeof(ind)) {
+			// 		// console.log(2222222)
+			// 		this.tabList[index].addEducation.push(JSON.parse(value))
+			
+			// 	} else {
+			// 		// console.log(1111111)
+			// 		this.$set(this.tabList[index].addEducation, index, JSON.parse(value))
+			// 	}
+				// this.testValue=value
+				// console.log(this.testValue)
+				// this.$forceUpdate()
+			
+				// console.log(this.tabList)
+			},
 		},
 		onReady() {
 			this.setHeight()
@@ -564,6 +637,76 @@
 					}
 				}
 
+				.add-modules {
+					margin-top: 25rpx;
+					padding: 0 20rpx;
+
+					.show-item-box {
+						display: flex;
+						flex-wrap: nowrap;
+						justify-content: space-between;
+						align-items: center;
+						padding: 25rpx 0;
+						border-bottom: 1px solid #eee;
+
+						.item-left {
+							font-size: 30rpx;
+						}
+
+						.add-btns {
+							display: flex;
+							flex-wrap: wrap;
+							flex-direction: column;
+
+							.btns-item {
+								margin-top: 25rpx;
+								background-color: #1296db;
+								padding: 20rpx 50rpx;
+								color: #fff;
+								border-radius: 15rpx;
+							}
+
+						}
+					}
+
+					.add-item {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						view {
+							color: #1296db;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						}
+
+						.add {
+							width: 26rpx;
+							height: 26rpx;
+							font-size: 24rpx;
+							border: 1px solid #1296db;
+							border-radius: 50%;
+							margin-right: 25rpx;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+						}
+
+						.content {
+							font-size: 26rpx;
+						}
+					}
+				}
+
+
+
+				.line-show {
+					margin: 25rpx 0;
+					background-color: #ddd;
+					width: 100%;
+					height: 50rpx;
+				}
 
 			}
 		}

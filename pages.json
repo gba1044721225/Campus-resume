@@ -73,7 +73,19 @@
 					}
 				},
 				{
-					"path": "resumeOnline/chooseInfoTwo",
+					"path": "resumeOnline/addEducation",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/addWork",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/chooseInfoAdd",
 					"style": {
 						"navigationBarTitleText": "在线简历"
 					}
