@@ -151,11 +151,16 @@
 										</view>
 										
 										<view class="content-item">
-											<tui-input v-model="item.resumeList.intentInfo.job" :isFillet='true'
+											<tui-input v-model="item.resumeList.intentInfo.salary" :isFillet='true'
 												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true" @click="openSalaryPicker(index,'intentInfo','salary')">
 											</tui-input>
 										</view>
 										
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.intentInfo.city" :isFillet='true'
+												:inputBorder='true' label="期望城市" placeholder="请输入期望城市" :disabled="true" @click="openCityPicker(index,'intentInfo','city')">
+											</tui-input>
+										</view>
 									</view>
 								</template>
 							</tui-collapse>
@@ -291,10 +296,10 @@
 							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
 
 						<!-- 薪资 -->
-						<u-picker :show="showSalaryPicker" ref="sPicker" :columns="salaryList" @confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
+						<u-picker :show="item.showSalaryPicker" ref="sPicker" :columns="salaryList" @confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
 
 						<!-- 日期 -->
-						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
+						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)" @hide="cancelCalendar(index)">
 						</tui-calendar>
 
 						<!-- 地区 -->
@@ -368,6 +373,7 @@
 							intentInfo: {
 								job: '',
 								salary:'',
+								city:'',
 								columnIndex: -1
 							}
 						},
@@ -480,6 +486,15 @@
 					this.swiperHeight = data.height + 25 + 'px'
 				}).exec();
 			},
+			
+			//弹出时候写死高度
+			setFixedHeight(){
+				const res = wx.getSystemInfoSync()
+				let statusHeight = res.statusBarHeight
+				let windowHeight = res.windowHeight
+				this.swiperHeight= windowHeight - statusHeight + 'px'
+			},
+			
 			//设置最小高度初始化
 			setMinHeight() {
 				// console.log("res",res)
@@ -520,6 +535,7 @@
 			openPicker(index, type, key) {
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
+				this.setFixedHeight()
 				this.tabList[index].showPicker = true
 			},
 			//选择picker
@@ -528,6 +544,7 @@
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0]
+				this.setHeight()
 				this.tabList[index].showPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
@@ -535,6 +552,7 @@
 
 			//取消Picker
 			cancelPicker(index) {
+				this.setHeight()
 				this.tabList[index].showPicker = false
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
@@ -547,6 +565,7 @@
 				console.log(this.cityList)
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
+				this.setFixedHeight()
 				this.tabList[index].showCityPicker = true
 			},
 
@@ -556,6 +575,7 @@
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
+				this.setHeight()
 				this.tabList[index].showCityPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
@@ -563,6 +583,7 @@
 
 			//取消citypicker
 			cancelCityPicker(index) {
+				this.setHeight()
 				this.tabList[index].showCityPicker = false
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
@@ -624,8 +645,20 @@
 				// console.log(this.$refs.calendar)
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
+				this.setFixedHeight()
 				this.$refs.calendar[index].show()
 			},
+			
+			//关闭日期选择
+			cancelCalendar(index){
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				// console.log(this.tabList[index]['pickKey']['type'])
+				// this.tabList[index]['pickKey']['type'] = ''
+				// this.tabList[index]['pickKey']['key'] = ''
+				this.setHeight()
+			},
+			
 			//选择日期
 			chooseDate(index, e) {
 				const type = this.tabList[index]['pickKey']['type']
@@ -635,16 +668,36 @@
 				this.tabList[index]['pickKey']['key'] = ''
 				// console.log("e", e)
 			},
-			
-			
-			//打开工资picker
-			openSalaryPicker(){
 				
+			//打开工资picker
+			openSalaryPicker(index, type, key){
+				this.tabList[index].pickKey.type = type
+				this.tabList[index].pickKey.key = key
+				this.setFixedHeight()
+				this.tabList[index].showSalaryPicker = true
 			},
 
 			//确认工资picker
-			confirmSalaryPicker(){
-				
+			confirmSalaryPicker(index, e){
+				// console.log("e",e)
+				console.log(e.value[0] +"-" +e.value[1])
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				this.tabList[index].resumeList[type][key] = e.value[0] +"-" +e.value[1]
+				this.setHeight()
+				this.tabList[index].showSalaryPicker = false
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
+			},
+
+			//取消salaryPicker
+			cancelSalaryPicker(index) {
+				this.setHeight()
+				this.tabList[index].showSalaryPicker = false
+				const type = this.tabList[index]['pickKey']['type']
+				const key = this.tabList[index]['pickKey']['key']
+				this.tabList[index]['pickKey']['type'] = ''
+				this.tabList[index]['pickKey']['key'] = ''
 			},
 
 			//跳转到选择教育经历
@@ -822,14 +875,14 @@
 			this.setMinHeight()
 			this.initCityData()
 		},
-		watch: {
-			tabList: {
-				deep: true,
-				handler(nw) {
-					console.log("nw", nw)
-				}
-			}
-		}
+		// watch: {
+		// 	tabList: {
+		// 		deep: true,
+		// 		handler(nw) {
+		// 			console.log("nw", nw)
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 
