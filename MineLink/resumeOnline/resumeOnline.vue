@@ -636,8 +636,9 @@
 				// console.log("e", e)
 			},
 			
+			
 			//打开工资picker
-			openSalaryPicker(index,'intentInfo','salary'){
+			openSalaryPicker(){
 				
 			},
 
