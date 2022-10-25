@@ -17,9 +17,11 @@
       "root": "MineLink",
       "pages": [
         "resumeOnline/resumeOnline",
-        "resumeOnline/chooseInfo",
         "resumeOnline/addEducation",
         "resumeOnline/addWork",
+        "resumeOnline/addProject",
+        "resumeOnline/addCertificate",
+        "resumeOnline/chooseInfo",
         "resumeOnline/chooseInfoAdd"
       ]
     }

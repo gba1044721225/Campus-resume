@@ -35,6 +35,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLink/resumeOnline/chooseInfo",
+          "query": "index=0&type=pnInfo&key=school",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

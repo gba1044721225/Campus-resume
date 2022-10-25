@@ -6,7 +6,7 @@
 		</view>
 
 		<view class="info-item-box">
-			<view class="info-item" :id="item.label" v-for='item in searchData' :key='item.label' @click="chooseItem(item.label)">
+			<view class="info-item" id="item.id" v-for='(item,index) in searchData' :key='index' @click="chooseItem(item.label)">
 				{{item.label}}
 			</view>
 		</view>
@@ -18,32 +18,8 @@
 		data() {
 			return {
 				dataList: {
-					school: [{
-							id: 1,
-							label: "北师大"
-						},
-						{
-							id: 2,
-							label: "北理工"
-						},
-						{
-							id: 3,
-							label: "工业大学"
-						},
-					],
-					major: [{
-							id: 1,
-							label: "计算机"
-						},
-						{
-							id: 2,
-							label: "数学"
-						},
-						{
-							id: 3,
-							label: "物理"
-						},
-					],
+					school: [],
+					major: [],
 				},
 				searchData:[],
 				infoType: '',
@@ -70,7 +46,9 @@
 				return reg
 			},
 			init(){
+				console.log(11111)
 				this.searchData=this.dataList[this.infoKey]
+				console.log(this.searchData)
 			},
 			chooseItem(label){
 				uni.navigateBack({
@@ -87,6 +65,60 @@
 						currentPage[curInd].$vm.comfirmInfo(this.infoIndex,this.infoType,this.infoKey,label)
 					}
 				})
+			},
+			
+			//获取学校数据
+			reqschool(){
+				return new Promise(resolve=>{
+					const data={
+						data:{
+							
+						},
+						meta:{
+							
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$getHttp('/parameter/query/1/0',data,res=>{
+						// console.log("res",res)
+						if(res.meta.code==200){
+							// this.dataList[this.infoKey]
+							// console.log(JSON.parse(res.data))
+							this.dataList[this.infoKey]=JSON.parse(res.data).listSchool
+							console.log(this.dataList)
+							resolve()
+						}
+					},header,true)
+				})
+			},
+			
+			//获取专业数据
+			reqmajor(){
+				return new Promise(resolve=>{
+					const data={
+						data:{
+							
+						},
+						meta:{
+							
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$getHttp('/parameter/query/0/0',data,res=>{
+						// console.log("res",res)
+						if(res.meta.code==200){
+							// this.dataList[this.infoKey]
+							// console.log(JSON.parse(res.data))
+							this.dataList[this.infoKey]=JSON.parse(res.data).list
+							// console.log(this.dataList)
+							resolve()
+						}
+					},header,true)
+				})
 			}
 		},	
 		onLoad(payload) {
@@ -94,7 +126,13 @@
 			this.infoType = payload.type
 			this.infoIndex = payload.index
 			this.infoKey=payload.key
-			this.init()
+			
+			
+			const fn= this[`req${this.infoKey}`]
+			// console.log(fn)
+			fn().then(_=>{
+				this.init()
+			})
 		}
 	}
 </script>

@@ -66,7 +66,6 @@
 		data() {
 			return {
 				pickKey: undefined,
-				showPicker: false,
 				showTimerPicker: false,
 				index: '',
 				ind: '',
@@ -82,30 +81,23 @@
 			}
 		},
 		onLoad(payload) {
-			console.log("payload", payload)
+			// console.log("payload", payload)
 			this.index = payload.index
 			this.ind = payload.ind
 			let data=payload.data
 			if(data){
-				console.log(data)
+				// console.log(data)
 				this.workHistory=JSON.parse(data)
 			}
 		},
 		methods: {
-			linkToChooseInfo(type) {
-				uni.navigateTo({
-					//&key=${key}
-					url: `/MineLink/resumeOnline/chooseInfoAdd?type=${type}&index=${this.index}&ind=${this.ind}`
-				})
-			},
-
 			openTimerPicker(key) {
 				this.pickKey = key
 				this.showTimerPicker = true
 			},
 
 			confirmTimerPicker(e) {
-				console.log("e", e)
+				// console.log("e", e)
 				let month = new Date(e.value).getMonth() + 1
 				let year = new Date(e.value).getFullYear()
 				this.workHistory[this.pickKey] = `${year}年${month}月`
@@ -120,27 +112,11 @@
 				this.pickKey = ''
 			},
 
-			comfirmInfoAdd(infoIndex, infoInd, infoType, value) {
-				// console.log(infoIndex)
-				// console.log(infoInd)
-				// console.log(infoType)
-				// 	console.log(infokey)
-				// console.log(value)
-				this.workHistory[infoType] = value
-				console.log(this.index)
-				// console.log(this.index,this.ind)
-				// console.log(this.workHistory)
-
-			},
-
 			comfirmWorkHistory() {
-				// this.workHistory.allTime = this.workHistory.beginTime + this.workHistory.endTime
-				// delete this.workHistory.beginTime
-				// delete this.workHistory.endTime
 				uni.navigateBack({
 					delta: 1,
 					success: (res) => {
-						console.log("res", getCurrentPages())
+						// console.log("res", getCurrentPages())
 						const currentPage = getCurrentPages()
 						let curInd
 						currentPage.forEach((v,i)=>{

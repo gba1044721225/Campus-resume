@@ -83,6 +83,7 @@
 								uni.setStorageSync('openId', res.meta.openId)
 								this.$store.commit('reSetOpenId', res.meta.openId)
 								this.$store.commit('setUserInfo',uni.getStorageSync('rawData'))
+								console.log("this.$store.state.openId",this.$store.state.openId)
 								this.reqSaveUserInfo()
 							}
 						})

@@ -64,15 +64,18 @@
 											</tui-input>
 										</view>
 
-										<view class="content-item">
+										<!-- 										<view class="content-item">
 											<tui-input v-model="item.resumeList.pnInfo.jobIntention" :isFillet='true'
 												:inputBorder='true' :required='true' label="求职意向" placeholder="请输入求职意向">
 											</tui-input>
-										</view>
+										</view> -->
 									</view>
 								</template>
 							</tui-collapse>
 						</view>
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
 
 						<!-- 补充信息 -->
 						<view class="resume-item-info">
@@ -123,12 +126,49 @@
 								</template>
 							</tui-collapse>
 						</view>
-						
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
+
+						<!-- 求职意向 -->
+						<view class="resume-item-info">
+							<tui-collapse :index="'intentInfo'+index" :current="item.resumeList.intentInfo.columnIndex"
+								@click="changeCollapse('intentInfo'+index,index,'intentInfo')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.resumeList.intentInfo.columnIndex==-1'>
+										求职意向
+									</view>
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										求职意向
+									</view>
+									<view class="info-content">
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.intentInfo.job" :isFillet='true'
+												:inputBorder='true' label="期望职位" placeholder="请输入期望职位">
+											</tui-input>
+										</view>
+										
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.intentInfo.job" :isFillet='true'
+												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true" @click="openSalaryPicker(index,'intentInfo','salary')">
+											</tui-input>
+										</view>
+										
+									</view>
+								</template>
+							</tui-collapse>
+						</view>
+
 						<!-- 分割线 -->
 						<view class="line-show"></view>
 
 						<!-- 教育经历 -->
 						<view class="add-modules">
+							<view class="item-title">
+								教育经历
+							</view>
 							<view class="show-item-box" v-if="item.addEducation.length!=0"
 								v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
 								<view class="item-left">
@@ -157,6 +197,9 @@
 
 						<!-- 工作经验 -->
 						<view class="add-modules">
+							<view class="item-title">
+								工作经验
+							</view>
 							<view class="show-item-box" v-if="item.addWorkExp.length!=0"
 								v-for='(workBox,workIndex) in item.addWorkExp' :key="workIndex">
 								<view class="item-left">
@@ -168,7 +211,7 @@
 									<view class="btns-item" @click="linkAddWork(index,workIndex,workBox)">
 										修改
 									</view>
-									<view class="btns-item">
+									<view class="btns-item" @click="deleteWork(index,workIndex)">
 										删除
 									</view>
 								</view>
@@ -176,15 +219,81 @@
 
 							<view class="add-item" @click="linkAddWork(index)">
 								<view class="add"> + </view>
-								<view class="content"> 添加教育经历 </view>
+								<view class="content"> 添加工作经历 </view>
 							</view>
 						</view>
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
+
+						<!-- 项目经验 -->
+						<view class="add-modules">
+							<view class="item-title">
+								项目经验
+							</view>
+							<view class="show-item-box" v-if="item.addPro.length!=0"
+								v-for='(proBox,proIndex) in item.addPro' :key="proIndex">
+								<view class="item-left">
+									<view class="item-content" v-for='(pro,proKey) in proBox' :key="proKey">
+										{{keyToCnPro[proKey]}} : {{pro}}
+									</view>
+								</view>
+								<view class="add-btns">
+									<view class="btns-item" @click="linkAddPro(index,proIndex,proBox)">
+										修改
+									</view>
+									<view class="btns-item" @click="deletePro(index,proIndex)">
+										删除
+									</view>
+								</view>
+							</view>
+
+							<view class="add-item" @click="linkAddPro(index)">
+								<view class="add"> + </view>
+								<view class="content"> 添加项目经历 </view>
+							</view>
+						</view>
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
+
+						<!-- 添加证书-->
+						<view class="add-modules">
+							<view class="item-title">
+								添加证书
+							</view>
+							<view class="show-item-box" v-if="item.addCertificate.length!=0"
+								v-for='(certBox,certIndex) in item.addCertificate' :key="certIndex">
+								<view class="item-left">
+									<view class="item-content" v-for='(cert,certKey) in certBox' :key="certKey">
+										{{keyToCnCert[certKey]}} : {{cert}}
+									</view>
+								</view>
+								<view class="add-btns">
+									<view class="btns-item" @click="linkAddCert(index,certIndex,certBox)">
+										修改
+									</view>
+									<view class="btns-item" @click="deleteCert(index,certIndex)">
+										删除
+									</view>
+								</view>
+							</view>
+
+							<view class="add-item" @click="linkAddCert(index)">
+								<view class="add"> + </view>
+								<view class="content"> 添加项目经历 </view>
+							</view>
+						</view>
+
 
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
 							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
 
-						<!-- 时间 -->
+						<!-- 薪资 -->
+						<u-picker :show="showSalaryPicker" ref="sPicker" :columns="salaryList" @confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
+
+						<!-- 日期 -->
 						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
 						</tui-calendar>
 
@@ -204,14 +313,71 @@
 	export default {
 
 		data() {
+			let arr=[]
+			for(let y=0;y<20;y++){
+				arr.push(y+1+'k')
+			}
 			return {
 				imageBaseSrc: this.$imageBaseSrc,
+				salaryList:[
+					arr,
+					arr
+				],
 				cityList: [],
 				cityLevel1: [],
 				cityLevel2: [],
 				cityLevel3: [],
 				tabList: [{
 						label: '简历1',
+						showPicker: false,
+						showCityPicker: false,
+						showSalaryPicker: false,
+						pickKey: {
+							type: '', //记录类型
+							key: ''
+						},
+						
+						educationColumns: [
+							['博士', '研究生', '本科', '专科', '高中', '中专']
+						],
+						majorColumns: [
+							['计算机', '数学', '生物工程']
+						],
+						politicalStatusColumns: [
+							['党员', '团员', '群众']
+						],
+						resumeList: {
+							pnInfo: {
+								name: '',
+								phone: '',
+								school: '',
+								education: '',
+								major: '',
+								// jobIntention: '',
+								graduationTime: '',
+								columnIndex: -1
+							},
+							addInfo: {
+								email: '',
+								politicalStatus: '',
+								birthday: '',
+								hometown: '',
+								dwelling: '',
+								columnIndex: -1
+							},
+							intentInfo: {
+								job: '',
+								salary:'',
+								columnIndex: -1
+							}
+						},
+						addEducation: [],
+						addWorkExp: [],
+						addPro: [],
+						addCertificate: [],
+					},
+					{
+						label: '简历2',
 						showPicker: false,
 						showCityPicker: false,
 						pickKey: {
@@ -235,7 +401,7 @@
 								school: '',
 								education: '',
 								major: '',
-								jobIntention: '',
+								// jobIntention: '',
 								graduationTime: '',
 								columnIndex: -1
 							},
@@ -247,52 +413,14 @@
 								dwelling: '',
 								columnIndex: -1
 							},
-						},
-						addEducation: [],
-						addWorkExp:[],
-					},
-					{
-						label: '简历2',
-						showPicker: false,
-						showCityPicker: false,
-						pickKey: {
-							type: '', //记录类型
-							key: ''
-						},
-						schoolColumns: [
-							['北师大', '北理工', '华南师范']
-						],
-						educationColumns: [
-							['博士', '研究生', '本科', '专科', '高中', '中专']
-						],
-						majorColumns: [
-							['计算机', '数学', '生物工程']
-						],
-						politicalStatusColumns: [
-							['党员', '团员', '群众']
-						],
-						resumeList: {
-							pnInfo: {
-								name: '',
-								phone: '',
-								school: '',
-								education: '',
-								major: '',
-								jobIntention: '',
-								graduationTime: '',
-								columnIndex: -1
-							},
-							addInfo: {
-								email: '',
-								politicalStatus: '',
-								birthday: '',
-								hometown: '',
-								dwelling: '',
+							intentInfo: {
 								columnIndex: -1
 							}
 						},
 						addEducation: [],
-						addWorkExp:[],
+						addWorkExp: [],
+						addPro: [],
+						addCertificate: [],
 					},
 				],
 				currentResume: 0,
@@ -307,8 +435,8 @@
 					education: '教育',
 					major: '专业',
 					// allTime: '就读时间',
-					beginTime:'入学时间',
-					endTime:'毕业时间',
+					beginTime: '入学时间',
+					endTime: '毕业时间',
 					discribe: '专业描述'
 				},
 				keyToCnWork: {
@@ -316,9 +444,21 @@
 					jobName: '职业名称',
 					department: '所属部门',
 					// allTime: '就读时间',
-					beginTime:'入学时间',
-					endTime:'毕业时间',
+					beginTime: '入职时间',
+					endTime: '离职时间',
 					discribe: '专业描述'
+				},
+				keyToCnPro: {
+					proName: '项目名称',
+					role: '职位名称',
+					// allTime: '就读时间',
+					beginTime: '项目开始',
+					endTime: '项目结束',
+					discribe: '项目描述'
+				},
+				keyToCnCert: {
+					certName: '证书名字',
+					certImage: '证书图片'
 				},
 				// testValue:""
 			}
@@ -495,9 +635,19 @@
 				this.tabList[index]['pickKey']['key'] = ''
 				// console.log("e", e)
 			},
+			
+			//打开工资picker
+			openSalaryPicker(index,'intentInfo','salary'){
+				
+			},
+
+			//确认工资picker
+			confirmSalaryPicker(){
+				
+			},
 
 			//跳转到选择教育经历
-			linkAddEducation(index,ind,item) {
+			linkAddEducation(index, ind, item) {
 				// console.log("item",item)
 				if (ind == undefined) {
 					uni.navigateTo({
@@ -514,7 +664,7 @@
 			comfirmEducationHistory(index, ind, value) {
 				// console.log("index", index)
 				// console.log("indkkkk", ind)
-				if (Number(ind)===99999) {
+				if (Number(ind) === 99999) {
 					// console.log(2222222)
 					this.tabList[index].addEducation.push(JSON.parse(value))
 
@@ -522,27 +672,27 @@
 					// console.log(1111111)
 					this.$set(this.tabList[index].addEducation, ind, JSON.parse(value))
 				}
-				
-				this.$nextTick(()=>{
+
+				this.$nextTick(() => {
 					this.setHeight()
 				})
-				
+
 				// this.testValue=value
 				// console.log(this.testValue)
 
 				// console.log(this.tabList)
 			},
-			
+
 			//删除教育经历
-			deleteEducation(index,eduIndex){
-				this.tabList[index].addEducation.splice(eduIndex,1)
-				this.$nextTick(()=>{
+			deleteEducation(index, eduIndex) {
+				this.tabList[index].addEducation.splice(eduIndex, 1)
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
-						
+
 			//跳转到添加工作页面
-			linkAddWork(index,ind,item){
+			linkAddWork(index, ind, item) {
 				if (ind == undefined) {
 					uni.navigateTo({
 						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=99999`
@@ -553,31 +703,113 @@
 					})
 				}
 			},
-			
+
 			//确认工作经历
 			comfirmWorkHistory(index, ind, value) {
 				// console.log("index", index)
-				console.log("ind", ind)
-				if (Number(ind)===99999) {
+				// console.log("ind", ind)
+				if (Number(ind) === 99999) {
 					// console.log(2222222)
 					this.tabList[index].addWorkExp.push(JSON.parse(value))
-			
+
 				} else {
 					// console.log(1111111)
 					this.$set(this.tabList[index].addWorkExp, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
-			
+
 				// console.log(this.tabList)
 			},
-			
+
 			//删除工作经历
-			deleteWork(index,workIndex){
-				this.tabList[index].addWorkExp.splice(workIndex,1)
-				this.$nextTick(()=>{
+			deleteWork(index, workIndex) {
+				this.tabList[index].addWorkExp.splice(workIndex, 1)
+				this.$nextTick(() => {
+					this.setHeight()
+				})
+			},
+
+			//跳转到添加项目页面
+			linkAddPro(index, ind, item) {
+				if (ind == undefined) {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addProject?index=${index}&ind=99999`
+					})
+				} else {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addProject?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+					})
+				}
+			},
+
+			//确认项目经历
+			comfirmProHistory(index, ind, value) {
+				// console.log("index", index)
+				// console.log("ind", ind)
+				if (Number(ind) === 99999) {
+					// console.log(2222222)
+					this.tabList[index].addPro.push(JSON.parse(value))
+
+				} else {
+					// console.log(1111111)
+					this.$set(this.tabList[index].addPro, ind, JSON.parse(value))
+				}
+				// this.testValue=value
+				this.$nextTick(() => {
+					this.setHeight()
+				})
+
+				// console.log(this.tabList)
+			},
+
+			//删除项目经历
+			deletePro(index, proIndex) {
+				this.tabList[index].addPro.splice(proIndex, 1)
+				this.$nextTick(() => {
+					this.setHeight()
+				})
+			},
+
+			//跳转到添加证书页面
+			linkAddCert(index, ind, item) {
+				if (ind == undefined) {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addCertificate?index=${index}&ind=99999`
+					})
+				} else {
+					uni.navigateTo({
+						url: `/MineLink/resumeOnline/addCertificate?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+					})
+				}
+			},
+
+			//确认证书经历
+			comfirmCertificate(index, ind, value) {
+				// console.log("index", index)
+				// console.log("ind", ind)
+				if (Number(ind) === 99999) {
+					// console.log(2222222)
+					this.tabList[index].addCertificate.push(JSON.parse(value))
+
+				} else {
+					// console.log(1111111)
+					this.$set(this.tabList[index].addCertificate, ind, JSON.parse(value))
+				}
+				// this.testValue=value
+				this.$nextTick(() => {
+					this.setHeight()
+				})
+
+				// console.log(this.tabList)
+			},
+
+			//删除证书经历
+			deleteCert(index, certIndex) {
+				this.tabList[index].addCertificate.splice(certIndex, 1)
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
@@ -674,6 +906,15 @@
 					margin-top: 25rpx;
 					padding: 0 20rpx;
 
+					.item-title {
+						margin-left: 5rpx;
+						font-size: 36rpx;
+						padding: 5rpx 25rpx;
+						box-sizing: border-box;
+						font-weight: bold;
+						border-left: 8rpx solid #1296db;
+					}
+
 					.show-item-box {
 						display: flex;
 						flex-wrap: nowrap;
@@ -738,7 +979,7 @@
 					margin: 25rpx 0;
 					background-color: #ddd;
 					width: 100%;
-					height: 50rpx;
+					height: 30rpx;
 				}
 
 			}

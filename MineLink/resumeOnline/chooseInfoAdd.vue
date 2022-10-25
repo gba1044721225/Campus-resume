@@ -6,7 +6,7 @@
 		</view>
 
 		<view class="info-item-box">
-			<view class="info-item" :id="item.label" v-for='item in searchData' :key='item.label' @click="chooseItem(item.label)">
+			<view class="info-item" :id="item.label" v-for='(item,index) in searchData' :key='index' @click="chooseItem(item.label)">
 				{{item.label}}
 			</view>
 		</view>
@@ -90,6 +90,60 @@
 						currentPage[curInd].$vm.comfirmInfoAdd(this.infoIndex,this.infoInd,this.infoType ,label)
 					}
 				})
+			},
+			
+			//获取学校数据
+			reqschool(){
+				return new Promise(resolve=>{
+					const data={
+						data:{
+							
+						},
+						meta:{
+							
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$getHttp('/parameter/query/1/0',data,res=>{
+						// console.log("res",res)
+						if(res.meta.code==200){
+							// this.dataList[this.infoType]
+							// console.log(JSON.parse(res.data))
+							this.dataList[this.infoType]=JSON.parse(res.data).listSchool
+							console.log(this.dataList)
+							resolve()
+						}
+					},header,true)
+				})
+			},
+			
+			//获取专业数据
+			reqmajor(){
+				return new Promise(resolve=>{
+					const data={
+						data:{
+							
+						},
+						meta:{
+							
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$getHttp('/parameter/query/0/0',data,res=>{
+						// console.log("res",res)
+						if(res.meta.code==200){
+							// this.dataList[this.infoType]
+							// console.log(JSON.parse(res.data))
+							this.dataList[this.infoType]=JSON.parse(res.data).list
+							// console.log(this.dataList)
+							resolve()
+						}
+					},header,true)
+				})
 			}
 		},	
 		onLoad(payload) {
@@ -99,7 +153,11 @@
 			this.infoInd=payload.ind
 			this.infoType = payload.type
 			// this.infokey=payload.infokey
-			this.init()
+			const fn= this[`req${this.infoType}`]
+			// console.log(fn)
+			fn().then(_=>{
+				this.init()
+			})
 		}
 	}
 </script>

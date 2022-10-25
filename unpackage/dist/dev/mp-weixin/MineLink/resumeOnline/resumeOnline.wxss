@@ -83,6 +83,14 @@
   margin-top: 25rpx;
   padding: 0 20rpx;
 }
+.resume-oneline .resume-swiper .swiper-item .add-modules .item-title.data-v-94a2068a {
+  margin-left: 5rpx;
+  font-size: 36rpx;
+  padding: 5rpx 25rpx;
+  box-sizing: border-box;
+  font-weight: bold;
+  border-left: 8rpx solid #1296db;
+}
 .resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box.data-v-94a2068a {
   display: flex;
   flex-wrap: nowrap;
@@ -135,6 +143,6 @@
   margin: 25rpx 0;
   background-color: #ddd;
   width: 100%;
-  height: 50rpx;
+  height: 30rpx;
 }
 

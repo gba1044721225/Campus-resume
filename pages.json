@@ -67,12 +67,6 @@
 					}
 				},
 				{
-					"path": "resumeOnline/chooseInfo",
-					"style": {
-						"navigationBarTitleText": "在线简历"
-					}
-				},
-				{
 					"path": "resumeOnline/addEducation",
 					"style": {
 						"navigationBarTitleText": "在线简历"
@@ -80,6 +74,24 @@
 				},
 				{
 					"path": "resumeOnline/addWork",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/addProject",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/addCertificate",
+					"style": {
+						"navigationBarTitleText": "在线简历"
+					}
+				},
+				{
+					"path": "resumeOnline/chooseInfo",
 					"style": {
 						"navigationBarTitleText": "在线简历"
 					}
