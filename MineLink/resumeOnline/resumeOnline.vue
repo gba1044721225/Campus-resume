@@ -161,6 +161,12 @@
 												:inputBorder='true' label="期望城市" placeholder="请输入期望城市" :disabled="true" @click="openCityPicker(index,'intentInfo','city')">
 											</tui-input>
 										</view>
+										
+										<view class="content-item">
+											<tui-input v-model="item.resumeList.intentInfo.jType" :isFillet='true'
+												:inputBorder='true' label="工作类型" placeholder="请输入工作类型" :disabled="true" @click="openPicker(index,'intentInfo','jType')">
+											</tui-input>
+										</view>
 									</view>
 								</template>
 							</tui-collapse>
@@ -351,6 +357,9 @@
 						politicalStatusColumns: [
 							['党员', '团员', '群众']
 						],
+						jTypeColumns:[
+							['校招','社招','实习']
+						],
 						resumeList: {
 							pnInfo: {
 								name: '',
@@ -374,7 +383,8 @@
 								job: '',
 								salary:'',
 								city:'',
-								columnIndex: -1
+								columnIndex: -1,
+								jType:'',
 							}
 						},
 						addEducation: [],
