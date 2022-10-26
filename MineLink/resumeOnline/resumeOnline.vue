@@ -349,7 +349,11 @@
 								</template>
 							</tui-collapse>
 						</view>
-
+						
+<!-- 						<view class="test-fixed">
+							测试
+						</view>
+						 -->
 
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
@@ -1122,6 +1126,16 @@
 
 			}
 		}
-
+		
+		.test-fixed{
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			width: 100%;
+			height: 400rpx;
+			background-color: red;
+		}
+		
 	}
 </style>
