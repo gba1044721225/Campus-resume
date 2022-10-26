@@ -545,7 +545,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 189));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
+//
 //
 //
 //
@@ -1002,8 +1004,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
       // console.log(this.tabList)
     }, //删除教育经历
     deleteEducation: function deleteEducation(index, eduIndex) {var _this6 = this;this.tabList[index].addEducation.splice(eduIndex, 1);this.$nextTick(function () {_this6.setHeight();});}, //跳转到添加工作页面
-    linkAddWork: function linkAddWork(index, ind, item) {if (ind == undefined) {uni.navigateTo({
-          url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=99999") });
+    linkAddWork: function linkAddWork(index, ind, item) {if (ind == undefined) {uni.navigateTo({ url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=99999") });
 
       } else {
         uni.navigateTo({

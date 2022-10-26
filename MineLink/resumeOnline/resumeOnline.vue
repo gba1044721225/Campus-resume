@@ -354,6 +354,7 @@
 							测试
 						</view>
 						 -->
+						 
 
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
