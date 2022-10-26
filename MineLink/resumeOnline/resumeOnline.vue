@@ -149,22 +149,25 @@
 												:inputBorder='true' label="期望职位" placeholder="请输入期望职位">
 											</tui-input>
 										</view>
-										
+
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.salary" :isFillet='true'
-												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true" @click="openSalaryPicker(index,'intentInfo','salary')">
+												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true"
+												@click="openSalaryPicker(index,'intentInfo','salary')">
 											</tui-input>
 										</view>
-										
+
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.city" :isFillet='true'
-												:inputBorder='true' label="期望城市" placeholder="请输入期望城市" :disabled="true" @click="openCityPicker(index,'intentInfo','city')">
+												:inputBorder='true' label="期望城市" placeholder="请输入期望城市" :disabled="true"
+												@click="openCityPicker(index,'intentInfo','city')">
 											</tui-input>
 										</view>
-										
+
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.jType" :isFillet='true'
-												:inputBorder='true' label="工作类型" placeholder="请输入工作类型" :disabled="true" @click="openPicker(index,'intentInfo','jType')">
+												:inputBorder='true' label="工作类型" placeholder="请输入工作类型" :disabled="true"
+												@click="openPicker(index,'intentInfo','jType')">
 											</tui-input>
 										</view>
 									</view>
@@ -177,30 +180,43 @@
 
 						<!-- 教育经历 -->
 						<view class="add-modules">
-							<view class="item-title">
-								教育经历
-							</view>
-							<view class="show-item-box" v-if="item.addEducation.length!=0"
-								v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
-								<view class="item-left">
-									<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
-										{{keyToCnEdu[eduKey]}} : {{edu}}
+							<tui-collapse :index="'eduCol'+index" :current="item.eduCol"
+								@click="changeCollapseAdd('eduCol'+index,index,'eduCol')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.eduCol==-1'>
+										教育经历
 									</view>
-								</view>
-								<view class="add-btns">
-									<view class="btns-item" @click="linkAddEducation(index,eduIndex,eduBox)">
-										修改
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										教育经历
 									</view>
-									<view class="btns-item" @click="deleteEducation(index,eduIndex)">
-										删除
-									</view>
-								</view>
-							</view>
+									<view class="info-content">
+										<view class="show-item-box" v-if="item.addEducation.length!=0"
+											v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
+											<view class="item-left">
+												<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
+													{{keyToCnEdu[eduKey]}} : {{edu}}
+												</view>
+											</view>
+											<view class="add-btns">
+												<view class="btns-item"
+													@click="linkAddEducation(index,eduIndex,eduBox)">
+													修改
+												</view>
+												<view class="btns-item" @click="deleteEducation(index,eduIndex)">
+													删除
+												</view>
+											</view>
+										</view>
 
-							<view class="add-item" @click="linkAddEducation(index)">
-								<view class="add"> ＋ </view>
-								<view class="content"> 添加教育经历 </view>
-							</view>
+										<view class="add-item" @click="linkAddEducation(index)">
+											<view class="add"> ＋ </view>
+											<view class="content"> 添加教育经历 </view>
+										</view>
+									</view>
+								</template>
+							</tui-collapse>
 						</view>
 
 						<!-- 分割线 -->
@@ -208,30 +224,43 @@
 
 						<!-- 工作经验 -->
 						<view class="add-modules">
-							<view class="item-title">
-								工作经验
-							</view>
-							<view class="show-item-box" v-if="item.addWorkExp.length!=0"
-								v-for='(workBox,workIndex) in item.addWorkExp' :key="workIndex">
-								<view class="item-left">
-									<view class="item-content" v-for='(work,workKey) in workBox' :key="workKey">
-										{{keyToCnWork[workKey]}} : {{work}}
+							<tui-collapse :index="'WorkExpCol'+index" :current="item.WorkExpCol"
+								@click="changeCollapseAdd('WorkExpCol'+index,index,'WorkExpCol')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.WorkExpCol==-1'>
+										工作经验
 									</view>
-								</view>
-								<view class="add-btns">
-									<view class="btns-item" @click="linkAddWork(index,workIndex,workBox)">
-										修改
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										工作经验
 									</view>
-									<view class="btns-item" @click="deleteWork(index,workIndex)">
-										删除
-									</view>
-								</view>
-							</view>
+									<view class="info-content">
+										<view class="show-item-box" v-if="item.addWorkExp.length!=0"
+											v-for='(workBox,workIndex) in item.addWorkExp' :key="workIndex">
+											<view class="item-left">
+												<view class="item-content" v-for='(work,workKey) in workBox'
+													:key="workKey">
+													{{keyToCnWork[workKey]}} : {{work}}
+												</view>
+											</view>
+											<view class="add-btns">
+												<view class="btns-item" @click="linkAddWork(index,workIndex,workBox)">
+													修改
+												</view>
+												<view class="btns-item" @click="deleteWork(index,workIndex)">
+													删除
+												</view>
+											</view>
+										</view>
 
-							<view class="add-item" @click="linkAddWork(index)">
-								<view class="add"> + </view>
-								<view class="content"> 添加工作经历 </view>
-							</view>
+										<view class="add-item" @click="linkAddWork(index)">
+											<view class="add"> + </view>
+											<view class="content"> 添加工作经历 </view>
+										</view>
+									</view>
+								</template>
+							</tui-collapse>
 						</view>
 
 						<!-- 分割线 -->
@@ -239,30 +268,42 @@
 
 						<!-- 项目经验 -->
 						<view class="add-modules">
-							<view class="item-title">
-								项目经验
-							</view>
-							<view class="show-item-box" v-if="item.addPro.length!=0"
-								v-for='(proBox,proIndex) in item.addPro' :key="proIndex">
-								<view class="item-left">
-									<view class="item-content" v-for='(pro,proKey) in proBox' :key="proKey">
-										{{keyToCnPro[proKey]}} : {{pro}}
+							<tui-collapse :index="'proCol'+index" :current="item.proCol"
+								@click="changeCollapseAdd('proCol'+index,index,'proCol')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.proCol==-1'>
+										项目经验
 									</view>
-								</view>
-								<view class="add-btns">
-									<view class="btns-item" @click="linkAddPro(index,proIndex,proBox)">
-										修改
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										项目经验
 									</view>
-									<view class="btns-item" @click="deletePro(index,proIndex)">
-										删除
-									</view>
-								</view>
-							</view>
+									<view class="info-content">
+										<view class="show-item-box" v-if="item.addPro.length!=0"
+											v-for='(proBox,proIndex) in item.addPro' :key="proIndex">
+											<view class="item-left">
+												<view class="item-content" v-for='(pro,proKey) in proBox' :key="proKey">
+													{{keyToCnPro[proKey]}} : {{pro}}
+												</view>
+											</view>
+											<view class="add-btns">
+												<view class="btns-item" @click="linkAddPro(index,proIndex,proBox)">
+													修改
+												</view>
+												<view class="btns-item" @click="deletePro(index,proIndex)">
+													删除
+												</view>
+											</view>
+										</view>
 
-							<view class="add-item" @click="linkAddPro(index)">
-								<view class="add"> + </view>
-								<view class="content"> 添加项目经历 </view>
-							</view>
+										<view class="add-item" @click="linkAddPro(index)">
+											<view class="add"> + </view>
+											<view class="content"> 添加项目经历 </view>
+										</view>
+									</view>
+								</template>
+							</tui-collapse>
 						</view>
 
 						<!-- 分割线 -->
@@ -270,30 +311,43 @@
 
 						<!-- 添加证书-->
 						<view class="add-modules">
-							<view class="item-title">
-								添加证书
-							</view>
-							<view class="show-item-box" v-if="item.addCertificate.length!=0"
-								v-for='(certBox,certIndex) in item.addCertificate' :key="certIndex">
-								<view class="item-left">
-									<view class="item-content" v-for='(cert,certKey) in certBox' :key="certKey">
-										{{keyToCnCert[certKey]}} : {{cert}}
+							<tui-collapse :index="'certCol'+index" :current="item.certCol"
+								@click="changeCollapseAdd('certCol'+index,index,'certCol')">
+								<template v-slot:title>
+									<view class="item-title" v-if='item.certCol==-1'>
+										添加证书
 									</view>
-								</view>
-								<view class="add-btns">
-									<view class="btns-item" @click="linkAddCert(index,certIndex,certBox)">
-										修改
+								</template>
+								<template v-slot:content>
+									<view class="item-title">
+										添加证书
 									</view>
-									<view class="btns-item" @click="deleteCert(index,certIndex)">
-										删除
-									</view>
-								</view>
-							</view>
+									<view class="info-content">
+										<view class="show-item-box" v-if="item.addCertificate.length!=0"
+											v-for='(certBox,certIndex) in item.addCertificate' :key="certIndex">
+											<view class="item-left">
+												<view class="item-content" v-for='(cert,certKey) in certBox'
+													:key="certKey">
+													{{keyToCnCert[certKey]}} : {{cert}}
+												</view>
+											</view>
+											<view class="add-btns">
+												<view class="btns-item" @click="linkAddCert(index,certIndex,certBox)">
+													修改
+												</view>
+												<view class="btns-item" @click="deleteCert(index,certIndex)">
+													删除
+												</view>
+											</view>
+										</view>
 
-							<view class="add-item" @click="linkAddCert(index)">
-								<view class="add"> + </view>
-								<view class="content"> 添加项目经历 </view>
-							</view>
+										<view class="add-item" @click="linkAddCert(index)">
+											<view class="add"> + </view>
+											<view class="content"> 添加项目经历 </view>
+										</view>
+									</view>
+								</template>
+							</tui-collapse>
 						</view>
 
 
@@ -302,10 +356,11 @@
 							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
 
 						<!-- 薪资 -->
-						<u-picker :show="item.showSalaryPicker" ref="sPicker" :columns="salaryList" @confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
+						<u-picker :show="item.showSalaryPicker" ref="sPicker" :columns="salaryList"
+							@confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
 
-						<!-- 日期 -->
-						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)" @hide="cancelCalendar(index)">
+						<!-- 日期 @hide="cancelCalendar(index)" -->
+						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
 						</tui-calendar>
 
 						<!-- 地区 -->
@@ -324,13 +379,13 @@
 	export default {
 
 		data() {
-			let arr=[]
-			for(let y=0;y<20;y++){
-				arr.push(y+1+'k')
+			let arr = []
+			for (let y = 0; y < 20; y++) {
+				arr.push(y + 1 + 'k')
 			}
 			return {
 				imageBaseSrc: this.$imageBaseSrc,
-				salaryList:[
+				salaryList: [
 					arr,
 					arr
 				],
@@ -347,7 +402,7 @@
 							type: '', //记录类型
 							key: ''
 						},
-						
+
 						educationColumns: [
 							['博士', '研究生', '本科', '专科', '高中', '中专']
 						],
@@ -357,8 +412,8 @@
 						politicalStatusColumns: [
 							['党员', '团员', '群众']
 						],
-						jTypeColumns:[
-							['校招','社招','实习']
+						jTypeColumns: [
+							['校招', '社招', '实习']
 						],
 						resumeList: {
 							pnInfo: {
@@ -381,21 +436,26 @@
 							},
 							intentInfo: {
 								job: '',
-								salary:'',
-								city:'',
+								salary: '',
+								city: '',
 								columnIndex: -1,
-								jType:'',
+								jType: '',
 							}
 						},
 						addEducation: [],
+						eduCol: -1,
 						addWorkExp: [],
+						WorkExpCol: -1,
 						addPro: [],
+						proCol: -1,
 						addCertificate: [],
+						certCol: -1,
 					},
 					{
 						label: '简历2',
 						showPicker: false,
 						showCityPicker: false,
+						showSalaryPicker: false,
 						pickKey: {
 							type: '', //记录类型
 							key: ''
@@ -409,6 +469,9 @@
 						],
 						politicalStatusColumns: [
 							['党员', '团员', '群众']
+						],
+						jTypeColumns: [
+							['校招', '社招', '实习']
 						],
 						resumeList: {
 							pnInfo: {
@@ -430,13 +493,21 @@
 								columnIndex: -1
 							},
 							intentInfo: {
-								columnIndex: -1
+								job: '',
+								salary: '',
+								city: '',
+								columnIndex: -1,
+								jType: '',
 							}
 						},
 						addEducation: [],
+						eduCol: -1,
 						addWorkExp: [],
+						WorkExpCol: -1,
 						addPro: [],
+						proCol: -1,
 						addCertificate: [],
+						certCol: -1,
 					},
 				],
 				currentResume: 0,
@@ -496,15 +567,15 @@
 					this.swiperHeight = data.height + 25 + 'px'
 				}).exec();
 			},
-			
+
 			//弹出时候写死高度
-			setFixedHeight(){
-				const res = wx.getSystemInfoSync()
-				let statusHeight = res.statusBarHeight
-				let windowHeight = res.windowHeight
-				this.swiperHeight= windowHeight - statusHeight + 'px'
-			},
-			
+			// setFixedHeight() {
+			// 	const res = wx.getSystemInfoSync()
+			// 	let statusHeight = res.statusBarHeight
+			// 	let windowHeight = res.windowHeight
+			// 	this.swiperHeight = windowHeight - statusHeight + 'px'
+			// },
+
 			//设置最小高度初始化
 			setMinHeight() {
 				// console.log("res",res)
@@ -523,11 +594,25 @@
 				} else {
 					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', -1)
 				}
-				this.$nextTick(() => {
+				
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 				// console.log("this.tabList", this.tabList)
 			},
+
+			//无限添加类别的折叠层
+			changeCollapseAdd(val, index, key) {
+				if (this.tabList[index][key] == -1) {
+					this.tabList[index][key] = val
+				} else {
+					this.tabList[index][key] = -1
+				}
+				this.$nextTick(()=>{
+					this.setHeight()
+				})
+			},
+
 			//跳到学校/专业选择
 			linkToChooseInfo(index, type, key) {
 				// console.log("index",index)
@@ -545,7 +630,6 @@
 			openPicker(index, type, key) {
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
-				this.setFixedHeight()
 				this.tabList[index].showPicker = true
 			},
 			//选择picker
@@ -554,7 +638,6 @@
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0]
-				this.setHeight()
 				this.tabList[index].showPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
@@ -562,7 +645,6 @@
 
 			//取消Picker
 			cancelPicker(index) {
-				this.setHeight()
 				this.tabList[index].showPicker = false
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
@@ -575,7 +657,6 @@
 				console.log(this.cityList)
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
-				this.setFixedHeight()
 				this.tabList[index].showCityPicker = true
 			},
 
@@ -585,7 +666,6 @@
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
-				this.setHeight()
 				this.tabList[index].showCityPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
@@ -593,7 +673,6 @@
 
 			//取消citypicker
 			cancelCityPicker(index) {
-				this.setHeight()
 				this.tabList[index].showCityPicker = false
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
@@ -655,20 +734,18 @@
 				// console.log(this.$refs.calendar)
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
-				this.setFixedHeight()
 				this.$refs.calendar[index].show()
 			},
-			
+
 			//关闭日期选择
-			cancelCalendar(index){
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				// console.log(this.tabList[index]['pickKey']['type'])
-				// this.tabList[index]['pickKey']['type'] = ''
-				// this.tabList[index]['pickKey']['key'] = ''
-				this.setHeight()
-			},
-			
+			// cancelCalendar(index) {
+			// 	const type = this.tabList[index]['pickKey']['type']
+			// 	const key = this.tabList[index]['pickKey']['key']
+			// 	// console.log(this.tabList[index]['pickKey']['type'])
+			// 	// this.tabList[index]['pickKey']['type'] = ''
+			// 	// this.tabList[index]['pickKey']['key'] = ''
+			// },
+
 			//选择日期
 			chooseDate(index, e) {
 				const type = this.tabList[index]['pickKey']['type']
@@ -678,23 +755,21 @@
 				this.tabList[index]['pickKey']['key'] = ''
 				// console.log("e", e)
 			},
-				
+
 			//打开工资picker
-			openSalaryPicker(index, type, key){
+			openSalaryPicker(index, type, key) {
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
-				this.setFixedHeight()
 				this.tabList[index].showSalaryPicker = true
 			},
 
 			//确认工资picker
-			confirmSalaryPicker(index, e){
+			confirmSalaryPicker(index, e) {
 				// console.log("e",e)
-				console.log(e.value[0] +"-" +e.value[1])
+				console.log(e.value[0] + "-" + e.value[1])
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.value[0] +"-" +e.value[1]
-				this.setHeight()
+				this.tabList[index].resumeList[type][key] = e.value[0] + "-" + e.value[1]
 				this.tabList[index].showSalaryPicker = false
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
@@ -702,7 +777,6 @@
 
 			//取消salaryPicker
 			cancelSalaryPicker(index) {
-				this.setHeight()
 				this.tabList[index].showSalaryPicker = false
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
@@ -737,7 +811,7 @@
 					this.$set(this.tabList[index].addEducation, ind, JSON.parse(value))
 				}
 
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 
@@ -750,7 +824,7 @@
 			//删除教育经历
 			deleteEducation(index, eduIndex) {
 				this.tabList[index].addEducation.splice(eduIndex, 1)
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 			},
@@ -781,7 +855,7 @@
 					this.$set(this.tabList[index].addWorkExp, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 
@@ -791,7 +865,7 @@
 			//删除工作经历
 			deleteWork(index, workIndex) {
 				this.tabList[index].addWorkExp.splice(workIndex, 1)
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 			},
@@ -822,7 +896,7 @@
 					this.$set(this.tabList[index].addPro, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 
@@ -832,7 +906,7 @@
 			//删除项目经历
 			deletePro(index, proIndex) {
 				this.tabList[index].addPro.splice(proIndex, 1)
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 			},
@@ -863,7 +937,7 @@
 					this.$set(this.tabList[index].addCertificate, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 
@@ -873,7 +947,7 @@
 			//删除证书经历
 			deleteCert(index, certIndex) {
 				this.tabList[index].addCertificate.splice(certIndex, 1)
-				this.$nextTick(() => {
+				this.$nextTick(()=>{
 					this.setHeight()
 				})
 			},

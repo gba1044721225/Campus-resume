@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "校区",
-  "usingComponents": {
-    "tui-banner-arc": "/components/thorui/tui-banner-arc/tui-banner-arc",
-    "tui-fab": "/components/thorui/tui-fab/tui-fab",
-    "my-login": "/mycomponents/login"
-  }
-}
