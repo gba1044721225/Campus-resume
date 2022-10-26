@@ -111,7 +111,7 @@
 					},
 					meta: {
 						openId: this.openId,
-						role: 1,
+						role: this.$store.state.role,
 					}
 				}
 				const header = {

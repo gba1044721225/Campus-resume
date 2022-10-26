@@ -349,12 +349,12 @@
 								</template>
 							</tui-collapse>
 						</view>
-						
-<!-- 						<view class="test-fixed">
+
+						<!-- 						<view class="test-fixed">
 							测试
 						</view>
 						 -->
-						 
+
 
 						<!-- 学历 -->
 						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
@@ -375,6 +375,20 @@
 					</view>
 				</swiper-item>
 			</swiper>
+		</view>
+		
+		<view class="resume-btns-box">
+			<view class="btns-item" @click="saveInfoTemporary">
+				暂存数据
+			</view>
+			
+			<view class="btns-item" @click="getInfoTemporary">
+				获取暂存数据
+			</view>
+			
+			<view class="btns-item" @click="reqAllInfo">
+				提交数据
+			</view>
 		</view>
 	</view>
 </template>
@@ -400,6 +414,7 @@
 				cityLevel3: [],
 				tabList: [{
 						label: '简历1',
+						resumeId:'',
 						showPicker: false,
 						showCityPicker: false,
 						showSalaryPicker: false,
@@ -599,8 +614,8 @@
 				} else {
 					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', -1)
 				}
-				
-				this.$nextTick(()=>{
+
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 				// console.log("this.tabList", this.tabList)
@@ -613,7 +628,7 @@
 				} else {
 					this.tabList[index][key] = -1
 				}
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
@@ -816,7 +831,7 @@
 					this.$set(this.tabList[index].addEducation, ind, JSON.parse(value))
 				}
 
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 
@@ -829,7 +844,7 @@
 			//删除教育经历
 			deleteEducation(index, eduIndex) {
 				this.tabList[index].addEducation.splice(eduIndex, 1)
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
@@ -860,7 +875,7 @@
 					this.$set(this.tabList[index].addWorkExp, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 
@@ -870,7 +885,7 @@
 			//删除工作经历
 			deleteWork(index, workIndex) {
 				this.tabList[index].addWorkExp.splice(workIndex, 1)
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
@@ -901,7 +916,7 @@
 					this.$set(this.tabList[index].addPro, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 
@@ -911,7 +926,7 @@
 			//删除项目经历
 			deletePro(index, proIndex) {
 				this.tabList[index].addPro.splice(proIndex, 1)
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
@@ -942,7 +957,7 @@
 					this.$set(this.tabList[index].addCertificate, ind, JSON.parse(value))
 				}
 				// this.testValue=value
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 
@@ -952,10 +967,86 @@
 			//删除证书经历
 			deleteCert(index, certIndex) {
 				this.tabList[index].addCertificate.splice(certIndex, 1)
-				this.$nextTick(()=>{
+				this.$nextTick(() => {
 					this.setHeight()
 				})
 			},
+
+			//请求提交个人信息，补充信息，求职意向
+			reqAllInfo() {
+				console.log(11111111111)
+				const dataList=this.tabList[this.currentResume].resumeList		
+				const resumeId=this.tabList[this.currentResume].resumeId
+				
+				const header={
+					'content-type': 'application/json'
+				}
+				const data = {
+					"data": {
+						"address": dataList.addInfo.dwelling,
+						"birthday": dataList.addInfo.birthday,
+						"email":dataList.addInfo.email,
+						"expectCity": dataList.intentInfo.city,
+						"expectedSalary": dataList.intentInfo.salary,
+						"graduationDate":  dataList.pnInfo.graduationTime,
+						"height": "",
+						"id": resumeId,
+						"identity": dataList.addInfo.politicalStatus,
+						"introduction": "",
+						"leve":dataList.pnInfo.education,//?
+						"nativePlace":dataList.addInfo.hometown,
+						"openId": this.$store.state.openId,
+						"phone": dataList.pnInfo.phone,
+						"position": dataList.intentInfo.job,
+						"positionTag": "",
+						"professional":dataList.pnInfo.major,
+						"school": dataList.pnInfo.school,
+						"sex": "",
+						"sort": "",
+						"userName": dataList.pnInfo.name,
+						"view": "",
+						"workCate": "",
+						"workType": dataList.intentInfo.jType
+					},
+					"meta": {
+						"openId": this.$store.state.openId,
+						"role":  this.$store.state.role,
+					}
+				}
+				
+				console.log("id???",data)
+				
+				this.$http('/recruit/user/updateResume', data, res => {
+					console.log("res",res)
+					if(res.meta.code==200){					
+						this.$set(this.tabList[this.currentResume],'resumeId',res.data)
+						console.log("this.tabList",this.tabList)
+					}
+				}, header)
+			},
+			
+			//暂存
+			saveInfoTemporary(){
+				const data=this.tabList[this.currentResume]
+				uni.setStorageSync('infoTemporary',JSON.stringify(data))
+			},
+			
+			//获取暂存
+			getInfoTemporary(){
+				// console.log(111111)
+				const data=uni.getStorageSync('infoTemporary')
+				console.log(JSON.parse(data))
+				if(data!=undefined){
+					// console.log(22222)
+					this.tabList[this.currentResume]=JSON.parse(data)
+					
+					// this.$forceUpdate()
+					this.$nextTick(() => {
+						this.setHeight()
+					})
+				}
+				// console.log("this.tabList",this.tabList)
+			}
 		},
 		onReady() {
 			this.setHeight()
@@ -964,20 +1055,20 @@
 			this.setMinHeight()
 			this.initCityData()
 		},
-		// watch: {
-		// 	tabList: {
-		// 		deep: true,
-		// 		handler(nw) {
-		// 			console.log("nw", nw)
-		// 		}
-		// 	}
-		// }
+		watch: {
+			tabList: {
+				deep: true,
+				handler(nw) {
+					console.log("nw", nw)
+				}
+			}
+		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	.resume-oneline {
-		margin-bottom: 5vh;
+		// margin-bottom: 5vh;
 
 		.resume-online-tab {
 			display: flex;
@@ -1015,6 +1106,7 @@
 
 			.swiper-item {
 				display: block;
+				padding-bottom: calc(env(safe-area-inset-bottom) + 90rpx);
 				// min-height: 100vh;
 
 				.resume-item-info {
@@ -1127,16 +1219,34 @@
 
 			}
 		}
+
+		// .test-fixed {
+		// 	position: fixed;
+		// 	bottom: 0;
+		// 	left: 0;
+		// 	right: 0;
+		// 	width: 100%;
+		// 	height: 400rpx;
+		// 	background-color: red;
+		// }
 		
-		.test-fixed{
+		.resume-btns-box{
+			// padding-bottom: env(safe-area-inset-bottom);
 			position: fixed;
-			bottom: 0;
+			bottom:env(safe-area-inset-bottom);
 			left: 0;
 			right: 0;
-			width: 100%;
-			height: 400rpx;
-			background-color: red;
+			display: flex;
+			justify-content: space-between;
+			padding: 0 20rpx;
+			.btns-item{
+				background-color: #1296db;
+				padding:0 20rpx;
+				height: 90rpx;
+				line-height: 90rpx;
+				color: #fff;
+				border-radius: 15rpx;
+			}
 		}
-		
 	}
 </style>

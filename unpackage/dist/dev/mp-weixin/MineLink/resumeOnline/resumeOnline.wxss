@@ -24,9 +24,6 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.resume-oneline.data-v-94a2068a {
-  margin-bottom: 5vh;
-}
 .resume-oneline .resume-online-tab.data-v-94a2068a {
   display: flex;
   align-items: center;
@@ -56,6 +53,7 @@
 }
 .resume-oneline .resume-swiper .swiper-item.data-v-94a2068a {
   display: block;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 90rpx);
 }
 .resume-oneline .resume-swiper .swiper-item .resume-item-info.data-v-94a2068a {
   margin-top: 25rpx;
@@ -145,13 +143,21 @@
   width: 100%;
   height: 30rpx;
 }
-.resume-oneline .test-fixed.data-v-94a2068a {
+.resume-oneline .resume-btns-box.data-v-94a2068a {
   position: fixed;
-  bottom: 0;
+  bottom: env(safe-area-inset-bottom);
   left: 0;
   right: 0;
-  width: 100%;
-  height: 400rpx;
-  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+.resume-oneline .resume-btns-box .btns-item.data-v-94a2068a {
+  background-color: #1296db;
+  padding: 0 20rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #fff;
+  border-radius: 15rpx;
 }
 

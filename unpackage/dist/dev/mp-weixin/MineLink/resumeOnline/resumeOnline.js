@@ -546,6 +546,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 189));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} //
 //
 //
@@ -927,7 +941,21 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 18
 //
 //
 //
-var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++) {arr.push(y + 1 + 'k');}return { imageBaseSrc: this.$imageBaseSrc, salaryList: [arr, arr], cityList: [], cityLevel1: [], cityLevel2: [], cityLevel3: [], tabList: [{ label: '简历1', showPicker: false, showCityPicker: false, showSalaryPicker: false, pickKey: { type: '', //记录类型
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++) {arr.push(y + 1 + 'k');}return { imageBaseSrc: this.$imageBaseSrc, salaryList: [arr, arr], cityList: [], cityLevel1: [], cityLevel2: [], cityLevel3: [], tabList: [{ label: '简历1', resumeId: '', showPicker: false, showCityPicker: false, showSalaryPicker: false, pickKey: { type: '', //记录类型
           key: '' }, educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
             graduationTime: '', columnIndex: -1 }, addInfo: { email: '', politicalStatus: '', birthday: '', hometown: '', dwelling: '', columnIndex: -1 }, intentInfo: { job: '', salary: '', city: '', columnIndex: -1, jType: '' } }, addEducation: [], eduCol: -1, addWorkExp: [], WorkExpCol: -1, addPro: [], proCol: -1, addCertificate: [], certCol: -1 }, { label: '简历2', showPicker: false, showCityPicker: false, showSalaryPicker: false, pickKey: { type: '', //记录类型
           key: '' }, educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
@@ -1004,24 +1032,11 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
       // console.log(this.tabList)
     }, //删除教育经历
     deleteEducation: function deleteEducation(index, eduIndex) {var _this6 = this;this.tabList[index].addEducation.splice(eduIndex, 1);this.$nextTick(function () {_this6.setHeight();});}, //跳转到添加工作页面
-    linkAddWork: function linkAddWork(index, ind, item) {if (ind == undefined) {uni.navigateTo({ url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=99999") });
-
-      } else {
-        uni.navigateTo({
-          url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=").concat(ind, "&data=").concat(JSON.stringify(item)) });
-
-      }
-    },
-
-    //确认工作经历
-    comfirmWorkHistory: function comfirmWorkHistory(index, ind, value) {var _this7 = this;
-      // console.log("index", index)
+    linkAddWork: function linkAddWork(index, ind, item) {if (ind == undefined) {uni.navigateTo({ url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=99999") });} else {uni.navigateTo({ url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&ind=").concat(ind, "&data=").concat(JSON.stringify(item)) });}}, //确认工作经历
+    comfirmWorkHistory: function comfirmWorkHistory(index, ind, value) {var _this7 = this; // console.log("index", index)
       // console.log("ind", ind)
-      if (Number(ind) === 99999) {
-        // console.log(2222222)
-        this.tabList[index].addWorkExp.push(JSON.parse(value));
-
-      } else {
+      if (Number(ind) === 99999) {// console.log(2222222)
+        this.tabList[index].addWorkExp.push(JSON.parse(value));} else {
         // console.log(1111111)
         this.$set(this.tabList[index].addWorkExp, ind, JSON.parse(value));
       }
@@ -1121,6 +1136,82 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
       this.$nextTick(function () {
         _this12.setHeight();
       });
+    },
+
+    //请求提交个人信息，补充信息，求职意向
+    reqAllInfo: function reqAllInfo() {var _this13 = this;
+      console.log(11111111111);
+      var dataList = this.tabList[this.currentResume].resumeList;
+      var resumeId = this.tabList[this.currentResume].resumeId;
+
+      var header = {
+        'content-type': 'application/json' };
+
+      var data = {
+        "data": {
+          "address": dataList.addInfo.dwelling,
+          "birthday": dataList.addInfo.birthday,
+          "email": dataList.addInfo.email,
+          "expectCity": dataList.intentInfo.city,
+          "expectedSalary": dataList.intentInfo.salary,
+          "graduationDate": dataList.pnInfo.graduationTime,
+          "height": "",
+          "id": resumeId,
+          "identity": dataList.addInfo.politicalStatus,
+          "introduction": "",
+          "leve": dataList.pnInfo.education, //?
+          "nativePlace": dataList.addInfo.hometown,
+          "openId": this.$store.state.openId,
+          "phone": dataList.pnInfo.phone,
+          "position": dataList.intentInfo.job,
+          "positionTag": "",
+          "professional": dataList.pnInfo.major,
+          "school": dataList.pnInfo.school,
+          "sex": "",
+          "sort": "",
+          "userName": dataList.pnInfo.name,
+          "view": "",
+          "workCate": "",
+          "workType": dataList.intentInfo.jType },
+
+        "meta": {
+          "openId": this.$store.state.openId,
+          "role": this.$store.state.role } };
+
+
+
+      console.log("id???", data);
+
+      this.$http('/recruit/user/updateResume', data, function (res) {
+        console.log("res", res);
+        if (res.meta.code == 200) {
+          _this13.$set(_this13.tabList[_this13.currentResume], 'resumeId', res.data);
+          console.log("this.tabList", _this13.tabList);
+        }
+      }, header);
+    },
+
+    //暂存
+    saveInfoTemporary: function saveInfoTemporary() {
+      var data = this.tabList[this.currentResume];
+      uni.setStorageSync('infoTemporary', JSON.stringify(data));
+    },
+
+    //获取暂存
+    getInfoTemporary: function getInfoTemporary() {var _this14 = this;
+      // console.log(111111)
+      var data = uni.getStorageSync('infoTemporary');
+      console.log(JSON.parse(data));
+      if (data != undefined) {
+        // console.log(22222)
+        this.tabList[this.currentResume] = JSON.parse(data);
+
+        // this.$forceUpdate()
+        this.$nextTick(function () {
+          _this14.setHeight();
+        });
+      }
+      // console.log("this.tabList",this.tabList)
     } },
 
   onReady: function onReady() {
@@ -1129,16 +1220,13 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
   onLoad: function onLoad() {
     this.setMinHeight();
     this.initCityData();
-  }
-  // watch: {
-  // 	tabList: {
-  // 		deep: true,
-  // 		handler(nw) {
-  // 			console.log("nw", nw)
-  // 		}
-  // 	}
-  // }
-};exports.default = _default;
+  },
+  watch: {
+    tabList: {
+      deep: true,
+      handler: function handler(nw) {
+        console.log("nw", nw);
+      } } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

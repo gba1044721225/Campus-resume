@@ -250,7 +250,7 @@ var _vuex = __webpack_require__(/*! vuex */ 138);function ownKeys(object, enumer
 
         meta: {
           openId: this.openId,
-          role: 1 } };
+          role: this.$store.state.role } };
 
 
       var header = {
