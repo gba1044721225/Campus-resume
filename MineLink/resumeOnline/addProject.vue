@@ -63,7 +63,9 @@
 				showTimerPicker: false,
 				index: '',
 				ind: '',
+				resumeId: '',
 				proHistory: { //type
+					addProId:'',
 					proName: '',
 					role: '',
 					beginTime: '',
@@ -77,6 +79,7 @@
 			// console.log("payload", payload)
 			this.index = payload.index
 			this.ind = payload.ind
+			this.resumeId = payload.resumeId
 			let data=payload.data
 			if(data){
 				// console.log(data)
@@ -127,7 +130,10 @@
 				uni.navigateBack({
 					delta: 1,
 				})
-			}
+			},
+			
+			//新增/修改 项目经验
+			
 		},
 	}
 </script>

@@ -196,7 +196,7 @@
 											v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
 											<view class="item-left">
 												<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
-													{{keyToCnEdu[eduKey]}} : {{edu}}
+													<text v-if="eduKey!='addEduId'">{{keyToCnEdu[eduKey]}} : {{edu}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -241,7 +241,7 @@
 											<view class="item-left">
 												<view class="item-content" v-for='(work,workKey) in workBox'
 													:key="workKey">
-													{{keyToCnWork[workKey]}} : {{work}}
+													<text v-if="workKey!='addWorkId'">{{keyToCnWork[workKey]}} : {{work}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -376,25 +376,31 @@
 				</swiper-item>
 			</swiper>
 		</view>
-		
+
 		<view class="resume-btns-box">
 			<view class="btns-item" @click="saveInfoTemporary">
 				暂存数据
 			</view>
-			
+
 			<view class="btns-item" @click="getInfoTemporary">
 				获取暂存数据
 			</view>
-			
+
 			<view class="btns-item" @click="reqAllInfo">
 				提交数据
 			</view>
 		</view>
+
+		<!-- <u-picker :show="tabList.currentResume.showPicker" :columns="item[item.pickKey.key+'Columns']" @confirm="confirmPicker(currentResume,$event)" @cancel="cancelPicker(currentResume)"></u-picker> -->
+
 	</view>
 </template>
 
 <script>
 	import cityData from '@/utils/city.js'
+	import {
+		header
+	} from '../../common/helper'
 	export default {
 
 		data() {
@@ -414,10 +420,11 @@
 				cityLevel3: [],
 				tabList: [{
 						label: '简历1',
-						resumeId:'',
+						resumeId: '',
 						showPicker: false,
 						showCityPicker: false,
 						showSalaryPicker: false,
+						viewType: '', //1公开 
 						pickKey: {
 							type: '', //记录类型
 							key: ''
@@ -608,6 +615,9 @@
 			changeCollapse(val, index, key) {
 				// console.log("val", val)
 				// console.log("index", index)
+				// console.log("key",key)
+				console.log("this.tabList[index]['resumeList'][key]['columnIndex']", this.tabList[index]['resumeList'][key]
+					['columnIndex'])
 
 				if (this.tabList[index]['resumeList'][key]['columnIndex'] == -1) {
 					this.$set(this.tabList[index]['resumeList'][key], 'columnIndex', val)
@@ -652,6 +662,8 @@
 				this.tabList[index].pickKey.key = key
 				this.tabList[index].showPicker = true
 			},
+
+
 			//选择picker
 			confirmPicker(index, e) {
 				// console.log("e", e)
@@ -662,6 +674,8 @@
 				this.tabList[index]['pickKey']['type'] = ''
 				this.tabList[index]['pickKey']['key'] = ''
 			},
+
+
 
 			//取消Picker
 			cancelPicker(index) {
@@ -674,7 +688,7 @@
 
 			//弹出citypicker
 			openCityPicker(index, type, key) {
-				console.log(this.cityList)
+				// console.log(this.cityList)
 				this.tabList[index].pickKey.type = type
 				this.tabList[index].pickKey.key = key
 				this.tabList[index].showCityPicker = true
@@ -682,7 +696,7 @@
 
 			//选择cityPicker
 			confirmCityPicker(index, e) {
-				console.log("e", e)
+				// console.log("e", e)
 				const type = this.tabList[index]['pickKey']['type']
 				const key = this.tabList[index]['pickKey']['key']
 				this.tabList[index].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
@@ -809,11 +823,11 @@
 				// console.log("item",item)
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=99999`
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+						url: `/MineLink/resumeOnline/addEducation?index=${index}&ind=${ind}&resumeId=${this.tabList[this.currentResume].resumeId}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
@@ -843,21 +857,27 @@
 
 			//删除教育经历
 			deleteEducation(index, eduIndex) {
-				this.tabList[index].addEducation.splice(eduIndex, 1)
-				this.$nextTick(() => {
-					this.setHeight()
+				const addEduId = this.tabList[index].addEducation[eduIndex].addEduId
+				// console.log(11111111)
+				// console.log("addEduId",addEduId)
+				this.reqDelItem(1, addEduId).then(_ => {
+					this.tabList[index].addEducation.splice(eduIndex, 1)
+					this.$nextTick(() => {
+						this.setHeight()
+					})
 				})
+
 			},
 
 			//跳转到添加工作页面
 			linkAddWork(index, ind, item) {
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=99999`
+						url: `/MineLink/resumeOnline/addWork?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addWork?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+						url: `/MineLink/resumeOnline/addWork?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=${ind}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
@@ -884,21 +904,26 @@
 
 			//删除工作经历
 			deleteWork(index, workIndex) {
-				this.tabList[index].addWorkExp.splice(workIndex, 1)
-				this.$nextTick(() => {
-					this.setHeight()
+				const addWorkId = this.tabList[index].addWorkExp[workIndex].addWorkId
+				
+				this.reqDelItem(2, addWorkId).then(_ => {
+					this.tabList[index].addWorkExp.splice(workIndex, 1)
+					this.$nextTick(() => {
+						this.setHeight()
+					})
 				})
+
 			},
 
 			//跳转到添加项目页面
 			linkAddPro(index, ind, item) {
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addProject?index=${index}&ind=99999`
+						url: `/MineLink/resumeOnline/addProject?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addProject?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+						url: `/MineLink/resumeOnline/addProject?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=${ind}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
@@ -972,97 +997,207 @@
 				})
 			},
 
-			//请求提交个人信息，补充信息，求职意向
-			reqAllInfo() {
-				console.log(11111111111)
-				const dataList=this.tabList[this.currentResume].resumeList		
-				const resumeId=this.tabList[this.currentResume].resumeId
-				
-				const header={
-					'content-type': 'application/json'
-				}
-				const data = {
-					"data": {
-						"address": dataList.addInfo.dwelling,
-						"birthday": dataList.addInfo.birthday,
-						"email":dataList.addInfo.email,
-						"expectCity": dataList.intentInfo.city,
-						"expectedSalary": dataList.intentInfo.salary,
-						"graduationDate":  dataList.pnInfo.graduationTime,
-						"height": "",
-						"id": resumeId,
-						"identity": dataList.addInfo.politicalStatus,
-						"introduction": "",
-						"leve":dataList.pnInfo.education,//?
-						"nativePlace":dataList.addInfo.hometown,
-						"openId": this.$store.state.openId,
-						"phone": dataList.pnInfo.phone,
-						"position": dataList.intentInfo.job,
-						"positionTag": "",
-						"professional":dataList.pnInfo.major,
-						"school": dataList.pnInfo.school,
-						"sex": "",
-						"sort": "",
-						"userName": dataList.pnInfo.name,
-						"view": "",
-						"workCate": "",
-						"workType": dataList.intentInfo.jType
-					},
-					"meta": {
-						"openId": this.$store.state.openId,
-						"role":  this.$store.state.role,
-					}
-				}
-				
-				console.log("id???",data)
-				
-				this.$http('/recruit/user/updateResume', data, res => {
-					console.log("res",res)
-					if(res.meta.code==200){					
-						this.$set(this.tabList[this.currentResume],'resumeId',res.data)
-						console.log("this.tabList",this.tabList)
-					}
-				}, header)
+			//暂存所有数据
+			saveInfoTemporary() {
+				const data = this.tabList[this.currentResume]
+				uni.setStorageSync('infoTemporary', JSON.stringify(data))
+				uni.setStorageSync('infoTemporaryIndex', this.currentResume)
+				uni.showToast({
+					title: '暂存成功',
+					duration: 2000
+				})
 			},
-			
-			//暂存
-			saveInfoTemporary(){
-				const data=this.tabList[this.currentResume]
-				uni.setStorageSync('infoTemporary',JSON.stringify(data))
-			},
-			
+
 			//获取暂存
-			getInfoTemporary(){
+			getInfoTemporary() {
 				// console.log(111111)
-				const data=uni.getStorageSync('infoTemporary')
-				console.log(JSON.parse(data))
-				if(data!=undefined){
+				const data = uni.getStorageSync('infoTemporary')
+				// console.log(data)
+				if (data) {
+					// console.log(JSON.parse(data))
 					// console.log(22222)
-					this.tabList[this.currentResume]=JSON.parse(data)
-					
+					const currentResume = uni.getStorageSync('infoTemporaryIndex')
+					this.$set(this.tabList[currentResume], 'resumeList', JSON.parse(data).resumeList)
 					// this.$forceUpdate()
 					this.$nextTick(() => {
 						this.setHeight()
 					})
 				}
 				// console.log("this.tabList",this.tabList)
+			},
+
+			//请求提交个人信息，补充信息，求职意向
+			reqAllInfo() {
+				// console.log(11111111111)
+				const dataList = this.tabList[this.currentResume].resumeList
+				const resumeId = this.tabList[this.currentResume].resumeId
+
+				const header = {
+					'content-type': 'application/json'
+				}
+				const data = {
+					"data": {
+						"address": dataList.addInfo.dwelling,
+						"birthday": dataList.addInfo.birthday,
+						"email": dataList.addInfo.email,
+						"expectCity": dataList.intentInfo.city,
+						"expectedSalary": dataList.intentInfo.salary,
+						"graduationDate": dataList.pnInfo.graduationTime,
+						"height": "",
+						"id": resumeId,
+						"identity": dataList.addInfo.politicalStatus,
+						"introduction": "",
+						"leve": dataList.pnInfo.education, //?
+						"nativePlace": dataList.addInfo.hometown,
+						"openId": this.$store.state.openId,
+						"phone": dataList.pnInfo.phone,
+						"position": dataList.intentInfo.job,
+						"positionTag": "",
+						"professional": dataList.pnInfo.major,
+						"school": dataList.pnInfo.school,
+						"sex": "",
+						"sort": this.currentResume,
+						"userName": dataList.pnInfo.name,
+						"view": "1", //1:公开
+						"workCate": "",
+						"workType": dataList.intentInfo.jType
+					},
+					"meta": {
+						"openId": this.$store.state.openId,
+						"role": this.$store.state.role,
+					}
+				}
+
+				// console.log("id???",data)
+
+				this.$http('/recruit/user/updateResume', data, res => {
+					// console.log("res", res)
+					if (res.meta.code == 200) {
+						this.$set(this.tabList[this.currentResume], 'resumeId', res.data)
+						console.log("this.tabList", this.tabList)
+					}
+				}, header)
+			},
+
+			//进入页面获取到所有数据
+			reqResumeAllInfo() {
+				const openId = this.$store.state.openId
+				this.$getHttp(`/recruit/user/query/${openId}/${this.currentResume}`, {}, res => {
+					console.log("reqResumeAllInfo", res)
+					if (res.meta.code == 200) {
+						const data = JSON.parse(res.data).sysuserInfoVO
+						const eduData = JSON.parse(res.data).eductions
+						const workData=JSON.parse(res.data).shixi
+						
+						// console.log(data)
+						//pnInfo
+						this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
+						this.$set(this.tabList[this.currentResume], 'viewType', data.view)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'name', data.userName)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'phone', data.phone)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'school', data.school)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'education', data.leve)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'major', data
+							.professional)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'graduationTime', data
+							.graduationDate)
+						//addInfo
+						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'email', data.email)
+						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'politicalStatus',
+							data.identity)
+						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'birthday', data
+							.birthday)
+						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'hometown', data
+							.nativePlace)
+						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'dwelling', data
+							.address)
+						//intentInfo
+						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'job', data
+							.position)
+						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'salary', data
+							.expectedSalary)
+						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'city', data
+							.expectCity)
+						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'jType', data
+							.workType)
+						// console.log("this.tabList[this.currentResume]['resumeId']", this.tabList[this
+						// 	.currentResume]['resumeId'])
+						let handleArr = []
+						eduData.forEach(v => {
+							const obj = {
+								addEduId: v.id,
+								school: v.school, //key
+								education: v.leve,
+								major: v.professional,
+								beginTime: v.startTime,
+								endTime: v.endTime,
+								// allTime:'',
+								discribe: v.described
+							}
+							handleArr.push(obj)
+						})
+						this.$set(this.tabList[this.currentResume], 'addEducation', handleArr)
+						
+						handleArr=[]
+						workData.forEach(v=>{
+							const obj = {
+								addWorkId: v.id,
+								companyName: v.company,
+								jobName: v.jobs,
+								department:v.depart,
+								beginTime: v.startTime,
+								endTime: v.endTime,
+								// allTime: '',
+								discribe: ''
+							}
+							handleArr.push(obj)
+						})
+						this.$set(this.tabList[this.currentResume], 'addWorkExp', handleArr)
+					}
+				})
+			},
+
+			//请求删除 教育经历/工作经验
+			reqDelItem(type, id) {
+				const data = {
+					"data": {},
+					"meta": {
+						"openId": this.$store.state.openId,
+						"role": this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				return new Promise(resolve => {
+					this.$getHttp(`/recruit/user/del/${type}/${id}`, data, res => {
+						// console.log("res", res)
+						if(res.meta.code==200){
+							resolve()
+						}
+					}, header)
+				})
 			}
 		},
 		onReady() {
 			this.setHeight()
 		},
 		onLoad() {
+			this.reqResumeAllInfo()
 			this.setMinHeight()
 			this.initCityData()
 		},
-		watch: {
-			tabList: {
-				deep: true,
-				handler(nw) {
-					console.log("nw", nw)
-				}
-			}
-		}
+		// onShow() {
+
+		// },
+		// watch: {
+		// 	tabList: {
+		// 		deep: true,
+		// 		handler(nw) {
+		// 			console.log("nw", nw)
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 
@@ -1139,7 +1274,7 @@
 
 				.add-modules {
 					margin-top: 25rpx;
-					padding: 0 20rpx;
+					padding: 0 0 0 20rpx;
 
 					.item-title {
 						margin-left: 5rpx;
@@ -1229,19 +1364,20 @@
 		// 	height: 400rpx;
 		// 	background-color: red;
 		// }
-		
-		.resume-btns-box{
+
+		.resume-btns-box {
 			// padding-bottom: env(safe-area-inset-bottom);
 			position: fixed;
-			bottom:env(safe-area-inset-bottom);
+			bottom: env(safe-area-inset-bottom);
 			left: 0;
 			right: 0;
 			display: flex;
 			justify-content: space-between;
 			padding: 0 20rpx;
-			.btns-item{
+
+			.btns-item {
 				background-color: #1296db;
-				padding:0 20rpx;
+				padding: 0 20rpx;
 				height: 90rpx;
 				line-height: 90rpx;
 				color: #fff;

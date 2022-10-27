@@ -4,5 +4,25 @@
   "setting": {
     "compileHotReLoad": true
   },
-  "libVersion": "2.25.4"
+  "libVersion": "2.25.4",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "MineLink/resumeOnline/resumeOnline",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLink/resumeOnline/addEducation",
+          "query": "index=0&ind=99999",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

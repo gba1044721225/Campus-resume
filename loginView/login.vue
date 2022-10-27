@@ -65,16 +65,15 @@
 				if (this.agreementChoose === true) {
 					this.$wxLogin().then(loginData => {
 						// console.log("loginData", loginData)
-
 						this.$getHttp(`/recruit/user/login/${loginData.code}/1`, {}, (res) => {
-							console.log('res', res)
+							// console.log('res', res)
 							if (res.meta.code === '200') {
 								if(res.data){
 									console.log("loginData",loginData)
 									console.log(JSON.parse(res.data))
 									loginData.rawData=JSON.stringify({
 										...JSON.parse(loginData.rawData),
-										avatarUrl:JSON.parse(res.data).avatarUrl
+										avatarUrl:JSON.parse(res.data).avatarUrl?JSON.parse(res.data).avatarUrl:loginData.userInfo.avatarUrl
 									})
 								}
 
@@ -117,7 +116,7 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				// console.log("data", data)
+				console.log("data", data)
 				this.$http('/recruit/user/add', data, res => {
 					// console.log('reqSaveUserInfo', res)
 				}, header)

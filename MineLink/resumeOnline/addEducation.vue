@@ -23,7 +23,8 @@
 				<view>
 					入学时间
 				</view>
-				<input v-model="educationHistory.beginTime" :disabled="true" type="text" @click="openTimerPicker('beginTime')">
+				<input v-model="educationHistory.beginTime" :disabled="true" type="text"
+					@click="openTimerPicker('beginTime')">
 			</view>
 
 			<view class="text">
@@ -34,27 +35,28 @@
 				<view>
 					毕业时间
 				</view>
-				<input v-model="educationHistory.endTime" :disabled="true" type="text" @click="openTimerPicker('endTime')">
+				<input v-model="educationHistory.endTime" :disabled="true" type="text"
+					@click="openTimerPicker('endTime')">
 			</view>
 		</view>
-		
-		
+
+
 		<view class="mytextarea">
 			<view class="dsc-cont">
 				专业描述
 			</view>
-			<u-textarea v-model="educationHistory.discribe" border="surround" placeholder="请输入专业描述" ></u-textarea>
+			<u-textarea v-model="educationHistory.discribe" border="surround" placeholder="请输入专业描述"></u-textarea>
 		</view>
-			
+
 		<view class="btns-box">
 			<view class="info-btns" @click="comfirmEducationHistory">
 				保存教育经历
-			</view>	
+			</view>
 			<view class="info-btns" @click="cancelEducationHistory">
 				取消
 			</view>
 		</view>
-			
+
 		<!-- 学历 -->
 		<u-picker :show="showPicker" :columns="educationColumns" @confirm="confirmPicker" @cancel="cancelPicker">
 		</u-picker>
@@ -66,6 +68,9 @@
 </template>
 
 <script>
+	import {
+		header
+	} from '../../common/helper'
 	export default {
 		data() {
 			return {
@@ -74,10 +79,12 @@
 				showTimerPicker: false,
 				index: '',
 				ind: '',
+				resumeId: '',
 				educationColumns: [
 					['博士', '研究生', '本科', '专科', '高中', '中专']
 				],
 				educationHistory: { //type
+					addEduId: '',
 					school: '', //key
 					education: '',
 					major: '',
@@ -89,13 +96,15 @@
 			}
 		},
 		onLoad(payload) {
-			console.log("payload",payload)
-			this.index=payload.index
-			this.ind=payload.ind
-			let data=payload.data
-			if(data){
+			console.log("payload", payload)
+			this.index = payload.index
+			this.ind = payload.ind
+			this.resumeId = payload.resumeId
+			let data = payload.data
+			console.log("this.resumeId", this.resumeId)
+			if (data) {
 				console.log(data)
-				this.educationHistory=JSON.parse(data)
+				this.educationHistory = JSON.parse(data)
 			}
 		},
 		methods: {
@@ -112,7 +121,7 @@
 			},
 
 			confirmPicker(e) {
-				console.log("e",e)
+				console.log("e", e)
 				this.educationHistory[this.pickKey] = e.value[0]
 				this.showPicker = false
 				this.pickKey = ''
@@ -136,7 +145,7 @@
 
 				this.showTimerPicker = false
 				this.pickKey = ''
-				this.timerValue=''
+				this.timerValue = ''
 			},
 
 			cancelTimerPicker() {
@@ -156,30 +165,70 @@
 				// console.log(this.educationHistory)
 
 			},
-			
-			comfirmEducationHistory(){
-				// this.educationHistory.allTime=this.educationHistory.beginTime+this.educationHistory.endTime
-				uni.navigateBack({
-					delta:1,
-					success:(res)=>{
-						console.log("res",getCurrentPages())
-						const currentPage=getCurrentPages()
-						let curInd
-						currentPage.forEach((v,i)=>{
-							if(v.route==='MineLink/resumeOnline/resumeOnline')
-							curInd=i
-						})
-						console.log(curInd)
-						currentPage[curInd].$vm.comfirmEducationHistory(this.index,this.ind,JSON.stringify(this.educationHistory))
-					}
+
+			comfirmEducationHistory() {
+				this.reqEducation().then(_ => {
+					// this.educationHistory.allTime=this.educationHistory.beginTime+this.educationHistory.endTime
+					uni.navigateBack({
+						delta: 1,
+						success: (res) => {
+							// console.log("res", getCurrentPages())
+							const currentPage = getCurrentPages()
+							let curInd
+							currentPage.forEach((v, i) => {
+								if (v.route === 'MineLink/resumeOnline/resumeOnline')
+									curInd = i
+							})
+							console.log(curInd)
+							currentPage[curInd].$vm.comfirmEducationHistory(this.index, this.ind, JSON
+								.stringify(
+									this.educationHistory))
+						}
+					})
 				})
 			},
-			
-			cancelEducationHistory(){
+
+			cancelEducationHistory() {
 				uni.navigateBack({
-					delta:1,
+					delta: 1,
 				})
-			}
+			},
+
+			//新增/修改教育经历
+			reqEducation() {
+				return new Promise(resolve => {
+					const data = {
+						"data": {
+							"described": this.educationHistory.discribe,
+							"endTime": this.educationHistory.endTime,
+							"id": this.educationHistory.addEduId ? this.educationHistory.addEduId :
+							'', //点加号的id
+							"leve": this.educationHistory.education,
+							"professional": this.educationHistory.major,
+							"school": this.educationHistory.school,
+							"startTime": this.educationHistory.beginTime,
+							"sysInfo": this.resumeId //简历id
+						},
+						"meta": {
+							"openId": this.$store.state.openId,
+							"role": this.$store.state.role,
+						}
+					}
+					// console.log("data", data)
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$http('/recruit/user/modifyEducation', data, res => {
+						// console.log("reqEducation", res)
+						if (res.meta.code == 200) {
+							// const data=JSON.parse(res.data)
+							this.educationHistory.addEduId = data.id
+							console.log("this.educationHistory", this.educationHistory)
+							resolve()
+						}
+					}, header)
+				})
+			},
 		},
 	}
 </script>
@@ -212,7 +261,7 @@
 				input {
 					margin-top: 15rpx;
 					border: 1rpx solid #1296db;
-					padding: 15rpx 0 ;
+					padding: 15rpx 0;
 					text-align: center;
 					border-radius: 10rpx;
 				}
@@ -222,38 +271,39 @@
 				margin: 0 10rpx;
 			}
 		}
-		
-		.mytextarea{
+
+		.mytextarea {
 			width: 100%;
 			height: 200rpx;
-			
-			.dsc-cont{
+
+			.dsc-cont {
 				margin-left: 20rpx;
 			}
-			::v-deep .u-textarea{
-				border: 1px solid  #1296db ;
-				padding:15rpx;
+
+			::v-deep .u-textarea {
+				border: 1px solid #1296db;
+				padding: 15rpx;
 				margin: 15rpx 20rpx;
 			}
 		}
-		
-		.btns-box{
+
+		.btns-box {
 			position: fixed;
 			bottom: 3vh;
 			left: 0;
 			right: 0;
 			padding: 0 25rpx;
-			
-			.info-btns{
+
+			.info-btns {
 				margin-bottom: 20rpx;
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				padding: 20rpx 0;
 				width: 100%;
-				background-color:  #1296db;
+				background-color: #1296db;
 				border-radius: 15rpx;
-				color:#fff;
+				color: #fff;
 			}
 		}
 	}

@@ -79,7 +79,7 @@
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules.data-v-94a2068a {
   margin-top: 25rpx;
-  padding: 0 20rpx;
+  padding: 0 0 0 20rpx;
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules .item-title.data-v-94a2068a {
   margin-left: 5rpx;

@@ -48,6 +48,7 @@
 		</view>
 		
 		<my-login ref="loginBox"></my-login>
+		<tui-fab :bottom="10" :right="20"  :btnList="btnList"></tui-fab>
 	</view>
 </template>
 
@@ -62,6 +63,23 @@
 		},
 		data() {
 			return {
+				 btnList:[{
+					bgColor: "#16C2C2",
+					//名称
+					text: "学生",
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: "#fff"
+				}, {
+					bgColor: "#64B532",
+					//名称
+					text: "企业",
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: "#fff"
+				}],
 				imageBaseSrc: this.$imageBaseSrc,
 				infoItem: [{
 						num: 0,
@@ -83,6 +101,10 @@
 			}
 		},
 		methods: {
+			fabClick(e){
+				
+			},
+			
 			userLogin() {
 				uni.showModal({
 					title: "登录提醒",

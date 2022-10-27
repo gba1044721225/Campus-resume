@@ -69,7 +69,9 @@
 				showTimerPicker: false,
 				index: '',
 				ind: '',
+				resumeId: '',
 				workHistory: { //type
+					addWorkId: '',
 					companyName: '',
 					jobName: '',
 					department: '',
@@ -84,10 +86,11 @@
 			// console.log("payload", payload)
 			this.index = payload.index
 			this.ind = payload.ind
-			let data=payload.data
-			if(data){
+			this.resumeId = payload.resumeId
+			let data = payload.data
+			if (data) {
 				// console.log(data)
-				this.workHistory=JSON.parse(data)
+				this.workHistory = JSON.parse(data)
 			}
 		},
 		methods: {
@@ -113,26 +116,64 @@
 			},
 
 			comfirmWorkHistory() {
-				uni.navigateBack({
-					delta: 1,
-					success: (res) => {
-						// console.log("res", getCurrentPages())
-						const currentPage = getCurrentPages()
-						let curInd
-						currentPage.forEach((v,i)=>{
-							if(v.route==='MineLink/resumeOnline/resumeOnline')
-							curInd=i
-						})
-						// console.log(curInd)
-						currentPage[curInd].$vm.comfirmWorkHistory(this.index, this.ind, JSON.stringify(this
-							.workHistory))
-					}
+				this.reqWorkExp().then(_=>{
+					uni.navigateBack({
+						delta: 1,
+						success: (res) => {
+							// console.log("res", getCurrentPages())
+							const currentPage = getCurrentPages()
+							let curInd
+							currentPage.forEach((v, i) => {
+								if (v.route === 'MineLink/resumeOnline/resumeOnline')
+									curInd = i
+							})
+							// console.log(curInd)
+							currentPage[curInd].$vm.comfirmWorkHistory(this.index, this.ind, JSON.stringify(this
+								.workHistory))
+						}
+					})
 				})
 			},
 
 			cancelWorkHistory() {
 				uni.navigateBack({
 					delta: 1,
+				})
+			},
+
+			//新增/修改工作经历
+			reqWorkExp() {
+				return new Promise(resolve => {
+					const data = {
+						"data": {
+							"company": this.workHistory.companyName,
+							"depart": this.workHistory.department,
+							"endTime": this.workHistory.endTime,
+							"id": this.workHistory.addWorkId?this.workHistory.addWorkId:'',
+							"jobs": this.workHistory.jobName,
+							"startTime": this.workHistory.beginTime,
+							"sysInfo": this.resumeId,
+							"workDescribe": this.workHistory.discribe,
+							"type":"2"	//1：社团 2：企业',
+						},
+						"meta": {
+							"openId": this.$store.state.openId,
+							"role": this.$store.state.role,
+						}
+					}
+					
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$http('/recruit/user/modifyWorkExperience', data, res => {
+						// console.log("reqEducation", res)
+						if (res.meta.code == 200) {
+							// const data=JSON.parse(res.data)
+							this.workHistory.addWorkId = data.id
+							// console.log("this.workHistory", this.workHistory)
+							resolve()
+						}
+					}, header)
 				})
 			}
 		},
