@@ -24,6 +24,12 @@
         "resumeOnline/chooseInfo",
         "resumeOnline/chooseInfoAdd"
       ]
+    },
+    {
+      "root": "Enterprise",
+      "pages": [
+        "enterpriseEdit/enterpriseEdit"
+      ]
     }
   ],
   "window": {

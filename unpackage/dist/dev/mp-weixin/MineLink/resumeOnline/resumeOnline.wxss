@@ -100,6 +100,14 @@
 .resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .item-left.data-v-94a2068a {
   font-size: 30rpx;
 }
+.resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .item-left .item-content .image-show.data-v-94a2068a {
+  display: flex;
+}
+.resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .item-left .item-content .image-show image.data-v-94a2068a {
+  margin-left: 20rpx;
+  width: 200rpx;
+  height: 230rpx;
+}
 .resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .add-btns.data-v-94a2068a {
   display: flex;
   flex-wrap: wrap;

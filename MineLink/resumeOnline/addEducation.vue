@@ -101,9 +101,9 @@
 			this.ind = payload.ind
 			this.resumeId = payload.resumeId
 			let data = payload.data
-			console.log("this.resumeId", this.resumeId)
+			// console.log("this.resumeId", this.resumeId)
 			if (data) {
-				console.log(data)
+				// console.log(data)
 				this.educationHistory = JSON.parse(data)
 			}
 		},
@@ -223,7 +223,7 @@
 						if (res.meta.code == 200) {
 							// const data=JSON.parse(res.data)
 							this.educationHistory.addEduId = data.id
-							console.log("this.educationHistory", this.educationHistory)
+							// console.log("this.educationHistory", this.educationHistory)
 							resolve()
 						}
 					}, header)

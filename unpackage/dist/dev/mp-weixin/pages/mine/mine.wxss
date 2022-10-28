@@ -32,61 +32,69 @@
   box-sizing: border-box;
   position: relative;
 }
-.header-bar .login-bar {
+.header-bar .login-status .login-bar {
   margin-left: 25rpx;
   display: flex;
   align-items: center;
 }
-.header-bar .login-bar .mine-avatar {
+.header-bar .login-status .login-bar .enterprise-outside {
+  background-color: #eee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10rpx;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.header-bar .login-status .login-bar .mine-avatar {
   width: 140rpx;
   height: 140rpx;
   border-radius: 50%;
 }
-.header-bar .login-bar .login-content {
+.header-bar .login-status .login-bar .login-content {
   margin-left: 25rpx;
   color: #fff;
   font-size: 26rpx;
 }
-.header-bar .login-bar .login-tips {
+.header-bar .login-status .login-bar .login-tips {
   margin-left: 36rpx;
 }
-.header-bar .login-bar .login-tips .tips-title {
+.header-bar .login-status .login-bar .login-tips .tips-title {
   font-size: 36rpx;
   font-weight: bold;
   color: #fff;
 }
-.header-bar .login-bar .login-tips .resume-online {
+.header-bar .login-status .login-bar .login-tips .resume-online {
   margin-top: 25rpx;
   display: flex;
   align-items: center;
 }
-.header-bar .login-bar .login-tips .resume-online image {
+.header-bar .login-status .login-bar .login-tips .resume-online image {
   width: 24rpx;
   height: 24rpx;
 }
-.header-bar .login-bar .login-tips .resume-online .resume-content {
+.header-bar .login-status .login-bar .login-tips .resume-online .resume-content {
   margin-left: 15rpx;
   font-size: 24rpx;
   color: #fff;
 }
-.header-bar .mine-info {
+.header-bar .login-status .mine-info {
   margin-top: 25rpx;
   display: flex;
   justify-content: space-around;
   color: #fff;
 }
-.header-bar .mine-info .mine-info-item {
+.header-bar .login-status .mine-info .mine-info-item {
   font-size: 26rpx;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.header-bar .mine-info .mine-info-item .item-num {
+.header-bar .login-status .mine-info .mine-info-item .item-num {
   font-weight: bold;
   margin-bottom: 5rpx;
 }
-.header-bar .mine-info-box {
+.header-bar .login-status .mine-info-box {
   background-color: #fff;
   width: 500rpx;
   position: absolute;
@@ -101,7 +109,7 @@
   display: flex;
   justify-content: space-between;
 }
-.header-bar .mine-info-box .mine-info-item {
+.header-bar .login-status .mine-info-box .mine-info-item {
   font-size: 24rpx;
   display: flex;
   flex-direction: column;
@@ -109,11 +117,11 @@
   align-items: center;
   color: rgba(0, 0, 0, 0.7);
 }
-.header-bar .mine-info-box .mine-info-item image {
+.header-bar .login-status .mine-info-box .mine-info-item image {
   width: 50rpx;
   height: 50rpx;
 }
-.header-bar .mine-info-box .mine-info-item .item-content {
+.header-bar .login-status .mine-info-box .mine-info-item .item-content {
   margin-top: 15rpx;
 }
 

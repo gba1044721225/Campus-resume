@@ -103,6 +103,12 @@
 					}
 				}
 			]
+		},
+		{
+			"root": "Enterprise",
+			"pages":[{
+				"path": "enterpriseEdit/enterpriseEdit"
+			}]
 		}
 	],
 	"globalStyle": {

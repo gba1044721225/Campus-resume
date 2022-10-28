@@ -2,7 +2,7 @@
 	<view class="resume-oneline">
 		<view class="resume-online-tab">
 			<view class="tab-item" v-for="(item,index) in tabList" :key="index" @click="changeTabItem(index)">
-				<text :class="{'resume-active':currentResume==index}">{{item.label}}</text>
+				<text :class="{'resume-active':currentResume==index}">{{item.label}}{{index+1}}</text>
 				<image :src="`${imageBaseSrc}edit_blue.png`" mode="" v-if="currentResume==index"></image>
 			</view>
 		</view>
@@ -196,7 +196,8 @@
 											v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
 											<view class="item-left">
 												<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
-													<text v-if="eduKey!='addEduId'">{{keyToCnEdu[eduKey]}} : {{edu}}</text>
+													<text v-if="eduKey!='addEduId'">{{keyToCnEdu[eduKey]}} :
+														{{edu}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -241,7 +242,8 @@
 											<view class="item-left">
 												<view class="item-content" v-for='(work,workKey) in workBox'
 													:key="workKey">
-													<text v-if="workKey!='addWorkId'">{{keyToCnWork[workKey]}} : {{work}}</text>
+													<text v-if="workKey!='addWorkId'">{{keyToCnWork[workKey]}} :
+														{{work}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -284,7 +286,8 @@
 											v-for='(proBox,proIndex) in item.addPro' :key="proIndex">
 											<view class="item-left">
 												<view class="item-content" v-for='(pro,proKey) in proBox' :key="proKey">
-													{{keyToCnPro[proKey]}} : {{pro}}
+													<text v-if="proKey!='addProId'">{{keyToCnPro[proKey]}} :
+														{{pro}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -328,7 +331,14 @@
 											<view class="item-left">
 												<view class="item-content" v-for='(cert,certKey) in certBox'
 													:key="certKey">
-													{{keyToCnCert[certKey]}} : {{cert}}
+													<view v-if="certKey!='certId'">
+														<text v-if="certKey!='certImage'">{{keyToCnCert[certKey]}} :
+															{{cert}}</text>
+														<view class="image-show" v-if="certKey=='certImage'">
+															<text>{{keyToCnCert[certKey]}}</text>
+															<image :src="cert" mode=""></image>
+														</view>
+													</view>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -419,7 +429,7 @@
 				cityLevel2: [],
 				cityLevel3: [],
 				tabList: [{
-						label: '简历1',
+						label: '简历',
 						resumeId: '',
 						showPicker: false,
 						showCityPicker: false,
@@ -479,10 +489,12 @@
 						certCol: -1,
 					},
 					{
-						label: '简历2',
+						label: '简历',
+						resumeId: '',
 						showPicker: false,
 						showCityPicker: false,
 						showSalaryPicker: false,
+						viewType: '', //1公开 
 						pickKey: {
 							type: '', //记录类型
 							key: ''
@@ -568,7 +580,8 @@
 					// allTime: '就读时间',
 					beginTime: '项目开始',
 					endTime: '项目结束',
-					discribe: '项目描述'
+					result: "项目描述",
+					discribe: '工作描述',
 				},
 				keyToCnCert: {
 					certName: '证书名字',
@@ -905,7 +918,7 @@
 			//删除工作经历
 			deleteWork(index, workIndex) {
 				const addWorkId = this.tabList[index].addWorkExp[workIndex].addWorkId
-				
+
 				this.reqDelItem(2, addWorkId).then(_ => {
 					this.tabList[index].addWorkExp.splice(workIndex, 1)
 					this.$nextTick(() => {
@@ -950,9 +963,12 @@
 
 			//删除项目经历
 			deletePro(index, proIndex) {
-				this.tabList[index].addPro.splice(proIndex, 1)
-				this.$nextTick(() => {
-					this.setHeight()
+				const addProId = this.tabList[index].addPro[proIndex].addProId
+				this.reqDelItem(3, addProId).then(_ => {
+					this.tabList[index].addPro.splice(proIndex, 1)
+					this.$nextTick(() => {
+						this.setHeight()
+					})
 				})
 			},
 
@@ -960,11 +976,11 @@
 			linkAddCert(index, ind, item) {
 				if (ind == undefined) {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addCertificate?index=${index}&ind=99999`
+						url: `/MineLink/resumeOnline/addCertificate?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=99999`
 					})
 				} else {
 					uni.navigateTo({
-						url: `/MineLink/resumeOnline/addCertificate?index=${index}&ind=${ind}&data=${JSON.stringify(item)}`
+						url: `/MineLink/resumeOnline/addCertificate?index=${index}&resumeId=${this.tabList[this.currentResume].resumeId}&ind=${ind}&data=${JSON.stringify(item)}`
 					})
 				}
 			},
@@ -991,9 +1007,13 @@
 
 			//删除证书经历
 			deleteCert(index, certIndex) {
-				this.tabList[index].addCertificate.splice(certIndex, 1)
-				this.$nextTick(() => {
-					this.setHeight()
+				const certId = this.tabList[index].addCertificate[certIndex].certId
+
+				this.reqDelItem(4, certId).then(_ => {
+					this.tabList[index].addCertificate.splice(certIndex, 1)
+					this.$nextTick(() => {
+						this.setHeight()
+					})
 				})
 			},
 
@@ -1087,8 +1107,9 @@
 					if (res.meta.code == 200) {
 						const data = JSON.parse(res.data).sysuserInfoVO
 						const eduData = JSON.parse(res.data).eductions
-						const workData=JSON.parse(res.data).shixi
-						
+						const workData = JSON.parse(res.data).shixi
+						const proData = JSON.parse(res.data).projects
+						const certData = JSON.parse(res.data).listFile
 						// console.log(data)
 						//pnInfo
 						this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
@@ -1137,22 +1158,51 @@
 							handleArr.push(obj)
 						})
 						this.$set(this.tabList[this.currentResume], 'addEducation', handleArr)
-						
-						handleArr=[]
-						workData.forEach(v=>{
+
+						handleArr = []
+						workData.forEach(v => {
 							const obj = {
 								addWorkId: v.id,
 								companyName: v.company,
 								jobName: v.jobs,
-								department:v.depart,
+								department: v.depart,
 								beginTime: v.startTime,
 								endTime: v.endTime,
 								// allTime: '',
-								discribe: ''
+								discribe: v.workDescribe
 							}
 							handleArr.push(obj)
 						})
 						this.$set(this.tabList[this.currentResume], 'addWorkExp', handleArr)
+
+						handleArr = []
+						proData.forEach(v => {
+							const obj = {
+								addProId: v.id,
+								proName: v.projectName,
+								role: v.projectRole,
+								beginTime: v.startTime,
+								endTime: v.endTime,
+								// allTime: '',
+								discribe: v.described,
+								result: v.results
+							}
+							handleArr.push(obj)
+						})
+						this.$set(this.tabList[this.currentResume], 'addPro', handleArr)
+						// console.log("handleArr",handleArr)
+
+						handleArr = []
+						certData.forEach(v => {
+							const obj = {
+								certId: v.id,
+								certName: v.fileName,
+								certImage: v.certImage,
+							}
+							handleArr.push(obj)
+						})
+						this.$set(this.tabList[this.currentResume], 'addCertificate', handleArr)
+						handleArr = null
 					}
 				})
 			},
@@ -1172,12 +1222,13 @@
 				return new Promise(resolve => {
 					this.$getHttp(`/recruit/user/del/${type}/${id}`, data, res => {
 						// console.log("res", res)
-						if(res.meta.code==200){
+						if (res.meta.code == 200) {
 							resolve()
 						}
 					}, header)
 				})
-			}
+			},
+
 		},
 		onReady() {
 			this.setHeight()
@@ -1295,6 +1346,18 @@
 
 						.item-left {
 							font-size: 30rpx;
+
+							.item-content {
+								.image-show {
+									display: flex;
+
+									image {
+										margin-left: 20rpx;
+										width: 200rpx;
+										height: 230rpx;
+									}
+								}
+							}
 						}
 
 						.add-btns {

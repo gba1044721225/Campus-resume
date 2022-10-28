@@ -7,7 +7,7 @@ const store = new Vuex.Store({
   state: {
     token: uni.getStorageSync('token')||'',
 	openId:uni.getStorageSync('openId')||'',
-	role:1,
+	role:uni.getStorageSync('role') || 1,
 	userInfo:uni.getStorageSync('rawData')?JSON.parse(uni.getStorageSync('rawData')):null,
 
   },

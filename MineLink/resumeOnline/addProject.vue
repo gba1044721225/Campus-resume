@@ -1,8 +1,8 @@
 <template>
 	<view class="add-project">
 		<view class="content-item">
-			<tui-input v-model="proHistory.proName" :isFillet='true' :inputBorder='true' :required='true'
-				label="项目名称" placeholder="请输入项目名称">
+			<tui-input v-model="proHistory.proName" :isFillet='true' :inputBorder='true' :required='true' label="项目名称"
+				placeholder="请输入项目名称">
 			</tui-input>
 		</view>
 
@@ -17,7 +17,7 @@
 				<view>
 					项目开始
 				</view>
-				<input v-model="proHistory.beginTime" type="text" @click="openTimerPicker('beginTime')">
+				<input :disabled="true" v-model="proHistory.beginTime" type="text" @click="openTimerPicker('beginTime')">
 			</view>
 
 			<view class="text">
@@ -35,9 +35,16 @@
 
 		<view class="mytextarea">
 			<view class="dsc-cont">
+				项目描述
+			</view>
+			<u-textarea v-model="proHistory.result" border="surround" placeholder="请输入项目描述"></u-textarea>
+		</view>
+
+		<view class="mytextarea" style="margin-top: 35rpx;">
+			<view class="dsc-cont">
 				工作描述
 			</view>
-			<u-textarea v-model="proHistory.discribe" border="surround" placeholder="请输入专业描述"></u-textarea>
+			<u-textarea v-model="proHistory.discribe" border="surround" placeholder="请输入工作描述"></u-textarea>
 		</view>
 
 		<view class="btns-box">
@@ -65,13 +72,14 @@
 				ind: '',
 				resumeId: '',
 				proHistory: { //type
-					addProId:'',
+					addProId: '',
 					proName: '',
 					role: '',
 					beginTime: '',
 					endTime: '',
 					// allTime: '',
-					discribe: ''
+					discribe: '',
+					result:''
 				},
 			}
 		},
@@ -80,10 +88,10 @@
 			this.index = payload.index
 			this.ind = payload.ind
 			this.resumeId = payload.resumeId
-			let data=payload.data
-			if(data){
+			let data = payload.data
+			if (data) {
 				// console.log(data)
-				this.proHistory=JSON.parse(data)
+				this.proHistory = JSON.parse(data)
 			}
 		},
 		methods: {
@@ -109,20 +117,22 @@
 			},
 
 			comfirmProHistory() {
-				uni.navigateBack({
-					delta: 1,
-					success: (res) => {
-						// console.log("res", getCurrentPages())
-						const currentPage = getCurrentPages()
-						let curInd
-						currentPage.forEach((v,i)=>{
-							if(v.route==='MineLink/resumeOnline/resumeOnline')
-							curInd=i
-						})
-						// console.log(curInd)
-						currentPage[curInd].$vm.comfirmProHistory(this.index, this.ind, JSON.stringify(this
-							.proHistory))
-					}
+				this.reqAddPro().then(_=>{
+					uni.navigateBack({
+						delta: 1,
+						success: (res) => {
+							// console.log("res", getCurrentPages())
+							const currentPage = getCurrentPages()
+							let curInd
+							currentPage.forEach((v, i) => {
+								if (v.route === 'MineLink/resumeOnline/resumeOnline')
+									curInd = i
+							})
+							// console.log(curInd)
+							currentPage[curInd].$vm.comfirmProHistory(this.index, this.ind, JSON.stringify(this
+								.proHistory))
+						}
+					})
 				})
 			},
 
@@ -131,9 +141,38 @@
 					delta: 1,
 				})
 			},
-			
+
 			//新增/修改 项目经验
-			
+			reqAddPro() {
+				return new Promise(resolve => {
+					const data = {
+						"data": {
+							"described": this.proHistory.discribe,
+							"endTime": this.proHistory.endTime,
+							"id": this.proHistory.addProId ? this.proHistory.addProId : '',
+							"projectName": this.proHistory.proName,
+							"projectRole": this.proHistory.role,
+							"startTime": this.proHistory.beginTime,
+							"sysInfo": this.resumeId,
+							"results":this.proHistory.result
+						},
+						"meta": {
+							"openId": this.$store.state.openId,
+							"role": this.$store.state.role,
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$http('/recruit/user/projectExperience',data,res=>{
+						// console.log("reqAddPro",res)
+						if(res.meta.code==200){
+							this.proHistory.addProId=data.id
+							resolve()
+						}
+					},header)
+				})
+			}
 		},
 	}
 </script>

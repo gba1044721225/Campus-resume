@@ -23,7 +23,7 @@
 				<view>
 					入职时间
 				</view>
-				<input v-model="workHistory.beginTime" type="text" @click="openTimerPicker('beginTime')">
+				<input :disabled="true" v-model="workHistory.beginTime" type="text" @click="openTimerPicker('beginTime')">
 			</view>
 
 			<view class="text">
