@@ -35,6 +35,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/enterpriseEdit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

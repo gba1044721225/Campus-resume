@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "u-textarea": "/uni_modules/uview-ui/components/u-textarea/u-textarea"
+  }
 }

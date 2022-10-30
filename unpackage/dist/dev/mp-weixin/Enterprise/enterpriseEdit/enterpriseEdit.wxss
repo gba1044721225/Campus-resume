@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .enterprise-edit.data-v-5d34218f {
-  padding: 20rpx 25rpx 0 25rpx;
+  padding: 20rpx 25rpx env(safe-area-inset-bottom) 25rpx;
 }
 .enterprise-edit .enterprise-tips.data-v-5d34218f {
   color: #1296db;
@@ -44,6 +44,17 @@
 }
 .enterprise-edit .enterprise-box .enterprise-item .item-left .title text.data-v-5d34218f:first-child {
   color: red;
+}
+.enterprise-edit .enterprise-box .enterprise-item .item-left .text-area.data-v-5d34218f {
+  margin-top: 15rpx;
+  width: 700rpx;
+  display: flex;
+  justify-content: center;
+}
+.enterprise-edit .enterprise-box .enterprise-item .item-left .text-area.data-v-5d34218f .u-textarea {
+  outline: none;
+  box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
+  border: 1rpx solid #1296db;
 }
 .enterprise-edit .enterprise-box .enterprise-item .item-right input.data-v-5d34218f {
   box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.2);
@@ -73,5 +84,11 @@
 .enterprise-edit .enterprise-box .item-tips.data-v-5d34218f {
   margin-top: 20rpx;
   color: #ff55ff;
+}
+.enterprise-edit .enterprise-box .item-tips.w_250.data-v-5d34218f {
+  width: 390rpx !important;
+}
+.enterprise-edit .enterprise-box.data-v-5d34218f:last-child {
+  border-bottom: 0;
 }
 

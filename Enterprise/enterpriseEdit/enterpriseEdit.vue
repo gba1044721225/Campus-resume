@@ -153,7 +153,7 @@
 					</view>
 				</view>
 				<view class="item-right">
-					<input type="text" :disabled="true" v-model="enterpriseInfo.linkmanEmail">
+					<input type="text" v-model="enterpriseInfo.linkmanEmail">
 				</view>
 			</view>
 		</view>
@@ -165,13 +165,151 @@
 						<text>*</text>
 						<text>单位简介</text>
 					</view>
-				</view>
-				<view class="item-right">
-					<input type="text" :disabled="true" v-model="enterpriseInfo.companyProfile">
+					<view class="text-area">
+						<u-textarea v-model="enterpriseInfo.companyProfile" placeholder="请输入内容" ></u-textarea>
+					</view>
 				</view>
 			</view>
 		</view>
 		
+		<view class="enterprise-tips">
+			以下为选填项
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>公司logo</text>
+					</view>
+				</view>
+
+				<view class="item-right" @click="upLoadCompanyLogo">
+					<view class="none-img" v-if="!enterpriseInfo.companyLogo">
+						<image src="/static/upLoadCertificate.png" mode="">
+						</image>
+					</view>
+					<image v-if="enterpriseInfo.companyLogo" :src="enterpriseInfo.companyLogo" mode=""></image>
+				</view>
+				
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>微信号</text>
+					</view>
+					<view class="item-tips w_250">
+						tips：为专属客服更好为您服务，可输入您的微信号
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.wechatNumber">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>单位网址</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.companyWebsite">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>单位详细地址</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.fullAddress">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>单位电话</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.companyPhone">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>单位联系人职位</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.linkmanJob">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>备用联系人</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.otherLinkman">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>备用手机</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.otherCompanyPhone">
+				</view>
+			</view>
+		</view>
+		
+		<view class="enterprise-box">
+			<view class="enterprise-item">
+				<view class="item-left">
+					<view class="title">
+						<text></text>
+						<text>备用邮箱</text>
+					</view>
+				</view>
+				<view class="item-right">
+					<input type="text" v-model="enterpriseInfo.otherEmail">
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -189,15 +327,30 @@
 					linkman:"",
 					locationArea:"",
 					linkmanEmail:"",
-					companyProfile:""
+					companyProfile:"",
+					companyLogo:"",
+					wechatNumber:"",
+					companyWebsite:"",
+					fullAddress:"",
+					companyPhone:"",
+					linkmanJob:"",
+					otherLinkman:"",
+					otherCompanyPhone:"",
+					otherEmail:"",
 				}
 			}
 		},
 		methods: {
 			async upLoadBusinessLicense() {
 				const res = await this.$chooseImage()
-				console.log("res", res)
+				// console.log("res", res)
 				this.enterpriseInfo.businessLicense = res.tempFilePaths[0]
+			},
+			
+			async upLoadCompanyLogo(){
+				const res = await this.$chooseImage()
+				// console.log("res", res)
+				this.enterpriseInfo.companyLogo = res.tempFilePaths[0]
 			}
 		}
 	}
@@ -205,7 +358,7 @@
 
 <style lang="scss" scoped>
 	.enterprise-edit {
-		padding: 20rpx 25rpx 0 25rpx;
+		padding: 20rpx 25rpx env(safe-area-inset-bottom) 25rpx;
 
 		.enterprise-tips {
 			color: #1296db;
@@ -229,6 +382,17 @@
 					.title {
 						text:first-child {
 							color: red;
+						}
+					}
+					.text-area{
+						margin-top: 15rpx;
+						width: 700rpx;
+						display: flex;
+						justify-content: center;
+						::v-deep.u-textarea{
+							outline: none;
+							box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
+							border: 1rpx solid #1296db;
 						}
 					}
 				}
@@ -268,7 +432,13 @@
 				margin-top: 20rpx;
 				color: #ff55ff;
 			}
+			.item-tips.w_250{
+				width: 390rpx !important;
+			}
 		}
-
-	}
+		
+		.enterprise-box:last-child{
+			border-bottom: 0;
+		}
+	}	
 </style>

@@ -43,12 +43,15 @@
 												placeholder="请输入学校" @click="linkToChooseInfo(index,'pnInfo','school')">
 											</tui-input>
 										</view>
+
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.pnInfo.education" :disabled="true"
 												:isFillet='true' :inputBorder='true' :required='true' label="学历"
-												placeholder="请输入学历" @click="openPicker(index,'pnInfo','education')">
+												placeholder="请输入学历" @click="openPicker('pnInfo','education')">
 											</tui-input>
 										</view>
+										
+
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.pnInfo.major" :disabled="true"
 												:isFillet='true' :inputBorder='true' :required='true' label="专业"
@@ -58,7 +61,7 @@
 
 										<view class="content-item">
 											<tui-input :isFillet='true' v-model="item.resumeList.pnInfo.graduationTime"
-												@click="calendarHandler(index,'pnInfo','graduationTime')"
+												@click="calendarHandler('pnInfo','graduationTime')"
 												:inputBorder='true' :required='true' label="毕业时间" :disabled='true'
 												placeholder="请选择毕业时间">
 											</tui-input>
@@ -100,25 +103,25 @@
 											<tui-input :disabled="true"
 												v-model="item.resumeList.addInfo.politicalStatus" :isFillet='true'
 												:inputBorder='true' label="政治面貌" placeholder="请输入政治面貌"
-												@click="openPicker(index,'addInfo','politicalStatus')">
+												@click="openPicker('addInfo','politicalStatus')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.birthday" :disabled="true"
 												:isFillet='true' :inputBorder='true' label="出生日期" placeholder="请输入出生日期"
-												@click="calendarHandler(index,'addInfo','birthday')">
+												@click="calendarHandler('addInfo','birthday')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.hometown" :disabled="true"
 												:isFillet='true' :inputBorder='true' label="籍贯" placeholder="请输入籍贯"
-												@click="openCityPicker(index,'addInfo','hometown')">
+												@click="openCityPicker('addInfo','hometown')">
 											</tui-input>
 										</view>
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.addInfo.dwelling" :disabled="true"
 												:isFillet='true' :inputBorder='true' label="居住地" placeholder="请输入居住地"
-												@click="openCityPicker(index,'addInfo','dwelling')">
+												@click="openCityPicker('addInfo','dwelling')">
 											</tui-input>
 										</view>
 
@@ -153,21 +156,21 @@
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.salary" :isFillet='true'
 												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true"
-												@click="openSalaryPicker(index,'intentInfo','salary')">
+												@click="openSalaryPicker('intentInfo','salary')">
 											</tui-input>
 										</view>
 
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.city" :isFillet='true'
 												:inputBorder='true' label="期望城市" placeholder="请输入期望城市" :disabled="true"
-												@click="openCityPicker(index,'intentInfo','city')">
+												@click="openCityPicker('intentInfo','city')">
 											</tui-input>
 										</view>
 
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.intentInfo.jType" :isFillet='true'
 												:inputBorder='true' label="工作类型" placeholder="请输入工作类型" :disabled="true"
-												@click="openPicker(index,'intentInfo','jType')">
+												@click="openPicker('intentInfo','jType')">
 											</tui-input>
 										</view>
 									</view>
@@ -360,28 +363,6 @@
 							</tui-collapse>
 						</view>
 
-						<!-- 						<view class="test-fixed">
-							测试
-						</view>
-						 -->
-
-
-						<!-- 学历 -->
-						<u-picker :show="item.showPicker" :columns="item[item.pickKey.key+'Columns']"
-							@confirm="confirmPicker(index,$event)" @cancel="cancelPicker(index)"></u-picker>
-
-						<!-- 薪资 -->
-						<u-picker :show="item.showSalaryPicker" ref="sPicker" :columns="salaryList"
-							@confirm="confirmSalaryPicker(index,$event)" @cancel="cancelSalaryPicker(index)"></u-picker>
-
-						<!-- 日期 @hide="cancelCalendar(index)" -->
-						<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate(index,$event)">
-						</tui-calendar>
-
-						<!-- 地区 -->
-						<u-picker ref="uPicker" :show="item.showCityPicker" :columns="cityList"
-							@confirm="confirmCityPicker(index,$event)" @cancel="cancelCityPicker(index)"
-							@change="changeHandler(index,$event)"></u-picker>
 					</view>
 				</swiper-item>
 			</swiper>
@@ -401,8 +382,22 @@
 			</view>
 		</view>
 
-		<!-- <u-picker :show="tabList.currentResume.showPicker" :columns="item[item.pickKey.key+'Columns']" @confirm="confirmPicker(currentResume,$event)" @cancel="cancelPicker(currentResume)"></u-picker> -->
-
+		<!-- 学历 -->
+		<u-picker :show="tabList[currentResume].showPicker" :columns="tabList[currentResume][tabList[currentResume].pickKey.key+'Columns']"
+			@confirm="confirmPicker" @cancel="cancelPicker"></u-picker>
+		
+		<!-- 日期 @hide="cancelCalendar(index)" -->
+		<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate">
+		</tui-calendar>
+		
+		<!-- 地区 -->
+		<u-picker ref="uPicker" :show="tabList[currentResume].showCityPicker" :columns="cityList"
+			@confirm="confirmCityPicker($event)" @cancel="cancelCityPicker"
+			@change="changeHandler($event)"></u-picker>
+			
+		<!-- 薪资 -->
+		<u-picker :show="tabList[currentResume].showSalaryPicker" ref="sPicker" :columns="salaryList"
+			@confirm="confirmSalaryPicker" @cancel="cancelSalaryPicker"></u-picker>
 	</view>
 </template>
 
@@ -670,61 +665,61 @@
 			},
 
 			//弹出picker
-			openPicker(index, type, key) {
-				this.tabList[index].pickKey.type = type
-				this.tabList[index].pickKey.key = key
-				this.tabList[index].showPicker = true
+			openPicker(type, key) {
+				this.tabList[this.currentResume].pickKey.type = type
+				this.tabList[this.currentResume].pickKey.key = key
+				this.tabList[this.currentResume].showPicker = true
 			},
 
 
+
 			//选择picker
-			confirmPicker(index, e) {
-				// console.log("e", e)
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.value[0]
-				this.tabList[index].showPicker = false
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+			confirmPicker(e) {			
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume].resumeList[type][key] = e.value[0]
+				this.tabList[this.currentResume].showPicker = false
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 
 
 			//取消Picker
-			cancelPicker(index) {
-				this.tabList[index].showPicker = false
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+			cancelPicker() {
+				this.tabList[this.currentResume].showPicker = false
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 			//弹出citypicker
-			openCityPicker(index, type, key) {
+			openCityPicker(type, key) {
 				// console.log(this.cityList)
-				this.tabList[index].pickKey.type = type
-				this.tabList[index].pickKey.key = key
-				this.tabList[index].showCityPicker = true
+				this.tabList[this.currentResume].pickKey.type = type
+				this.tabList[this.currentResume].pickKey.key = key
+				this.tabList[this.currentResume].showCityPicker = true
 			},
 
 			//选择cityPicker
-			confirmCityPicker(index, e) {
+			confirmCityPicker(e) {
 				// console.log("e", e)
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
-				this.tabList[index].showCityPicker = false
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume].resumeList[type][key] = e.value[0] + e.value[1] + e.value[2]
+				this.tabList[this.currentResume].showCityPicker = false
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 			//取消citypicker
-			cancelCityPicker(index) {
-				this.tabList[index].showCityPicker = false
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+			cancelCityPicker() {
+				this.tabList[this.currentResume].showCityPicker = false
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 			//初始化地区数据
@@ -754,7 +749,7 @@
 				this.cityList.push(this.cityLevel1, this.cityLevel2[0], this.cityLevel3[0][0]);
 			},
 			// 选中时执行
-			changeHandler(ind, e) {
+			changeHandler(e) {
 				const {
 					columnIndex,
 					index,
@@ -763,7 +758,7 @@
 					values,
 					// 微信小程序无法将picker实例传出来，只能通过ref操作
 				} = e;
-				const picker = this.$refs.uPicker[ind]
+				const picker = this.$refs.uPicker
 				console.log("picker", picker)
 				if (columnIndex === 0) { // 选择第一列数据时
 					// 设置第二列关联数据
@@ -777,11 +772,11 @@
 			},
 
 			//弹出日期选择
-			calendarHandler(index, type, key) {
+			calendarHandler(type, key) {
 				// console.log(this.$refs.calendar)
-				this.tabList[index].pickKey.type = type
-				this.tabList[index].pickKey.key = key
-				this.$refs.calendar[index].show()
+				this.tabList[this.currentResume].pickKey.type = type
+				this.tabList[this.currentResume].pickKey.key = key
+				this.$refs.calendar.show()
 			},
 
 			//关闭日期选择
@@ -794,41 +789,41 @@
 			// },
 
 			//选择日期
-			chooseDate(index, e) {
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.result
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+			chooseDate(e) {
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume].resumeList[type][key] = e.result
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 				// console.log("e", e)
 			},
 
 			//打开工资picker
-			openSalaryPicker(index, type, key) {
-				this.tabList[index].pickKey.type = type
-				this.tabList[index].pickKey.key = key
-				this.tabList[index].showSalaryPicker = true
+			openSalaryPicker(type, key) {
+				this.tabList[this.currentResume].pickKey.type = type
+				this.tabList[this.currentResume].pickKey.key = key
+				this.tabList[this.currentResume].showSalaryPicker = true
 			},
 
 			//确认工资picker
-			confirmSalaryPicker(index, e) {
+			confirmSalaryPicker(e) {
 				// console.log("e",e)
 				console.log(e.value[0] + "-" + e.value[1])
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index].resumeList[type][key] = e.value[0] + "-" + e.value[1]
-				this.tabList[index].showSalaryPicker = false
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume].resumeList[type][key] = e.value[0] + "-" + e.value[1]
+				this.tabList[this.currentResume].showSalaryPicker = false
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 			//取消salaryPicker
-			cancelSalaryPicker(index) {
-				this.tabList[index].showSalaryPicker = false
-				const type = this.tabList[index]['pickKey']['type']
-				const key = this.tabList[index]['pickKey']['key']
-				this.tabList[index]['pickKey']['type'] = ''
-				this.tabList[index]['pickKey']['key'] = ''
+			cancelSalaryPicker() {
+				this.tabList[this.currentResume].showSalaryPicker = false
+				const type = this.tabList[this.currentResume]['pickKey']['type']
+				const key = this.tabList[this.currentResume]['pickKey']['key']
+				this.tabList[this.currentResume]['pickKey']['type'] = ''
+				this.tabList[this.currentResume]['pickKey']['key'] = ''
 			},
 
 			//跳转到选择教育经历
@@ -1417,16 +1412,6 @@
 
 			}
 		}
-
-		// .test-fixed {
-		// 	position: fixed;
-		// 	bottom: 0;
-		// 	left: 0;
-		// 	right: 0;
-		// 	width: 100%;
-		// 	height: 400rpx;
-		// 	background-color: red;
-		// }
 
 		.resume-btns-box {
 			// padding-bottom: env(safe-area-inset-bottom);
