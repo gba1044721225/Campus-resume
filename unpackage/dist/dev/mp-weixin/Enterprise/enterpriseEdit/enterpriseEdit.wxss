@@ -25,7 +25,9 @@
 /* 透明度 */
 /* 文章场景相关 */
 .enterprise-edit.data-v-5d34218f {
+  padding: 20rpx;
   padding: 20rpx 25rpx env(safe-area-inset-bottom) 25rpx;
+  padding: 20rpx 25rpx constant(safe-area-inset-bottom) 25rpx;
 }
 .enterprise-edit .enterprise-tips.data-v-5d34218f {
   color: #1296db;
@@ -90,5 +92,16 @@
 }
 .enterprise-edit .enterprise-box.data-v-5d34218f:last-child {
   border-bottom: 0;
+}
+.enterprise-edit .button-box.data-v-5d34218f {
+  margin: 25rpx auto 0;
+  width: 600rpx;
+  padding: 20rpx;
+  height: 50rpx;
+  border-radius: 10rpx;
+  background-color: #1296db;
+  color: #fff;
+  text-align: center;
+  line-height: 50rpx;
 }
 

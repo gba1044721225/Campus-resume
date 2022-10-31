@@ -28,7 +28,7 @@
 		}
 	},
 	"requiredPrivateInfos": [
-		"getLocation"
+		"chooseLocation"
 	],
 	"subPackages": [{
 			"root": "HomeLink",
@@ -107,8 +107,17 @@
 		{
 			"root": "Enterprise",
 			"pages":[{
-				"path": "enterpriseEdit/enterpriseEdit"
-			}]
+				"path": "enterpriseEdit/enterpriseEdit",
+				"style": {
+					"navigationBarTitleText": "公司档案"
+				}
+			},{
+				"path":"enterpriseEdit/enterpriseRelease",
+				"style": {
+					"navigationBarTitleText": "发布招聘信息"
+				}
+			}
+			]
 		}
 	],
 	"globalStyle": {

@@ -28,7 +28,8 @@
     {
       "root": "Enterprise",
       "pages": [
-        "enterpriseEdit/enterpriseEdit"
+        "enterpriseEdit/enterpriseEdit",
+        "enterpriseEdit/enterpriseRelease"
       ]
     }
   ],
@@ -64,5 +65,8 @@
       "desc": "一件获取用户位置方面用户使用"
     }
   },
+  "requiredPrivateInfos": [
+		"chooseLocation"
+	],
   "usingComponents": {}
 }

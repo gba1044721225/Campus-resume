@@ -98,6 +98,13 @@
 							公司简介
 						</view>
 					</view>
+					
+					<view class="mine-info-item" @click="linkToEnterpriseRelease">
+						<image :src="`${imgSrc}recruitmentRelease.Png`" mode=""></image>
+						<view class="item-content">
+							我要招聘
+						</view>
+					</view>
 				</view>
 			</view>
 
@@ -234,7 +241,14 @@
 					url: '/Enterprise/enterpriseEdit/enterpriseEdit'
 				})
 			},
-
+			
+			//跳转到企业端 招聘发布模块
+			linkToEnterpriseRelease(){
+				uni.navigateTo({
+					url: '/Enterprise/enterpriseEdit/enterpriseRelease'
+				})
+			},
+			
 
 			//企业端请求
 			reqEnterpriseInfo() {
@@ -256,7 +270,9 @@
 						console.log("this.enterPriseInfo", this.enterPriseInfo)
 					}
 				}, header)
-			}
+			},
+			
+			
 		},
 		computed: {
 			...mapState(['openId', 'userInfo', 'role'])

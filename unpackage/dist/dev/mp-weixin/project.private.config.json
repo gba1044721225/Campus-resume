@@ -4,7 +4,7 @@
   "setting": {
     "compileHotReLoad": true
   },
-  "libVersion": "2.25.4",
+  "libVersion": "2.27.0",
   "condition": {
     "miniprogram": {
       "list": [
@@ -32,6 +32,27 @@
         {
           "name": "",
           "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/enterpriseEdit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/enterpriseRelease",
           "query": "",
           "launchMode": "default",
           "scene": null
