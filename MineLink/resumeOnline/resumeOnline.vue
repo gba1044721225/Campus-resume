@@ -50,7 +50,7 @@
 												placeholder="请输入学历" @click="openPicker('pnInfo','education')">
 											</tui-input>
 										</view>
-										
+
 
 										<view class="content-item">
 											<tui-input v-model="item.resumeList.pnInfo.major" :disabled="true"
@@ -61,9 +61,8 @@
 
 										<view class="content-item">
 											<tui-input :isFillet='true' v-model="item.resumeList.pnInfo.graduationTime"
-												@click="calendarHandler('pnInfo','graduationTime')"
-												:inputBorder='true' :required='true' label="毕业时间" :disabled='true'
-												placeholder="请选择毕业时间">
+												@click="calendarHandler('pnInfo','graduationTime')" :inputBorder='true'
+												:required='true' label="毕业时间" :disabled='true' placeholder="请选择毕业时间">
 											</tui-input>
 										</view>
 
@@ -199,8 +198,7 @@
 											v-for='(eduBox,eduIndex) in item.addEducation' :key="eduIndex">
 											<view class="item-left">
 												<view class="item-content" v-for='(edu,eduKey) in eduBox' :key="eduKey">
-													<text v-if="eduKey!='addEduId'">{{keyToCnEdu[eduKey]}} :
-														{{edu}}</text>
+													<text v-if="eduKey!='addEduId'">{{keyToCnEdu[eduKey]}} : {{edu}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -245,8 +243,7 @@
 											<view class="item-left">
 												<view class="item-content" v-for='(work,workKey) in workBox'
 													:key="workKey">
-													<text v-if="workKey!='addWorkId'">{{keyToCnWork[workKey]}} :
-														{{work}}</text>
+													<text v-if="workKey!='addWorkId'">{{keyToCnWork[workKey]}} : {{work}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -289,8 +286,7 @@
 											v-for='(proBox,proIndex) in item.addPro' :key="proIndex">
 											<view class="item-left">
 												<view class="item-content" v-for='(pro,proKey) in proBox' :key="proKey">
-													<text v-if="proKey!='addProId'">{{keyToCnPro[proKey]}} :
-														{{pro}}</text>
+													<text v-if="proKey!='addProId'">{{keyToCnPro[proKey]}} : {{pro}}</text>
 												</view>
 											</view>
 											<view class="add-btns">
@@ -335,8 +331,7 @@
 												<view class="item-content" v-for='(cert,certKey) in certBox'
 													:key="certKey">
 													<view v-if="certKey!='certId'">
-														<text v-if="certKey!='certImage'">{{keyToCnCert[certKey]}} :
-															{{cert}}</text>
+														<text v-if="certKey!='certImage'">{{keyToCnCert[certKey]}} : {{cert}}</text>
 														<view class="image-show" v-if="certKey=='certImage'">
 															<text>{{keyToCnCert[certKey]}}</text>
 															<image :src="cert" mode=""></image>
@@ -383,18 +378,18 @@
 		</view>
 
 		<!-- 学历 -->
-		<u-picker :show="tabList[currentResume].showPicker" :columns="tabList[currentResume][tabList[currentResume].pickKey.key+'Columns']"
-			@confirm="confirmPicker" @cancel="cancelPicker"></u-picker>
-		
+		<u-picker :show="tabList[currentResume].showPicker"
+			:columns="tabList[currentResume][tabList[currentResume].pickKey.key+'Columns']" @confirm="confirmPicker"
+			@cancel="cancelPicker"></u-picker>
+
 		<!-- 日期 @hide="cancelCalendar(index)" -->
 		<tui-calendar ref="calendar" :isFixed="true" :type="1" @change="chooseDate">
 		</tui-calendar>
-		
+
 		<!-- 地区 -->
 		<u-picker ref="uPicker" :show="tabList[currentResume].showCityPicker" :columns="cityList"
-			@confirm="confirmCityPicker($event)" @cancel="cancelCityPicker"
-			@change="changeHandler($event)"></u-picker>
-			
+			@confirm="confirmCityPicker($event)" @cancel="cancelCityPicker" @change="changeHandler($event)"></u-picker>
+
 		<!-- 薪资 -->
 		<u-picker :show="tabList[currentResume].showSalaryPicker" ref="sPicker" :columns="salaryList"
 			@confirm="confirmSalaryPicker" @cancel="cancelSalaryPicker"></u-picker>
@@ -674,7 +669,7 @@
 
 
 			//选择picker
-			confirmPicker(e) {			
+			confirmPicker(e) {
 				const type = this.tabList[this.currentResume]['pickKey']['type']
 				const key = this.tabList[this.currentResume]['pickKey']['key']
 				this.tabList[this.currentResume].resumeList[type][key] = e.value[0]
