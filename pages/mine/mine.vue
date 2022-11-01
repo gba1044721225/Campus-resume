@@ -71,10 +71,10 @@
 						<view class="tips-title">
 							{{enterPriseInfo.companyName}}
 						</view>
-						<view class="resume-online">
+						<view class="resume-online" @click="linkToEnterpriseIntro">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
 							<view class="resume-content">
-								修改公司名称
+								编辑公司信息
 							</view>
 						</view>
 					</view>
@@ -92,13 +92,13 @@
 				</view>
 
 				<view class="mine-info-box">
-					<view class="mine-info-item" @click="linkToEnterpriseIntro">
+					<view class="mine-info-item" @click="checkCompanyIntro">
 						<image :src="`${imgSrc}intro_Enterprise.png`" mode=""></image>
 						<view class="item-content">
 							公司简介
 						</view>
 					</view>
-					
+
 					<view class="mine-info-item" @click="linkToEnterpriseRelease">
 						<image :src="`${imgSrc}recruitmentRelease.Png`" mode=""></image>
 						<view class="item-content">
@@ -173,14 +173,29 @@
 			}
 		},
 		methods: {
+			//初始化化数据
 			init() {
 				if (this.role == 2) {
 					this.reqEnterpriseInfo()
 				}
 			},
 
+			checkCompanyIntro() {
+				uni.navigateTo({
+					url: "/Enterprise/enterpriseEdit/companyIntro"
+				})
+			},
+
 			//切换登录模式
 			fabClick(e) {
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
+				
 				// console.log("e",e)
 				this.$store.commit('reSetRole', e.index + 1)
 				switch (e.index) {
@@ -190,6 +205,7 @@
 							duration: 1000
 						})
 						uni.setStorageSync('role', 1)
+						this.init()
 						break;
 					case 1:
 						uni.showToast({
@@ -197,6 +213,7 @@
 							duration: 1000
 						})
 						uni.setStorageSync('role', 2)
+						this.init()
 						break;
 				}
 			},
@@ -230,6 +247,13 @@
 
 			//跳转到学生端 简历模块
 			linkToResumeOnline() {
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
 				uni.navigateTo({
 					url: '/MineLink/resumeOnline/resumeOnline'
 				})
@@ -241,14 +265,21 @@
 					url: '/Enterprise/enterpriseEdit/enterpriseEdit'
 				})
 			},
-			
+
 			//跳转到企业端 招聘发布模块
-			linkToEnterpriseRelease(){
+			linkToEnterpriseRelease() {
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
 				uni.navigateTo({
 					url: '/Enterprise/enterpriseEdit/enterpriseRelease'
 				})
 			},
-			
+
 
 			//企业端请求
 			reqEnterpriseInfo() {
@@ -271,8 +302,8 @@
 					}
 				}, header)
 			},
-			
-			
+
+
 		},
 		computed: {
 			...mapState(['openId', 'userInfo', 'role'])

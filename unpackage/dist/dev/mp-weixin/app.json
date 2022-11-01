@@ -7,8 +7,8 @@
     {
       "root": "HomeLink",
       "pages": [
-        "recruitment/recruitment",
-        "findJob/findJob",
+        "studentDetails/studentDetails",
+        "jobDetails/jobDetails",
         "rules/userAgreement",
         "rules/privacy"
       ]
@@ -29,7 +29,8 @@
       "root": "Enterprise",
       "pages": [
         "enterpriseEdit/enterpriseEdit",
-        "enterpriseEdit/enterpriseRelease"
+        "enterpriseEdit/enterpriseRelease",
+        "enterpriseEdit/companyIntro"
       ]
     }
   ],
@@ -49,7 +50,7 @@
         "pagePath": "pages/home/home",
         "iconPath": "static/index.png",
         "selectedIconPath": "static/index_active.png",
-        "text": "校区"
+        "text": "首页"
       },
       {
         "pagePath": "pages/mine/mine",
@@ -65,8 +66,5 @@
       "desc": "一件获取用户位置方面用户使用"
     }
   },
-  "requiredPrivateInfos": [
-		"chooseLocation"
-	],
   "usingComponents": {}
 }

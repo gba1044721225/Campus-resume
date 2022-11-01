@@ -3,8 +3,8 @@ module.exports = {
 
 	//设置全局api请求地址h
 	hostname() {
-		return "http://192.168.43.93:8888"
-		// return "http://101.33.210.213:8877/"
+		// return "http://192.168.43.93:8888"
+		return "http://101.33.210.213:8877/"
 	},
 
 	//设置全局api请求路径
@@ -99,7 +99,7 @@ module.exports = {
 	//上传
 	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.公司Logo
 	upLoadFile(url, filePath, data, succ) {
-		console.log("this.hostname()",this.$hostname() + url)
+		console.log("this.hostname()", this.$hostname() + url)
 		wx.uploadFile({
 			url: this.$hostname() + url, //仅为示例，非真实的接口地址
 			filePath, //tempFilePaths[0]
@@ -107,7 +107,10 @@ module.exports = {
 			formData: {
 				...data
 			},
-			success: succ
+			success: succ,
+			fail: err => {
+				console.log(err)
+			},
 		});
 	},
 
@@ -116,8 +119,8 @@ module.exports = {
 		return wx.chooseImage({
 			count: 1,
 			sizeType: ["original", "compressed"],
-			sourceType: ["album","camera"],
-			type:'image'
+			sourceType: ["album", "camera"],
+			type: 'image'
 		});
 
 	},

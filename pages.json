@@ -4,7 +4,7 @@
 		{
 			"path": "pages/home/home",
 			"style": {
-				"navigationBarTitleText": "校区"
+				"navigationBarTitleText": "首页"
 			}
 		},
 		//我的
@@ -33,15 +33,15 @@
 	"subPackages": [{
 			"root": "HomeLink",
 			"pages": [{
-					"path": "recruitment/recruitment",
+					"path": "studentDetails/studentDetails",
 					"style": {
-						"navigationBarTitleText": "发布招聘信息"
+						"navigationBarTitleText": "人才寻觅"
 					}
 				},
 				{
-					"path": "findJob/findJob",
+					"path": "jobDetails/jobDetails",
 					"style": {
-						"navigationBarTitleText": "填写应聘简历"
+						"navigationBarTitleText": "公司招聘"
 					}
 				},
 				{
@@ -114,7 +114,12 @@
 			},{
 				"path":"enterpriseEdit/enterpriseRelease",
 				"style": {
-					"navigationBarTitleText": "发布招聘信息"
+					"navigationBarTitleText": "编辑公司"
+				}
+			},{
+				"path":"enterpriseEdit/companyIntro",
+				"style": {
+					"navigationBarTitleText": "公司简介"
 				}
 			}
 			]
@@ -135,7 +140,7 @@
 				"pagePath": "pages/home/home",
 				"iconPath": "static/index.png",
 				"selectedIconPath": "static/index_active.png",
-				"text": "校区"
+				"text": "首页"
 			},
 			{
 				"pagePath": "pages/mine/mine",

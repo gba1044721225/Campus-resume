@@ -324,10 +324,10 @@
 						jobName: this.enterpriseMsg.station,
 						jobLab: this.enterpriseMsg.stationTag,
 						workAddress: this.enterpriseMsg.workCity,
-						workNature: this.getWorkNatureId(this.enterpriseMsg.workNature),
+						workNature: this.enterpriseMsg.workNature,
 						num: this.enterpriseMsg.enterpriseNum,
 						treatment: this.enterpriseMsg.salary,
-						leve: this.getEducationId(this.enterpriseMsg.education),
+						leve: this.enterpriseMsg.education,
 						professional: this.enterpriseMsg.major,
 						requirements: this.enterpriseMsg.requirements,
 						duties: this.enterpriseMsg.duties,
@@ -374,7 +374,8 @@
 			// 		}
 			// 	});
 			// }
-		}
+		},
+
 	}
 </script>
 

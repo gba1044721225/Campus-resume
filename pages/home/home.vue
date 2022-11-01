@@ -34,44 +34,94 @@
 			</tui-banner-arc>
 		</view>
 
-		<view class="job-box">
-			<view class="job-item" v-for="i in 10" :key="i">
+		<view class="job-box" v-if="showJobBox">
+			<view @click="linkToJobDetails(item.id)" class="job-item" v-for="(item,index) in dataList" :key="index">
 				<view class="job-item-content">
 					<view class="content-top">
 						<view class="top-title">
-							前端开发（16薪+包吃住+五险一金）
+							{{item.jobName}}（{{item.leve}}）
 						</view>
 						<view class="top-salary">
-							15-30K（16薪）
+							{{item.treatment}}
 						</view>
 					</view>
 
 					<view class="content-main">
 						<view class="main-skills">
 							<scroll-view scroll-x="true" class="skill-scroll">
-								<view class="sill-item" v-for="(item,key) in testInfo.skill" :key="key">
-									{{item}}
+								<view class="sill-item" v-for="(skillItem,ind) in item.requirements.split('，')"
+									:key="ind">
+									{{skillItem}}
 								</view>
 							</scroll-view>
 						</view>
 						<view class="main-company">
-							人瑞科技 1000-9999人
+							<view class="item">
+								{{item.num}}人
+							</view>
+							<view class="item">
+								{{item.workNature}}
+							</view>
 						</view>
 					</view>
 
 					<view class="content-bottom">
 						<view class="botom-recruiters">
 							<view class="recruiters-pic">
-								<image
-									src="https://img0.baidu.com/it/u=3814667313,3000795201&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-									mode=""></image>
+								<image :src="item.logo" mode=""></image>
 							</view>
 							<view class="recruiters-name">
-								金香梅·HR
+								{{item.companyName}}
 							</view>
 						</view>
 						<view class="content-place">
-							天河区 天河北
+							{{item.workAddress}}
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+
+
+		<view class="student-box" v-if="showStuBox">
+			<view @click="linkToStudentDetails" class="job-item">
+				<view class="job-item-content">
+					<view class="content-top">
+						<view class="top-title">
+							朱百洁
+						</view>
+						<view class="top-salary">
+							期望薪资：9k-10k
+						</view>
+					</view>
+
+					<view class="content-main">
+						<view class="main-skills">
+							<scroll-view scroll-x="true" class="skill-scroll">
+								<view class="sill-item">
+									工作经验：3-5年
+								</view>
+								<view class="sill-item">
+									学历：本科
+								</view>
+								<view class="sill-item">
+									专业：计算机
+								</view>
+							</scroll-view>
+						</view>
+					</view>
+
+					<view class="content-bottom">
+						<view class="botom-recruiters">
+							<view class="recruiters-pic">
+								<image :src="item.logo" mode=""></image>
+							</view>
+							<view class="recruiters-name">
+								{{item.companyName}}
+							</view>
+						</view>
+						<view class="content-place">
+							{{item.workAddress}}
 						</view>
 					</view>
 				</view>
@@ -86,13 +136,22 @@
 
 <script>
 	import MyLogin from "@/loginView/login.vue"
-	import { mapState } from 'vuex'
+	import {
+		mapState
+	} from 'vuex'
 	export default {
 		components: {
 			MyLogin
 		},
 		data() {
 			return {
+				pageInfo: {
+					pageSize: 10,
+					pageNum: 1,
+				},
+				showJobBox: true,
+				showStuBox: false,
+				dataList: [],
 				screenHeight: 0,
 				swiperInfo: {
 					indicatorDots: true,
@@ -105,18 +164,18 @@
 						"教师资格证"
 					]
 				},
-				btnList: [{
-					bgColor: "#16C2C2",
+				btnList: [ {
+					bgColor: "#64B532",
 					//名称
-					text: "招聘",
+					text: "应聘",
 					//字体大小
 					fontSize: 28,
 					//字体颜色
 					color: "#fff"
-				}, {
-					bgColor: "#64B532",
+				},{
+					bgColor: "#16C2C2",
 					//名称
-					text: "应聘",
+					text: "招聘",
 					//字体大小
 					fontSize: 28,
 					//字体颜色
@@ -144,17 +203,18 @@
 		},
 		methods: {
 			fabClick(e) {
+
 				// console.log(e)
-				if (this.token) {
-					switch (e.index) {	
+				if (this.$store.state.openId) {
+					switch (e.index) {
 						case 0:
-							this.linkToRecruitment()
+							this.showJobBox = true
+							this.showStuBox = false
 							break;
 						case 1:
-							this.linkToFindJob()
+							this.showJobBox = false
+							this.showStuBox = true
 							break;
-						default:
-							return;
 					}
 				} else {
 					uni.showModal({
@@ -172,23 +232,57 @@
 						},
 					})
 				}
-
 			},
 
-			linkToRecruitment() {
+			linkToJobDetails(id) {
 				uni.navigateTo({
-					url: "/HomeLink/recruitment/recruitment"
+					url: `/HomeLink/jobDetails/jobDetails?id=${id}`
 				})
 			},
-
-			linkToFindJob() {
+			
+			linkToStudentDetails(){
 				uni.navigateTo({
-					url: "/HomeLink/findJob/findJob"
+					url: "/HomeLink/studentDetails/studentDetails"
 				})
+			},
+			
+			reqRecruitmentInformation() {
+				const data = {
+					data: {
+						current: this.pageInfo.pageNum,
+						size: this.pageInfo.pageSize
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http("/recruit/user/query/msgList", data, res => {
+					console.log("res", res)
+					if (res.meta.code == 200) {
+						if (this.pageInfo.pageNum == 1) {
+							this.dataList = JSON.parse(res.data).records
+						} else {
+							this.dataList.concat(JSON.parse(res.data).records)
+						}
+
+						console.log("this.dataList", this.dataList)
+					}
+				}, header)
 			}
 		},
-		computed:{
-			...mapState(['token'])
+		computed: {
+			...mapState(['token']),
+		},
+		onLoad() {
+			this.reqRecruitmentInformation()
+		},
+		onReachBottom() {
+			this.pageInfo.pageNum++
+			this.reqRecruitmentInformation()
 		}
 	}
 </script>
@@ -196,7 +290,8 @@
 <style lang="scss" scoped>
 	.content {
 		background-color: #eee;
-		height: calc(100% + 100vh);
+
+		// height: calc(100% + 100vh);
 
 		//
 		.tui-banner-arc {
@@ -222,7 +317,9 @@
 		}
 
 		//
-		.job-box {
+		.job-box,.student-box {
+			min-height: calc(100vh - 400rpx);
+
 			.job-item {
 				padding: 15px;
 
@@ -277,6 +374,9 @@
 						}
 
 						.main-company {
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
 							margin-top: 15rpx;
 							font-size: 28rpx;
 						}
@@ -303,6 +403,7 @@
 							}
 
 							.recruiters-name {
+								margin-left: 15rpx;
 								font-size: 24rpx;
 							}
 						}

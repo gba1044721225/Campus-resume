@@ -517,14 +517,14 @@
 			console.log(this.cityList)
 		},
 
-		watch: {
-			enterpriseInfo: {
-				deep: true,
-				handler(nw) {
-					console.log("enterpriseInfo", nw)
-				}
-			}
-		}
+		// watch: {
+		// 	enterpriseInfo: {
+		// 		deep: true,
+		// 		handler(nw) {
+		// 			console.log("enterpriseInfo", nw)
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 
