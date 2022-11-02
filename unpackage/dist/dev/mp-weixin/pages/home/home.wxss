@@ -44,9 +44,10 @@
 }
 .content .job-box.data-v-92bb8f34 {
   min-height: calc(100vh - 400rpx);
+  margin-top: 10rpx;
 }
 .content .job-box .job-item.data-v-92bb8f34 {
-  padding: 8px;
+  padding: 5px 20rpx;
 }
 .content .job-box .job-item .job-item-content.data-v-92bb8f34 {
   background-color: #fff;

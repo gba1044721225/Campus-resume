@@ -84,7 +84,7 @@
 
 
 		<view class="student-box" v-if="showStuBox">
-			<view @click="linkToStudentDetails" class="student-item" v-for="(item,index) in dataList" :key="index">
+			<view @click="linkToStudentDetails(item.id)" class="student-item" v-for="(item,index) in dataList" :key="index">
 				<view class="item-content">
 					<image :src="item.imgUrl" mode=""></image>
 					<view class="content">
@@ -190,17 +190,16 @@
 
 				// console.log(e)
 				if (this.$store.state.openId) {
+					this.init()
 					switch (e.index) {
 						case 0:
 							this.showJobBox = true
-							this.showStuBox = false
-							this.init()
+							this.showStuBox = false				
 							this.reqRecruitmentInformation()
 							break;
 						case 1:
 							this.showJobBox = false
 							this.showStuBox = true
-							this.init()
 							this.reqResumeList()
 							break;
 					}	
@@ -228,10 +227,17 @@
 				})
 			},
 			
-			linkToStudentDetails(){
+			linkToStudentDetails(stuId){
 				uni.navigateTo({
-					url: "/HomeLink/studentDetails/studentDetails"
+					url: `/HomeLink/studentDetails/studentDetails?stuId=${stuId}`
 				})
+			},
+			
+			//初始化
+			init(){
+				this.dataList=[]
+				this.pageInfo.pageNum=1
+				this.pageInfo.pageSize=10
 			},
 			
 			//学生模块 请求招聘信息
@@ -250,24 +256,19 @@
 					'content-type': 'application/json'
 				}
 				this.$http("/recruit/user/query/msgList", data, res => {
-					// console.log("res", res)
+					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 					if (res.meta.code == 200) {
 						if (this.pageInfo.pageNum == 1) {
+							// console.log(11111111)
 							this.dataList = JSON.parse(res.data).records
 						} else {
-							this.dataList.concat(JSON.parse(res.data).records)
+							// console.log(222222)
+							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
 						}
 
 						// console.log("this.dataList", this.dataList)
 					}
 				}, header)
-			},
-			
-			//初始化
-			init(){
-				this.dataList=[]
-				this.pageInfo.pageNum=1
-				this.pageInfo.pageSize=10
 			},
 			
 			//企业模块 请求学生简历
@@ -286,15 +287,18 @@
 					'content-type': 'application/json'
 				}
 				this.$http("/company/resume/list", data, res => {
-					console.log("res", res)
+					console.log("JSON.parse(res.data).records", JSON.parse(res.data).records)
+					console.log("this.dataList", this.dataList)
 					if (res.meta.code == 200) {
 						if (this.pageInfo.pageNum == 1) {
+							// console.log(11111111)
 							this.dataList = JSON.parse(res.data).records
 						} else {
-							this.dataList.concat(JSON.parse(res.data).records)
+							// console.log(222222)
+							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
 						}
 				
-						console.log("this.dataList", this.dataList)
+						// console.log("this.dataList", this.dataList)
 					}
 				}, header)
 			}
@@ -351,9 +355,10 @@
 		//
 		.job-box{
 			min-height: calc(100vh - 400rpx);
+			margin-top: 10rpx;
 
 			.job-item {
-				padding: 8px;
+				padding: 5px 20rpx;
 
 				.job-item-content {
 					background-color: #fff;

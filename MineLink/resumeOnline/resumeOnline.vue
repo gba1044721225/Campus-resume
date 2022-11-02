@@ -372,7 +372,7 @@
 				获取暂存数据
 			</view> -->
 			
-			<view class="btns-item">
+			<view class="btns-item" @click="reqSetDefaultResume">
 				设为默认简历
 			</view>
 			
@@ -1226,7 +1226,9 @@
 					}, header)
 				})
 			},
-
+			
+			//设置默认简历
+			reqSetDefaultResume(){}
 		},
 		onReady() {
 			this.setHeight()

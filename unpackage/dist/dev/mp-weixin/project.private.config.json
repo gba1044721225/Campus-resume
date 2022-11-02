@@ -5,31 +5,5 @@
     "compileHotReLoad": true
   },
   "libVersion": "2.27.0",
-  "condition": {
-    "miniprogram": {
-      "list": [
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/deliver",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/home/home",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "MineLink/resumeOnline/resumeOnline",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        }
-      ]
-    }
-  }
+  "condition": {}
 }

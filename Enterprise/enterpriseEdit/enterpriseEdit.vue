@@ -1,5 +1,5 @@
 <template>
-	<view class="enterprise-edit">
+	<view class="enterprise-edit" :class="{'bottom-ios':isIos}">
 		<view class="enterprise-tips">
 			以下（*号）为必填项
 		</view>
@@ -325,6 +325,7 @@
 	export default {
 		data() {
 			return {
+				isIos:this.$isIos,
 				showPicker: false,
 				cityList: [],
 				cityLevel1: [],
@@ -530,9 +531,7 @@
 
 <style lang="scss" scoped>
 	.enterprise-edit {
-		padding: 20rpx;
-		padding: 20rpx 25rpx env(safe-area-inset-bottom) 25rpx;
-		padding: 20rpx 25rpx constant(safe-area-inset-bottom) 25rpx;
+		padding: 20rpx 25rpx;
 
 		.enterprise-tips {
 			color: #1296db;
@@ -631,5 +630,12 @@
 			text-align: center;
 			line-height: 50rpx;
 		}
+	}
+	
+	.bottom-ios {
+		padding-bottom: constant(safe-area-inset-bottom);
+		/*兼容 IOS<11.2*/
+		padding-bottom: env(safe-area-inset-bottom);
+		/*兼容 IOS>11.2*/
 	}
 </style>

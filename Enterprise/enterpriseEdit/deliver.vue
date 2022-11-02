@@ -17,9 +17,6 @@
 		methods: {
 
 		},
-		onLoad() {
-			this.reqResumeList()
-		}
 	}
 </script>
 
