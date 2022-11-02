@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "公司档案",
+  "usingComponents": {
+    "u-textarea": "/uni_modules/uview-ui/components/u-textarea/u-textarea",
+    "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker"
+  }
+}

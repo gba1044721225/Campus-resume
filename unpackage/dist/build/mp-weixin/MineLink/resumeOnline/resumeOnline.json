@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "在线简历",
+  "usingComponents": {
+    "tui-collapse": "/components/thorui/tui-collapse/tui-collapse",
+    "tui-input": "/components/thorui/tui-input/tui-input",
+    "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker",
+    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar"
+  }
+}

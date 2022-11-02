@@ -1,5 +1,5 @@
 <template>
-	<view class="company-intro">
+	<view class="company-intro" :class="{'bottom-ios':isIos}">
 		<view class="company-intro-header">
 			<view class="header-left">
 				<view class="company-title">
@@ -90,9 +90,7 @@
 			<view class="title">
 				公司证书
 			</view>
-			<view class="image">
-				<image :src="dataList.imgIds" mode="aspectFit"></image>
-			</view>
+			<image class="image" :src="dataList.imgIds" mode=""></image>
 		</view>
 	</view>
 </template>
@@ -101,6 +99,7 @@
 	export default{
 		data(){
 			return {
+				isIos:this.$isIos,
 				dataList:{}
 			}
 		},
@@ -134,8 +133,7 @@
 	.company-intro{
 		min-height: 100vh;
 		background-color: #1296db;
-		padding: 20rpx 25rpx env(safe-area-inset-bottom);
-		padding: 20rpx 25rpx constant(safe-area-inset-bottom);
+		padding: 20rpx 35rpx 30rpx;
 		.company-intro-header{
 			display: flex;
 			justify-content: space-between;
@@ -243,24 +241,29 @@
 			background-color: rgba(74, 102, 154, 0.4);
 			border-radius: 25rpx;
 			padding: 25rpx;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
 			.title{
 				font-size: 55rpx;
 				font-weight: bold;
 				color:#fff;
+				margin-bottom: 15rpx;
 			}
 			.image{
-				margin-top: 20rpx;
 				border: 1rpx solid #fff;
 				border-radius: 10rpx;
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				padding: 15rpx;
-				image{
-					width: 600rpx;
-				}
+				width: 600rpx;
+				height: 435rpx;
+				box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, .2);
 			}
 		}
 	}
-
+	.bottom-ios {
+		padding-bottom: constant(safe-area-inset-bottom);
+		/*兼容 IOS<11.2*/
+		padding-bottom: env(safe-area-inset-bottom);
+		/*兼容 IOS>11.2*/
+	}
 </style>

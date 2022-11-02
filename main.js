@@ -12,6 +12,12 @@ Object.keys(helper).forEach(v => {
 	Vue.prototype['$' + v] = helper[v]
 })
 
+uni.getSystemInfo({
+	success: (res) => {
+		console.log('getSystemInfo',res)
+		Vue.prototype.$isIos=res.osName=='ios'
+	}
+})
 Vue.prototype.$wxLogin = function() {
 	return new Promise((resolve, reject) => {
 		uni.getUserProfile({

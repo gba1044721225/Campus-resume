@@ -84,47 +84,31 @@
 
 
 		<view class="student-box" v-if="showStuBox">
-			<view @click="linkToStudentDetails" class="job-item">
-				<view class="job-item-content">
-					<view class="content-top">
-						<view class="top-title">
-							朱百洁
+			<view @click="linkToStudentDetails" class="student-item" v-for="(item,index) in dataList" :key="index">
+				<view class="item-content">
+					<image :src="item.imgUrl" mode=""></image>
+					<view class="content">
+						<view class="name">
+							{{item.position}}
 						</view>
-						<view class="top-salary">
-							期望薪资：9k-10k
+						<view class="item-info">
+							{{item.userName}}（{{item.sex}}）
 						</view>
-					</view>
-
-					<view class="content-main">
-						<view class="main-skills">
-							<scroll-view scroll-x="true" class="skill-scroll">
-								<view class="sill-item">
-									工作经验：3-5年
-								</view>
-								<view class="sill-item">
-									学历：本科
-								</view>
-								<view class="sill-item">
-									专业：计算机
-								</view>
-							</scroll-view>
+						<view class="item-info">
+							 {{item.school}} {{item.professional}}
 						</view>
-					</view>
-
-					<view class="content-bottom">
-						<view class="botom-recruiters">
-							<view class="recruiters-pic">
-								<image :src="item.logo" mode=""></image>
-							</view>
-							<view class="recruiters-name">
-								{{item.companyName}}
-							</view>
+						<view class="item-info">
+							期望薪资:{{item.expectedSalary}}
 						</view>
-						<view class="content-place">
-							{{item.workAddress}}
+						<view class="item-info">
+							<text>{{item.leve}}</text>
+							<text>{{item.identity}}</text>
 						</view>
 					</view>
 				</view>
+<!-- 				<view class="content-tag">
+					{{item.introduction}}
+				</view> -->
 			</view>
 		</view>
 
@@ -210,12 +194,16 @@
 						case 0:
 							this.showJobBox = true
 							this.showStuBox = false
+							this.init()
+							this.reqRecruitmentInformation()
 							break;
 						case 1:
 							this.showJobBox = false
 							this.showStuBox = true
+							this.init()
+							this.reqResumeList()
 							break;
-					}
+					}	
 				} else {
 					uni.showModal({
 						title: "登录提醒",
@@ -246,6 +234,7 @@
 				})
 			},
 			
+			//学生模块 请求招聘信息
 			reqRecruitmentInformation() {
 				const data = {
 					data: {
@@ -261,7 +250,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http("/recruit/user/query/msgList", data, res => {
-					console.log("res", res)
+					// console.log("res", res)
 					if (res.meta.code == 200) {
 						if (this.pageInfo.pageNum == 1) {
 							this.dataList = JSON.parse(res.data).records
@@ -269,6 +258,42 @@
 							this.dataList.concat(JSON.parse(res.data).records)
 						}
 
+						// console.log("this.dataList", this.dataList)
+					}
+				}, header)
+			},
+			
+			//初始化
+			init(){
+				this.dataList=[]
+				this.pageInfo.pageNum=1
+				this.pageInfo.pageSize=10
+			},
+			
+			//企业模块 请求学生简历
+			reqResumeList() {
+				const data = {
+					data: {
+						current: this.pageInfo.pageNum,
+						size: this.pageInfo.pageSize
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http("/company/resume/list", data, res => {
+					console.log("res", res)
+					if (res.meta.code == 200) {
+						if (this.pageInfo.pageNum == 1) {
+							this.dataList = JSON.parse(res.data).records
+						} else {
+							this.dataList.concat(JSON.parse(res.data).records)
+						}
+				
 						console.log("this.dataList", this.dataList)
 					}
 				}, header)
@@ -282,7 +307,14 @@
 		},
 		onReachBottom() {
 			this.pageInfo.pageNum++
-			this.reqRecruitmentInformation()
+			if(this.showStuBox){
+				this.reqResumeList()
+				return
+			}
+			if(this.showJobBox){
+				this.reqRecruitmentInformation()
+				return
+			}
 		}
 	}
 </script>
@@ -317,11 +349,11 @@
 		}
 
 		//
-		.job-box,.student-box {
+		.job-box{
 			min-height: calc(100vh - 400rpx);
 
 			.job-item {
-				padding: 15px;
+				padding: 8px;
 
 				.job-item-content {
 					background-color: #fff;
@@ -417,5 +449,69 @@
 		}
 
 		//
+		.student-box{
+			min-height: calc(100vh - 400rpx);
+			padding: 20rpx;
+			
+			.student-item{
+				margin-bottom: 20rpx;
+				background-color: #fff;
+				padding: 25rpx;
+				box-sizing: border-box;
+				box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, .1);
+				border-radius: 10rpx;
+				
+				.item-content{
+					// padding-bottom: 20rpx;
+					// border-bottom: 1rpx solid #ccc;
+					display: flex;
+					flex-wrap: nowrap;
+					image{
+						width: 200rpx;
+						height: 250rpx;
+						border-radius: 10rpx;
+						margin-right: 30rpx;
+					}
+					.content{
+						background-color: #fff;
+						width: 432rpx;
+						height: 250rpx;
+						display: flex;
+						flex-direction: column;
+						justify-content	: space-between;
+						.name{
+							font-size: 36rpx;
+							font-weight: bold;
+						}
+						.item-info{
+							margin-top: 15rpx;
+							width: 100%;
+							font-size: 26rpx;
+							color: #666;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+							overflow: hidden;
+							
+							text{
+								margin-right: 15rpx;
+								padding: 10rpx 15rpx;
+								border-radius: 2rpx;
+								background-color: #eee;
+							}
+						}
+					}
+
+				}
+				
+
+			}
+			.content-tag{
+				padding: 20rpx 10rpx 0;
+				font-size: 26rpx;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+				overflow: hidden;
+			}
+		}
 	}
 </style>

@@ -42,21 +42,21 @@
   width: 100%;
   height: 400rpx;
 }
-.content .job-box.data-v-92bb8f34, .content .student-box.data-v-92bb8f34 {
+.content .job-box.data-v-92bb8f34 {
   min-height: calc(100vh - 400rpx);
 }
-.content .job-box .job-item.data-v-92bb8f34, .content .student-box .job-item.data-v-92bb8f34 {
-  padding: 15px;
+.content .job-box .job-item.data-v-92bb8f34 {
+  padding: 8px;
 }
-.content .job-box .job-item .job-item-content.data-v-92bb8f34, .content .student-box .job-item .job-item-content.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content.data-v-92bb8f34 {
   background-color: #fff;
   padding: 15px;
   border-radius: 20rpx;
 }
-.content .job-box .job-item .job-item-content .content-top.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-top.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-top.data-v-92bb8f34 {
   display: flex;
 }
-.content .job-box .job-item .job-item-content .content-top .top-title.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-top .top-title.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-top .top-title.data-v-92bb8f34 {
   flex: 0.6;
   width: 100px;
   overflow: hidden;
@@ -66,20 +66,20 @@
   margin-right: 15px;
   font-weight: bold;
 }
-.content .job-box .job-item .job-item-content .content-top .top-salary.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-top .top-salary.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-top .top-salary.data-v-92bb8f34 {
   flex: 0.4;
   text-align: right;
   color: #1296db;
   font-size: 30rpx;
 }
-.content .job-box .job-item .job-item-content .content-main.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-main.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-main.data-v-92bb8f34 {
   margin-top: 20rpx;
 }
-.content .job-box .job-item .job-item-content .content-main .main-skills .skill-scroll.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-main .main-skills .skill-scroll.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-main .main-skills .skill-scroll.data-v-92bb8f34 {
   white-space: nowrap;
   width: 100%;
 }
-.content .job-box .job-item .job-item-content .content-main .main-skills .skill-scroll .sill-item.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-main .main-skills .skill-scroll .sill-item.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-main .main-skills .skill-scroll .sill-item.data-v-92bb8f34 {
   display: inline-block;
   font-size: 24rpx;
   color: #1296db;
@@ -88,36 +88,92 @@
   padding: 10rpx;
   border-radius: 15rpx;
 }
-.content .job-box .job-item .job-item-content .content-main .main-company.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-main .main-company.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-main .main-company.data-v-92bb8f34 {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-top: 15rpx;
   font-size: 28rpx;
 }
-.content .job-box .job-item .job-item-content .content-bottom.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom.data-v-92bb8f34 {
   margin-top: 20rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom .botom-recruiters.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters.data-v-92bb8f34 {
   display: flex;
   align-items: center;
 }
-.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic.data-v-92bb8f34 {
   margin-right: 15rpx;
 }
-.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic image.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic image.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic image.data-v-92bb8f34 {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
 }
-.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-name.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-name.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-name.data-v-92bb8f34 {
   margin-left: 15rpx;
   font-size: 24rpx;
 }
-.content .job-box .job-item .job-item-content .content-bottom .content-place.data-v-92bb8f34, .content .student-box .job-item .job-item-content .content-bottom .content-place.data-v-92bb8f34 {
+.content .job-box .job-item .job-item-content .content-bottom .content-place.data-v-92bb8f34 {
   font-size: 28rpx;
+}
+.content .student-box.data-v-92bb8f34 {
+  min-height: calc(100vh - 400rpx);
+  padding: 20rpx;
+}
+.content .student-box .student-item.data-v-92bb8f34 {
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  padding: 25rpx;
+  box-sizing: border-box;
+  box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, 0.1);
+  border-radius: 10rpx;
+}
+.content .student-box .student-item .item-content.data-v-92bb8f34 {
+  display: flex;
+  flex-wrap: nowrap;
+}
+.content .student-box .student-item .item-content image.data-v-92bb8f34 {
+  width: 200rpx;
+  height: 250rpx;
+  border-radius: 10rpx;
+  margin-right: 30rpx;
+}
+.content .student-box .student-item .item-content .content.data-v-92bb8f34 {
+  background-color: #fff;
+  width: 432rpx;
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.content .student-box .student-item .item-content .content .name.data-v-92bb8f34 {
+  font-size: 36rpx;
+  font-weight: bold;
+}
+.content .student-box .student-item .item-content .content .item-info.data-v-92bb8f34 {
+  margin-top: 15rpx;
+  width: 100%;
+  font-size: 26rpx;
+  color: #666;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.content .student-box .student-item .item-content .content .item-info text.data-v-92bb8f34 {
+  margin-right: 15rpx;
+  padding: 10rpx 15rpx;
+  border-radius: 2rpx;
+  background-color: #eee;
+}
+.content .student-box .content-tag.data-v-92bb8f34 {
+  padding: 20rpx 10rpx 0;
+  font-size: 26rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 

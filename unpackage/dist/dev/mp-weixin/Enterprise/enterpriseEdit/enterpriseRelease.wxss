@@ -27,9 +27,7 @@
 .enterprise-release.data-v-3853f3dc {
   background-color: #1296db;
   min-height: 100vh;
-  padding: 50rpx 0;
-  padding: constant(safe-area-inset-bottom) 0;
-  padding: env(safe-area-inset-bottom) 0;
+  padding: 50rpx 0 50rpx;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,8 +59,17 @@
   border-radius: 5rpx;
   padding: 10rpx 15rpx;
 }
+.enterprise-release .enterprise-box .none-border.data-v-3853f3dc {
+  border-bottom: 0;
+}
 .enterprise-release .enterprise-box .skill-popup.data-v-3853f3dc {
   padding: 25rpx;
   width: 350rpx;
+}
+.bottom-ios.data-v-3853f3dc {
+  padding-bottom: constant(safe-area-inset-bottom);
+  /*兼容 IOS<11.2*/
+  padding-bottom: env(safe-area-inset-bottom);
+  /*兼容 IOS>11.2*/
 }
 

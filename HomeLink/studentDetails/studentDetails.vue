@@ -1,10 +1,17 @@
 <template>
-	<view class="recruitment">
-		我爱娟娟
+	<view class="student-details">
+		
 	</view>
 </template>
 
 <script>
+	export default{
+		methods:{
+			reqStudentById(){
+				
+			}
+		}
+	}
 </script>
 
 <style>

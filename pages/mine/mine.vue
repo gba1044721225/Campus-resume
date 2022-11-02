@@ -105,6 +105,13 @@
 							我要招聘
 						</view>
 					</view>
+					
+					<view class="mine-info-item" @click="linkToDeliver">
+						<image :src="`${imgSrc}deliver.Png`" mode=""></image>
+						<view class="item-content">
+							查看简历
+						</view>
+					</view>
 				</view>
 			</view>
 
@@ -279,7 +286,21 @@
 					url: '/Enterprise/enterpriseEdit/enterpriseRelease'
 				})
 			},
-
+			
+			
+			//跳转到企业端 查看简历模块
+			linkToDeliver(){
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
+				uni.navigateTo({
+					url: '/Enterprise/enterpriseEdit/deliver'
+				})
+			},
 
 			//企业端请求
 			reqEnterpriseInfo() {

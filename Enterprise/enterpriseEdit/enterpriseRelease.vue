@@ -1,5 +1,5 @@
 <template>
-	<view class="enterprise-release">
+	<view class="enterprise-release" :class="{'bottom-ios':isIos}">
 		<view class="enterprise-box">
 			<view class="enterprise-item">
 				<view class="title">
@@ -93,7 +93,7 @@
 				</view>
 			</view>
 
-			<view class="enterprise-item">
+			<view class="enterprise-item none-border">
 				<view class="title">
 					岗位职责
 				</view>
@@ -102,7 +102,8 @@
 					</u-input>
 				</view>
 			</view>
-
+			
+			
 			<!-- 			<view class="enterprise-item">
 				<view class="title">
 					福利待遇
@@ -169,6 +170,7 @@
 			arr_num.push("100+")
 
 			return {
+				isIos:this.$isIos,
 				showPicker: false,
 				showPopup: false,
 				pickerKey: "",
@@ -274,7 +276,8 @@
 					}
 					return val
 				}
-			}
+			},
+
 		},
 
 		methods: {
@@ -379,13 +382,11 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style scoped lang="scss">	
 	.enterprise-release {
 		background-color: #1296db;
 		min-height: 100vh;
-		padding: 50rpx 0;
-		padding: constant(safe-area-inset-bottom) 0;
-		padding: env(safe-area-inset-bottom) 0;
+		padding: 50rpx 0 50rpx;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -422,11 +423,22 @@
 					}
 				}
 			}
-
+			
+			.none-border{
+				border-bottom: 0;
+			}
+			
 			.skill-popup {
 				padding: 25rpx;
 				width: 350rpx;
 			}
 		}
+	}
+	
+	.bottom-ios {
+		padding-bottom: constant(safe-area-inset-bottom);
+		/*兼容 IOS<11.2*/
+		padding-bottom: env(safe-area-inset-bottom);
+		/*兼容 IOS>11.2*/
 	}
 </style>

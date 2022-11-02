@@ -10,15 +10,22 @@
       "list": [
         {
           "name": "",
-          "pathName": "Enterprise/enterpriseEdit/companyIntro",
+          "pathName": "Enterprise/enterpriseEdit/deliver",
           "query": "",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "",
-          "pathName": "HomeLink/jobDetails/jobDetails",
-          "query": "id=1",
+          "pathName": "pages/home/home",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLink/resumeOnline/resumeOnline",
+          "query": "",
           "launchMode": "default",
           "scene": null
         }

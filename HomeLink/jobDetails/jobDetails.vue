@@ -1,6 +1,6 @@
 <template>
 	<view class="job-details">
-		<view class="">
+		<view class="details-box">
 			<view class="job-title">
 				<view class="title-top">
 					<view class="item">
@@ -25,7 +25,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="company-logo-intro">
 				<view class="company-logo">
 					<view class="logo-image">
@@ -44,7 +44,7 @@
 					</view>
 				</view>
 			</view>
-			
+
 			<view class="company-position">
 				<view class="position-title">
 					职业详情
@@ -62,14 +62,12 @@
 					{{jobList.recruitmentInfo.duties}}
 				</view>
 			</view>
-			
+
 			<view class="company-certificate">
 				<view class="certificate-title">
 					公司证书
 				</view>
-				<view class="certificate-image">
-					<image :src="jobList.company.imgIds" mode="aspectFit"></image>
-				</view>
+				<image class="certificate-image" :src="jobList.company.imgIds" mode=""></image>
 			</view>
 		</view>
 
@@ -109,13 +107,13 @@
 					}
 				}, header)
 			},
-			
-			reqDeliverResume(){
+
+			reqDeliverResume() {
 				const data = {
 					data: {
-						openId:this.$store.state.openId,
+						openId: this.$store.state.openId,
 						recruitId: this.jobId,
-						type:"",
+						type: "",
 						descri: "",
 						flag: "",
 					},
@@ -131,8 +129,8 @@
 					console.log("res", res)
 					if (res.meta.code == 200) {
 						uni.showToast({
-							title:"投递成功",
-							duration:2000
+							title: "投递成功",
+							duration: 2000
 						})
 					}
 				}, header)
@@ -147,155 +145,167 @@
 
 <style scoped lang="scss">
 	.job-details {
-		padding: 25rpx 35rpx;
-		padding: 25rpx 35rpx env(safe-area-inset-bottom);
-		padding: 25rpx 35rpx constant(safe-area-inset-bottom);
+		padding: 25rpx 35rpx 46rpx;
 
-		.job-title {
-			.title-top {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-
-				.item:first-child {
-					font-size: 55rpx;
-					font-weight: bold;
-					letter-spacing: 5rpx;
-				}
-
-				.item:last-child {
-					font-size: 36rpx;
-					color: #1296db;
-				}
-			}
-
-			.title-bottom {
-				margin-top: 15rpx;
-				white-space: nowrap;
-				overflow: auto;
-				border-bottom: 1rpx solid #aaa;
-				padding-bottom: 20rpx;
-
-				.item {
-					display: inline-block;
-					margin-bottom: 20rpx;
-					margin-right: 35rpx;
-
-					text {
-						margin-left: 10rpx;
-						display: inline-block;
-					}
-
-					image {
-						vertical-align: middle;
-						margin-left: 10rpx;
-						width: 50rpx;
-						height: 50rpx;
-					}
-				}
-			}
-		}
-
-		.company-logo-intro {
-			.company-logo {
-				margin-top: 25rpx;
-				display: flex;
-				align-items: center;
-				border-bottom: 1rpx solid #aaa;
-				padding-bottom: 20rpx;
-
-				.logo-image {
-					image {
-						width: 200rpx;
-						height: 200rpx;
-						border-radius: 50%;
-						border: 1rpx solid rgba(0, 0, 0, .3);
-						box-shadow: 0 0 2rpx 2rpx #1296db;
-					}
-				}
-
-				.company-info {
-					margin-left: 25rpx;
-				}
-
-				.info-item {
-					margin-bottom: 15rpx;
-				}
-			}
-		}
-
-
-		.company-position {
-			margin-top: 30rpx;
-			border-bottom: 1rpx solid #aaa;
-			padding-bottom: 20rpx;
-
-			.position-title {
-				font-size: 40rpx;
-				font-weight: bold;
-			}
-
-			.tag-box {
-				display: flex;
-				padding: 25rpx 0;
-
-				.tag-item {
-					margin-right: 20rpx;
-					background-color: rgba(0, 0, 0, .1);
-					padding: 20rpx;
-					border-radius: 10rpx;
-				}
-			}
-
-			.position-duty {
-				font-size: 36rpx;
-			}
-
-			.duty-content {
-				margin-top: 15rpx;
-				padding: 15rpx;
-				// border: 1rpx solid #1296db;
-				border-radius: 10rpx;
-				box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, .3);
-			}
-		}
-
-		.company-certificate {
-			margin-bottom: calc(20rpx + 30rpx + 80rpx);
+		.details-box {
+			margin-bottom: calc(60rpx + 80rpx);
 			margin-bottom: calc(env(safe-area-inset-bottom) + 30rpx + 80rpx);
-			.certificate-title {
-				margin-top: 30rpx;
-				font-size: 40rpx;
-				font-weight: bold;
+			
+			.job-title {
+				.title-top {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+
+					.item:first-child {
+						font-size: 55rpx;
+						font-weight: bold;
+						letter-spacing: 5rpx;
+					}
+
+					.item:last-child {
+						font-size: 36rpx;
+						color: #1296db;
+					}
+				}
+
+				.title-bottom {
+					margin-top: 15rpx;
+					white-space: nowrap;
+					overflow: auto;
+					border-bottom: 1rpx solid #aaa;
+					padding-bottom: 20rpx;
+
+					.item {
+						display: inline-block;
+						margin-bottom: 20rpx;
+						margin-right: 35rpx;
+
+						text {
+							margin-left: 10rpx;
+							display: inline-block;
+						}
+
+						image {
+							vertical-align: middle;
+							margin-left: 10rpx;
+							width: 50rpx;
+							height: 50rpx;
+						}
+					}
+				}
 			}
 
-			.certificate-image {
-				margin-top: 20rpx;
-				border: 1rpx solid #1296db;
-				border-radius: 10rpx;
+			.company-logo-intro {
+				.company-logo {
+					margin-top: 25rpx;
+					display: flex;
+					align-items: center;
+					border-bottom: 1rpx solid #aaa;
+					padding-bottom: 20rpx;
+
+					.logo-image {
+						image {
+							width: 200rpx;
+							height: 200rpx;
+							border-radius: 50%;
+							border: 1rpx solid rgba(0, 0, 0, .3);
+							box-shadow: 0 0 2rpx 2rpx #1296db;
+						}
+					}
+
+					.company-info {
+						margin-left: 25rpx;
+					}
+
+					.info-item {
+						margin-bottom: 15rpx;
+					}
+				}
+			}
+
+
+			.company-position {
+				margin-top: 30rpx;
+				border-bottom: 1rpx solid #aaa;
+				padding-bottom: 20rpx;
+
+				.position-title {
+					font-size: 40rpx;
+					font-weight: bold;
+				}
+
+				.tag-box {
+					display: flex;
+					padding: 25rpx 0 10rpx;
+					flex-wrap: wrap;
+					
+					.tag-item {
+						margin-bottom: 15rpx;
+						margin-right: 20rpx;
+						background-color: rgba(0, 0, 0, .1);
+						padding: 20rpx;
+						border-radius: 10rpx;
+					}
+				}
+
+				.position-duty {
+					font-size: 36rpx;
+				}
+
+				.duty-content {
+					margin-top: 20rpx;
+					padding: 15rpx;
+					// border: 1rpx solid #1296db;
+					border-radius: 10rpx;
+					box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, .3);
+				}
+			}
+
+			.company-certificate {
 				display: flex;
+				flex-direction: column;
 				justify-content: center;
 				align-items: center;
-				padding: 15rpx;
 
-				image {
+				.certificate-title {
+					margin-top: 30rpx;
+					font-size: 40rpx;
+					font-weight: bold;
+					margin-bottom: 15rpx;
+				}
+
+				.certificate-image {
+					border: 1rpx solid #1296db;
+					border-radius: 10rpx;
 					width: 600rpx;
+					height: 435rpx;
+					box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, .2);
 				}
 			}
 		}
-		
-		.commit-button-box{
+
+
+
+
+		.commit-button-box {
 			padding-top: 30rpx;
+			padding-bottom: 30rpx;
+			padding-bottom: constant(safe-area-inset-bottom);
+			/*兼容 IOS<11.2*/
+			padding-bottom: env(safe-area-inset-bottom);
+			/*兼容 IOS>11.2*/
 			background-color: #fff;
 			position: fixed;
-			padding-bottom:20rpx;
-			padding-bottom:env(safe-area-inset-bottom);
-			padding-bottom:constant(safe-area-inset-bottom);
-			bottom:0;
+			bottom: 0;
 			left: 0;
 			right: 0;
 			width: 750rpx;
-			.commit-button{
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			.commit-button {
 				border-radius: 10rpx;
 				line-height: 80rpx;
 				height: 80rpx;
@@ -304,9 +314,10 @@
 				color: #fff;
 				background-color: #1296db;
 				text-align: center;
+				margin-bottom: constant(safe-area-inset-bottom);
+				margin-bottom: env(safe-area-inset-bottom);
+				margin-bottom: 30rpx;
 			}
 		}
-
-
 	}
 </style>

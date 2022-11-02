@@ -3,8 +3,8 @@ module.exports = {
 
 	//设置全局api请求地址h
 	hostname() {
-		// return "http://192.168.43.93:8888"
-		return "http://101.33.210.213:8877/"
+		return "http://192.168.43.93:8877"
+		// return "http://101.33.210.213:8877/"
 	},
 
 	//设置全局api请求路径

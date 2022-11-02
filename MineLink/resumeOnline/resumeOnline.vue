@@ -12,7 +12,7 @@
 				circular :indicator-dots="indicatorDots" :interval="interval" :duration="duration"
 				@change='changeTabItemBySwiper'>
 				<swiper-item v-for="(item,index) in tabList" :key="index">
-					<view class="swiper-item">
+					<view class="swiper-item" :id="'swiper'+index" :class="{'swiper-padding-bottom-ios':isIos}">
 						<!-- 个人信息 -->
 						<view class="resume-item-info">
 							<tui-collapse :index="'pnInfo'+index" :current="item.resumeList.pnInfo.columnIndex"
@@ -363,15 +363,19 @@
 			</swiper>
 		</view>
 
-		<view class="resume-btns-box">
-			<view class="btns-item" @click="saveInfoTemporary">
+		<view class="resume-btns-box" :class="{'bottom-ios':isIos}">
+<!-- 			<view class="btns-item" @click="saveInfoTemporary">
 				暂存数据
 			</view>
 
 			<view class="btns-item" @click="getInfoTemporary">
 				获取暂存数据
+			</view> -->
+			
+			<view class="btns-item">
+				设为默认简历
 			</view>
-
+			
 			<view class="btns-item" @click="reqAllInfo">
 				提交数据
 			</view>
@@ -409,6 +413,7 @@
 				arr.push(y + 1 + 'k')
 			}
 			return {
+				isIos:this.$isIos,
 				imageBaseSrc: this.$imageBaseSrc,
 				salaryList: [
 					arr,
@@ -584,16 +589,19 @@
 			//切换简历
 			changeTabItem(index) {
 				this.currentResume = index
+				this.reqResumeAllInfo()
 			},
 			//切换轮播图关联简历
 			changeTabItemBySwiper(e) {
 				// console.log("e",e)
 				this.currentResume = e.detail.current
+				this.reqResumeAllInfo()
 			},
 			//页面高度初始化
 			setHeight() {
 				const query = uni.createSelectorQuery().in(this);
-				query.select('.swiper-item').boundingClientRect(data => {
+				console.log('11111111111',query.selectAll('.swiper-item'))
+				query.select(`#swiper${this.currentResume}`).boundingClientRect(data => {
 					this.swiperHeight = data.height + 25 + 'px'
 				}).exec();
 			},
@@ -1279,10 +1287,10 @@
 			.swiper {
 				min-height: 100vh;
 			}
-
+			
 			.swiper-item {
 				display: block;
-				padding-bottom: calc(env(safe-area-inset-bottom) + 90rpx);
+				padding-bottom: 170rpx;
 				// min-height: 100vh;
 
 				.resume-item-info {
@@ -1406,18 +1414,27 @@
 				}
 
 			}
+			
+			.swiper-padding-bottom-ios{
+				padding-bottom:calc(constant(safe-area-inset-bottom) + constant(safe-area-inset-bottom) + 90rpx);
+				/*兼容 IOS<11.2*/
+				padding-bottom:calc(env(safe-area-inset-bottom) + env(safe-area-inset-bottom) + 90rpx);
+				/*兼容 IOS>11.2*/
+			}
 		}
 
 		.resume-btns-box {
-			// padding-bottom: env(safe-area-inset-bottom);
+			padding: 0 20rpx;
+			padding-bottom: 40rpx;
+			padding-top: 40rpx;
 			position: fixed;
-			bottom: env(safe-area-inset-bottom);
+			bottom: 0;
 			left: 0;
 			right: 0;
 			display: flex;
-			justify-content: space-between;
-			padding: 0 20rpx;
-
+			justify-content: space-around;
+			background-color: #eee;
+			
 			.btns-item {
 				background-color: #1296db;
 				padding: 0 20rpx;
@@ -1425,7 +1442,18 @@
 				line-height: 90rpx;
 				color: #fff;
 				border-radius: 15rpx;
+				text-align: center;
 			}
+
+		}
+		
+		.bottom-ios {
+			padding-bottom: constant(safe-area-inset-bottom);
+			padding-top: constant(safe-area-inset-bottom);
+			/*兼容 IOS<11.2*/
+			padding-bottom: env(safe-area-inset-bottom);
+			padding-top: env(safe-area-inset-bottom);
+			/*兼容 IOS>11.2*/
 		}
 	}
 </style>
