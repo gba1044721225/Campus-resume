@@ -1228,7 +1228,26 @@
 			},
 			
 			//设置默认简历
-			reqSetDefaultResume(){}
+			reqSetDefaultResume(){				
+				const data={
+					data:{
+						mainOneId:this.tabList[0].resumeId,
+						mainOneSort:this.currentResume==0?0:1,
+						mainTwoId:this.tabList[1].resumeId ,
+						mainTwoSort:this.currentResume==1?0:1,
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/recruit/user/set/maset',data,res=>{
+					console.log("res",res)
+				},header)
+			}
 		},
 		onReady() {
 			this.setHeight()

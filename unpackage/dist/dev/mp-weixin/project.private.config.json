@@ -5,5 +5,17 @@
     "compileHotReLoad": true
   },
   "libVersion": "2.27.0",
-  "condition": {}
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "name": "",
+          "pathName": "HomeLink/studentDetails/studentDetails",
+          "query": "stuId=29",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
 }

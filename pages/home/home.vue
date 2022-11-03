@@ -135,6 +135,7 @@
 				},
 				showJobBox: true,
 				showStuBox: false,
+				recordList:[],
 				dataList: [],
 				screenHeight: 0,
 				swiperInfo: {
@@ -236,6 +237,7 @@
 			//初始化
 			init(){
 				this.dataList=[]
+				this.recordList=[]
 				this.pageInfo.pageNum=1
 				this.pageInfo.pageSize=10
 			},
@@ -257,16 +259,17 @@
 				}
 				this.$http("/recruit/user/query/msgList", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-					if (res.meta.code == 200) {
-						if (this.pageInfo.pageNum == 1) {
-							// console.log(11111111)
-							this.dataList = JSON.parse(res.data).records
-						} else {
-							// console.log(222222)
+					// console.log("res",res)
+					if (res.meta.code == 200) {	
+						if(JSON.parse(res.data).total<=this.pageInfo.pageSize * this.pageInfo.pageNum){
+							this.pageInfo.pageNum -=1
+							this.dataList=this.recordList.concat(JSON.parse(res.data).records)
+						}else{
 							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
+							this.recordList=this.recordList.concat(JSON.parse(res.data).records)
 						}
-
-						// console.log("this.dataList", this.dataList)
+						
+						console.log("this.dataList", this.dataList)
 					}
 				}, header)
 			},
@@ -288,17 +291,17 @@
 				}
 				this.$http("/company/resume/list", data, res => {
 					console.log("JSON.parse(res.data).records", JSON.parse(res.data).records)
-					console.log("this.dataList", this.dataList)
+					// console.log("this.dataList", this.dataList)
 					if (res.meta.code == 200) {
-						if (this.pageInfo.pageNum == 1) {
-							// console.log(11111111)
-							this.dataList = JSON.parse(res.data).records
-						} else {
-							// console.log(222222)
+						if(JSON.parse(res.data).total<=this.pageInfo.pageSize * this.pageInfo.pageNum){
+							this.pageInfo.pageNum -=1
+							this.dataList=this.recordList.concat(JSON.parse(res.data).records)
+						}else{
 							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
+							this.recordList=this.recordList.concat(JSON.parse(res.data).records)
 						}
-				
-						// console.log("this.dataList", this.dataList)
+						
+						console.log("this.dataList", this.dataList)
 					}
 				}, header)
 			}
