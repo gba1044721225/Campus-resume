@@ -128,10 +128,25 @@
 .content .student-box .student-item.data-v-92bb8f34 {
   margin-bottom: 20rpx;
   background-color: #fff;
-  padding: 25rpx;
+  padding: 25rpx 30rpx;
   box-sizing: border-box;
   box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, 0.1);
   border-radius: 10rpx;
+  position: relative;
+}
+.content .student-box .student-item .img-logo-top.data-v-92bb8f34 {
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  top: -25rpx;
+  right: 0;
+}
+.content .student-box .student-item .img-logo-bottom.data-v-92bb8f34 {
+  width: 100rpx;
+  height: 100rpx;
+  position: absolute;
+  bottom: -25rpx;
+  right: -15rpx;
 }
 .content .student-box .student-item .item-content.data-v-92bb8f34 {
   display: flex;
@@ -141,11 +156,11 @@
   width: 200rpx;
   height: 250rpx;
   border-radius: 10rpx;
-  margin-right: 30rpx;
+  margin-right: 50rpx;
 }
 .content .student-box .student-item .item-content .content.data-v-92bb8f34 {
   background-color: #fff;
-  width: 432rpx;
+  width: 400rpx;
   height: 250rpx;
   display: flex;
   flex-direction: column;
