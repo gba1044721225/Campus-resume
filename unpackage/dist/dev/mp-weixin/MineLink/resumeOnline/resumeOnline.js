@@ -98,16 +98,16 @@ var components
 try {
   components = {
     tuiCollapse: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 295))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 297))
     },
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 302))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 304))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 309))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 311))
     },
     tuiCalendar: function() {
-      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 317))
+      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 319))
     }
   }
 } catch (e) {
@@ -1394,7 +1394,26 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
     },
 
     //设置默认简历
-    reqSetDefaultResume: function reqSetDefaultResume() {} },
+    reqSetDefaultResume: function reqSetDefaultResume() {
+      var data = {
+        data: {
+          mainOneId: this.tabList[0].resumeId,
+          mainOneSort: this.currentResume == 0 ? 0 : 1,
+          mainTwoId: this.tabList[1].resumeId,
+          mainTwoSort: this.currentResume == 1 ? 0 : 1 },
+
+        meta: {
+          openId: this.$store.state.openId,
+          role: this.$store.state.role } };
+
+
+      var header = {
+        'content-type': 'application/json' };
+
+      this.$http('/recruit/user/set/maset', data, function (res) {
+        console.log("res", res);
+      }, header);
+    } },
 
   onReady: function onReady() {
     this.setHeight();

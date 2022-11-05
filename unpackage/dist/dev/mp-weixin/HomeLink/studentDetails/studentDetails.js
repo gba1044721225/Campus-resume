@@ -147,15 +147,121 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
     return {
-      stuId: "" };
+      stuId: "",
+      dataList: {} };
 
   },
   methods: {
-    reqResumeListById: function reqResumeListById() {
+    reqResumeListById: function reqResumeListById() {var _this = this;
       var data = {
         data: this.stuId,
         meta: {
@@ -166,6 +272,39 @@ var _default =
       var header = {
         'content-type': 'application/json' };
 
+      this.$http('/recruit/user/query/detail', data, function (res) {
+        console.log("res", res);
+        if (res.meta.code == 200) {
+          _this.dataList = JSON.parse(res.data);
+
+          console.log();
+        }
+      }, header);
+    } },
+
+  computed: {
+    getWorkYear: function getWorkYear() {
+      if (this.dataList.shixi != undefined) {
+        var exp1 = this.dataList.shixi[0].endTime;
+        var exp2 = this.dataList.shixi[this.dataList.shixi.length - 1].startTime;
+        exp1 = (exp1 = exp1.replace('年', '-')).replace('月', '');
+        exp2 = (exp2 = exp2.replace('年', '-')).replace('月', '');
+        var d = new Date(exp1) - new Date(exp2);
+        return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
+      }
+      return 10000;
+    },
+    getAge: function getAge() {
+      if (this.dataList.sysuserInfoVO != undefined) {
+        var exp = this.dataList.sysuserInfoVO.birthday;
+        // console.log(exp,"exp")
+        exp = (exp = exp.replace('年', '-')).replace('月', '');
+        // console.log(new Date(exp))
+        var d = new Date().getTime() - new Date(exp).getTime();
+        // console.log("dddddd",d)
+        return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
+      }
+      return 10000;
     } },
 
   onLoad: function onLoad(payload) {

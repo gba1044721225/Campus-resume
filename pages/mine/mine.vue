@@ -23,8 +23,8 @@
 						</view>
 						<view class="resume-online">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
-							<view class="resume-content">
-								修改昵称
+							<view class="resume-content" @click="linkToResumeOnline">
+								修改简历
 							</view>
 						</view>
 					</view>
@@ -81,7 +81,7 @@
 				</view>
 
 				<view class="mine-info">
-					<view class="mine-info-item" v-for='(item,index) in infoItem' :key="index">
+					<view class="mine-info-item" v-for='(item,index) in infoItemEnterprise' :key="index" @click="linkToEnterprisePath(item.path)">
 						<view class="item-num">
 							{{item.num}}
 						</view>
@@ -106,12 +106,12 @@
 						</view>
 					</view>
 					
-					<view class="mine-info-item" @click="linkToDeliver">
+<!-- 					<view class="mine-info-item" @click="linkToDeliver">
 						<image :src="`${imgSrc}deliver.Png`" mode=""></image>
 						<view class="item-content">
 							查看简历
 						</view>
-					</view>
+					</view> -->
 				</view>
 			</view>
 
@@ -175,6 +175,30 @@
 					},
 				],
 
+				//企业界面
+				infoItemEnterprise: [{
+						num: 1,
+						label: '收到简历',
+						path:"/Enterprise/enterpriseEdit/deliver"
+					},
+					{
+						num: 0,
+						label: '约谈面试',
+						path:""
+					},
+					// {
+					// 	num: 0,
+					// 	label: '录用审核',
+					// 	path:""
+					// },
+					{
+						num: 0,
+						label: '人才收藏',
+						path:""
+					},
+				],
+
+
 				//企业端数据
 				enterPriseInfo: {}
 			}
@@ -182,7 +206,7 @@
 		methods: {
 			//初始化化数据
 			init() {
-				if (this.role == 2) {
+				if (this.$store.state.openId!='' && this.role == 2) {
 					this.reqEnterpriseInfo()
 				}
 			},
@@ -212,6 +236,7 @@
 							duration: 1000
 						})
 						uni.setStorageSync('role', 1)
+						this.$store.commit('reSetRole',1)
 						this.init()
 						break;
 					case 1:
@@ -220,6 +245,7 @@
 							duration: 1000
 						})
 						uni.setStorageSync('role', 2)
+						this.$store.commit('reSetRole',2)
 						this.init()
 						break;
 				}
@@ -268,6 +294,13 @@
 
 			//跳转到企业端 简介编辑模块
 			linkToEnterpriseIntro() {
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
 				uni.navigateTo({
 					url: '/Enterprise/enterpriseEdit/enterpriseEdit'
 				})
@@ -288,8 +321,9 @@
 			},
 			
 			
-			//跳转到企业端 查看简历模块
-			linkToDeliver(){
+			//跳转到企业端 查看 模块
+			linkToEnterprisePath(path){
+				console.log(1111)
 				if (!this.$store.state.openId) {
 					uni.showToast({
 						title: "请先登录后使用该功能",
@@ -297,9 +331,13 @@
 					})
 					return
 				}
-				uni.navigateTo({
-					url: '/Enterprise/enterpriseEdit/deliver'
-				})
+				console.log("path",path)
+				if(path){
+					console.log("22222")	
+					uni.navigateTo({
+						url:path
+					})
+				}
 			},
 
 			//企业端请求

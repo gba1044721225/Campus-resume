@@ -124,7 +124,17 @@
 			},{
 				"path":"enterpriseEdit/deliver",
 				"style": {
-					"navigationBarTitleText": "查看简历"
+					"navigationBarTitleText": "发布信息"
+				}
+			},{
+				"path":"enterpriseEdit/studentBox",
+				"style": {
+					"navigationBarTitleText": "已收简历"
+				}
+			},{
+				"path":"enterpriseEdit/studentBoxDetails",
+				"style": {
+					"navigationBarTitleText": "简历详情"
 				}
 			}
 			]

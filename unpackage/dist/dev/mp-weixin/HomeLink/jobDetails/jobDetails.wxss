@@ -166,4 +166,18 @@
   margin-bottom: env(safe-area-inset-bottom);
   margin-bottom: 30rpx;
 }
+.job-details .collection.data-v-059cb0e7 {
+  position: fixed;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  right: 0;
+  background-color: #1296db;
+  color: #fff;
+  border-radius: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  text-align: center;
+  line-height: 120rpx;
+}
 

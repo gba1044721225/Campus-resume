@@ -76,6 +76,10 @@
 				投递简历
 			</view>
 		</view>
+		
+		<view class="collection" @click="reqCollectResume">
+			收藏
+		</view>
 	</view>
 </template>
 
@@ -113,7 +117,7 @@
 					data: {
 						openId: this.$store.state.openId,
 						recruitId: this.jobId,
-						type: "",
+						type: "2",
 						descri: "",
 						flag: "",
 					},
@@ -130,6 +134,34 @@
 					if (res.meta.code == 200) {
 						uni.showToast({
 							title: "投递成功",
+							duration: 2000
+						})
+					}
+				}, header)
+			},
+			
+			reqCollectResume() {
+				const data = {
+					data: {
+						openId: this.$store.state.openId,
+						recruitId: this.jobId,
+						type: "1",
+						descri: "",
+						flag: "",
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/recruit/user/delivery', data, res => {
+					console.log("res", res)
+					if (res.meta.code == 200) {
+						uni.showToast({
+							title: "收藏成功",
 							duration: 2000
 						})
 					}
@@ -318,6 +350,21 @@
 				margin-bottom: env(safe-area-inset-bottom);
 				margin-bottom: 30rpx;
 			}
+		}
+		
+		
+		.collection{
+			position: fixed;
+			top: 50%;
+			transform: translateY(-50%);
+			right: 0;
+			background-color: #1296db ;
+			color: #fff;
+			border-radius: 50%;
+			width: 120rpx;
+			height: 120rpx;
+			text-align: center;
+			line-height: 120rpx;
 		}
 	}
 </style>

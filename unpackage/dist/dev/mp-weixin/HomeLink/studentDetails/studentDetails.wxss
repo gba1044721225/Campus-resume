@@ -27,4 +27,80 @@
 .student-details.data-v-49dabfa7 {
   padding: 20rpx 20rpx;
 }
+.student-details .details-header.data-v-49dabfa7 {
+  padding: 0	25rpx 30rpx;
+  border-bottom: 1rpx solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student-details .details-header .header-left .name.data-v-49dabfa7 {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.student-details .details-header .header-left .item.data-v-49dabfa7 {
+  font-size: 32rpx;
+  color: #000;
+  margin-bottom: 10rpx;
+}
+.student-details .details-header .header-left .item.first.data-v-49dabfa7 {
+  margin-top: 25rpx;
+  font-size: 32rpx;
+  color: #555;
+}
+.student-details .details-header image.data-v-49dabfa7 {
+  border: 1rpx solid #1296db;
+  border-radius: 5rpx;
+  width: 200rpx;
+  height: 250rpx;
+  box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.1);
+}
+.student-details .self-introduction.data-v-49dabfa7 {
+  padding: 30rpx	25rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.student-details .self-introduction .title.data-v-49dabfa7 {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.student-details .self-introduction .content.data-v-49dabfa7 {
+  margin-top: 25rpx;
+  font-size: 32rpx;
+  color: #555;
+}
+.student-details .work-exp.data-v-49dabfa7 {
+  padding: 30rpx	25rpx;
+  border-bottom: 1rpx solid #ddd;
+}
+.student-details .work-exp .title.data-v-49dabfa7 {
+  font-size: 40rpx;
+  font-weight: bold;
+}
+.student-details .work-exp .exp-item.data-v-49dabfa7 {
+  padding: 25rpx 0 10rpx;
+  border-bottom: 1rpx solid #1296db;
+}
+.student-details .work-exp .exp-item .company-name.data-v-49dabfa7 {
+  margin-bottom: 10rpx;
+}
+.student-details .work-exp .exp-item .company-name text.data-v-49dabfa7 {
+  margin-right: 15rpx;
+}
+.student-details .work-exp .exp-item .position.data-v-49dabfa7 {
+  margin-bottom: 10rpx;
+}
+.student-details .work-exp .exp-item .exp-intro.data-v-49dabfa7 {
+  margin-bottom: 10rpx;
+  text-indent: 2em;
+}
+.student-details .work-exp .exp-item.data-v-49dabfa7:last-child {
+  border: 0;
+}
+.student-details .work-exp image.data-v-49dabfa7 {
+  width: 650rpx;
+  height: 650rpx;
+  border-radius: 10rpx solid #1296db;
+  box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.1);
+  margin-bottom: 15rpx;
+}
 

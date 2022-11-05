@@ -31,7 +31,9 @@
         "enterpriseEdit/enterpriseEdit",
         "enterpriseEdit/enterpriseRelease",
         "enterpriseEdit/companyIntro",
-        "enterpriseEdit/deliver"
+        "enterpriseEdit/deliver",
+        "enterpriseEdit/studentBox",
+        "enterpriseEdit/studentBoxDetails"
       ]
     }
   ],

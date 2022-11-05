@@ -34,7 +34,7 @@
 			</tui-banner-arc>
 		</view>
 
-		<view class="job-box" v-if="showJobBox">
+		<view class="job-box" v-if="role==1">
 			<view @click="linkToJobDetails(item.id)" class="job-item" v-for="(item,index) in dataList" :key="index">
 				<view class="job-item-content">
 					<view class="content-top">
@@ -83,7 +83,7 @@
 		</view>
 
 
-		<view class="student-box" v-if="showStuBox">
+		<view class="student-box" v-if="role==2">
 			<view @click="linkToStudentDetails(item.id)" class="student-item" v-for="(item,index) in dataList" :key="index">
 				<view class="item-content">
 					<image :src="item.imgUrl" mode=""></image>
@@ -109,6 +109,8 @@
 <!-- 				<view class="content-tag">
 					{{item.introduction}}
 				</view> -->
+				<image v-if="showTag('top',item)" class="img-logo-top" :src="`${imgSrc}hot.png`" mode=""></image>
+				<image class="img-logo-bottom" :src="`${imgSrc}boshi.png`" mode=""></image>
 			</view>
 		</view>
 
@@ -129,12 +131,12 @@
 		},
 		data() {
 			return {
+				imgSrc:this.$imageBaseSrc,
 				pageInfo: {
 					pageSize: 10,
 					pageNum: 1,
 				},
-				showJobBox: true,
-				showStuBox: false,
+				recordList:[],
 				dataList: [],
 				screenHeight: 0,
 				swiperInfo: {
@@ -151,7 +153,7 @@
 				btnList: [ {
 					bgColor: "#64B532",
 					//名称
-					text: "应聘",
+					text: "学生",
 					//字体大小
 					fontSize: 28,
 					//字体颜色
@@ -159,13 +161,12 @@
 				},{
 					bgColor: "#16C2C2",
 					//名称
-					text: "招聘",
+					text: "企业",
 					//字体大小
 					fontSize: 28,
 					//字体颜色
 					color: "#fff"
 				}],
-				showWindow: false
 			}
 		},
 		onLoad() {
@@ -193,13 +194,13 @@
 					this.init()
 					switch (e.index) {
 						case 0:
-							this.showJobBox = true
-							this.showStuBox = false				
+							uni.setStorageSync('role', 1)
+							this.$store.commit('reSetRole',1)
 							this.reqRecruitmentInformation()
 							break;
 						case 1:
-							this.showJobBox = false
-							this.showStuBox = true
+							uni.setStorageSync('role', 2)
+							this.$store.commit('reSetRole',2)	
 							this.reqResumeList()
 							break;
 					}	
@@ -236,6 +237,7 @@
 			//初始化
 			init(){
 				this.dataList=[]
+				this.recordList=[]
 				this.pageInfo.pageNum=1
 				this.pageInfo.pageSize=10
 			},
@@ -248,7 +250,7 @@
 						size: this.pageInfo.pageSize
 					},
 					meta: {
-						openId: this.$store.state.openId,
+						openId: "",
 						role: this.$store.state.role,
 					}
 				}
@@ -257,16 +259,17 @@
 				}
 				this.$http("/recruit/user/query/msgList", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-					if (res.meta.code == 200) {
-						if (this.pageInfo.pageNum == 1) {
-							// console.log(11111111)
-							this.dataList = JSON.parse(res.data).records
-						} else {
-							// console.log(222222)
+					// console.log("res",res)
+					if (res.meta.code == 200) {	
+						if(JSON.parse(res.data).total<=this.pageInfo.pageSize * this.pageInfo.pageNum){
+							this.pageInfo.pageNum -=1
+							this.dataList=this.recordList.concat(JSON.parse(res.data).records)
+						}else{
 							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
+							this.recordList=this.recordList.concat(JSON.parse(res.data).records)
 						}
-
-						// console.log("this.dataList", this.dataList)
+						
+						console.log("this.dataList", this.dataList)
 					}
 				}, header)
 			},
@@ -288,35 +291,67 @@
 				}
 				this.$http("/company/resume/list", data, res => {
 					console.log("JSON.parse(res.data).records", JSON.parse(res.data).records)
-					console.log("this.dataList", this.dataList)
+					// console.log("this.dataList", this.dataList)
 					if (res.meta.code == 200) {
-						if (this.pageInfo.pageNum == 1) {
-							// console.log(11111111)
-							this.dataList = JSON.parse(res.data).records
-						} else {
-							// console.log(222222)
+						if(JSON.parse(res.data).total<=this.pageInfo.pageSize * this.pageInfo.pageNum){
+							this.pageInfo.pageNum -=1
+							this.dataList=this.recordList.concat(JSON.parse(res.data).records)
+						}else{
 							this.dataList=this.dataList.concat(JSON.parse(res.data).records)
+							this.recordList=this.recordList.concat(JSON.parse(res.data).records)
 						}
-				
-						// console.log("this.dataList", this.dataList)
+						
+						console.log("this.dataList", this.dataList)
 					}
 				}, header)
 			}
 		},
 		computed: {
-			...mapState(['token']),
+			...mapState(['token','role']),
+			showTag(){
+				return function(val,item){
+					if(val=='top'){
+						const t=(new Date().getTime()-item.createTime)/1000/60/60/24
+						if(Math.floor(t)){
+							return true
+						}
+						return false
+					}
+					
+					if(val=='bottom'){
+						if(item.leve=='博士'||item.leve=='研究生'){
+							return true
+						}
+						return false
+					}
+					
+					return false
+				}
+			}
 		},
-		onLoad() {
-			this.reqRecruitmentInformation()
+		// onLoad() {			
+		// },
+		onHide() {
+			this.init()
+		},
+		onShow(){
+			if(this.role==1){
+				this.reqRecruitmentInformation()
+				return
+			}
+			
+			if(this.role==2){
+				this.reqResumeList()
+			}
 		},
 		onReachBottom() {
 			this.pageInfo.pageNum++
-			if(this.showStuBox){
-				this.reqResumeList()
+			if(this.role==1){
+				this.reqRecruitmentInformation()
 				return
 			}
-			if(this.showJobBox){
-				this.reqRecruitmentInformation()
+			if(this.role==2){
+				this.reqResumeList()
 				return
 			}
 		}
@@ -364,7 +399,7 @@
 					background-color: #fff;
 					padding: 15px;
 					border-radius: 20rpx;
-
+					
 					.content-top {
 						display: flex;
 
@@ -461,10 +496,26 @@
 			.student-item{
 				margin-bottom: 20rpx;
 				background-color: #fff;
-				padding: 25rpx;
+				padding: 25rpx 30rpx;
 				box-sizing: border-box;
 				box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, .1);
 				border-radius: 10rpx;
+				position: relative;
+				
+				.img-logo-top{
+					width: 100rpx;
+					height: 100rpx;
+					position: absolute;
+					top: -25rpx;
+					right: 0;
+				}
+				.img-logo-bottom{
+					width: 100rpx;
+					height: 100rpx;
+					position: absolute;
+					bottom: -25rpx;
+					right: -15rpx;
+				}
 				
 				.item-content{
 					// padding-bottom: 20rpx;
@@ -475,11 +526,11 @@
 						width: 200rpx;
 						height: 250rpx;
 						border-radius: 10rpx;
-						margin-right: 30rpx;
+						margin-right: 50rpx;
 					}
 					.content{
 						background-color: #fff;
-						width: 432rpx;
+						width: 400rpx;
 						height: 250rpx;
 						display: flex;
 						flex-direction: column;

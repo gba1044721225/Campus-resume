@@ -225,6 +225,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -259,7 +263,7 @@ var _default =
         data: {
           openId: this.$store.state.openId,
           recruitId: this.jobId,
-          type: "",
+          type: "2",
           descri: "",
           flag: "" },
 
@@ -276,6 +280,34 @@ var _default =
         if (res.meta.code == 200) {
           uni.showToast({
             title: "投递成功",
+            duration: 2000 });
+
+        }
+      }, header);
+    },
+
+    reqCollectResume: function reqCollectResume() {
+      var data = {
+        data: {
+          openId: this.$store.state.openId,
+          recruitId: this.jobId,
+          type: "1",
+          descri: "",
+          flag: "" },
+
+        meta: {
+          openId: this.$store.state.openId,
+          role: this.$store.state.role } };
+
+
+      var header = {
+        'content-type': 'application/json' };
+
+      this.$http('/recruit/user/delivery', data, function (res) {
+        console.log("res", res);
+        if (res.meta.code == 200) {
+          uni.showToast({
+            title: "收藏成功",
             duration: 2000 });
 
         }

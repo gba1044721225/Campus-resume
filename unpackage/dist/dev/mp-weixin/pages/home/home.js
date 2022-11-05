@@ -98,10 +98,10 @@ var components
 try {
   components = {
     tuiBannerArc: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-banner-arc/tui-banner-arc */ "components/thorui/tui-banner-arc/tui-banner-arc").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-banner-arc/tui-banner-arc.vue */ 274))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-banner-arc/tui-banner-arc */ "components/thorui/tui-banner-arc/tui-banner-arc").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-banner-arc/tui-banner-arc.vue */ 276))
     },
     tuiFab: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-fab/tui-fab */ "components/thorui/tui-fab/tui-fab").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-fab/tui-fab.vue */ 281))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-fab/tui-fab */ "components/thorui/tui-fab/tui-fab").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-fab/tui-fab.vue */ 283))
     }
   }
 } catch (e) {
@@ -125,22 +125,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  var l1 = _vm.showJobBox
-    ? _vm.__map(_vm.dataList, function(item, index) {
-        var $orig = _vm.__get_orig(item)
+  var l1 =
+    _vm.role == 1
+      ? _vm.__map(_vm.dataList, function(item, index) {
+          var $orig = _vm.__get_orig(item)
 
-        var l0 = item.requirements.split("，")
-        return {
-          $orig: $orig,
-          l0: l0
-        }
-      })
-    : null
+          var l0 = item.requirements.split("，")
+          return {
+            $orig: $orig,
+            l0: l0
+          }
+        })
+      : null
+  var l2 =
+    _vm.role == 2
+      ? _vm.__map(_vm.dataList, function(item, index) {
+          var $orig = _vm.__get_orig(item)
+
+          var m0 = _vm.showTag("top", item)
+          return {
+            $orig: $orig,
+            m0: m0
+          }
+        })
+      : null
   _vm.$mp.data = Object.assign(
     {},
     {
       $root: {
-        l1: l1
+        l1: l1,
+        l2: l2
       }
     }
   )
@@ -299,21 +313,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var MyLogin = function MyLogin() {__webpack_require__.e(/*! require.ensure | loginView/login */ "loginView/login").then((function () {return resolve(__webpack_require__(/*! @/loginView/login.vue */ 288));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default = (_components$data$onLo = {
 
 
+var _vuex = __webpack_require__(/*! vuex */ 138);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var MyLogin = function MyLogin() {__webpack_require__.e(/*! require.ensure | loginView/login */ "loginView/login").then((function () {return resolve(__webpack_require__(/*! @/loginView/login.vue */ 290));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 
+
+{
   components: {
     MyLogin: MyLogin },
 
   data: function data() {
     return {
+      imgSrc: this.$imageBaseSrc,
       pageInfo: {
         pageSize: 10,
         pageNum: 1 },
 
-      showJobBox: true,
-      showStuBox: false,
+      recordList: [],
       dataList: [],
       screenHeight: 0,
       swiperInfo: {
@@ -330,7 +346,7 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
       btnList: [{
         bgColor: "#64B532",
         //名称
-        text: "应聘",
+        text: "学生",
         //字体大小
         fontSize: 28,
         //字体颜色
@@ -338,13 +354,12 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
       {
         bgColor: "#16C2C2",
         //名称
-        text: "招聘",
+        text: "企业",
         //字体大小
         fontSize: 28,
         //字体颜色
-        color: "#fff" }],
+        color: "#fff" }] };
 
-      showWindow: false };
 
   },
   onLoad: function onLoad() {var _this = this;
@@ -372,13 +387,13 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
         this.init();
         switch (e.index) {
           case 0:
-            this.showJobBox = true;
-            this.showStuBox = false;
+            uni.setStorageSync('role', 1);
+            this.$store.commit('reSetRole', 1);
             this.reqRecruitmentInformation();
             break;
           case 1:
-            this.showJobBox = false;
-            this.showStuBox = true;
+            uni.setStorageSync('role', 2);
+            this.$store.commit('reSetRole', 2);
             this.reqResumeList();
             break;}
 
@@ -415,6 +430,7 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
     //初始化
     init: function init() {
       this.dataList = [];
+      this.recordList = [];
       this.pageInfo.pageNum = 1;
       this.pageInfo.pageSize = 10;
     },
@@ -427,7 +443,7 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
           size: this.pageInfo.pageSize },
 
         meta: {
-          openId: this.$store.state.openId,
+          openId: "",
           role: this.$store.state.role } };
 
 
@@ -436,16 +452,17 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
 
       this.$http("/recruit/user/query/msgList", data, function (res) {
         // console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
+        // console.log("res",res)
         if (res.meta.code == 200) {
-          if (_this3.pageInfo.pageNum == 1) {
-            // console.log(11111111)
-            _this3.dataList = JSON.parse(res.data).records;
+          if (JSON.parse(res.data).total <= _this3.pageInfo.pageSize * _this3.pageInfo.pageNum) {
+            _this3.pageInfo.pageNum -= 1;
+            _this3.dataList = _this3.recordList.concat(JSON.parse(res.data).records);
           } else {
-            // console.log(222222)
             _this3.dataList = _this3.dataList.concat(JSON.parse(res.data).records);
+            _this3.recordList = _this3.recordList.concat(JSON.parse(res.data).records);
           }
 
-          // console.log("this.dataList", this.dataList)
+          console.log("this.dataList", _this3.dataList);
         }
       }, header);
     },
@@ -467,38 +484,70 @@ var _vuex = __webpack_require__(/*! vuex */ 138);var _components$data$onLo;funct
 
       this.$http("/company/resume/list", data, function (res) {
         console.log("JSON.parse(res.data).records", JSON.parse(res.data).records);
-        console.log("this.dataList", _this4.dataList);
+        // console.log("this.dataList", this.dataList)
         if (res.meta.code == 200) {
-          if (_this4.pageInfo.pageNum == 1) {
-            // console.log(11111111)
-            _this4.dataList = JSON.parse(res.data).records;
+          if (JSON.parse(res.data).total <= _this4.pageInfo.pageSize * _this4.pageInfo.pageNum) {
+            _this4.pageInfo.pageNum -= 1;
+            _this4.dataList = _this4.recordList.concat(JSON.parse(res.data).records);
           } else {
-            // console.log(222222)
             _this4.dataList = _this4.dataList.concat(JSON.parse(res.data).records);
+            _this4.recordList = _this4.recordList.concat(JSON.parse(res.data).records);
           }
 
-          // console.log("this.dataList", this.dataList)
+          console.log("this.dataList", _this4.dataList);
         }
       }, header);
     } },
 
-  computed: _objectSpread({},
-  (0, _vuex.mapState)(['token'])) }, _defineProperty(_components$data$onLo, "onLoad", function onLoad()
+  computed: _objectSpread(_objectSpread({},
+  (0, _vuex.mapState)(['token', 'role'])), {}, {
+    showTag: function showTag() {
+      return function (val, item) {
+        if (val == 'top') {
+          var t = (new Date().getTime() - item.createTime) / 1000 / 60 / 60 / 24;
+          if (Math.floor(t)) {
+            return true;
+          }
+          return false;
+        }
 
-{
-  this.reqRecruitmentInformation();
-}), _defineProperty(_components$data$onLo, "onReachBottom", function onReachBottom()
-{
-  this.pageInfo.pageNum++;
-  if (this.showStuBox) {
-    this.reqResumeList();
-    return;
-  }
-  if (this.showJobBox) {
-    this.reqRecruitmentInformation();
-    return;
-  }
-}), _components$data$onLo);exports.default = _default;
+        if (val == 'bottom') {
+          if (item.leve == '博士' || item.leve == '研究生') {
+            return true;
+          }
+          return false;
+        }
+
+        return false;
+      };
+    } }),
+
+  // onLoad() {			
+  // },
+  onHide: function onHide() {
+    this.init();
+  },
+  onShow: function onShow() {
+    if (this.role == 1) {
+      this.reqRecruitmentInformation();
+      return;
+    }
+
+    if (this.role == 2) {
+      this.reqResumeList();
+    }
+  },
+  onReachBottom: function onReachBottom() {
+    this.pageInfo.pageNum++;
+    if (this.role == 1) {
+      this.reqRecruitmentInformation();
+      return;
+    }
+    if (this.role == 2) {
+      this.reqResumeList();
+      return;
+    }
+  } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
