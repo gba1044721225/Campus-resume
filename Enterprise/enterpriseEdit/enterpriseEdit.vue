@@ -509,6 +509,18 @@
 				}
 				this.$http('/company/modify', data, res => {
 					console.log("res", res)
+					if(res.meta.code==200){
+						uni.showToast({
+							title:"提交成功",
+							duration:1500
+						})
+					}else{
+						uni.showToast({
+							title:"提交失败",
+							duration:1500,
+							icon:"fail"
+						})
+					}
 				}, header)
 			}
 		},

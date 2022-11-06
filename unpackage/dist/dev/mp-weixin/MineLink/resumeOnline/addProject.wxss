@@ -55,6 +55,7 @@
 }
 .add-project .timer-p .text.data-v-d4e7585a {
   margin: 0 10rpx;
+  padding-top: 49rpx;
 }
 .add-project .mytextarea.data-v-d4e7585a {
   width: 100%;

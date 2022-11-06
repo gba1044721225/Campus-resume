@@ -249,7 +249,7 @@ var _default =
         'content-type': 'application/json' };
 
       this.$http('/company/query', data, function (res) {
-        // console.log("res",res)
+        console.log("res", res);
         if (res.meta.code == 200) {
           _this.dataList = JSON.parse(res.data);
           console.log(_this.dataList);

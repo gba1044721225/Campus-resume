@@ -3,11 +3,11 @@
 		<view class="company-intro-header">
 			<view class="header-left">
 				<view class="company-title">
-					<text>{{dataList.companyName}}</text>
-					<text style="font-weight: normal;">（{{dataList.alias}}）</text>
+					<text>{{dataList.companyName?dataList.companyName:'暂无数据'}}</text>
+					<text style="font-weight: normal;">（{{dataList.alias?dataList.alias:''}}）</text>
 				</view>
 				<view class="company-intro-size">
-					{{dataList.companySize}}
+					{{dataList.companySize?dataList.companySize:'暂无数据'}}
 				</view>
 			</view>
 			<view class="header-right">
@@ -17,10 +17,10 @@
 		
 		<view class="company-tag">
 			<view class="tag-item">
-				单位性质：{{dataList.unitNature}}
+				单位性质：{{dataList.unitNature?dataList.unitNature:'暂无数据'}}
 			</view>
 			<view class="tag-item">
-				行业分类：{{dataList.industryCategory}}
+				行业分类：{{dataList.industryCategory?dataList.industryCategory:'暂无数据'}}
 			</view>
 		</view>
 		
@@ -72,7 +72,7 @@
 					公司地址
 				</view>
 				<view class="content">
-					{{dataList.address}} {{dataList.addressDetail}}
+					{{dataList.address?dataList.address:''}} {{dataList.addressDetail?dataList.addressDetail:''}}
 				</view>
 			</view>
 		</view>
@@ -82,7 +82,7 @@
 				公司介绍
 			</view>
 			<view class="content">
-				{{dataList.introduce}}
+				{{dataList.introduce?dataList.introduce:''}}
 			</view>
 		</view>
 		
@@ -115,7 +115,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/company/query',data,res=>{
-					// console.log("res",res)
+					console.log("res",res)
 					if(res.meta.code==200){
 						this.dataList=JSON.parse(res.data)
 						console.log(this.dataList)
@@ -178,10 +178,11 @@
 		.company-tag{
 			margin-top: 25rpx;
 			.tag-item{
+				margin-top: 15rpx;
 				display: inline-block;
 				background-color: rgba(74, 102, 154, 0.4);
 				border-radius: 30rpx;
-				padding: 15rpx;
+				padding: 15rpx 20rpx;
 				margin-right: 20rpx;
 				color: #fff;
 			}

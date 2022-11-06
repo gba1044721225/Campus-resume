@@ -171,7 +171,18 @@
 							// const data=JSON.parse(res.data)
 							this.workHistory.addWorkId = data.id
 							// console.log("this.workHistory", this.workHistory)
+							uni.showToast({
+								title:"保存成功",
+								duration:1500,
+								icon:"success"
+							})
 							resolve()
+						}else{
+							uni.showToast({
+								title:"保存失败",
+								duration:1500,
+								icon:"none"
+							})
 						}
 					}, header)
 				})
@@ -216,6 +227,7 @@
 
 			.text {
 				margin: 0 10rpx;
+				padding-top: 49rpx;
 			}
 		}
 

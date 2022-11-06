@@ -98,10 +98,10 @@ var components
 try {
   components = {
     uTextarea: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-textarea/u-textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-textarea/u-textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-textarea/u-textarea.vue */ 327))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-textarea/u-textarea */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-textarea/u-textarea")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-textarea/u-textarea.vue */ 343))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 311))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 327))
     }
   }
 } catch (e) {
@@ -669,6 +669,18 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
 
       this.$http('/company/modify', data, function (res) {
         console.log("res", res);
+        if (res.meta.code == 200) {
+          uni.showToast({
+            title: "提交成功",
+            duration: 1500 });
+
+        } else {
+          uni.showToast({
+            title: "提交失败",
+            duration: 1500,
+            icon: "fail" });
+
+        }
       }, header);
     } },
 

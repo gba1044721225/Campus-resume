@@ -89,7 +89,7 @@
 					<image :src="item.imgUrl" mode=""></image>
 					<view class="content">
 						<view class="name">
-							{{item.position}}
+							{{item.position?item.position:'暂无岗位信息'}}
 						</view>
 						<view class="item-info">
 							{{item.userName}}（{{item.sex}}）
@@ -98,7 +98,7 @@
 							 {{item.school}} {{item.professional}}
 						</view>
 						<view class="item-info">
-							期望薪资:{{item.expectedSalary}}
+							期望薪资:{{item.expectedSalary?item.expectedSalary:"面议"}}
 						</view>
 						<view class="item-info">
 							<text>{{item.leve}}</text>

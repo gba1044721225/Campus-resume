@@ -98,7 +98,7 @@ var components
 try {
   components = {
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 304))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 320))
     }
   }
 } catch (e) {
@@ -263,7 +263,19 @@ var _default =
             _this3.certificate.certId = data.fileId;
             // this.certificate.certName=data.fileNmae
             // console.log('data', data)
+            uni.showToast({
+              title: "保存成功",
+              duration: 1500,
+              icon: "success" });
+
+
             resolve();
+          } else {
+            uni.showToast({
+              title: "保存失败",
+              duration: 1500,
+              icon: "none" });
+
           }
 
         });

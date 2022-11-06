@@ -231,16 +231,17 @@ var _default =
       this.pageInfo.pageNum = 1;
       this.pageInfo.pageSize = 50;
     },
-    linkToStudentBox: function linkToStudentBox() {
+    linkToStudentBox: function linkToStudentBox(id) {
       uni.navigateTo({
-        url: "/Enterprise/enterpriseEdit/studentBox" });
+        url: "/Enterprise/enterpriseEdit/studentBox?id=".concat(id) });
 
     },
     reqRecruitmentInformation: function reqRecruitmentInformation() {var _this = this;
       var data = {
         data: {
           current: this.pageInfo.pageNum,
-          size: this.pageInfo.pageSize },
+          size: this.pageInfo.pageSize,
+          openId: this.$store.state.openId },
 
         meta: {
           openId: this.$store.state.openId,
@@ -250,9 +251,9 @@ var _default =
       var header = {
         'content-type': 'application/json' };
 
-      this.$http("/recruit/user/query/msgList", data, function (res) {
+      this.$http("/company/query/resume", data, function (res) {
         // console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-        // console.log("res",res)
+        console.log("res", res);
         if (res.meta.code == 200) {
           if (JSON.parse(res.data).total <= _this.pageInfo.pageSize * _this.pageInfo.pageNum) {
             _this.pageInfo.pageNum -= 1;

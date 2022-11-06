@@ -106,7 +106,19 @@
 							this.certificate.certId=data.fileId
 							// this.certificate.certName=data.fileNmae
 							// console.log('data', data)
+							uni.showToast({
+								title:"保存成功",
+								duration:1500,
+								icon:"success"
+							})
+							
 							resolve()
+						}else{
+							uni.showToast({
+								title:"保存失败",
+								duration:1500,
+								icon:"none"
+							})
 						}
 					
 					})

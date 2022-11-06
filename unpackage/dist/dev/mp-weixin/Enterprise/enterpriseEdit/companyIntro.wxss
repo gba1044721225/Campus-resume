@@ -70,10 +70,11 @@
   margin-top: 25rpx;
 }
 .company-intro .company-tag .tag-item.data-v-3358051a {
+  margin-top: 15rpx;
   display: inline-block;
   background-color: rgba(74, 102, 154, 0.4);
   border-radius: 30rpx;
-  padding: 15rpx;
+  padding: 15rpx 20rpx;
   margin-right: 20rpx;
   color: #fff;
 }

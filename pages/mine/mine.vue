@@ -19,7 +19,7 @@
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
-							{{userInfo.nickName}}
+							{{userInfo.nickName?userInfo.nickName:'暂无数据'}}
 						</view>
 						<view class="resume-online">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
@@ -69,7 +69,7 @@
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
-							{{enterPriseInfo.companyName}}
+							{{enterPriseInfo.companyName?enterPriseInfo.companyName:'暂无数据'}}
 						</view>
 						<view class="resume-online" @click="linkToEnterpriseIntro">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>

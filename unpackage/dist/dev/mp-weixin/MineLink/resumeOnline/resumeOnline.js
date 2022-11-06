@@ -98,16 +98,16 @@ var components
 try {
   components = {
     tuiCollapse: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 297))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 313))
     },
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 304))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 320))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 311))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 327))
     },
     tuiCalendar: function() {
-      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 319))
+      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 335))
     }
   }
 } catch (e) {
@@ -1040,7 +1040,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
     confirmSalaryPicker: function confirmSalaryPicker(e) {// console.log("e",e)
       console.log(e.value[0] + "-" + e.value[1]);var type = this.tabList[this.currentResume]['pickKey']['type'];var key = this.tabList[this.currentResume]['pickKey']['key'];this.tabList[this.currentResume].resumeList[type][key] = e.value[0] + "-" + e.value[1];this.tabList[this.currentResume].showSalaryPicker = false;this.tabList[this.currentResume]['pickKey']['type'] = '';this.tabList[this.currentResume]['pickKey']['key'] = '';}, //取消salaryPicker
     cancelSalaryPicker: function cancelSalaryPicker() {this.tabList[this.currentResume].showSalaryPicker = false;var type = this.tabList[this.currentResume]['pickKey']['type'];var key = this.tabList[this.currentResume]['pickKey']['key'];this.tabList[this.currentResume]['pickKey']['type'] = '';this.tabList[this.currentResume]['pickKey']['key'] = '';}, //跳转到选择教育经历
-    linkAddEducation: function linkAddEducation(index, ind, item) {// console.log("item",item)
+    linkAddEducation: function linkAddEducation(index, ind, item) {if (this.tabList[this.currentResume].addEducation.length >= 4) {uni.showToast({ title: "最多添加四项教育经历", icon: "fail", duration: 1500 });return;} // console.log("item",item)
       if (ind == undefined) {uni.navigateTo({ url: "/MineLink/resumeOnline/addEducation?index=".concat(index, "&resumeId=").concat(this.tabList[this.currentResume].resumeId, "&ind=99999") });} else {uni.navigateTo({ url: "/MineLink/resumeOnline/addEducation?index=".concat(index, "&ind=").concat(ind, "&resumeId=").concat(this.tabList[this.currentResume].resumeId, "&data=").concat(JSON.stringify(item)) });}}, //确认教育经历
     comfirmEducationHistory: function comfirmEducationHistory(index, ind, value) {var _this5 = this; // console.log("index", index)
       // console.log("indkkkk", ind)
@@ -1052,8 +1052,17 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
     }, //删除教育经历
     deleteEducation: function deleteEducation(index, eduIndex) {var _this6 = this;var addEduId = this.tabList[index].addEducation[eduIndex].addEduId; // console.log(11111111)
       // console.log("addEduId",addEduId)
-      this.reqDelItem(1, addEduId).then(function (_) {_this6.tabList[index].addEducation.splice(eduIndex, 1);_this6.$nextTick(function () {_this6.setHeight();});});}, //跳转到添加工作页面
-    linkAddWork: function linkAddWork(index, ind, item) {if (ind == undefined) {uni.navigateTo({ url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&resumeId=").concat(this.tabList[this.currentResume].resumeId, "&ind=99999") });} else {uni.navigateTo({
+      this.reqDelItem(1, addEduId).then(function (_) {_this6.tabList[index].addEducation.splice(eduIndex, 1);_this6.$nextTick(function () {_this6.setHeight();});});
+    },
+
+    //跳转到添加工作页面
+    linkAddWork: function linkAddWork(index, ind, item) {
+      if (ind == undefined) {
+        uni.navigateTo({
+          url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&resumeId=").concat(this.tabList[this.currentResume].resumeId, "&ind=99999") });
+
+      } else {
+        uni.navigateTo({
           url: "/MineLink/resumeOnline/addWork?index=".concat(index, "&resumeId=").concat(this.tabList[this.currentResume].resumeId, "&ind=").concat(ind, "&data=").concat(JSON.stringify(item)) });
 
       }
@@ -1212,6 +1221,15 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
 
     //请求提交个人信息，补充信息，求职意向
     reqAllInfo: function reqAllInfo() {var _this14 = this;
+      if (!this.tabList[this.currentResume].resumeList.intentInfo.job) {
+        uni.showToast({
+          icon: "none",
+          title: "期望职位不能为空",
+          duration: 1500 });
+
+        return;
+      }
+
       // console.log(11111111111)
       var dataList = this.tabList[this.currentResume].resumeList;
       var resumeId = this.tabList[this.currentResume].resumeId;
@@ -1258,7 +1276,11 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
         // console.log("res", res)
         if (res.meta.code == 200) {
           _this14.$set(_this14.tabList[_this14.currentResume], 'resumeId', res.data);
-          console.log("this.tabList", _this14.tabList);
+          // console.log("this.tabList", this.tabList)
+          uni.showToast({
+            title: "提交成功",
+            duration: 1500 });
+
         }
       }, header);
     },
@@ -1387,6 +1409,10 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
         _this16.$getHttp("/recruit/user/del/".concat(type, "/").concat(id), data, function (res) {
           // console.log("res", res)
           if (res.meta.code == 200) {
+            uni.showToast({
+              title: "删除成功",
+              duration: 1500 });
+
             resolve();
           }
         }, header);

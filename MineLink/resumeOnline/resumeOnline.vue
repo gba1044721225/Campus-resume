@@ -147,13 +147,13 @@
 									</view>
 									<view class="info-content">
 										<view class="content-item">
-											<tui-input v-model="item.resumeList.intentInfo.job" :isFillet='true'
+											<tui-input v-model="item.resumeList.intentInfo.job" :required='true' :isFillet='true'
 												:inputBorder='true' label="期望职位" placeholder="请输入期望职位">
 											</tui-input>
 										</view>
 
 										<view class="content-item">
-											<tui-input v-model="item.resumeList.intentInfo.salary" :isFillet='true'
+											<tui-input v-model="item.resumeList.intentInfo.salary" :required='true' :isFillet='true'
 												:inputBorder='true' label="期望薪资" placeholder="请输入期望薪资" :disabled="true"
 												@click="openSalaryPicker('intentInfo','salary')">
 											</tui-input>
@@ -831,6 +831,15 @@
 
 			//跳转到选择教育经历
 			linkAddEducation(index, ind, item) {
+				if(this.tabList[this.currentResume].addEducation.length>=4){
+					uni.showToast({
+						title:"最多添加四项教育经历",
+						icon:"fail",
+						duration:1500
+					})
+					return
+				}
+				
 				// console.log("item",item)
 				if (ind == undefined) {
 					uni.navigateTo({
@@ -1046,6 +1055,15 @@
 
 			//请求提交个人信息，补充信息，求职意向
 			reqAllInfo() {
+				if(!this.tabList[this.currentResume].resumeList.intentInfo.job){
+					uni.showToast({
+						icon:"none",
+						title:"期望职位不能为空",
+						duration:1500
+					})
+					return
+				}
+				
 				// console.log(11111111111)
 				const dataList = this.tabList[this.currentResume].resumeList
 				const resumeId = this.tabList[this.currentResume].resumeId
@@ -1092,7 +1110,11 @@
 					// console.log("res", res)
 					if (res.meta.code == 200) {
 						this.$set(this.tabList[this.currentResume], 'resumeId', res.data)
-						console.log("this.tabList", this.tabList)
+						// console.log("this.tabList", this.tabList)
+						uni.showToast({
+							title:"提交成功",
+							duration:1500
+						})
 					}
 				}, header)
 			},
@@ -1221,6 +1243,10 @@
 					this.$getHttp(`/recruit/user/del/${type}/${id}`, data, res => {
 						// console.log("res", res)
 						if (res.meta.code == 200) {
+							uni.showToast({
+								title:"删除成功",
+								duration:1500
+							})
 							resolve()
 						}
 					}, header)

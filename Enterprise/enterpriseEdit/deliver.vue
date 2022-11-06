@@ -8,7 +8,7 @@
 			</view> -->
 		
 		<view class="deliver-box">
-			<view class="job-item" v-for="(item,index) in dataList" :key="index" @click="linkToStudentBox">
+			<view class="job-item" v-for="(item,index) in dataList" :key="index" @click="linkToStudentBox(item.id)">
 				<view class="job-item-content">
 					<view class="content-top">
 						<view class="top-title">
@@ -79,16 +79,17 @@
 				this.pageInfo.pageNum=1
 				this.pageInfo.pageSize=50
 			},
-			linkToStudentBox(){
+			linkToStudentBox(id){
 				uni.navigateTo({
-					url:"/Enterprise/enterpriseEdit/studentBox"
-				})
+					url:`/Enterprise/enterpriseEdit/studentBox?id=${id}`
+				})	
 			},
 			reqRecruitmentInformation() {
 				const data = {
 					data: {
 						current: this.pageInfo.pageNum,
-						size: this.pageInfo.pageSize
+						size: this.pageInfo.pageSize,
+						openId: this.$store.state.openId,
 					},
 					meta: {
 						openId: this.$store.state.openId,
@@ -98,9 +99,9 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/recruit/user/query/msgList", data, res => {
+				this.$http("/company/query/resume", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-					// console.log("res",res)
+					console.log("res",res)
 					if (res.meta.code == 200) {	
 						if(JSON.parse(res.data).total<=this.pageInfo.pageSize * this.pageInfo.pageNum){
 							this.pageInfo.pageNum -=1

@@ -55,6 +55,7 @@
 }
 .add-work .timer-p .text.data-v-cd3a5c72 {
   margin: 0 10rpx;
+  padding-top: 49rpx;
 }
 .add-work .mytextarea.data-v-cd3a5c72 {
   width: 100%;

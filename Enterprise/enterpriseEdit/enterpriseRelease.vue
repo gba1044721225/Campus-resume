@@ -357,6 +357,12 @@
 							title:"提交成功",
 							duration:1500
 						})
+					}else{
+						uni.showToast({
+							title:"提交失败",
+							duration:1500,
+							icon:"none"
+						})
 					}
 				}, header)
 			}

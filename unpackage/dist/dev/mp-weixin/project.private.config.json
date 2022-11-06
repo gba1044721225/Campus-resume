@@ -10,28 +10,7 @@
       "list": [
         {
           "name": "",
-          "pathName": "HomeLink/studentDetails/studentDetails",
-          "query": "stuId=29",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/home/home",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "HomeLink/jobDetails/jobDetails",
-          "query": "id=1",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/mine/mine",
+          "pathName": "MineLink/resumeOnline/resumeOnline",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -40,6 +19,13 @@
           "name": "",
           "pathName": "Enterprise/enterpriseEdit/deliver",
           "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/studentBox",
+          "query": "id=16",
           "launchMode": "default",
           "scene": null
         }

@@ -168,7 +168,19 @@
 						// console.log("reqAddPro",res)
 						if(res.meta.code==200){
 							this.proHistory.addProId=data.id
+							
+							uni.showToast({
+								title:"保存成功",
+								duration:1500,
+								icon:"success"
+							})
 							resolve()
+						}else{
+							uni.showToast({
+								title:"保存失败",
+								duration:1500,
+								icon:"none"
+							})
 						}
 					},header)
 				})
@@ -213,6 +225,7 @@
 
 			.text {
 				margin: 0 10rpx;
+				padding-top: 49rpx;
 			}
 		}
 

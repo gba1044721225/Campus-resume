@@ -5,6 +5,7 @@ module.exports = {
 	hostname() {
 		// return "http://192.168.43.93:8877"
 		return "http://101.33.210.213:8877"
+		// return ""
 	},
 
 	//设置全局api请求路径

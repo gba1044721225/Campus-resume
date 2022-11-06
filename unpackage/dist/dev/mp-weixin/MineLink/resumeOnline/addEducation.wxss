@@ -55,6 +55,7 @@
 }
 .add-education .timer-p .text.data-v-45207062 {
   margin: 0 10rpx;
+  padding-top: 49rpx;
 }
 .add-education .mytextarea.data-v-45207062 {
   width: 100%;

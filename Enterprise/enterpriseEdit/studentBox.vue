@@ -5,7 +5,7 @@
 				<image :src="item.imgUrl" mode=""></image>
 				<view class="content">
 					<view class="name">
-						{{item.position}}
+						{{item.position?item.position:'暂无岗位要求'}}
 					</view>
 					<view class="item-info">
 						{{item.userName}}（{{item.sex}}）
@@ -14,7 +14,7 @@
 						{{item.school}} {{item.professional}}
 					</view>
 					<view class="item-info">
-						期望薪资:{{item.expectedSalary}}
+						期望薪资:{{item.expectedSalary?item.expectedSalary:'面议'}}
 					</view>
 					<view class="item-info">
 						<text>{{item.leve}}</text>
@@ -36,25 +36,23 @@
 					pageSize: 10,
 					pageNum: 1,
 				},
+				recruitId:""
 			}
 		},
 
 		methods: {
 			//初始化
-			init() {
-				this.dataList = []
-				this.recordList = []
-				this.pageInfo.pageNum = 1
-				this.pageInfo.pageSize = 50
-			},
+			// init() {
+			// 	this.dataList = []
+			// 	this.recordList = []
+			// 	this.pageInfo.pageNum = 1
+			// 	this.pageInfo.pageSize = 50
+			// },
 
 			//企业模块 请求学生简历
 			reqResumeList() {
 				const data = {
-					data: {
-						current: this.pageInfo.pageNum,
-						size: this.pageInfo.pageSize
-					},
+					data: this.recruitId,
 					meta: {
 						openId: this.$store.state.openId,
 						role: this.$store.state.role,
@@ -63,17 +61,12 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/company/resume/list", data, res => {
-					console.log("JSON.parse(res.data).records", JSON.parse(res.data).records)
+				this.$http("/recruit/user/queryByresumeId/list", data, res => {
+					console.log("res",res)
+					// console.log("JSON.parse(res.data).records", JSON.parse(res.data).records)
 					// console.log("this.dataList", this.dataList)
 					if (res.meta.code == 200) {
-						if (JSON.parse(res.data).total <= this.pageInfo.pageSize * this.pageInfo.pageNum) {
-							this.pageInfo.pageNum -= 1
-							this.dataList = this.recordList.concat(JSON.parse(res.data).records)
-						} else {
-							this.dataList = this.dataList.concat(JSON.parse(res.data).records)
-							this.recordList = this.recordList.concat(JSON.parse(res.data).records)
-						}
+						this.dataList=JSON.parse(res.data)
 
 						console.log("this.dataList", this.dataList)
 					}
@@ -86,16 +79,16 @@
 				})
 			},
 		},
+		onLoad(payload){
+			console.log("payload",payload)
+			this.recruitId=payload.id
+		},
 		onShow(){
 			this.reqResumeList() 
 		},
-		onHide() {
-			this.init()
-		},
-		onReachBottom() {
-			this.pageInfo.pageNum++
-			this.reqResumeList()
-		}
+		// onHide() {
+		// 	this.init()
+		// },
 	}
 </script>
 
