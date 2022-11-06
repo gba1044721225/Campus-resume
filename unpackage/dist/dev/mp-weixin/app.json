@@ -35,6 +35,12 @@
         "enterpriseEdit/studentBox",
         "enterpriseEdit/studentBoxDetails"
       ]
+    },
+    {
+      "root": "MineLinkOthers",
+      "pages": [
+        "upLoadPdf"
+      ]
     }
   ],
   "window": {

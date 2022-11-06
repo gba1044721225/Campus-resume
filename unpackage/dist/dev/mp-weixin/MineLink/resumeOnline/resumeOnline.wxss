@@ -170,6 +170,7 @@
   background-color: #eee;
 }
 .resume-oneline .resume-btns-box .btns-item.data-v-94a2068a {
+  width: 240rpx;
   background-color: #1296db;
   padding: 0 20rpx;
   height: 90rpx;
@@ -177,6 +178,16 @@
   color: #fff;
   border-radius: 15rpx;
   text-align: center;
+}
+.resume-oneline .sex-box.data-v-94a2068a {
+  border: 15rpx;
+}
+.resume-oneline .sex-box.data-v-94a2068a  .u-radio-group {
+  flex-direction: row;
+  justify-content: space-around;
+}
+.resume-oneline .sex-box.data-v-94a2068a  .u-radio-group .u-radio {
+  margin-right: 20rpx;
 }
 .resume-oneline .bottom-ios.data-v-94a2068a {
   padding-bottom: constant(safe-area-inset-bottom);

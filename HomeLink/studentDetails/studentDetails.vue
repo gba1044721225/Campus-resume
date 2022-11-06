@@ -6,7 +6,7 @@
 					{{dataList.sysuserInfoVO.userName}}
 				</view>
 				<view class="item first">
-					{{getWorkYear}}年经验·{{getAge}}岁·{{dataList.sysuserInfoVO.leve}}
+					{{getWorkYear}}年经验 · {{getAge}}岁 · {{dataList.sysuserInfoVO.leve}}
 				</view>
 				<view class="item">
 					电话：{{dataList.sysuserInfoVO.phone}}

@@ -21,9 +21,9 @@
 						<view class="tips-title">
 							{{userInfo.nickName?userInfo.nickName:'暂无数据'}}
 						</view>
-						<view class="resume-online">
+						<view class="resume-online" @click="linkToResumeOnline">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
-							<view class="resume-content" @click="linkToResumeOnline">
+							<view class="resume-content">
 								修改简历
 							</view>
 						</view>
@@ -46,6 +46,13 @@
 						<image src="/static/resume.png" mode=""></image>
 						<view class="item-content">
 							在线简历
+						</view>
+					</view>
+					
+					<view class="mine-info-item" @click="linkToUpLoadPdf">
+						<image src="/static/upLoadPdf.png" mode=""></image>
+						<view class="item-content">
+							上传/下载简历
 						</view>
 					</view>
 				</view>
@@ -161,10 +168,10 @@
 						num: 0,
 						label: '已投递'
 					},
-					{
-						num: 0,
-						label: '邀约我'
-					},
+					// {
+					// 	num: 0,
+					// 	label: '邀约我'
+					// },
 					{
 						num: 0,
 						label: '我的面试'
@@ -289,6 +296,20 @@
 				}
 				uni.navigateTo({
 					url: '/MineLink/resumeOnline/resumeOnline'
+				})
+			},
+			
+			//跳转到学生端 pdf上传模块
+			linkToUpLoadPdf(){
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
+				uni.navigateTo({
+					url: '/MineLinkOthers/upLoadPdf'
 				})
 			},
 
@@ -445,6 +466,7 @@
 				color: #fff;
 
 				.mine-info-item {
+					width: 165rpx;
 					font-size: 26rpx;
 					display: flex;
 					flex-direction: column;
@@ -460,7 +482,7 @@
 
 			.mine-info-box {
 				background-color: #fff;
-				width: 500rpx;
+				width: 400rpx;
 				position: absolute;
 				border-radius: 15rpx;
 				box-shadow: 0rpx 0rpx 10rpx 10rpx rgba(0, 0, 0, .1);
@@ -468,7 +490,7 @@
 				left: 50%;
 				right: 50%;
 				transform: translate(-50%, -50%);
-				padding: 50rpx 100rpx;
+				padding: 50rpx 150rpx;
 				display: flex;
 				justify-content: space-between;
 

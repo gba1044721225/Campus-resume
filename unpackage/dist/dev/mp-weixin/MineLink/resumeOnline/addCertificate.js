@@ -98,7 +98,7 @@ var components
 try {
   components = {
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 320))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 328))
     }
   }
 } catch (e) {

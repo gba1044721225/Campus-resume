@@ -33,6 +33,11 @@
 											</tui-input>
 										</view>
 										<view class="content-item">
+											<tui-input v-model="item.resumeList.pnInfo.sex" :isFillet='true'
+												:inputBorder='true' :required='true' label="性别" placeholder="请输入性别" :disabled="true" @click="openSexPopup(index)">
+											</tui-input>
+										</view>
+										<view class="content-item">
 											<tui-input v-model="item.resumeList.pnInfo.phone" :isFillet='true'
 												:inputBorder='true' :required='true' label="手机" placeholder="请输入手机">
 											</tui-input>
@@ -372,7 +377,7 @@
 				获取暂存数据
 			</view> -->
 			
-			<view class="btns-item" @click="reqSetDefaultResume">
+			<view class="btns-item" @click="reqSetDefaultResume" v-if="currentResume>0">
 				设为默认简历
 			</view>
 			
@@ -394,9 +399,28 @@
 		<u-picker ref="uPicker" :show="tabList[currentResume].showCityPicker" :columns="cityList"
 			@confirm="confirmCityPicker($event)" @cancel="cancelCityPicker" @change="changeHandler($event)"></u-picker>
 
-		<!-- 薪资 -->
+		<!-- 薪资 -->		
 		<u-picker :show="tabList[currentResume].showSalaryPicker" ref="sPicker" :columns="salaryList"
 			@confirm="confirmSalaryPicker" @cancel="cancelSalaryPicker"></u-picker>
+			
+		<!-- 性别 -->
+		<u-popup :customStyle="{width:'50%',height:'20%',borderRadius:'15rpx',display:'flex','justify-content':'center','align-items': 'center'}" mode="center" :show="tabList[currentResume].showSexPopup" @close="closeSexPopup">
+			<view class="sex-box">
+				<u-radio-group
+				    placement="column"
+				  >
+				    <u-radio
+				      :customStyle="{marginBottom: '8px'}"
+				      v-for="(item, index) in sexList"
+				      :key="index"
+				      :label="item.name"
+				      :name="item.name"
+					  @change="sexChange"
+				    >
+				    </u-radio>
+				</u-radio-group>
+			</view>
+		</u-popup>
 	</view>
 </template>
 
@@ -408,7 +432,7 @@
 	export default {
 
 		data() {
-			let arr = []
+			let arr=[]
 			for (let y = 0; y < 20; y++) {
 				arr.push(y + 1 + 'k')
 			}
@@ -429,6 +453,7 @@
 						showPicker: false,
 						showCityPicker: false,
 						showSalaryPicker: false,
+						showSexPopup:false,
 						viewType: '', //1公开 
 						pickKey: {
 							type: '', //记录类型
@@ -450,6 +475,7 @@
 						resumeList: {
 							pnInfo: {
 								name: '',
+								sex:'',
 								phone: '',
 								school: '',
 								education: '',
@@ -484,65 +510,129 @@
 						certCol: -1,
 					},
 					{
-						label: '简历',
-						resumeId: '',
-						showPicker: false,
-						showCityPicker: false,
-						showSalaryPicker: false,
-						viewType: '', //1公开 
-						pickKey: {
-							type: '', //记录类型
-							key: ''
-						},
-
-						educationColumns: [
-							['博士', '研究生', '本科', '专科', '高中', '中专']
-						],
-						majorColumns: [
-							['计算机', '数学', '生物工程']
-						],
-						politicalStatusColumns: [
-							['党员', '团员', '群众']
-						],
-						jTypeColumns: [
-							['校招', '社招', '实习']
-						],
-						resumeList: {
-							pnInfo: {
-								name: '',
-								phone: '',
-								school: '',
-								education: '',
-								major: '',
-								// jobIntention: '',
-								graduationTime: '',
-								columnIndex: -1
+							label: '简历',
+							resumeId: '',
+							showPicker: false,
+							showCityPicker: false,
+							showSalaryPicker: false,
+							showSexPopup:false,
+							viewType: '', //1公开 
+							pickKey: {
+								type: '', //记录类型
+								key: ''
 							},
-							addInfo: {
-								email: '',
-								politicalStatus: '',
-								birthday: '',
-								hometown: '',
-								dwelling: '',
-								columnIndex: -1
+					
+							educationColumns: [
+								['博士', '研究生', '本科', '专科', '高中', '中专']
+							],
+							majorColumns: [
+								['计算机', '数学', '生物工程']
+							],
+							politicalStatusColumns: [
+								['党员', '团员', '群众']
+							],
+							jTypeColumns: [
+								['校招', '社招', '实习']
+							],
+							resumeList: {
+								pnInfo: {
+									name: '',
+									sex:'',
+									phone: '',
+									school: '',
+									education: '',
+									major: '',
+									// jobIntention: '',
+									graduationTime: '',
+									columnIndex: -1
+								},
+								addInfo: {
+									email: '',
+									politicalStatus: '',
+									birthday: '',
+									hometown: '',
+									dwelling: '',
+									columnIndex: -1
+								},
+								intentInfo: {
+									job: '',
+									salary: '',
+									city: '',
+									columnIndex: -1,
+									jType: '',
+								}
 							},
-							intentInfo: {
-								job: '',
-								salary: '',
-								city: '',
-								columnIndex: -1,
-								jType: '',
-							}
+							addEducation: [],
+							eduCol: -1,
+							addWorkExp: [],
+							WorkExpCol: -1,
+							addPro: [],
+							proCol: -1,
+							addCertificate: [],
+							certCol: -1,
 						},
-						addEducation: [],
-						eduCol: -1,
-						addWorkExp: [],
-						WorkExpCol: -1,
-						addPro: [],
-						proCol: -1,
-						addCertificate: [],
-						certCol: -1,
-					},
+						{
+								label: '简历',
+								resumeId: '',
+								showPicker: false,
+								showCityPicker: false,
+								showSalaryPicker: false,
+								showSexPopup:false,
+								viewType: '', //1公开 
+								pickKey: {
+									type: '', //记录类型
+									key: ''
+								},
+						
+								educationColumns: [
+									['博士', '研究生', '本科', '专科', '高中', '中专']
+								],
+								majorColumns: [
+									['计算机', '数学', '生物工程']
+								],
+								politicalStatusColumns: [
+									['党员', '团员', '群众']
+								],
+								jTypeColumns: [
+									['校招', '社招', '实习']
+								],
+								resumeList: {
+									pnInfo: {
+										name: '',
+										sex:'',
+										phone: '',
+										school: '',
+										education: '',
+										major: '',
+										// jobIntention: '',
+										graduationTime: '',
+										columnIndex: -1
+									},
+									addInfo: {
+										email: '',
+										politicalStatus: '',
+										birthday: '',
+										hometown: '',
+										dwelling: '',
+										columnIndex: -1
+									},
+									intentInfo: {
+										job: '',
+										salary: '',
+										city: '',
+										columnIndex: -1,
+										jType: '',
+									}
+								},
+								addEducation: [],
+								eduCol: -1,
+								addWorkExp: [],
+								WorkExpCol: -1,
+								addPro: [],
+								proCol: -1,
+								addCertificate: [],
+								certCol: -1,
+							},
 				],
 				currentResume: 0,
 				indicatorDots: false,
@@ -550,6 +640,17 @@
 				duration: 500,
 				swiperHeight: 0,
 				swiperMinHeight: 0,
+				//性别
+				sexList:[
+					{
+						name: '男',
+						disabled: false
+					},
+					{
+						name: '女',
+						disabled: false
+					},
+				],
 				//映射表
 				keyToCnEdu: {
 					school: '学校',
@@ -652,6 +753,23 @@
 				this.$nextTick(() => {
 					this.setHeight()
 				})
+			},
+			
+			//打开性别选择
+			openSexPopup(index){
+				this.currentResume=index
+				this.tabList[index].showSexPopup=true
+			},
+			
+			//关闭性别触发
+			closeSexPopup(){
+				this.tabList[this.currentResume].showSexPopup=false
+			},
+
+			//选择性别
+			sexChange(e){
+				// console.log("e",e)
+				this.tabList[this.currentResume].resumeList.pnInfo.sex=e
 			},
 
 			//跳到学校/专业选择
@@ -803,9 +921,24 @@
 
 			//打开工资picker
 			openSalaryPicker(type, key) {
-				this.tabList[this.currentResume].pickKey.type = type
-				this.tabList[this.currentResume].pickKey.key = key
-				this.tabList[this.currentResume].showSalaryPicker = true
+				uni.showActionSheet({
+					itemList: ['面议', '选择薪资范围'],
+					success:res => {
+						console.log("res111",res)
+						if(res.tapIndex===0){
+							this.tabList[this.currentResume].resumeList.intentInfo.salary="面议"
+							return
+						}
+						if(res.tapIndex===1){
+							this.tabList[this.currentResume].pickKey.type = type
+							this.tabList[this.currentResume].pickKey.key = key
+							this.tabList[this.currentResume].showSalaryPicker = true
+						}
+					},
+					fail: function (res) {
+						// console.log(res.errMsg);
+					}
+				});
 			},
 
 			//确认工资picker
@@ -1091,7 +1224,7 @@
 						"positionTag": "",
 						"professional": dataList.pnInfo.major,
 						"school": dataList.pnInfo.school,
-						"sex": "",
+						"sex": dataList.pnInfo.sex,
 						"sort": this.currentResume,
 						"userName": dataList.pnInfo.name,
 						"view": "1", //1:公开
@@ -1483,6 +1616,7 @@
 			background-color: #eee;
 			
 			.btns-item {
+				width: 240rpx;
 				background-color: #1296db;
 				padding: 0 20rpx;
 				height: 90rpx;
@@ -1492,6 +1626,17 @@
 				text-align: center;
 			}
 
+		}
+		
+		.sex-box{
+			border: 15rpx;
+			::v-deep .u-radio-group{
+				flex-direction: row;
+				justify-content: space-around;
+				.u-radio {
+					margin-right: 20rpx;
+				}
+			}
 		}
 		
 		.bottom-ios {

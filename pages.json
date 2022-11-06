@@ -138,6 +138,17 @@
 				}
 			}
 			]
+		},
+		{
+			"root": "MineLinkOthers",
+			"pages": [
+				{
+					"path":"upLoadPdf",
+					"style": {
+						"navigationBarTitleText": "简历详情"
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {

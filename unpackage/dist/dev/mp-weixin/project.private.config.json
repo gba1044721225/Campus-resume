@@ -28,6 +28,20 @@
           "query": "id=16",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/upLoadPdf",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
