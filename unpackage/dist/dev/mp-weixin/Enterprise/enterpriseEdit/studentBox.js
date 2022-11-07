@@ -209,7 +209,7 @@ var _default =
 
     linkToStudentBoxDetails: function linkToStudentBoxDetails(stuId) {
       uni.navigateTo({
-        url: "/Enterprise/enterpriseEdit/studentBoxDetails?stuId=".concat(stuId) });
+        url: "/Enterprise/enterpriseEdit/studentBoxDetails?stuId=".concat(stuId, "&recruitId=").concat(this.recruitId) });
 
     } },
 

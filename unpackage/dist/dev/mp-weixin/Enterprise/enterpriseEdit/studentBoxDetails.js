@@ -95,10 +95,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    tuiModal: function() {
+      return __webpack_require__.e(/*! import() | components/thorui/tui-modal/tui-modal */ "components/thorui/tui-modal/tui-modal").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-modal/tui-modal.vue */ 552))
+    },
+    tuiButton: function() {
+      return __webpack_require__.e(/*! import() | components/thorui/tui-button/tui-button */ "components/thorui/tui-button/tui-button").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-button/tui-button.vue */ 455))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event) {
+      _vm.showModal = false
+    }
+  }
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -132,7 +163,19 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -288,16 +331,31 @@ var _default =
   data: function data() {
     return {
       stuId: "",
+      recruitId: "",
+      showModal: false,
+      rejectReason: "",
       dataList: {} };
 
   },
   methods: {
     invitInterview: function invitInterview() {
+      this.rejectReason = '';
+      uni.showModal({
+        title: '邀请面试',
+        content: '确认后将邀请面试',
+        success: function success(res) {
+          if (res.confirm) {
+            this.reqHandlerResume(1);
+          } else if (res.cancel) {
+            // console.log('用户点击取消');
+          }
+        } });
 
     },
 
     rejectInterview: function rejectInterview() {
-
+      this.rejectReason = '';
+      this.showModal = true;
     },
 
     reqResumeListById: function reqResumeListById() {var _this = this;
@@ -315,8 +373,44 @@ var _default =
         console.log("res", res);
         if (res.meta.code == 200) {
           _this.dataList = JSON.parse(res.data);
+        } else {
+        }
+      }, header);
+    },
 
-          console.log();
+    //邀请/驳回
+    reqHandlerResume: function reqHandlerResume(flag) {var _this2 = this;
+      var data = {
+        data: {
+          openId: this.$store.state.openId,
+          recruitId: this.recruitId,
+          type: "",
+          descri: this.rejectReason,
+          flag: flag },
+
+        meta: {
+          openId: this.$store.state.openId,
+          role: this.$store.state.role } };
+
+
+      var header = {
+        'content-type': 'application/json' };
+
+      this.$http('/recruit/user/delivery', data, function (res) {
+        console.log("res", res);
+        _this2.showModal = false;
+        if (res.meta.code == 200) {
+          uni.showToast({
+            icon: "none",
+            title: "邀请成功",
+            duration: 1500 });
+
+        } else {
+          uni.showToast({
+            icon: "none",
+            title: "数据出错",
+            duration: 1500 });
+
         }
       }, header);
     } },
@@ -348,9 +442,12 @@ var _default =
 
   onLoad: function onLoad(payload) {
     this.stuId = payload.stuId;
+    this.recruitId = payload.recruitId;
     console.log("this.stuId", this.stuId);
+    console.log("this.recruitId", this.recruitId);
     this.reqResumeListById();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

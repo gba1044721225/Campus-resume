@@ -75,7 +75,7 @@
 			
 			linkToStudentBoxDetails(stuId){
 				uni.navigateTo({
-					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${stuId}`
+					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${stuId}&recruitId=${this.recruitId}`
 				})
 			},
 		},

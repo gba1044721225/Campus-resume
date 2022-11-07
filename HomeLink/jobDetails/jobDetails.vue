@@ -36,7 +36,7 @@
 							{{jobList.company.companyName}} · {{jobList.company.addressUrl}}
 						</view>
 						<view class="info-item">
-							{{jobList.company.alias}}
+							位置：{{jobList.company.alias}}
 						</view>
 						<view class="info-item">
 							微信号：{{jobList.company.weixinCode}}
@@ -247,12 +247,16 @@
 					}
 
 					.company-info {
+						width: 450rpx;
 						margin-left: 25rpx;
+						
+						.info-item {
+							white-space: nowrap;
+							overflow: auto;
+							margin-bottom: 15rpx;
+						}
 					}
 
-					.info-item {
-						margin-bottom: 15rpx;
-					}
 				}
 			}
 
@@ -365,6 +369,7 @@
 			height: 120rpx;
 			text-align: center;
 			line-height: 120rpx;
+			box-shadow: 0 0 10rpx 5rpx rgba(0,0,0,.2);
 		}
 	}
 </style>

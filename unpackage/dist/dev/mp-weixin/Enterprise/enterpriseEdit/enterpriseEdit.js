@@ -481,12 +481,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 193));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   data: function data() {
     return {
       isIos: this.$isIos,
       showPicker: false,
+      showSizePicker: false,
+      companySizeList: [
+      ['1-10人', '10-50人', '50-100人', '100-500人', '500-1000人', '1000-5000人', '5000-10000人', '10000+人']],
+
       cityList: [],
       cityLevel1: [],
       cityLevel2: [],
@@ -517,12 +524,34 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
 
   },
   methods: {
+    //网址检查  不能有中文
+    checkWebsite: function checkWebsite(e) {var _this2 = this;
+      var value = e.detail.value;
+      console.log("e", e);
+      var reg = new RegExp("[\u4E00-\u9FA5]", "g");
+      reg.lastIndex = 0;
+      // console.log(reg)
+      if (reg.test(value)) {
+        // console.log('中文')
+        this.$nextTick(function () {
+          _this2.$set(_this2.enterpriseInfo, 'companyWebsite', _this2.enterpriseInfo.companyWebsite.replace(reg, ''));
+        });
+        uni.showToast({
+          icon: "none",
+          title: "网址不能输入中文" });
+
+      } else {
+        this.$set(this.enterpriseInfo, 'companyWebsite', value);
+      }
+      console.log(this.enterpriseInfo);
+    },
+
     //初始化地区数据
-    initCityData: function initCityData() {var _this2 = this;
+    initCityData: function initCityData() {var _this3 = this;
       // 遍历城市js
       _city.default.forEach(function (item1, index1) {
         var temp2 = [];
-        _this2.cityLevel1.push(item1.provinceName);
+        _this3.cityLevel1.push(item1.provinceName);
 
         var temp4 = [];
         var temp3 = [];
@@ -536,9 +565,9 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
           temp4[index2] = temp3;
           temp3 = [];
         });
-        _this2.cityLevel3[index1] = temp4;
+        _this3.cityLevel3[index1] = temp4;
 
-        _this2.cityLevel2[index1] = temp2;
+        _this3.cityLevel2[index1] = temp2;
       });
       // 选择器默认城市
       this.cityList.push(this.cityLevel1, this.cityLevel2[0], this.cityLevel3[0][0]);
@@ -583,6 +612,20 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
       this.showPicker = false;
     },
 
+    openSizePicker: function openSizePicker() {
+      this.showSizePicker = true;
+    },
+
+
+    confirmSizePicker: function confirmSizePicker(e) {
+      this.enterpriseInfo.companySize = e.value[0];
+      this.showSizePicker = false;
+    },
+
+    cancelSizePicker: function cancelSizePicker() {
+      this.showSizePicker = false;
+    },
+
     getLocation: function getLocation() {
       var _this = this;
       wx.chooseLocation({
@@ -598,15 +641,15 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
 
     },
 
-    upLoadBusinessLicense: function upLoadBusinessLicense() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this3.$chooseImage());case 2:res = _context.sent;
+    upLoadBusinessLicense: function upLoadBusinessLicense() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  _this4.$chooseImage());case 2:res = _context.sent;
                 // console.log("res", res)
-                _this3.enterpriseInfo.businessLicense = res.tempFilePaths[0];
-                _this3.$upLoadFile("/file/upload/".concat(_this3.$store.state.openId, "/6"), res.tempFilePaths[0], {}, function (res) {
+                _this4.enterpriseInfo.businessLicense = res.tempFilePaths[0];
+                _this4.$upLoadFile("/file/upload/".concat(_this4.$store.state.openId, "/6"), res.tempFilePaths[0], {}, function (res) {
                   // console.log("res",res)
                   if (res.statusCode == 200) {
                     var dataList = JSON.parse(JSON.parse(res.data).data);
-                    _this3.enterpriseInfo.businessLicenseUrl = dataList.path;
+                    _this4.enterpriseInfo.businessLicenseUrl = dataList.path;
                     // console.log("dataList",dataList)
                     uni.showToast({
                       title: "上传成功",
@@ -616,16 +659,16 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
                 });case 5:case "end":return _context.stop();}}}, _callee);}))();
     },
 
-    upLoadCompanyLogo: function upLoadCompanyLogo() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                  _this4.$chooseImage());case 2:res = _context2.sent;
+    upLoadCompanyLogo: function upLoadCompanyLogo() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                  _this5.$chooseImage());case 2:res = _context2.sent;
                 // console.log("res", res)
-                _this4.enterpriseInfo.companyLogo = res.tempFilePaths[0];
-                _this4.$upLoadFile("/file/upload/".concat(_this4.$store.state.openId, "/7"), res.tempFilePaths[0], {}, function (res) {
+                _this5.enterpriseInfo.companyLogo = res.tempFilePaths[0];
+                _this5.$upLoadFile("/file/upload/".concat(_this5.$store.state.openId, "/7"), res.tempFilePaths[0], {}, function (res) {
                   // console.log("res",res)
                   if (res.statusCode == 200) {
                     var dataList = JSON.parse(JSON.parse(res.data).data);
                     console.log("dataList", dataList);
-                    _this4.enterpriseInfo.companyLogoUrl = dataList.path;
+                    _this5.enterpriseInfo.companyLogoUrl = dataList.path;
                     console.log("dataList", dataList);
                     uni.showToast({
                       title: "上传成功",

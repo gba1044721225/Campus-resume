@@ -364,7 +364,9 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
 
 
       //企业端数据
-      enterPriseInfo: {} };
+      enterPriseInfo: {},
+      //学生端数据
+      studentInfo: {} };
 
   },
   methods: {
@@ -562,7 +564,7 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
     //学生端请求
     reqStudentInfo: function reqStudentInfo() {
       var data = {
-        "data": '',
+        "data": this.openId,
         "meta": {
           openId: this.openId,
           role: this.$store.state.role } };

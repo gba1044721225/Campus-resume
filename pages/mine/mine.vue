@@ -207,7 +207,9 @@
 
 
 				//企业端数据
-				enterPriseInfo: {}
+				enterPriseInfo: {},
+				//学生端数据
+				studentInfo:{}
 			}
 		},
 		methods: {
@@ -405,7 +407,7 @@
 			//学生端请求
 			reqStudentInfo(){
 				const data = {
-					"data": '',
+					"data": this.openId,
 					"meta": {
 						openId: this.openId,
 						role: this.$store.state.role,

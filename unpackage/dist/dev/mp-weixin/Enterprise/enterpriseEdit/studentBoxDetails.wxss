@@ -113,12 +113,36 @@
   padding: 50rpx 0;
   background-color: #eee;
   justify-content: space-around;
+  box-shadow: 0px -4rpx 10rpx 2rpx rgba(0, 0, 0, 0.1);
 }
 .student-box-details .btns-box .btn-item.data-v-66f51584 {
+  color: #fff;
   width: 250rpx;
   padding: 25rpx;
   text-align: center;
   background-color: #1296db;
   border-radius: 15rpx;
+}
+.student-box-details.data-v-66f51584  .tui-modal-box {
+  border-radius: 10rpx !important;
+}
+.student-box-details .tui-modal-custom .tui-modal-custom-text.data-v-66f51584 {
+  width: 500rpx;
+  border: 1rpx solid #1296db;
+  box-shadow: 0 0 4rpx 4rpx rgba(0, 0, 0, 0.2);
+  margin-bottom: 30rpx;
+}
+.student-box-details .tui-modal-custom .tui-modal-custom-text textarea.data-v-66f51584 {
+  box-sizing: border-box;
+  padding: 20rpx 25rpx;
+  width: 100%;
+}
+.student-box-details .tui-modal-custom .tui-box.data-v-66f51584 {
+  display: flex;
+  justify-content: space-between;
+}
+.student-box-details .tui-modal-custom .tui-box.data-v-66f51584 .tui-btn {
+  width: 200rpx !important;
+  background-color: #1296db !important;
 }
 

@@ -82,9 +82,12 @@
   box-shadow: 0 0 2rpx 2rpx #1296db;
 }
 .job-details .details-box .company-logo-intro .company-logo .company-info.data-v-059cb0e7 {
+  width: 450rpx;
   margin-left: 25rpx;
 }
-.job-details .details-box .company-logo-intro .company-logo .info-item.data-v-059cb0e7 {
+.job-details .details-box .company-logo-intro .company-logo .company-info .info-item.data-v-059cb0e7 {
+  white-space: nowrap;
+  overflow: auto;
   margin-bottom: 15rpx;
 }
 .job-details .details-box .company-position.data-v-059cb0e7 {
@@ -179,5 +182,6 @@
   height: 120rpx;
   text-align: center;
   line-height: 120rpx;
+  box-shadow: 0 0 10rpx 5rpx rgba(0, 0, 0, 0.2);
 }
 

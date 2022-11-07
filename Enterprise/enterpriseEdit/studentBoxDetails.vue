@@ -146,6 +146,18 @@
 				驳回
 			</view>
 		</view>
+		
+		<tui-modal :show="showModal" custom>
+			<view class="tui-modal-custom">
+				<view class="tui-modal-custom-text">
+					<textarea v-model="rejectReason" placeholder="请填写驳回原因" />
+				</view>
+				<view class="tui-box">
+					<tui-button height="72rpx" :size="28" type="primary" @click="showModal=false">取消</tui-button>
+					<tui-button height="72rpx" :size="28" type="primary" @click="reqHandlerResume(0)">确定</tui-button>
+				</view>
+			</view>
+		</tui-modal>
 	</view>
 </template>
 
@@ -154,16 +166,31 @@
 		data(){
 			return {
 				stuId:"",
-				dataList:{}
+				recruitId:"",
+				showModal:false,
+				rejectReason:"",
+				dataList:{},
 			}
 		},
 		methods:{
 			invitInterview(){
-				
+				this.rejectReason=''
+				uni.showModal({
+					title: '邀请面试',
+					content: '确认后将邀请面试',
+					success: function (res) {
+						if (res.confirm) {
+							this.reqHandlerResume(1)
+						} else if (res.cancel) {
+							// console.log('用户点击取消');
+						}
+					}
+				});	
 			},
 			
 			rejectInterview(){
-				
+				this.rejectReason=''
+				this.showModal=true
 			},
 			
 			reqResumeListById(){
@@ -181,11 +208,47 @@
 					console.log("res",res)
 					if(res.meta.code==200){
 						this.dataList=JSON.parse(res.data)
-						
-						console.log()
+					}else{
 					}
 				},header)
-			}
+			},
+			
+			//邀请/驳回
+			reqHandlerResume(flag){
+				const data = {
+					data: {
+						openId: this.$store.state.openId,
+						recruitId: this.recruitId,
+						type: "",
+						descri: this.rejectReason,
+						flag,
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/recruit/user/delivery', data, res => {
+					console.log("res", res)
+					this.showModal=false
+					if (res.meta.code == 200) {
+						uni.showToast({
+							icon:"none",
+							title:"邀请成功",
+							duration:1500
+						})
+					}else{
+						uni.showToast({
+							icon:"none",
+							title:"数据出错",
+							duration:1500
+						})
+					}
+				}, header)
+			},
 		},
 		computed:{
 			getWorkYear(){
@@ -214,7 +277,9 @@
 		},
 		onLoad(payload) {
 			this.stuId=payload.stuId
+			this.recruitId=payload.recruitId
 			console.log("this.stuId",this.stuId)
+			console.log("this.recruitId",this.recruitId)
 			this.reqResumeListById()
 		}
 	}
@@ -317,13 +382,44 @@
 			padding: 50rpx 0;
 			background-color: #eee;
 			justify-content: space-around;
+			box-shadow: 0px -4rpx 10rpx 2rpx rgba(0, 0, 0, .1);
 			.btn-item{
+				color: #fff;
 				width: 250rpx;
 				padding: 25rpx;
 				text-align: center;
 				background-color: #1296db;
 				border-radius: 15rpx;
 			}
+		}
+		
+		::v-deep .tui-modal-box{
+			border-radius: 10rpx !important;
+		}
+		
+		.tui-modal-custom{			
+			.tui-modal-custom-text{
+				width: 500rpx;
+				border: 1rpx solid #1296db;
+				box-shadow: 0 0 4rpx 4rpx rgba(0, 0, 0, .2);
+				margin-bottom: 30rpx;
+				textarea{
+					box-sizing: border-box;
+					padding: 20rpx 25rpx;
+					width: 100%;
+				}
+			}
+			
+			.tui-box{
+				display: flex;
+				justify-content: space-between;
+				
+				/deep/ .tui-btn{
+					width: 200rpx !important;
+					background-color: #1296db !important;
+				}
+			}
+
 		}
 	}
 </style>

@@ -70,6 +70,27 @@
           "query": "stuId=49",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/enterpriseEdit",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "HomeLink/jobDetails/jobDetails",
+          "query": "id=15",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/studentBoxDetails",
+          "query": "stuId=49",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

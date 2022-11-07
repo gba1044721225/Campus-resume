@@ -96,8 +96,8 @@
 						<text>公司规模</text>
 					</view>
 				</view>
-				<view class="item-right">
-					<input type="text" v-model="enterpriseInfo.companySize">
+				<view class="item-right" @click="openSizePicker">
+					<input type="text" :disabled="true" v-model="enterpriseInfo.companySize">
 				</view>
 			</view>
 		</view>
@@ -222,7 +222,7 @@
 					</view>
 				</view>
 				<view class="item-right">
-					<input type="text" v-model="enterpriseInfo.companyWebsite">
+					<input type="text" @input="checkWebsite" v-model="enterpriseInfo.companyWebsite">
 				</view>
 			</view>
 		</view>
@@ -317,6 +317,9 @@
 
 		<u-picker ref="uPicker" @change="changeHandler($event)" @cancel="cancelPicker" @confirm="confirmPicker"
 			:show="showPicker" :columns="cityList"></u-picker>
+			
+		<u-picker ref="sizePicker" @cancel="cancelSizePicker" @confirm="confirmSizePicker"
+			:show="showSizePicker" :columns="companySizeList"></u-picker>
 	</view>
 </template>
 
@@ -327,6 +330,10 @@
 			return {
 				isIos:this.$isIos,
 				showPicker: false,
+				showSizePicker:false,
+				companySizeList:[
+					['1-10人','10-50人','50-100人','100-500人','500-1000人','1000-5000人','5000-10000人','10000+人']
+				],
 				cityList: [],
 				cityLevel1: [],
 				cityLevel2: [],
@@ -357,6 +364,28 @@
 			}
 		},
 		methods: {
+			//网址检查  不能有中文
+			checkWebsite(e){
+				let value=e.detail.value
+				console.log("e",e)
+				let reg=new RegExp("[\u4e00-\u9fa5]","g")
+				reg.lastIndex=0
+				// console.log(reg)
+				if(reg.test(value)){
+					// console.log('中文')
+					this.$nextTick(()=>{
+						this.$set(this.enterpriseInfo,'companyWebsite',this.enterpriseInfo.companyWebsite.replace(reg,''))	
+					})
+					uni.showToast({
+						icon:"none",
+						title:"网址不能输入中文"
+					})
+				}else{
+					this.$set(this.enterpriseInfo,'companyWebsite',value)	
+				}		
+				console.log(this.enterpriseInfo)	
+			},
+			
 			//初始化地区数据
 			initCityData() {
 				// 遍历城市js
@@ -412,17 +441,31 @@
 				this.showPicker = true
 				// console.log("this.showPicker", this.showPicker)
 			},
-
+						
 			confirmPicker(e) {
 				// console.log("e", e)
 				this.enterpriseInfo.locationArea = e.value[0] + e.value[1] + e.value[2]
 				this.showPicker = false
 			},
-
+			
 			cancelPicker() {
 				this.showPicker = false
 			},
 
+			openSizePicker(){
+				this.showSizePicker=true
+			},
+			
+
+			confirmSizePicker(e){
+				this.enterpriseInfo.companySize=e.value[0]
+				this.showSizePicker = false
+			},
+			
+			cancelSizePicker(){
+				this.showSizePicker = false
+			},
+			
 			getLocation() {
 				const _this = this
 				wx.chooseLocation({

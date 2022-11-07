@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "简历详情",
-  "usingComponents": {}
+  "usingComponents": {
+    "tui-modal": "/components/thorui/tui-modal/tui-modal",
+    "tui-button": "/components/thorui/tui-button/tui-button"
+  }
 }
