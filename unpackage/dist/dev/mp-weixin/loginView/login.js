@@ -222,6 +222,7 @@ var _vuex = __webpack_require__(/*! vuex */ 138);function ownKeys(object, enumer
               _this.$store.commit('reSetOpenId', res.meta.openId);
               _this.$store.commit('setUserInfo', uni.getStorageSync('rawData'));
               console.log("this.$store.state.openId", _this.$store.state.openId);
+              uni.$emit('loginAllRight');
               _this.reqSaveUserInfo();
             }
           });

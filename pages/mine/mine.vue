@@ -5,8 +5,8 @@
 			<view class="login-status" v-if="role==1">
 				<!-- 未登录 -->
 				<view class='login-bar' v-if='!openId'>
-					<!-- 学生端头像 -->
-					<image class="mine-avatar" :src="studentInfo.imgUrl?studentInfo.imgUrl:`${imgSrc}mine_def_touxiang_3x.png`" mode="" @click="userLogin">
+					<!-- 学生端头像  ?studentInfo.imgUrl:`${imgSrc}mine_def_touxiang_3x.png`-->
+					<image class="mine-avatar" :src="studentInfo.imgUrl" mode="" @click="userLogin">
 					</image>
 
 					<view class="login-content" @click="userLogin">
@@ -431,6 +431,9 @@
 			...mapState(['openId', 'userInfo', 'role'])
 		},
 		onShow() {
+			uni.$on('loginAllRight',_=>{
+				this.init()
+			})	
 			this.init()
 		},
 	}

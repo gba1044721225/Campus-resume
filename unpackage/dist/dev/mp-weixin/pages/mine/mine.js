@@ -587,7 +587,10 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
   computed: _objectSpread({},
   (0, _vuex.mapState)(['openId', 'userInfo', 'role'])),
 
-  onShow: function onShow() {
+  onShow: function onShow() {var _this5 = this;
+    uni.$on('loginAllRight', function (_) {
+      _this5.init();
+    });
     this.init();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
