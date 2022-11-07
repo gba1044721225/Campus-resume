@@ -6,7 +6,7 @@
 				<!-- 未登录 -->
 				<view class='login-bar' v-if='!openId'>
 					<!-- 学生端头像  ?studentInfo.imgUrl:`${imgSrc}mine_def_touxiang_3x.png`-->
-					<image class="mine-avatar" :src="studentInfo.imgUrl" mode="" @click="userLogin">
+					<image class="mine-avatar" :src="`${imgSrc}mine_def_touxiang_3x.png`" mode="" @click="userLogin">
 					</image>
 
 					<view class="login-content" @click="userLogin">
@@ -15,7 +15,7 @@
 				</view>
 				<!-- 已登录 -->
 				<view class="login-bar" v-if='openId'>
-					<image class="mine-avatar" :src="userInfo.avatarUrl" mode="" @click="reqAavatar">
+					<image class="mine-avatar" :src="studentInfo.imgUrl" mode="" @click="reqAavatar">
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
