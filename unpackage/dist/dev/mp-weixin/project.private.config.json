@@ -42,6 +42,34 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/companyIntro",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/myResumeInfo",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "HomeLink/studentDetails/studentDetails",
+          "query": "stuId=51",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/studentBoxDetails",
+          "query": "stuId=49",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

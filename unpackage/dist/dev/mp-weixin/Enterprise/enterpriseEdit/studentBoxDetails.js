@@ -252,6 +252,37 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -261,6 +292,14 @@ var _default =
 
   },
   methods: {
+    invitInterview: function invitInterview() {
+
+    },
+
+    rejectInterview: function rejectInterview() {
+
+    },
+
     reqResumeListById: function reqResumeListById() {var _this = this;
       var data = {
         data: this.stuId,
@@ -284,7 +323,7 @@ var _default =
 
   computed: {
     getWorkYear: function getWorkYear() {
-      if (this.dataList.shixi != undefined) {
+      if (this.dataList.shixi != undefined && this.dataList.shixi.length != 0) {
         var exp1 = this.dataList.shixi[0].endTime;
         var exp2 = this.dataList.shixi[this.dataList.shixi.length - 1].startTime;
         exp1 = (exp1 = exp1.replace('年', '-')).replace('月', '');
@@ -292,10 +331,10 @@ var _default =
         var d = new Date(exp1) - new Date(exp2);
         return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
       }
-      return 10000;
+      return 0;
     },
     getAge: function getAge() {
-      if (this.dataList.sysuserInfoVO != undefined) {
+      if (this.dataList.sysuserInfoVO && this.dataList.sysuserInfoVO.birthday) {
         var exp = this.dataList.sysuserInfoVO.birthday;
         // console.log(exp,"exp")
         exp = (exp = exp.replace('年', '-')).replace('月', '');
@@ -304,7 +343,7 @@ var _default =
         // console.log("dddddd",d)
         return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
       }
-      return 10000;
+      return 0;
     } },
 
   onLoad: function onLoad(payload) {

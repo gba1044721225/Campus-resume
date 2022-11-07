@@ -27,21 +27,23 @@
 .company-intro.data-v-3358051a {
   min-height: 100vh;
   background-color: #1296db;
+}
+.company-intro .intro-box.data-v-3358051a {
   padding: 20rpx 35rpx 30rpx;
 }
-.company-intro .company-intro-header.data-v-3358051a {
+.company-intro .intro-box .company-intro-header.data-v-3358051a {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.company-intro .company-intro-header .header-left.data-v-3358051a {
+.company-intro .intro-box .company-intro-header .header-left.data-v-3358051a {
   height: 150rpx;
   width: 525rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.company-intro .company-intro-header .header-left .company-title.data-v-3358051a {
+.company-intro .intro-box .company-intro-header .header-left .company-title.data-v-3358051a {
   color: #fff;
   font-size: 60rpx;
   font-weight: bold;
@@ -50,7 +52,7 @@
   white-space: nowrap;
   overflow: auto;
 }
-.company-intro .company-intro-header .header-left .company-intro-size.data-v-3358051a {
+.company-intro .intro-box .company-intro-header .header-left .company-intro-size.data-v-3358051a {
   width: 100%;
   margin-top: 25rpx;
   color: #eee;
@@ -59,17 +61,17 @@
   white-space: nowrap;
   overflow: auto;
 }
-.company-intro .company-intro-header .header-right image.data-v-3358051a {
+.company-intro .intro-box .company-intro-header .header-right image.data-v-3358051a {
   width: 150rpx;
   height: 150rpx;
   border: 1rpx solid #fff;
   border-radius: 5rpx;
   box-shadow: 0 0 5rpx 5rpx rgba(255, 255, 255, 0.3);
 }
-.company-intro .company-tag.data-v-3358051a {
+.company-intro .intro-box .company-tag.data-v-3358051a {
   margin-top: 25rpx;
 }
-.company-intro .company-tag .tag-item.data-v-3358051a {
+.company-intro .intro-box .company-tag .tag-item.data-v-3358051a {
   margin-top: 15rpx;
   display: inline-block;
   background-color: rgba(74, 102, 154, 0.4);
@@ -78,7 +80,7 @@
   margin-right: 20rpx;
   color: #fff;
 }
-.company-intro .company-contact.data-v-3358051a {
+.company-intro .intro-box .company-contact.data-v-3358051a {
   margin-top: 20rpx;
   color: #fff;
   font-size: 34rpx;
@@ -86,43 +88,43 @@
   border-radius: 25rpx;
   padding: 15rpx;
 }
-.company-intro .company-contact .contact-item.data-v-3358051a {
+.company-intro .intro-box .company-contact .contact-item.data-v-3358051a {
   padding: 20rpx;
 }
-.company-intro .company-address.data-v-3358051a {
+.company-intro .intro-box .company-address.data-v-3358051a {
   margin-top: 30rpx;
   display: flex;
   background-color: rgba(74, 102, 154, 0.4);
   border-radius: 25rpx;
   padding: 25rpx;
 }
-.company-intro .company-address .address-left .title.data-v-3358051a {
+.company-intro .intro-box .company-address .address-left .title.data-v-3358051a {
   font-size: 55rpx;
   font-weight: bold;
   color: #fff;
 }
-.company-intro .company-address .address-left .content.data-v-3358051a {
+.company-intro .intro-box .company-address .address-left .content.data-v-3358051a {
   margin-top: 15rpx;
   color: #fff;
   font-size: 32rpx;
 }
-.company-intro .company-intro-box.data-v-3358051a {
+.company-intro .intro-box .company-intro-box.data-v-3358051a {
   margin-top: 30rpx;
   background-color: rgba(74, 102, 154, 0.4);
   border-radius: 25rpx;
   padding: 25rpx;
 }
-.company-intro .company-intro-box .title.data-v-3358051a {
+.company-intro .intro-box .company-intro-box .title.data-v-3358051a {
   font-size: 55rpx;
   font-weight: bold;
   color: #fff;
 }
-.company-intro .company-intro-box .content.data-v-3358051a {
+.company-intro .intro-box .company-intro-box .content.data-v-3358051a {
   margin-top: 15rpx;
   color: #fff;
   font-size: 32rpx;
 }
-.company-intro .company-certificate.data-v-3358051a {
+.company-intro .intro-box .company-certificate.data-v-3358051a {
   margin-top: 30rpx;
   background-color: rgba(74, 102, 154, 0.4);
   border-radius: 25rpx;
@@ -132,13 +134,13 @@
   justify-content: center;
   align-items: center;
 }
-.company-intro .company-certificate .title.data-v-3358051a {
+.company-intro .intro-box .company-certificate .title.data-v-3358051a {
   font-size: 55rpx;
   font-weight: bold;
   color: #fff;
   margin-bottom: 15rpx;
 }
-.company-intro .company-certificate .image.data-v-3358051a {
+.company-intro .intro-box .company-certificate .image.data-v-3358051a {
   border: 1rpx solid #fff;
   border-radius: 10rpx;
   width: 600rpx;

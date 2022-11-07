@@ -145,6 +145,12 @@
 				{
 					"path":"upLoadPdf",
 					"style": {
+						"navigationBarTitleText": "上传简历"
+					}
+				},
+				{
+					"path":"myResumeInfo",
+					"style": {
 						"navigationBarTitleText": "简历详情"
 					}
 				}
@@ -180,8 +186,8 @@
 	"easycom": {
 		"autoscan": true,
 		"custom": {
-			"tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue",
-			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue",
+			"tui-(.*)": "@/components/thorui/tui-$1/tui-$1.vue"
 		}
 	}
 }

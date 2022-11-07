@@ -25,7 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .student-box-details.data-v-66f51584 {
-  padding: 20rpx 20rpx;
+  padding: 20rpx 20rpx 220rpx;
 }
 .student-box-details .details-header.data-v-66f51584 {
   padding: 0	25rpx 30rpx;
@@ -102,5 +102,23 @@
   border-radius: 10rpx solid #1296db;
   box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.1);
   margin-bottom: 15rpx;
+}
+.student-box-details .btns-box.data-v-66f51584 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  width: 750rpx;
+  padding: 50rpx 0;
+  background-color: #eee;
+  justify-content: space-around;
+}
+.student-box-details .btns-box .btn-item.data-v-66f51584 {
+  width: 250rpx;
+  padding: 25rpx;
+  text-align: center;
+  background-color: #1296db;
+  border-radius: 15rpx;
 }
 

@@ -42,7 +42,7 @@
 				</view>
 
 				<view class="mine-info-box">
-					<view class="mine-info-item" @click="linkToResumeOnline">
+					<view class="mine-info-item" @click="linkToResumeDetails">
 						<image src="/static/resume.png" mode=""></image>
 						<view class="item-content">
 							在线简历
@@ -72,7 +72,7 @@
 				</view>
 				<!-- 已登录 -->
 				<view class="login-bar" v-if='openId'>
-					<image class="mine-avatar" :src="enterPriseInfo.logo" mode="" @click="reqAavatar">
+					<image class="mine-avatar" :src="enterPriseInfo.logo" mode="" @click="linkToEnterpriseIntro">
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
@@ -215,6 +215,10 @@
 			init() {
 				if (this.$store.state.openId!='' && this.role == 2) {
 					this.reqEnterpriseInfo()
+					return
+				}
+				if(this.$store.state.openId!='' && this.role == 1){
+					this.reqStudentInfo()
 				}
 			},
 
@@ -285,7 +289,7 @@
 
 			},
 
-			//跳转到学生端 简历模块
+			//跳转到学生端 简历编辑模块
 			linkToResumeOnline() {
 				if (!this.$store.state.openId) {
 					uni.showToast({
@@ -296,6 +300,20 @@
 				}
 				uni.navigateTo({
 					url: '/MineLink/resumeOnline/resumeOnline'
+				})
+			},
+			
+			//跳转到学生端 简历详情模块
+			linkToResumeDetails(){
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
+				uni.navigateTo({
+					url: '/MineLinkOthers/myResumeInfo'
 				})
 			},
 			
@@ -382,8 +400,24 @@
 					}
 				}, header)
 			},
-
-
+			
+			
+			//学生端请求
+			reqStudentInfo(){
+				const data = {
+					"data": '',
+					"meta": {
+						openId: this.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/recruit/user/query/index',data,res=>{
+					console.log("res",res)
+				},header)
+			}
 		},
 		computed: {
 			...mapState(['openId', 'userInfo', 'role'])

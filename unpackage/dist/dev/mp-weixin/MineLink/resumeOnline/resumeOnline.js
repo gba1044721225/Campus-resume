@@ -98,25 +98,25 @@ var components
 try {
   components = {
     tuiCollapse: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 321))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 329))
     },
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 328))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 336))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 335))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 343))
     },
     tuiCalendar: function() {
-      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 343))
+      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 351))
     },
     uPopup: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 351))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 359))
     },
     uRadioGroup: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio-group/u-radio-group.vue */ 359))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio-group/u-radio-group.vue */ 367))
     },
     uRadio: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio/u-radio.vue */ 367))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio/u-radio.vue */ 375))
     }
   }
 } catch (e) {

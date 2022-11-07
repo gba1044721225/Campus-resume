@@ -252,6 +252,28 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -284,7 +306,7 @@ var _default =
 
   computed: {
     getWorkYear: function getWorkYear() {
-      if (this.dataList.shixi != undefined) {
+      if (this.dataList.shixi != undefined && this.dataList.shixi.length != 0) {
         var exp1 = this.dataList.shixi[0].endTime;
         var exp2 = this.dataList.shixi[this.dataList.shixi.length - 1].startTime;
         exp1 = (exp1 = exp1.replace('年', '-')).replace('月', '');
@@ -295,7 +317,7 @@ var _default =
       return 10000;
     },
     getAge: function getAge() {
-      if (this.dataList.sysuserInfoVO != undefined) {
+      if (this.dataList.sysuserInfoVO && this.dataList.sysuserInfoVO.birthday) {
         var exp = this.dataList.sysuserInfoVO.birthday;
         // console.log(exp,"exp")
         exp = (exp = exp.replace('年', '-')).replace('月', '');

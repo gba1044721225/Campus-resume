@@ -39,7 +39,8 @@
     {
       "root": "MineLinkOthers",
       "pages": [
-        "upLoadPdf"
+        "upLoadPdf",
+        "myResumeInfo"
       ]
     }
   ],

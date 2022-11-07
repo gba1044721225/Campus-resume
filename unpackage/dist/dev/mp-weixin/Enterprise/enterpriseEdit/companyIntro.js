@@ -132,7 +132,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
 //
 //
 //
@@ -234,8 +236,9 @@ var _default =
   data: function data() {
     return {
       isIos: this.$isIos,
-      dataList: {} };
-
+      dataList: {},
+      flag: "" //判断是否已填写
+    };
   },
   methods: {
     reqCompanyIntro: function reqCompanyIntro() {var _this = this;
@@ -253,6 +256,22 @@ var _default =
         if (res.meta.code == 200) {
           _this.dataList = JSON.parse(res.data);
           console.log(_this.dataList);
+          _this.flag = _this.dataList.flag;
+          if (_this.flag == 2) {
+            uni.showModal({
+              title: '公司简介还没有填报',
+              content: '是否立即跳转到填写页面',
+              success: function success(res) {
+                if (res.confirm) {
+                  uni.navigateTo({
+                    url: "/Enterprise/enterpriseEdit/enterpriseEdit" });
+
+                } else if (res.cancel) {
+                  // console.log('用户点击取消');
+                }
+              } });
+
+          }
         }
       }, header);
     } },
@@ -260,6 +279,7 @@ var _default =
   onLoad: function onLoad() {
     this.reqCompanyIntro();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
