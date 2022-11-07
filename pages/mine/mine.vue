@@ -418,6 +418,12 @@
 				}
 				this.$http('/recruit/user/query/index',data,res=>{
 					console.log("res",res)
+					if(res.meta.code==200){
+						this.studentInfo=JSON.parse(res.data)						
+						this.infoItem[0].num=this.studentInfo.toudiNum
+						this.infoItem[1].num=this.studentInfo.mianshiNum
+						this.infoItem[2].num=this.studentInfo.shoucangNum
+					}
 				},header)
 			}
 		},

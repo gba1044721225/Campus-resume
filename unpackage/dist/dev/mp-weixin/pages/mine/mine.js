@@ -562,7 +562,7 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
 
 
     //学生端请求
-    reqStudentInfo: function reqStudentInfo() {
+    reqStudentInfo: function reqStudentInfo() {var _this4 = this;
       var data = {
         "data": this.openId,
         "meta": {
@@ -575,6 +575,12 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
 
       this.$http('/recruit/user/query/index', data, function (res) {
         console.log("res", res);
+        if (res.meta.code == 200) {
+          _this4.studentInfo = JSON.parse(res.data);
+          _this4.infoItem[0].num = _this4.studentInfo.toudiNum;
+          _this4.infoItem[1].num = _this4.studentInfo.mianshiNum;
+          _this4.infoItem[2].num = _this4.studentInfo.shoucangNum;
+        }
       }, header);
     } },
 
