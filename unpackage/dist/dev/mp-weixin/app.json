@@ -40,7 +40,8 @@
       "root": "MineLinkOthers",
       "pages": [
         "upLoadPdf",
-        "myResumeInfo"
+        "myResumeInfo",
+        "deliveryInfo"
       ]
     }
   ],

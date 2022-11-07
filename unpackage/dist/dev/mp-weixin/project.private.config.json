@@ -91,6 +91,13 @@
           "query": "stuId=49",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/deliveryInfo",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

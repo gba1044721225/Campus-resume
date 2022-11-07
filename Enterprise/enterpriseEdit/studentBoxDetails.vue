@@ -178,7 +178,7 @@
 				uni.showModal({
 					title: '邀请面试',
 					content: '确认后将邀请面试',
-					success: function (res) {
+					success: res => {
 						if (res.confirm) {
 							this.reqHandlerResume(1)
 						} else if (res.cancel) {

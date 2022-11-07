@@ -19,7 +19,7 @@
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
-							{{userInfo.nickName?userInfo.nickName:'暂无数据'}}
+							{{studentInfo.name?studentInfo.name:userInfo.nickName?userInfo.nickName:'暂无数据'}}
 						</view>
 						<view class="resume-online" @click="linkToResumeOnline">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
@@ -31,7 +31,7 @@
 				</view>
 
 				<view class="mine-info">
-					<view class="mine-info-item" v-for='(item,index) in infoItem' :key="index">
+					<view class="mine-info-item" v-for='(item,index) in infoItem' :key="index" @click="linkToStudentPath(item.path)">
 						<view class="item-num">
 							{{item.num}}
 						</view>
@@ -166,7 +166,8 @@
 				//学生界面
 				infoItem: [{
 						num: 0,
-						label: '已投递'
+						label: '已投递',
+						path:"/MineLinkOthers/deliveryInfo"
 					},
 					// {
 					// 	num: 0,
@@ -174,11 +175,13 @@
 					// },
 					{
 						num: 0,
-						label: '我的面试'
+						label: '我的面试',
+						path:""
 					},
 					{
 						num: 0,
-						label: '我的收藏'
+						label: '我的收藏',
+						path:""
 					},
 				],
 
@@ -365,6 +368,25 @@
 			//跳转到企业端 查看 模块
 			linkToEnterprisePath(path){
 				console.log(1111)
+				if (!this.$store.state.openId) {
+					uni.showToast({
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					return
+				}
+				console.log("path",path)
+				if(path){
+					console.log("22222")	
+					uni.navigateTo({
+						url:path
+					})
+				}
+			},
+
+			//跳转到学生端 查看 模块
+			linkToStudentPath(path){
+				// console.log(1111)
 				if (!this.$store.state.openId) {
 					uni.showToast({
 						title: "请先登录后使用该功能",

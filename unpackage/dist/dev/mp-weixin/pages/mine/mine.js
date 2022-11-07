@@ -323,7 +323,8 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       //学生界面
       infoItem: [{
         num: 0,
-        label: '已投递' },
+        label: '已投递',
+        path: "/MineLinkOthers/deliveryInfo" },
 
       // {
       // 	num: 0,
@@ -331,11 +332,13 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       // },
       {
         num: 0,
-        label: '我的面试' },
+        label: '我的面试',
+        path: "" },
 
       {
         num: 0,
-        label: '我的收藏' }],
+        label: '我的收藏',
+        path: "" }],
 
 
 
@@ -522,6 +525,25 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
     //跳转到企业端 查看 模块
     linkToEnterprisePath: function linkToEnterprisePath(path) {
       console.log(1111);
+      if (!this.$store.state.openId) {
+        uni.showToast({
+          title: "请先登录后使用该功能",
+          duration: 1500 });
+
+        return;
+      }
+      console.log("path", path);
+      if (path) {
+        console.log("22222");
+        uni.navigateTo({
+          url: path });
+
+      }
+    },
+
+    //跳转到学生端 查看 模块
+    linkToStudentPath: function linkToStudentPath(path) {
+      // console.log(1111)
       if (!this.$store.state.openId) {
         uni.showToast({
           title: "请先登录后使用该功能",

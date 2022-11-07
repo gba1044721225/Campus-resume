@@ -153,6 +153,12 @@
 					"style": {
 						"navigationBarTitleText": "简历详情"
 					}
+				},
+				{
+					"path":"deliveryInfo",
+					"style": {
+						"navigationBarTitleText": "投递情况"
+					}
 				}
 			]
 		}

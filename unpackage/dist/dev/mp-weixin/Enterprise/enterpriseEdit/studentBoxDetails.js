@@ -338,14 +338,14 @@ var _default =
 
   },
   methods: {
-    invitInterview: function invitInterview() {
+    invitInterview: function invitInterview() {var _this = this;
       this.rejectReason = '';
       uni.showModal({
         title: '邀请面试',
         content: '确认后将邀请面试',
         success: function success(res) {
           if (res.confirm) {
-            this.reqHandlerResume(1);
+            _this.reqHandlerResume(1);
           } else if (res.cancel) {
             // console.log('用户点击取消');
           }
@@ -358,7 +358,7 @@ var _default =
       this.showModal = true;
     },
 
-    reqResumeListById: function reqResumeListById() {var _this = this;
+    reqResumeListById: function reqResumeListById() {var _this2 = this;
       var data = {
         data: this.stuId,
         meta: {
@@ -372,14 +372,14 @@ var _default =
       this.$http('/recruit/user/query/detail', data, function (res) {
         console.log("res", res);
         if (res.meta.code == 200) {
-          _this.dataList = JSON.parse(res.data);
+          _this2.dataList = JSON.parse(res.data);
         } else {
         }
       }, header);
     },
 
     //邀请/驳回
-    reqHandlerResume: function reqHandlerResume(flag) {var _this2 = this;
+    reqHandlerResume: function reqHandlerResume(flag) {var _this3 = this;
       var data = {
         data: {
           openId: this.$store.state.openId,
@@ -398,7 +398,7 @@ var _default =
 
       this.$http('/recruit/user/delivery', data, function (res) {
         console.log("res", res);
-        _this2.showModal = false;
+        _this3.showModal = false;
         if (res.meta.code == 200) {
           uni.showToast({
             icon: "none",
