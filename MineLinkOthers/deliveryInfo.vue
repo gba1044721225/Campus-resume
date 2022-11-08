@@ -47,8 +47,10 @@
 			
 			<view class="job-item-offer">
 				<view class="offer-item">
-					<image :src="`${imgSrc}offer.png`" mode=""></image>
-					<text>恭喜你，你已被邀请面试</text>
+					<image :src="`${imgSrc}reject.png`" mode="" v-if="index==0"></image>
+					<text v-if="index==0">抱歉，您的简历已被驳回，请继续努力！</text>
+					<image :src="`${imgSrc}offer.png`" mode="" v-if="index==1"></image>
+					<text v-if="index==1">恭喜你，你已被邀请面试！</text>
 				</view>
 			</view>
 		</view>
@@ -68,6 +70,13 @@
 			}
 		},
 		methods:{
+			linkToJobDetails(id) {
+				uni.navigateTo({
+					url: `/HomeLink/jobDetails/jobDetails?id=${id}&from='deliveryInfo'`
+				})
+			},
+			
+			
 			//学生模块 请求招聘信息
 			reqRecruitmentInformation() {
 				const data = {

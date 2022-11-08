@@ -150,7 +150,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
 //
 //
 //
@@ -220,6 +222,13 @@ var _default =
 
   },
   methods: {
+    linkToJobDetails: function linkToJobDetails(id) {
+      uni.navigateTo({
+        url: "/HomeLink/jobDetails/jobDetails?id=".concat(id, "&from='deliveryInfo'") });
+
+    },
+
+
     //学生模块 请求招聘信息
     reqRecruitmentInformation: function reqRecruitmentInformation() {var _this = this;
       var data = {
@@ -249,6 +258,7 @@ var _default =
   onShow: function onShow() {
     this.reqRecruitmentInformation();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

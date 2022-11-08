@@ -132,208 +132,303 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
-{
-  data: function data() {
-    return {
-      stuId: "",
-      dataList: {} };
-
-  },
-  methods: {
-    reqResumeListById: function reqResumeListById() {var _this = this;
-      var data = {
-        data: this.stuId,
-        meta: {
-          openId: this.$store.state.openId,
-          role: this.$store.state.role } };
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
-      var header = {
-        'content-type': 'application/json' };
 
-      this.$http('/recruit/user/query/detail', data, function (res) {
-        console.log("res", res);
-        if (res.meta.code == 200) {
-          _this.dataList = JSON.parse(res.data);
 
-          console.log();
-        }
-      }, header);
-    } },
 
-  computed: {
-    getWorkYear: function getWorkYear() {
-      if (this.dataList.shixi != undefined && this.dataList.shixi.length != 0) {
-        var exp1 = this.dataList.shixi[0].endTime;
-        var exp2 = this.dataList.shixi[this.dataList.shixi.length - 1].startTime;
-        exp1 = (exp1 = exp1.replace('年', '-')).replace('月', '');
-        exp2 = (exp2 = exp2.replace('年', '-')).replace('月', '');
-        var d = new Date(exp1) - new Date(exp2);
-        return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
-      }
-      return 10000;
-    },
-    getAge: function getAge() {
-      if (this.dataList.sysuserInfoVO && this.dataList.sysuserInfoVO.birthday) {
-        var exp = this.dataList.sysuserInfoVO.birthday;
-        // console.log(exp,"exp")
-        exp = (exp = exp.replace('年', '-')).replace('月', '');
-        // console.log(new Date(exp))
-        var d = new Date().getTime() - new Date(exp).getTime();
-        // console.log("dddddd",d)
-        return Math.floor(d / 1000 / 60 / 60 / 24 / 365);
-      }
-      return 10000;
-    } },
 
-  onLoad: function onLoad(payload) {
-    this.stuId = payload.stuId;
-    console.log("this.stuId", this.stuId);
-    this.reqResumeListById();
-  } };exports.default = _default;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _helper = __webpack_require__(/*! ../../common/helper */ 12); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {return { stuId: "", dataList: {} };}, methods: { reqResumeListById: function reqResumeListById() {var _this = this;var data = { data: this.stuId, meta: { openId: this.$store.state.openId, role: this.$store.state.role } };var header = { 'content-type': 'application/json' };this.$http('/recruit/user/query/detail', data, function (res) {console.log("res", res);if (res.meta.code == 200) {_this.dataList = JSON.parse(res.data);console.log();}}, header);}, reqCollectStu: function reqCollectStu() {var data = { data: { descri: "", flag: "", openId: this.$store.state.openId, recruitId: this.stuId, type: "1" }, meta: { openId: this.$store.state.openId, role: this.$store.state.role } };this.$http("/recruit/user/", data, function (res) {console.log("res", res);}, _helper.header);} }, computed: { getWorkYear: function getWorkYear() {if (this.dataList.shixi != undefined && this.dataList.shixi.length != 0) {var exp1 = this.dataList.shixi[0].endTime;var exp2 = this.dataList.shixi[this.dataList.shixi.length - 1].startTime;exp1 = (exp1 = exp1.replace('年', '-')).replace('月', '');exp2 = (exp2 = exp2.replace('年', '-')).replace('月', '');var d = new Date(exp1) - new Date(exp2);return Math.floor(d / 1000 / 60 / 60 / 24 / 365);}return 10000;}, getAge: function getAge() {if (this.dataList.sysuserInfoVO && this.dataList.sysuserInfoVO.birthday) {var exp = this.dataList.sysuserInfoVO.birthday; // console.log(exp,"exp")
+        exp = (exp = exp.replace('年', '-')).replace('月', ''); // console.log(new Date(exp))
+        var d = new Date().getTime() - new Date(exp).getTime(); // console.log("dddddd",d)
+        return Math.floor(d / 1000 / 60 / 60 / 24 / 365);}return 10000;} }, onLoad: function onLoad(payload) {this.stuId = payload.stuId;console.log("this.stuId", this.stuId);this.reqResumeListById();} };exports.default = _default;
 
 /***/ }),
 

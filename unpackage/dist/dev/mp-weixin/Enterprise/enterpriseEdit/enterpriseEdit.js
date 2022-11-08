@@ -678,6 +678,43 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
                 });case 5:case "end":return _context2.stop();}}}, _callee2);}))();
     },
 
+    //获取信息
+    reqCompanyIntro: function reqCompanyIntro() {
+      var data = {
+        meta: {
+          openId: this.$store.state.openId,
+          role: this.$store.state.role } };
+
+
+      var header = {
+        'content-type': 'application/json' };
+
+      this.$http('/company/query', data, function (res) {
+        console.log("res", res);
+        if (res.meta.code == 200) {
+          if (JSON.parse(res.data).flag == 2) {
+            uni.showModal({
+              title: '公司简介还没有填报',
+              content: '是否立即跳转到填写页面',
+              success: function success(res) {
+                if (res.confirm) {
+                  uni.navigateTo({
+                    url: "/Enterprise/enterpriseEdit/enterpriseEdit" });
+
+                } else if (res.cancel) {
+                  // console.log('用户点击取消');
+                }
+              } });
+
+          } else {
+
+          }
+        }
+      }, header);
+    },
+
+
+    //提交信息
     reqEnterpriseInfo: function reqEnterpriseInfo() {
       var data = {
         data: {
@@ -730,7 +767,8 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
 
   onLoad: function onLoad() {
     this.initCityData();
-    console.log(this.cityList);
+    this.reqCompanyIntro();
+    // console.log(this.cityList)
   }
 
   // watch: {

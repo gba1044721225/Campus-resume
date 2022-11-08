@@ -101,6 +101,7 @@ module.exports = {
 	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.公司Logo
 	upLoadFile(url, filePath, data, succ) {
 		console.log("this.hostname()", this.$hostname() + url)
+		console.log("filePath",filePath)
 		wx.uploadFile({
 			url: this.$hostname() + url, //仅为示例，非真实的接口地址
 			filePath, //tempFilePaths[0]
@@ -125,4 +126,19 @@ module.exports = {
 		});
 
 	},
+	
+	//获取本地文件
+	chooseFile() {
+		return wx.chooseMessageFile({
+		  count: 1,
+		  type: 'file',
+		})
+	},
+	
+	downFile(url,succ){
+		wx.downloadFile({
+		  url:  this.$hostname() + url,
+		  success:succ
+		})
+	}
 }

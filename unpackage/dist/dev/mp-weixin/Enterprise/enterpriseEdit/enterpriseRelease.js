@@ -315,6 +315,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 var _helper = __webpack_require__(/*! ../../common/helper */ 12); //
 //
 //
@@ -468,7 +479,18 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12); //
 //
 //
 //
-var _default = { data: function data() {var arr = [];for (var i = 1; i < 21; i++) {arr.push("".concat(i, "k"));}var arr_num = [];for (var _i = 1; _i < 101; _i++) {arr_num.push(_i);}arr_num.push("100+");return { isIos: this.$isIos, showPicker: false, showPopup: false, pickerKey: "", enterpriseMsg: { station: "", stationTag: "", workCity: "", workNature: "", //工作性质
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { data: function data() {var arr = [];for (var i = 1; i < 21; i++) {arr.push("".concat(i, "k"));}var arr_num = [];for (var _i = 1; _i < 101; _i++) {arr_num.push(_i);}arr_num.push("100+");return { isIos: this.$isIos, showPicker: false, showPopup: false, pickerKey: "", enterpriseMsg: { station: "", stationTag: [], workCity: "", workNature: "", //工作性质
         enterpriseNum: "", salary: "", // welfareTreatment:"",
         education: "", major: "", requirements: "", duties: "", flag: 2 // workLocation: {
         // 	name: "",
@@ -480,17 +502,16 @@ var _default = { data: function data() {var arr = [];for (var i = 1; i < 21; i++
       }, name: "", columnsList: { 'station': [["前端", "后端", "全栈", "架构师"]], "workNature": [["校招", "实习", "社招"]], "enterpriseNum": [arr_num], 'salary': [arr, arr], 'education': [["本科", "硕士", "博士", "大专", "中专/其他"]] }, skillBoxValue: [], checkBoxList: [{ name: 'javascript', disabled: false }, { name: 'java', disabled: false }, { name: 'mysql', disabled: false }] // popupStyle:{
       // 	width:"350rpx"
       // }
-    };}, computed: { getWorkNatureId: function getWorkNatureId() {return function (val) {switch (val) {case "校招":val = 0;break;case "实习":val = 1;break;case "社招":val = 2;break;}return val;};}, getEducationId: function getEducationId() {return function (val) {switch (val) {case "本科":val = 0;break;case "硕士":val = 1;break;case "博士":val = 2;break;case "大专":val = 3;break;case "中专/其他":val = 4;break;}return val;};} }, methods: { openPicker: function openPicker(pickerKey) {// console.log(this.$refs.uPicker)
+    };}, computed: { getWorkNatureId: function getWorkNatureId() {return function (val) {switch (val) {case "校招":val = 0;break;case "实习":val = 1;break;case "社招":val = 2;break;}return val;};}, getEducationId: function getEducationId() {return function (val) {switch (val) {case "本科":val = 0;break;case "硕士":val = 1;break;case "博士":val = 2;break;case "大专":val = 3;break;case "中专/其他":val = 4;break;}return val;};} }, methods: { addPositionTag: function addPositionTag() {this.enterpriseMsg.stationTag.push('');}, delPositionTag: function delPositionTag(index) {console.log(11111);this.enterpriseMsg.stationTag.splice(index, 1);console.log("this.enterpriseMsg", this.enterpriseMsg);}, openPicker: function openPicker(pickerKey) {// console.log(this.$refs.uPicker)
       // this.$refs.uPicker.setIndexs(0,0)
       // console.log(11111)
       this.pickerKey = pickerKey;this.showPicker = true;}, confirmPicker: function confirmPicker(e) {// console.log("e", e)
-      if (this.pickerKey == 'salary') {this.enterpriseMsg[this.pickerKey] = e.value[0] + " - " + e.value[1];this.pickerKey = '';this.showPicker = false;return;}this.enterpriseMsg[this.pickerKey] = e.value[0];this.pickerKey = '';this.showPicker = false;}, cancelPicker: function cancelPicker() {this.pickerKey = '';this.showPicker = false;}, openPopup: function openPopup() {this.showPopup = true;}, closePopup: function closePopup() {this.showPopup = false;}, checkboxChange: function checkboxChange(e) {console.log("e", e);this.enterpriseMsg.skill = e.join(" , ");},
-    reqEnterpriseMsg: function reqEnterpriseMsg() {
+      if (this.pickerKey == 'salary') {this.enterpriseMsg[this.pickerKey] = e.value[0] + " - " + e.value[1];this.pickerKey = '';this.showPicker = false;return;}this.enterpriseMsg[this.pickerKey] = e.value[0];this.pickerKey = '';this.showPicker = false;}, cancelPicker: function cancelPicker() {this.pickerKey = '';this.showPicker = false;}, openPopup: function openPopup() {this.showPopup = true;}, closePopup: function closePopup() {this.showPopup = false;}, checkboxChange: function checkboxChange(e) {console.log("e", e);this.enterpriseMsg.skill = e.join(" , ");}, reqEnterpriseMsg: function reqEnterpriseMsg() {
       console.log(111111);
       var data = {
         data: {
           jobName: this.enterpriseMsg.station,
-          jobLab: this.enterpriseMsg.stationTag,
+          jobLab: this.enterpriseMsg.stationTag.join("，"),
           workAddress: this.enterpriseMsg.workCity,
           workNature: this.enterpriseMsg.workNature,
           num: this.enterpriseMsg.enterpriseNum,

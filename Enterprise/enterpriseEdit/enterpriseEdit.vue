@@ -517,7 +517,44 @@
 					}
 				})
 			},
-
+			
+			//获取信息
+			reqCompanyIntro(){
+				const data={
+					meta:{
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header={
+					'content-type': 'application/json'
+				}
+				this.$http('/company/query',data,res=>{
+					console.log("res",res)
+					if(res.meta.code==200){
+						if(JSON.parse(res.data).flag==2){
+							uni.showModal({
+								title: '公司简介还没有填报',
+								content: '是否立即跳转到填写页面',
+								success: function (res) {
+									if (res.confirm) {
+										uni.navigateTo({
+											url:"/Enterprise/enterpriseEdit/enterpriseEdit"
+										})
+									} else if (res.cancel) {
+										// console.log('用户点击取消');
+									}
+								}
+							});
+						}else{
+							
+						}
+					}
+				},header)
+			},
+			
+			
+			//提交信息
 			reqEnterpriseInfo() {
 				const data = {
 					data: {
@@ -570,7 +607,8 @@
 
 		onLoad() {
 			this.initCityData()
-			console.log(this.cityList)
+			this.reqCompanyIntro()
+			// console.log(this.cityList)
 		},
 
 		// watch: {

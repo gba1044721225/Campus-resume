@@ -4,6 +4,9 @@
     "tui-collapse": "/components/thorui/tui-collapse/tui-collapse",
     "tui-input": "/components/thorui/tui-input/tui-input",
     "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker",
-    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar"
+    "tui-calendar": "/components/thorui/tui-calendar/tui-calendar",
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "u-radio-group": "/uni_modules/uview-ui/components/u-radio-group/u-radio-group",
+    "u-radio": "/uni_modules/uview-ui/components/u-radio/u-radio"
   }
 }

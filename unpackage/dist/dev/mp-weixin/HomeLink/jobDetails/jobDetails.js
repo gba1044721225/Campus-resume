@@ -229,16 +229,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
     return {
       imgSrc: this.$imageBaseSrc,
       jobId: '',
-      jobList: {} };
+      jobList: {},
+      fromPath: "",
+      locationXY: {
+        latitude: '39.909',
+        longitude: '116.39742' } };
+
 
   },
   methods: {
+    goToHere: function goToHere() {
+      console.log(1111);
+      uni.getLocation({
+        type: 'gcj02', //返回可以用于 wx.openLocation 的经纬度
+        success: function success(res) {
+          console.log(22222);
+          var latitude = res.latitude;
+          var longitude = res.longitude;
+          uni.openLocation({
+            latitude: Number(latitude),
+            longitude: Number(longitude),
+            scale: 18,
+            fail: function fail(res) {
+              console.log("res", res);
+            } });
+
+        } });
+
+    },
+
+
     reqJobDetails: function reqJobDetails() {var _this = this;
       var data = {
         data: this.jobId,
@@ -316,6 +344,8 @@ var _default =
 
   onLoad: function onLoad(payload) {
     this.jobId = payload.id || '';
+    this.fromPath = payload.from || '';
+    console.log("this.fromPath", this.fromPath);
     this.reqJobDetails();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

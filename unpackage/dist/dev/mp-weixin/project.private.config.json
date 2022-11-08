@@ -10,29 +10,8 @@
       "list": [
         {
           "name": "",
-          "pathName": "MineLink/resumeOnline/resumeOnline",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/deliver",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/studentBox",
-          "query": "id=16",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "pages/mine/mine",
-          "query": "",
+          "pathName": "HomeLink/jobDetails/jobDetails",
+          "query": "id=17&from='deliveryInfo'",
           "launchMode": "default",
           "scene": null
         },
@@ -40,83 +19,6 @@
           "name": "",
           "pathName": "MineLinkOthers/upLoadPdf",
           "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/companyIntro",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "MineLinkOthers/myResumeInfo",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "HomeLink/studentDetails/studentDetails",
-          "query": "stuId=51",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/studentBoxDetails",
-          "query": "stuId=49",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/enterpriseEdit",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "HomeLink/jobDetails/jobDetails",
-          "query": "id=15",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/studentBoxDetails",
-          "query": "stuId=49",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "MineLinkOthers/deliveryInfo",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "MineLink/resumeOnline/resumeOnline",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "Enterprise/enterpriseEdit/enterpriseRelease",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "",
-          "pathName": "MineLink/resumeOnline/addCertificate",
-          "query": "index=0&resumeId=57&ind=99999",
           "launchMode": "default",
           "scene": null
         }

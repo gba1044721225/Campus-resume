@@ -137,10 +137,15 @@
 				<image :src="fileItem.fileUrl" mode=""></image>
 			</view>
 		</view>
+		
+		<view class="collection" @click="reqCollectStu">
+			收藏
+		</view>
 	</view>
 </template>
 
 <script>
+import { header } from '../../common/helper'
 	export default{
 		data(){
 			return {
@@ -167,6 +172,25 @@
 						
 						console.log()
 					}
+				},header)
+			},
+			
+			reqCollectStu(){
+				const data={
+					data:{
+						descri: "",
+						flag: "",
+						openId:this.$store.state.openId,
+						recruitId: this.stuId,
+						type: "1"
+					},
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				this.$http("/recruit/user/",data,res=>{
+					console.log("res",res)
 				},header)
 			}
 		},
@@ -288,6 +312,23 @@
 				box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, .1);
 				margin-bottom: 15rpx;
 			}
+		}
+		
+		.collection{
+			position: fixed;
+			// top: 50%;
+			// transform: translateY(-50%);
+			bottom: 200rpx;
+			right: 0;
+			background-color: #1296db ;
+			color: #fff;
+			border-radius: 50%;
+			width: 120rpx;
+			height: 120rpx;
+			text-align: center;
+			line-height: 120rpx;
+			box-shadow: 0 0 10rpx 5rpx rgba(0,0,0,.2);
+			opacity: 0.7;
 		}
 	}
 </style>

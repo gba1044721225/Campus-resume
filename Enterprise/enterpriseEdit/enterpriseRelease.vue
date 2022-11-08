@@ -12,12 +12,23 @@
 			</view>
 
 			<view class="enterprise-item">
-				<view class="title">
-					职业标签
+				<view class="title btn-box">
+					<text>职业标签</text>
+					<view class="title-btn" @click="addPositionTag">
+						添加+
+					</view>
 				</view>
 				<view class="input">
-					<u-input placeholder="请填写职位标签(用','隔开)" border="surround" v-model="enterpriseMsg.stationTag">
-					</u-input>
+					<view class="like-input">
+						<view class="input-item" v-for="(item,index) in enterpriseMsg.stationTag" :key="index">
+							<input type="text" v-model="enterpriseMsg.stationTag[index]">
+							<view class="del-btn" @click="delPositionTag">
+								x
+							</view>
+						</view>
+					</view>
+<!-- 					<u-input placeholder="请填写职位标签(用','隔开)" border="surround" v-model="enterpriseMsg.stationTag">
+					</u-input> -->
 				</view>
 			</view>
 
@@ -176,7 +187,7 @@
 				pickerKey: "",
 				enterpriseMsg: {
 					station: "",
-					stationTag: "",
+					stationTag: [],
 					workCity: "",
 					workNature: "", //工作性质
 					enterpriseNum: "",
@@ -281,6 +292,16 @@
 		},
 
 		methods: {
+			addPositionTag(){
+				this.enterpriseMsg.stationTag.push('')
+			},
+			
+			delPositionTag(index){
+				console.log(11111)
+				this.enterpriseMsg.stationTag.splice(index,1)
+				console.log("this.enterpriseMsg",this.enterpriseMsg)
+			},
+			
 			openPicker(pickerKey) {
 				// console.log(this.$refs.uPicker)
 				// this.$refs.uPicker.setIndexs(0,0)
@@ -327,7 +348,7 @@
 				const data = {
 					data: {
 						jobName: this.enterpriseMsg.station,
-						jobLab: this.enterpriseMsg.stationTag,
+						jobLab: this.enterpriseMsg.stationTag.join("，"),
 						workAddress: this.enterpriseMsg.workCity,
 						workNature: this.enterpriseMsg.workNature,
 						num: this.enterpriseMsg.enterpriseNum,
@@ -420,6 +441,46 @@
 						border: 1rpx solid #1296db;
 						box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
 					}
+					
+					.like-input{
+						margin: 0 20rpx;
+						border-radius: 5rpx;
+						padding: 20rpx 15rpx 0;
+						border: 1rpx solid #1296db;
+						box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
+						min-height: 200rpx;
+						
+						.input-item{
+							border: 1rpx solid #aaa;
+							border-radius: 10rpx;
+							// padding: 10rpx 20rpx;
+							box-sizing: border-box;
+							display: inline-block;
+							position: relative;
+							margin-right: 20rpx;
+							margin-bottom: 20rpx;
+							width: 100%;
+							input{
+								width: 100%;
+								border: none;
+								box-shadow: none;
+							}
+							.del-btn{
+								z-index: 999;
+								background-color: red;
+								color: #fff;
+								width: 36rpx;
+								height: 36rpx;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								position: absolute;
+								right: -17rpx;
+								top: -10rpx;
+								border-radius: 50%;
+							}
+						}
+					}
 				}
 
 				.text-area {
@@ -428,6 +489,18 @@
 						box-shadow: 0 0 2px 2px rgba(0, 0, 0, .1);
 						border-radius: 5rpx;
 						padding: 10rpx 15rpx;
+					}
+				}
+				
+				.title.btn-box{
+					display: flex;
+					align-items: center;
+					.title-btn{
+						border-radius: 10rpx;
+						margin-left: 20rpx;
+						background-color: #1296db;
+						color: #fff;
+						padding: 15rpx 30rpx;
 					}
 				}
 			}

@@ -28,7 +28,8 @@
 		}
 	},
 	"requiredPrivateInfos": [
-		"chooseLocation"
+		"chooseLocation",
+		"getLocation"
 	],
 	"subPackages": [{
 			"root": "HomeLink",
@@ -114,7 +115,7 @@
 			},{
 				"path":"enterpriseEdit/enterpriseRelease",
 				"style": {
-					"navigationBarTitleText": "编辑公司"
+					"navigationBarTitleText": "编辑招聘信息"
 				}
 			},{
 				"path":"enterpriseEdit/companyIntro",

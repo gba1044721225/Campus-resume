@@ -72,10 +72,12 @@
 		</view>
 
 		<view class="commit-button-box">
-			<view class="commit-button" @click="reqDeliverResume">
+			<view class="commit-button" @click="reqDeliverResume" v-if="!fromPath">
 				投递简历
 			</view>
 		</view>
+		
+		<map @click="goToHere" class='map' :latitude="locationXY.latitude" :longitude="locationXY.longitude" :markers="covers" />
 		
 		<view class="collection" @click="reqCollectResume">
 			收藏
@@ -89,10 +91,36 @@
 			return {
 				imgSrc: this.$imageBaseSrc,
 				jobId: '',
-				jobList: {}
+				jobList: {},
+				fromPath:"",
+				locationXY:{
+					latitude:'39.909',
+					longitude:'116.39742',
+				}
 			}
 		},
 		methods: {
+			goToHere(){
+				console.log(1111)
+				uni.getLocation({
+				 type: 'gcj02', //返回可以用于 wx.openLocation 的经纬度
+				 success (res) {
+					 console.log(22222)
+				   const latitude = res.latitude
+				   const longitude = res.longitude
+				   uni.openLocation({
+					 latitude:Number(latitude),
+					 longitude:Number(longitude),
+					 scale: 18,
+					 fail:res=>{
+						 console.log("res",res)
+					 }
+				   })
+				 }
+				})
+			},
+			
+			
 			reqJobDetails() {
 				const data = {
 					data: this.jobId,
@@ -170,6 +198,8 @@
 		},
 		onLoad(payload) {
 			this.jobId = payload.id || ''
+			this.fromPath=payload.from || ''
+			console.log("this.fromPath",this.fromPath)
 			this.reqJobDetails()
 		}
 	}
@@ -359,8 +389,9 @@
 		
 		.collection{
 			position: fixed;
-			top: 50%;
-			transform: translateY(-50%);
+			// top: 50%;
+			// transform: translateY(-50%);
+			bottom: 200rpx;
 			right: 0;
 			background-color: #1296db ;
 			color: #fff;
@@ -370,6 +401,7 @@
 			text-align: center;
 			line-height: 120rpx;
 			box-shadow: 0 0 10rpx 5rpx rgba(0,0,0,.2);
+			opacity: 0.7;
 		}
 	}
 </style>

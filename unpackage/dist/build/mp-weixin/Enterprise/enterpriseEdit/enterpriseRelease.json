@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "编辑公司",
+  "navigationBarTitleText": "编辑招聘信息",
   "usingComponents": {
     "u-input": "/uni_modules/uview-ui/components/u-input/u-input",
     "u-button": "/uni_modules/uview-ui/components/u-button/u-button",

@@ -103,4 +103,18 @@
   box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.1);
   margin-bottom: 15rpx;
 }
+.student-details .collection.data-v-49dabfa7 {
+  position: fixed;
+  bottom: 200rpx;
+  right: 0;
+  background-color: #1296db;
+  color: #fff;
+  border-radius: 50%;
+  width: 120rpx;
+  height: 120rpx;
+  text-align: center;
+  line-height: 120rpx;
+  box-shadow: 0 0 10rpx 5rpx rgba(0, 0, 0, 0.2);
+  opacity: 0.7;
+}
 
