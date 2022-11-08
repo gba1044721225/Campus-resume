@@ -24,7 +24,7 @@
 						<view class="resume-online" @click="linkToResumeOnline">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
 							<view class="resume-content">
-								修改简历
+								编辑个人简历
 							</view>
 						</view>
 					</view>

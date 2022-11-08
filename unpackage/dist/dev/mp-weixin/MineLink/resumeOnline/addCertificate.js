@@ -98,7 +98,7 @@ var components
 try {
   components = {
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 336))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 344))
     }
   }
 } catch (e) {
@@ -183,6 +183,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
@@ -234,11 +235,11 @@ var _default =
     upLoadCertificate: function upLoadCertificate() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.prev = 0;_context.next = 3;return (
 
                   _this2.$chooseImage());case 3:res = _context.sent;
-                // console.log("res",res)
-                _this2.certificate.certImage = res.tempFilePaths[0];_context.next = 10;break;case 7:_context.prev = 7;_context.t0 = _context["catch"](0);
+                console.log("res", res);
+                _this2.certificate.certImage = res.tempFilePaths[0];_context.next = 11;break;case 8:_context.prev = 8;_context.t0 = _context["catch"](0);
 
 
-                console.log("error", _context.t0);case 10:case "end":return _context.stop();}}}, _callee, null, [[0, 7]]);}))();
+                console.log("error", _context.t0);case 11:case "end":return _context.stop();}}}, _callee, null, [[0, 8]]);}))();
 
     },
 

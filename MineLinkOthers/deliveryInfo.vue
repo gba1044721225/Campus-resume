@@ -48,7 +48,7 @@
 			<view class="job-item-offer">
 				<view class="offer-item">
 					<image :src="`${imgSrc}offer.png`" mode=""></image>
-					<text>你已被邀请面试</text>
+					<text>恭喜你，你已被邀请面试</text>
 				</view>
 			</view>
 		</view>
@@ -208,8 +208,11 @@
 					padding: 20rpx 25rpx;
 					border-top: 1rpx solid #1296db;
 					background-color: #fff;
+					border-bottom-left-radius:20rpx;
+					border-bottom-right-radius: 20rpx;
 					.offer-item{
 						display: flex;
+						align-items: center;
 						image{
 							margin-right: 20rpx;
 							width: 50rpx;

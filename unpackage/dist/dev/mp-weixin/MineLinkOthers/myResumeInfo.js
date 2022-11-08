@@ -98,7 +98,7 @@ var components
 try {
   components = {
     tuiTabs: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-tabs/tui-tabs */ "components/thorui/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-tabs/tui-tabs.vue */ 425))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-tabs/tui-tabs */ "components/thorui/tui-tabs/tui-tabs").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-tabs/tui-tabs.vue */ 447))
     }
   }
 } catch (e) {

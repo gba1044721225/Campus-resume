@@ -108,10 +108,17 @@
   width: 200rpx;
   height: 230rpx;
 }
+.resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .item-left .item-content .image-name.data-v-94a2068a {
+  width: 520rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .add-btns.data-v-94a2068a {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin-right: 15rpx;
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules .show-item-box .add-btns .btns-item.data-v-94a2068a {
   margin-top: 25rpx;
@@ -144,6 +151,23 @@
 }
 .resume-oneline .resume-swiper .swiper-item .add-modules .add-item .content.data-v-94a2068a {
   font-size: 26rpx;
+}
+.resume-oneline .resume-swiper .swiper-item .user-introduction .introduction-title.data-v-94a2068a {
+  margin-left: 25rpx;
+  padding-left: 25rpx;
+  margin-bottom: 20rpx;
+  font-size: 36rpx;
+  font-weight: bold;
+  border-left: 8rpx solid #1296db;
+}
+.resume-oneline .resume-swiper .swiper-item .user-introduction textarea.data-v-94a2068a {
+  width: 600rpx;
+  margin: 0 auto;
+  box-sizing: border-box;
+  border: 1rpx solid #1296db;
+  box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.1);
+  border-radius: 15rpx;
+  padding: 25rpx;
 }
 .resume-oneline .resume-swiper .swiper-item .line-show.data-v-94a2068a {
   margin: 25rpx 0;

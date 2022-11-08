@@ -335,10 +335,10 @@
 											<view class="item-left">
 												<view class="item-content" v-for='(cert,certKey) in certBox'
 													:key="certKey">
-													<view v-if="certKey!='certId'">
+													<view v-if="certKey!='certId'" class="image-name">
 														<text v-if="certKey!='certImage'">{{keyToCnCert[certKey]}} : {{cert}}</text>
 														<view class="image-show" v-if="certKey=='certImage'">
-															<text>{{keyToCnCert[certKey]}}</text>
+															<text>{{keyToCnCert[certKey]}}: </text>
 															<image :src="cert" mode=""></image>
 														</view>
 													</view>
@@ -361,6 +361,16 @@
 									</view>
 								</template>
 							</tui-collapse>
+						</view>
+
+						<!-- 分割线 -->
+						<view class="line-show"></view>
+						
+						<view class="user-introduction">
+							<view class="introduction-title">
+								自我介绍
+							</view>
+							<textarea v-model="item.userIntro"></textarea>
 						</view>
 
 					</view>
@@ -459,7 +469,7 @@
 							type: '', //记录类型
 							key: ''
 						},
-
+						userIntro:"",
 						educationColumns: [
 							['博士', '研究生', '本科', '专科', '高中', '中专']
 						],
@@ -521,7 +531,7 @@
 								type: '', //记录类型
 								key: ''
 							},
-					
+							userIntro:"",
 							educationColumns: [
 								['博士', '研究生', '本科', '专科', '高中', '中专']
 							],
@@ -583,7 +593,7 @@
 									type: '', //记录类型
 									key: ''
 								},
-						
+								userIntro:"",
 								educationColumns: [
 									['博士', '研究生', '本科', '专科', '高中', '中专']
 								],
@@ -1215,7 +1225,7 @@
 						"height": "",
 						"id": resumeId,
 						"identity": dataList.addInfo.politicalStatus,
-						"introduction": "",
+						"introduction": this.tabList[this.currentResume].userIntro,
 						"leve": dataList.pnInfo.education, //?
 						"nativePlace": dataList.addInfo.hometown,
 						"openId": this.$store.state.openId,
@@ -1267,6 +1277,7 @@
 						//pnInfo
 						this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
 						this.$set(this.tabList[this.currentResume], 'viewType', data.view)
+						this.$set(this.tabList[this.currentResume], 'userIntro', data.introduction)
 						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'name', data.userName)
 						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'phone', data.phone)
 						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'school', data.school)
@@ -1275,6 +1286,8 @@
 							.professional)
 						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'graduationTime', data
 							.graduationDate)
+						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'sex', data
+							.sex)
 						//addInfo
 						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'email', data.email)
 						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'politicalStatus',
@@ -1350,7 +1363,7 @@
 							const obj = {
 								certId: v.id,
 								certName: v.fileName,
-								certImage: v.certImage,
+								certImage: v.fileUrl,
 							}
 							handleArr.push(obj)
 						})
@@ -1419,14 +1432,14 @@
 		// onShow() {
 
 		// },
-		// watch: {
-		// 	tabList: {
-		// 		deep: true,
-		// 		handler(nw) {
-		// 			console.log("nw", nw)
-		// 		}
-		// 	}
-		// }
+		watch: {
+			tabList: {
+				deep: true,
+				handler(nw) {
+					console.log("nw", nw)
+				}
+			}
+		}
 	}
 </script>
 
@@ -1526,6 +1539,7 @@
 							font-size: 30rpx;
 
 							.item-content {
+								
 								.image-show {
 									display: flex;
 
@@ -1535,6 +1549,13 @@
 										height: 230rpx;
 									}
 								}
+								
+								.image-name{
+									width: 520rpx;
+									white-space:nowrap;
+									overflow:hidden;
+									text-overflow:ellipsis;
+								}
 							}
 						}
 
@@ -1542,6 +1563,7 @@
 							display: flex;
 							flex-wrap: wrap;
 							flex-direction: column;
+							margin-right: 15rpx;
 
 							.btns-item {
 								margin-top: 25rpx;
@@ -1584,7 +1606,27 @@
 					}
 				}
 
+				.user-introduction{
 
+					.introduction-title{
+						margin-left: 25rpx;
+						padding-left: 25rpx;
+						margin-bottom: 20rpx;
+						font-size: 36rpx;
+						font-weight: bold;
+						border-left: 8rpx solid #1296db;
+					}
+					
+					textarea{
+						width: 600rpx;
+						margin:  0 auto;
+						box-sizing: border-box;
+						border: 1rpx solid #1296db;
+						box-shadow: 0 0 2rpx 2rpx rgba(0,0,0,.1);
+						border-radius: 15rpx;
+						padding: 25rpx;
+					}
+				}
 
 				.line-show {
 					margin: 25rpx 0;

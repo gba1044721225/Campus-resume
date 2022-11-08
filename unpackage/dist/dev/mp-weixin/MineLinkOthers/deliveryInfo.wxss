@@ -109,9 +109,12 @@
   padding: 20rpx 25rpx;
   border-top: 1rpx solid #1296db;
   background-color: #fff;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
 }
 .delivery-info .job-item .job-item-offer .offer-item.data-v-e66f1dfa {
   display: flex;
+  align-items: center;
 }
 .delivery-info .job-item .job-item-offer .offer-item image.data-v-e66f1dfa {
   margin-right: 20rpx;

@@ -10,9 +10,10 @@
 			<view class="name-item">
 				证书上传
 			</view>
-			<view class="image-box" @click="upLoadCertificate">
-				<image :src="`${imgSrc}/upLoadCertificate.png`" mode=""></image>
+			<view class="image-box" @click="upLoadCertificate" v-if="!certificate.certImage">
+				<image :src="`${imgSrc}upLoadCertificate.png`" mode=""></image>
 			</view>
+			<image  v-if="certificate.certImage" class="image-box" :src="certificate.certImage" mode=""></image>
 		</view>
 
 		<view class="btns-box">
@@ -77,7 +78,7 @@
 			async upLoadCertificate() {
 				try {
 					const res = await this.$chooseImage()
-					// console.log("res",res)
+					console.log("res",res)
 					this.certificate.certImage = res.tempFilePaths[0]
 
 				} catch (error) {

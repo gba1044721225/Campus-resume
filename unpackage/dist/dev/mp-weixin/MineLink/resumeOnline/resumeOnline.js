@@ -98,25 +98,25 @@ var components
 try {
   components = {
     tuiCollapse: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 329))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-collapse/tui-collapse */ "components/thorui/tui-collapse/tui-collapse").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-collapse/tui-collapse.vue */ 337))
     },
     tuiInput: function() {
-      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 336))
+      return __webpack_require__.e(/*! import() | components/thorui/tui-input/tui-input */ "components/thorui/tui-input/tui-input").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-input/tui-input.vue */ 344))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 343))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 351))
     },
     tuiCalendar: function() {
-      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 351))
+      return Promise.all(/*! import() | components/thorui/tui-calendar/tui-calendar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/thorui/tui-calendar/tui-calendar")]).then(__webpack_require__.bind(null, /*! @/components/thorui/tui-calendar/tui-calendar.vue */ 359))
     },
     uPopup: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 359))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-popup/u-popup */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-popup/u-popup")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-popup/u-popup.vue */ 367))
     },
     uRadioGroup: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio-group/u-radio-group.vue */ 367))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio-group/u-radio-group.vue */ 375))
     },
     uRadio: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio/u-radio.vue */ 375))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio/u-radio.vue */ 383))
     }
   }
 } catch (e) {
@@ -190,6 +190,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1043,15 +1053,25 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++) {arr.push(y + 1 + 'k');}return { isIos: this.$isIos, imageBaseSrc: this.$imageBaseSrc, salaryList: [arr, arr], cityList: [], cityLevel1: [], cityLevel2: [], cityLevel3: [], tabList: [{ label: '简历', resumeId: '', showPicker: false, showCityPicker: false, showSalaryPicker: false, showSexPopup: false, viewType: '', //1公开 
         pickKey: { type: '', //记录类型
-          key: '' }, educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
+          key: '' }, userIntro: "", educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
             graduationTime: '', columnIndex: -1 }, addInfo: { email: '', politicalStatus: '', birthday: '', hometown: '', dwelling: '', columnIndex: -1 }, intentInfo: { job: '', salary: '', city: '', columnIndex: -1, jType: '' } }, addEducation: [], eduCol: -1, addWorkExp: [], WorkExpCol: -1, addPro: [], proCol: -1, addCertificate: [], certCol: -1 }, { label: '简历', resumeId: '', showPicker: false, showCityPicker: false, showSalaryPicker: false, showSexPopup: false, viewType: '', //1公开 
         pickKey: { type: '', //记录类型
-          key: '' }, educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
+          key: '' }, userIntro: "", educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
             graduationTime: '', columnIndex: -1 }, addInfo: { email: '', politicalStatus: '', birthday: '', hometown: '', dwelling: '', columnIndex: -1 }, intentInfo: { job: '', salary: '', city: '', columnIndex: -1, jType: '' } }, addEducation: [], eduCol: -1, addWorkExp: [], WorkExpCol: -1, addPro: [], proCol: -1, addCertificate: [], certCol: -1 }, { label: '简历', resumeId: '', showPicker: false, showCityPicker: false, showSalaryPicker: false, showSexPopup: false, viewType: '', //1公开 
         pickKey: { type: '', //记录类型
-          key: '' }, educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
+          key: '' }, userIntro: "", educationColumns: [['博士', '研究生', '本科', '专科', '高中', '中专']], majorColumns: [['计算机', '数学', '生物工程']], politicalStatusColumns: [['党员', '团员', '群众']], jTypeColumns: [['校招', '社招', '实习']], resumeList: { pnInfo: { name: '', sex: '', phone: '', school: '', education: '', major: '', // jobIntention: '',
             graduationTime: '', columnIndex: -1 }, addInfo: { email: '', politicalStatus: '', birthday: '', hometown: '', dwelling: '', columnIndex: -1 }, intentInfo: { job: '', salary: '', city: '', columnIndex: -1, jType: '' } }, addEducation: [], eduCol: -1, addWorkExp: [], WorkExpCol: -1, addPro: [], proCol: -1, addCertificate: [], certCol: -1 }], currentResume: 0, indicatorDots: false, interval: 2000, duration: 500, swiperHeight: 0, swiperMinHeight: 0, //性别
       sexList: [{ name: '男', disabled: false }, { name: '女', disabled: false }], //映射表
       keyToCnEdu: { school: '学校', education: '教育', major: '专业', // allTime: '就读时间',
@@ -1117,17 +1137,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
     //选择日期
     chooseDate: function chooseDate(e) {var type = this.tabList[this.currentResume]['pickKey']['type'];var key = this.tabList[this.currentResume]['pickKey']['key'];this.tabList[this.currentResume].resumeList[type][key] = e.result;this.tabList[this.currentResume]['pickKey']['type'] = '';this.tabList[this.currentResume]['pickKey']['key'] = ''; // console.log("e", e)
     }, //打开工资picker
-    openSalaryPicker: function openSalaryPicker(type, key) {var _this5 = this;uni.showActionSheet({ itemList: ['面议', '选择薪资范围'], success: function success(res) {console.log("res111", res);if (res.tapIndex === 0) {_this5.tabList[_this5.currentResume].resumeList.intentInfo.salary = "面议";
-            return;
-          }
-          if (res.tapIndex === 1) {
-            _this5.tabList[_this5.currentResume].pickKey.type = type;
-            _this5.tabList[_this5.currentResume].pickKey.key = key;
-            _this5.tabList[_this5.currentResume].showSalaryPicker = true;
-          }
-        },
-        fail: function fail(res) {
-          // console.log(res.errMsg);
+    openSalaryPicker: function openSalaryPicker(type, key) {var _this5 = this;uni.showActionSheet({ itemList: ['面议', '选择薪资范围'], success: function success(res) {console.log("res111", res);if (res.tapIndex === 0) {_this5.tabList[_this5.currentResume].resumeList.intentInfo.salary = "面议";return;}if (res.tapIndex === 1) {_this5.tabList[_this5.currentResume].pickKey.type = type;_this5.tabList[_this5.currentResume].pickKey.key = key;_this5.tabList[_this5.currentResume].showSalaryPicker = true;}}, fail: function fail(res) {// console.log(res.errMsg);
         } });
 
     },
@@ -1406,7 +1416,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
           "height": "",
           "id": resumeId,
           "identity": dataList.addInfo.politicalStatus,
-          "introduction": "",
+          "introduction": this.tabList[this.currentResume].userIntro,
           "leve": dataList.pnInfo.education, //?
           "nativePlace": dataList.addInfo.hometown,
           "openId": this.$store.state.openId,
@@ -1458,6 +1468,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
           //pnInfo
           _this16.$set(_this16.tabList[_this16.currentResume], 'resumeId', data.id);
           _this16.$set(_this16.tabList[_this16.currentResume], 'viewType', data.view);
+          _this16.$set(_this16.tabList[_this16.currentResume], 'userIntro', data.introduction);
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['pnInfo'], 'name', data.userName);
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['pnInfo'], 'phone', data.phone);
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['pnInfo'], 'school', data.school);
@@ -1466,6 +1477,8 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
           professional);
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['pnInfo'], 'graduationTime', data.
           graduationDate);
+          _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['pnInfo'], 'sex', data.
+          sex);
           //addInfo
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['addInfo'], 'email', data.email);
           _this16.$set(_this16.tabList[_this16.currentResume]['resumeList']['addInfo'], 'politicalStatus',
@@ -1541,7 +1554,7 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
             var obj = {
               certId: v.id,
               certName: v.fileName,
-              certImage: v.certImage };
+              certImage: v.fileUrl };
 
             handleArr.push(obj);
           });
@@ -1606,19 +1619,16 @@ var _default = { data: function data() {var arr = [];for (var y = 0; y < 20; y++
     this.reqResumeAllInfo();
     this.setMinHeight();
     this.initCityData();
-  }
+  },
   // onShow() {
 
   // },
-  // watch: {
-  // 	tabList: {
-  // 		deep: true,
-  // 		handler(nw) {
-  // 			console.log("nw", nw)
-  // 		}
-  // 	}
-  // }
-};exports.default = _default;
+  watch: {
+    tabList: {
+      deep: true,
+      handler: function handler(nw) {
+        console.log("nw", nw);
+      } } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

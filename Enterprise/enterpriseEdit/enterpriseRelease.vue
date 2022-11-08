@@ -5,8 +5,8 @@
 				<view class="title">
 					招聘职位
 				</view>
-				<view class="input" @click="openPicker('station')">
-					<u-input :disabled="true" placeholder="请选择职位" border="surround" v-model="enterpriseMsg.station">
+				<view class="input">
+					<u-input placeholder="请填写职位" border="surround" v-model="enterpriseMsg.station">
 					</u-input>
 				</view>
 			</view>
@@ -16,7 +16,7 @@
 					职业标签
 				</view>
 				<view class="input">
-					<u-input placeholder="请填写职位标签" border="surround" v-model="enterpriseMsg.stationTag">
+					<u-input placeholder="请填写职位标签(用','隔开)" border="surround" v-model="enterpriseMsg.stationTag">
 					</u-input>
 				</view>
 			</view>
@@ -135,7 +135,7 @@
 
 			<u-button type="primary" text="提交" @click="reqEnterpriseMsg"></u-button>
 
-			<u-picker :defaultIndex="[0,0]" @cancel="cancelPicker" @confirm="confirmPicker" :show="showPicker"
+			<u-picker v-if="showPicker" ref="uPicker" :defaultIndex="[0,0]" @cancel="cancelPicker" @confirm="confirmPicker" :show="showPicker"
 				:columns="columnsList[pickerKey]"></u-picker>
 
 			<!-- 			<u-popup @close="closePopup" :show="showPopup" :closeable="true" :closeOnClickOverlay="true" mode="right">
@@ -282,6 +282,8 @@
 
 		methods: {
 			openPicker(pickerKey) {
+				// console.log(this.$refs.uPicker)
+				// this.$refs.uPicker.setIndexs(0,0)
 				// console.log(11111)
 				this.pickerKey = pickerKey
 				this.showPicker = true

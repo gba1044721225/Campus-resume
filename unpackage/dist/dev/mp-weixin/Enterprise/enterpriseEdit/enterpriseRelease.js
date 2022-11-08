@@ -98,13 +98,13 @@ var components
 try {
   components = {
     uInput: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-input/u-input.vue */ 407))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-input/u-input.vue */ 415))
     },
     uButton: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-button/u-button.vue */ 415))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-button/u-button */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-button/u-button")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-button/u-button.vue */ 423))
     },
     uPicker: function() {
-      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 343))
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-picker/u-picker */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-picker/u-picker")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-picker/u-picker.vue */ 351))
     }
   }
 } catch (e) {
@@ -480,7 +480,9 @@ var _default = { data: function data() {var arr = [];for (var i = 1; i < 21; i++
       }, name: "", columnsList: { 'station': [["前端", "后端", "全栈", "架构师"]], "workNature": [["校招", "实习", "社招"]], "enterpriseNum": [arr_num], 'salary': [arr, arr], 'education': [["本科", "硕士", "博士", "大专", "中专/其他"]] }, skillBoxValue: [], checkBoxList: [{ name: 'javascript', disabled: false }, { name: 'java', disabled: false }, { name: 'mysql', disabled: false }] // popupStyle:{
       // 	width:"350rpx"
       // }
-    };}, computed: { getWorkNatureId: function getWorkNatureId() {return function (val) {switch (val) {case "校招":val = 0;break;case "实习":val = 1;break;case "社招":val = 2;break;}return val;};}, getEducationId: function getEducationId() {return function (val) {switch (val) {case "本科":val = 0;break;case "硕士":val = 1;break;case "博士":val = 2;break;case "大专":val = 3;break;case "中专/其他":val = 4;break;}return val;};} }, methods: { openPicker: function openPicker(pickerKey) {// console.log(11111)
+    };}, computed: { getWorkNatureId: function getWorkNatureId() {return function (val) {switch (val) {case "校招":val = 0;break;case "实习":val = 1;break;case "社招":val = 2;break;}return val;};}, getEducationId: function getEducationId() {return function (val) {switch (val) {case "本科":val = 0;break;case "硕士":val = 1;break;case "博士":val = 2;break;case "大专":val = 3;break;case "中专/其他":val = 4;break;}return val;};} }, methods: { openPicker: function openPicker(pickerKey) {// console.log(this.$refs.uPicker)
+      // this.$refs.uPicker.setIndexs(0,0)
+      // console.log(11111)
       this.pickerKey = pickerKey;this.showPicker = true;}, confirmPicker: function confirmPicker(e) {// console.log("e", e)
       if (this.pickerKey == 'salary') {this.enterpriseMsg[this.pickerKey] = e.value[0] + " - " + e.value[1];this.pickerKey = '';this.showPicker = false;return;}this.enterpriseMsg[this.pickerKey] = e.value[0];this.pickerKey = '';this.showPicker = false;}, cancelPicker: function cancelPicker() {this.pickerKey = '';this.showPicker = false;}, openPopup: function openPopup() {this.showPopup = true;}, closePopup: function closePopup() {this.showPopup = false;}, checkboxChange: function checkboxChange(e) {console.log("e", e);this.enterpriseMsg.skill = e.join(" , ");},
     reqEnterpriseMsg: function reqEnterpriseMsg() {
