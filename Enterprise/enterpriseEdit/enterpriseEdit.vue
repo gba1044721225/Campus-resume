@@ -531,23 +531,29 @@
 				}
 				this.$http('/company/query',data,res=>{
 					console.log("res",res)
+					const dataList=JSON.parse(res.data)
 					if(res.meta.code==200){
-						if(JSON.parse(res.data).flag==2){
-							uni.showModal({
-								title: '公司简介还没有填报',
-								content: '是否立即跳转到填写页面',
-								success: function (res) {
-									if (res.confirm) {
-										uni.navigateTo({
-											url:"/Enterprise/enterpriseEdit/enterpriseEdit"
-										})
-									} else if (res.cancel) {
-										// console.log('用户点击取消');
-									}
-								}
-							});
-						}else{
-							
+						if(dataList.flag!=2){
+							this.enterpriseInfo.companyFullName=dataList.companyName
+							this.enterpriseInfo.companyShortName=dataList.alias	
+							this.enterpriseInfo.businessLicenseUrl=dataList.imgIds
+							this.enterpriseInfo.businessLicense=dataList.imgIds
+							this.enterpriseInfo.unitProperties=dataList.unitNature
+							this.enterpriseInfo.industry=dataList.industryCategory
+							this.enterpriseInfo.companySize=dataList.companySize
+							this.enterpriseInfo.linkman=dataList.contact
+							this.enterpriseInfo.locationArea=dataList.address
+							this.enterpriseInfo.linkmanEmail=dataList.email
+							this.enterpriseInfo.companyProfile=dataList.introduce
+							this.enterpriseInfo.companyLogo=dataList.logo
+							this.enterpriseInfo.companyLogoUrl=dataList.logo
+							this.enterpriseInfo.wechatNumber=dataList.weixinCode
+							this.enterpriseInfo.companyWebsite=dataList.addressUrl
+							this.enterpriseInfo.fullAddress=dataList.addressDetail
+							this.enterpriseInfo.companyPhone=dataList.unitPhone
+							this.enterpriseInfo.otherLinkman=dataList.standbyUser
+							this.enterpriseInfo.otherCompanyPhone=dataList.standbyPhone
+							this.enterpriseInfo.otherEmail=dataList.standbyEmail
 						}
 					}
 				},header)

@@ -679,7 +679,7 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
     },
 
     //获取信息
-    reqCompanyIntro: function reqCompanyIntro() {
+    reqCompanyIntro: function reqCompanyIntro() {var _this6 = this;
       var data = {
         meta: {
           openId: this.$store.state.openId,
@@ -691,23 +691,29 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
 
       this.$http('/company/query', data, function (res) {
         console.log("res", res);
+        var dataList = JSON.parse(res.data);
         if (res.meta.code == 200) {
-          if (JSON.parse(res.data).flag == 2) {
-            uni.showModal({
-              title: '公司简介还没有填报',
-              content: '是否立即跳转到填写页面',
-              success: function success(res) {
-                if (res.confirm) {
-                  uni.navigateTo({
-                    url: "/Enterprise/enterpriseEdit/enterpriseEdit" });
-
-                } else if (res.cancel) {
-                  // console.log('用户点击取消');
-                }
-              } });
-
-          } else {
-
+          if (dataList.flag != 2) {
+            _this6.enterpriseInfo.companyFullName = dataList.companyName;
+            _this6.enterpriseInfo.companyShortName = dataList.alias;
+            _this6.enterpriseInfo.businessLicenseUrl = dataList.imgIds;
+            _this6.enterpriseInfo.businessLicense = dataList.imgIds;
+            _this6.enterpriseInfo.unitProperties = dataList.unitNature;
+            _this6.enterpriseInfo.industry = dataList.industryCategory;
+            _this6.enterpriseInfo.companySize = dataList.companySize;
+            _this6.enterpriseInfo.linkman = dataList.contact;
+            _this6.enterpriseInfo.locationArea = dataList.address;
+            _this6.enterpriseInfo.linkmanEmail = dataList.email;
+            _this6.enterpriseInfo.companyProfile = dataList.introduce;
+            _this6.enterpriseInfo.companyLogo = dataList.logo;
+            _this6.enterpriseInfo.companyLogoUrl = dataList.logo;
+            _this6.enterpriseInfo.wechatNumber = dataList.weixinCode;
+            _this6.enterpriseInfo.companyWebsite = dataList.addressUrl;
+            _this6.enterpriseInfo.fullAddress = dataList.addressDetail;
+            _this6.enterpriseInfo.companyPhone = dataList.unitPhone;
+            _this6.enterpriseInfo.otherLinkman = dataList.standbyUser;
+            _this6.enterpriseInfo.otherCompanyPhone = dataList.standbyPhone;
+            _this6.enterpriseInfo.otherEmail = dataList.standbyEmail;
           }
         }
       }, header);
