@@ -28,6 +28,7 @@
 							</view>
 						</view>
 					</view>
+					<image @click="settingOpenOrNot" class="setting-btns" :src="`${imgSrc}setting.png`" mode=""></image>
 				</view>
 
 				<view class="mine-info">
@@ -127,6 +128,49 @@
 
 		<my-login ref="loginBox"></my-login>
 		<tui-fab :bottom="10" :right="20" :btnList="btnList" @click="fabClick"></tui-fab>
+		
+		<tui-modal maskClosable :show="settingModal" custom @cancel="closeSettingModal">
+			<view class="tui-modal-custom">
+				<view class="setting-title">
+					请设置简历可见方式
+				</view>
+			  <u-radio-group
+			    v-model="resumeStateShow"
+				placement="row"
+				@change="settingChange"
+			  >
+				<u-radio
+				  :customStyle="{marginBottom: '8px'}"
+				  v-for="(item, index) in resumeState"
+				  :key="index"
+				  :label="item.name"
+				  :name="item.name"
+				>
+				</u-radio>
+			  </u-radio-group>
+			  
+			  <view class="show-resume-item">
+			  	<u-radio-group
+					v-if="resumeStateShow!=='隐藏'&&resumeStateShow!==''"				  
+					v-model="resumeItemShow"
+					placement="row"
+					@change="resumeItemChange"
+			  	>
+					<u-radio
+					  :customStyle="{marginBottom: '8px'}"
+					  v-for="(item, index) in resumeItemList"
+					  :key="index"
+					  :label="item.name"
+					  :name="item.name"
+					>
+					</u-radio>
+				</u-radio-group>
+				<view class="btn-item">
+					确定
+				</view>
+			  </view>
+			</view>
+		</tui-modal>
 	</view>
 </template>
 
@@ -142,6 +186,7 @@
 		components: {
 			MyLogin
 		},
+		options: { styleIsolation: 'shared' },
 		data() {
 			return {
 				imgSrc: this.$imageBaseSrc,
@@ -176,12 +221,12 @@
 					{
 						num: 0,
 						label: '我的面试',
-						path:""
+						path:"/MineLinkOthers/myInterviewStu"
 					},
 					{
 						num: 0,
 						label: '我的收藏',
-						path:""
+						path:"/MineLinkOthers/myCollection"
 					},
 				],
 
@@ -212,7 +257,40 @@
 				//企业端数据
 				enterPriseInfo: {},
 				//学生端数据
-				studentInfo:{}
+				studentInfo:{},
+				
+				//设置简历可见与否窗口
+				settingModal:false,
+				resumeStateShow:"",
+				resumeState:[
+					{
+						name: '可见',
+						disabled: false
+					},
+					{
+						name: '对企业可见',
+						disabled: false
+					},
+					{
+						name: '隐藏',
+						disabled: false
+					},
+				],
+				resumeItemList:[
+					{
+						name: '简历1',
+						disabled: false
+					},
+					{
+						name: '简历2',
+						disabled: false
+					},
+					{
+						name: '简历3',
+						disabled: false
+					},	
+				],
+				resumeItemShow:""
 			}
 		},
 		methods: {
@@ -406,6 +484,26 @@
 				}
 			},
 
+			//打开设置弹窗
+			settingOpenOrNot(){
+				this.settingModal=true
+			},
+			
+			//
+			settingChange(e){
+				console.log("e",e)
+				// this.resumeStateShow=e
+				console.log(this.resumeStateShow)
+			},
+			
+			resumeItemChange(e){
+				console.log("e",e)
+			},
+			
+			closeSettingModal(){
+				this.settingModal=false
+			},
+			
 			//企业端请求
 			reqEnterpriseInfo() {
 				const data = {
@@ -450,6 +548,12 @@
 						this.infoItem[2].num=this.studentInfo.shoucangNum
 					}
 				},header)
+			},
+			
+			//进来页面获取简历选择信息
+			reqSettingResumeMsg(){
+				this.resumeStateShow="可见"
+				this.resumeItemShow="简历3"
 			}
 		},
 		computed: {
@@ -463,6 +567,7 @@
 				this.init()
 			})
 				// this.init()
+			this.reqSettingResumeMsg()
 		},
 	}
 </script>
@@ -525,10 +630,21 @@
 
 						.resume-content {
 							margin-left: 15rpx;
+							margin-right: 25rpx;
 							font-size: 24rpx;
 							color: #fff;
 						}
+						
+
 					}
+				}
+				
+				.setting-btns{
+					width: 80rpx !important;
+					height: 80rpx !important;
+					position: fixed;
+					top: 20rpx;
+					right: 20rpx;
 				}
 			}
 
@@ -586,6 +702,43 @@
 				}
 			}
 		}
-
 	}
+	
+	
+	
+	.tui-modal-custom{
+		height: 250rpx;
+		position: relative;
+		.setting-title{
+			margin-bottom: 25rpx;
+			font-weight: bold;
+		}
+		
+		/deep/ .u-radio-group{
+			display: flex !important;
+			justify-content: space-between;
+			flex-direction: row;
+			align-items: center;
+		}
+		
+		.show-resume-item{
+			margin-top: 25rpx;
+			width: 100%;
+			height: 52rpx;
+			
+			.btn-item{
+				position: absolute;
+				background-color: #1296db;
+				color:#fff;
+				padding: 20rpx 50rpx;
+				border-radius: 10rpx;
+				text-align: center;
+				bottom: -20rpx;
+				left: 0;
+				right: 0;
+			}
+		}
+	}
+		
+
 </style>

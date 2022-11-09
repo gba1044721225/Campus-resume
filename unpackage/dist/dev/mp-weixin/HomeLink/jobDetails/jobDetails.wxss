@@ -139,6 +139,7 @@
   box-shadow: 0 0 2rpx 2rpx rgba(0, 0, 0, 0.2);
 }
 .job-details .commit-button-box.data-v-059cb0e7 {
+  z-index: 9999;
   padding-top: 30rpx;
   padding-bottom: 30rpx;
   padding-bottom: constant(safe-area-inset-bottom);

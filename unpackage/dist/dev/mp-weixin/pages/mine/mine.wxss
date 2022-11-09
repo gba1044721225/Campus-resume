@@ -74,8 +74,16 @@
 }
 .header-bar .login-status .login-bar .login-tips .resume-online .resume-content {
   margin-left: 15rpx;
+  margin-right: 25rpx;
   font-size: 24rpx;
   color: #fff;
+}
+.header-bar .login-status .login-bar .setting-btns {
+  width: 80rpx !important;
+  height: 80rpx !important;
+  position: fixed;
+  top: 20rpx;
+  right: 20rpx;
 }
 .header-bar .login-status .mine-info {
   margin-top: 25rpx;
@@ -124,5 +132,35 @@
 }
 .header-bar .login-status .mine-info-box .mine-info-item .item-content {
   margin-top: 15rpx;
+}
+.tui-modal-custom {
+  height: 250rpx;
+  position: relative;
+}
+.tui-modal-custom .setting-title {
+  margin-bottom: 25rpx;
+  font-weight: bold;
+}
+.tui-modal-custom .u-radio-group {
+  display: flex !important;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+.tui-modal-custom .show-resume-item {
+  margin-top: 25rpx;
+  width: 100%;
+  height: 52rpx;
+}
+.tui-modal-custom .show-resume-item .btn-item {
+  position: absolute;
+  background-color: #1296db;
+  color: #fff;
+  padding: 20rpx 50rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  bottom: -20rpx;
+  left: 0;
+  right: 0;
 }
 

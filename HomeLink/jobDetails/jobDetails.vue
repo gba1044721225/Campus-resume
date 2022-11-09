@@ -194,9 +194,12 @@
 						})
 					}
 				}, header)
-			}
+			},
+			
+
 		},
 		onLoad(payload) {
+			console.log("payload",payload)
 			this.jobId = payload.id || ''
 			this.fromPath=payload.from || ''
 			console.log("this.fromPath",this.fromPath)
@@ -355,6 +358,7 @@
 
 
 		.commit-button-box {
+			z-index: 9999;
 			padding-top: 30rpx;
 			padding-bottom: 30rpx;
 			padding-bottom: constant(safe-area-inset-bottom);

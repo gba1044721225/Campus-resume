@@ -41,7 +41,10 @@
       "pages": [
         "upLoadPdf",
         "myResumeInfo",
-        "deliveryInfo"
+        "deliveryInfo",
+        "myInterviewStu",
+        "myInterviewStuDt",
+        "myCollection"
       ]
     }
   ],

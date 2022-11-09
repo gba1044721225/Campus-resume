@@ -63,6 +63,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/myInterviewStu",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/myInterviewStuDt",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

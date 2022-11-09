@@ -99,6 +99,15 @@ try {
   components = {
     tuiFab: function() {
       return __webpack_require__.e(/*! import() | components/thorui/tui-fab/tui-fab */ "components/thorui/tui-fab/tui-fab").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-fab/tui-fab.vue */ 323))
+    },
+    tuiModal: function() {
+      return __webpack_require__.e(/*! import() | components/thorui/tui-modal/tui-modal */ "components/thorui/tui-modal/tui-modal").then(__webpack_require__.bind(null, /*! @/components/thorui/tui-modal/tui-modal.vue */ 433))
+    },
+    uRadioGroup: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio-group/u-radio-group */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio-group/u-radio-group")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio-group/u-radio-group.vue */ 375))
+    },
+    uRadio: function() {
+      return Promise.all(/*! import() | uni_modules/uview-ui/components/u-radio/u-radio */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uview-ui/components/u-radio/u-radio")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uview-ui/components/u-radio/u-radio.vue */ 383))
     }
   }
 } catch (e) {
@@ -288,6 +297,50 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 138);
 
 
@@ -299,6 +352,7 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
   components: {
     MyLogin: MyLogin },
 
+  options: { styleIsolation: 'shared' },
   data: function data() {
     return {
       imgSrc: this.$imageBaseSrc,
@@ -333,12 +387,12 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       {
         num: 0,
         label: '我的面试',
-        path: "" },
+        path: "/MineLinkOthers/myInterviewStu" },
 
       {
         num: 0,
         label: '我的收藏',
-        path: "" }],
+        path: "/MineLinkOthers/myCollection" }],
 
 
 
@@ -369,7 +423,40 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       //企业端数据
       enterPriseInfo: {},
       //学生端数据
-      studentInfo: {} };
+      studentInfo: {},
+
+      //设置简历可见与否窗口
+      settingModal: false,
+      resumeStateShow: "",
+      resumeState: [
+      {
+        name: '可见',
+        disabled: false },
+
+      {
+        name: '对企业可见',
+        disabled: false },
+
+      {
+        name: '隐藏',
+        disabled: false }],
+
+
+      resumeItemList: [
+      {
+        name: '简历1',
+        disabled: false },
+
+      {
+        name: '简历2',
+        disabled: false },
+
+      {
+        name: '简历3',
+        disabled: false }],
+
+
+      resumeItemShow: "" };
 
   },
   methods: {
@@ -563,6 +650,26 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       }
     },
 
+    //打开设置弹窗
+    settingOpenOrNot: function settingOpenOrNot() {
+      this.settingModal = true;
+    },
+
+    //
+    settingChange: function settingChange(e) {
+      console.log("e", e);
+      // this.resumeStateShow=e
+      console.log(this.resumeStateShow);
+    },
+
+    resumeItemChange: function resumeItemChange(e) {
+      console.log("e", e);
+    },
+
+    closeSettingModal: function closeSettingModal() {
+      this.settingModal = false;
+    },
+
     //企业端请求
     reqEnterpriseInfo: function reqEnterpriseInfo() {var _this3 = this;
       var data = {
@@ -607,6 +714,12 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
           _this4.infoItem[2].num = _this4.studentInfo.shoucangNum;
         }
       }, header);
+    },
+
+    //进来页面获取简历选择信息
+    reqSettingResumeMsg: function reqSettingResumeMsg() {
+      this.resumeStateShow = "可见";
+      this.resumeItemShow = "简历3";
     } },
 
   computed: _objectSpread({},
@@ -620,6 +733,7 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
       _this5.init();
     });
     // this.init()
+    this.reqSettingResumeMsg();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

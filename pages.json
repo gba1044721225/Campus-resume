@@ -160,6 +160,24 @@
 					"style": {
 						"navigationBarTitleText": "投递情况"
 					}
+				},
+				{
+					"path":"myInterviewStu",
+					"style": {
+						"navigationBarTitleText": "我的面试"
+					}
+				},
+				{
+					"path":"myInterviewStuDt",
+					"style": {
+						"navigationBarTitleText": "我的面试"
+					}
+				},
+				{
+					"path":"myCollection",
+					"style": {
+						"navigationBarTitleText": "我的收藏"
+					}
 				}
 			]
 		}

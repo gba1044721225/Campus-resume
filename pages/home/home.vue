@@ -569,5 +569,6 @@
 				overflow: hidden;
 			}
 		}
+		
 	}
 </style>

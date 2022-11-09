@@ -342,7 +342,10 @@ var _default =
       }, header);
     } },
 
+
+
   onLoad: function onLoad(payload) {
+    console.log("payload", payload);
     this.jobId = payload.id || '';
     this.fromPath = payload.from || '';
     console.log("this.fromPath", this.fromPath);
