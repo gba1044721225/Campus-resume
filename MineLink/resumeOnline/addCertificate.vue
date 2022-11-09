@@ -55,7 +55,7 @@
 		},
 
 		methods: {
-			comfirmCertificate() {
+			comfirmCertificate() {			
 				this.reqCertificate().then(_=>{
 					uni.navigateBack({
 						delta: 1,

@@ -491,6 +491,7 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
       isIos: this.$isIos,
       showPicker: false,
       showSizePicker: false,
+      companyId: "",
       companySizeList: [
       ['1-10人', '10-50人', '50-100人', '100-500人', '500-1000人', '1000-5000人', '5000-10000人', '10000+人']],
 
@@ -714,6 +715,8 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
             _this6.enterpriseInfo.otherLinkman = dataList.standbyUser;
             _this6.enterpriseInfo.otherCompanyPhone = dataList.standbyPhone;
             _this6.enterpriseInfo.otherEmail = dataList.standbyEmail;
+            _this6.companyId = dataList.id;
+
           }
         }
       }, header);
@@ -724,6 +727,7 @@ var _city = _interopRequireDefault(__webpack_require__(/*! @/utils/city.js */ 19
     reqEnterpriseInfo: function reqEnterpriseInfo() {
       var data = {
         data: {
+          id: this.companyId || '',
           openId: this.$store.state.openId,
           companyName: this.enterpriseInfo.companyFullName,
           alias: this.enterpriseInfo.companyShortName,

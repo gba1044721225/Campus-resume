@@ -331,6 +331,7 @@
 				isIos:this.$isIos,
 				showPicker: false,
 				showSizePicker:false,
+				companyId:"",
 				companySizeList:[
 					['1-10人','10-50人','50-100人','100-500人','500-1000人','1000-5000人','5000-10000人','10000+人']
 				],
@@ -554,6 +555,8 @@
 							this.enterpriseInfo.otherLinkman=dataList.standbyUser
 							this.enterpriseInfo.otherCompanyPhone=dataList.standbyPhone
 							this.enterpriseInfo.otherEmail=dataList.standbyEmail
+							this.companyId=dataList.id
+						
 						}
 					}
 				},header)
@@ -564,6 +567,7 @@
 			reqEnterpriseInfo() {
 				const data = {
 					data: {
+						id:this.companyId||'',
 						openId: this.$store.state.openId,
 						companyName: this.enterpriseInfo.companyFullName,
 						alias: this.enterpriseInfo.companyShortName,
