@@ -26,10 +26,7 @@
 /* 文章场景相关 */
 .job-details.data-v-059cb0e7 {
   padding: 25rpx 35rpx 46rpx;
-}
-.job-details .details-box.data-v-059cb0e7 {
-  margin-bottom: calc(60rpx + 80rpx);
-  margin-bottom: calc(env(safe-area-inset-bottom) + 30rpx + 80rpx);
+  position: relative;
 }
 .job-details .details-box .job-title .title-top.data-v-059cb0e7 {
   display: flex;
@@ -125,6 +122,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 0 30rpx;
+  border-bottom: 1rpx solid #aaa;
 }
 .job-details .details-box .company-certificate .certificate-title.data-v-059cb0e7 {
   margin-top: 30rpx;
@@ -182,5 +181,11 @@
   line-height: 120rpx;
   box-shadow: 0 0 10rpx 5rpx rgba(0, 0, 0, 0.2);
   opacity: 0.7;
+}
+.job-details .map-open.data-v-059cb0e7 {
+  margin: 0 auto;
+  margin-top: 25rpx;
+  margin-bottom: calc(60rpx + 80rpx);
+  margin-bottom: calc(env(safe-area-inset-bottom) + 30rpx + 80rpx);
 }
 

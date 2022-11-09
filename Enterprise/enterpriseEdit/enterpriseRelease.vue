@@ -13,7 +13,7 @@
 
 			<view class="enterprise-item">
 				<view class="title btn-box">
-					<text>职业标签</text>
+					<text>技能标签</text>
 					<view class="title-btn" @click="addPositionTag">
 						添加+
 					</view>

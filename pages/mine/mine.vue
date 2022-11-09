@@ -288,8 +288,11 @@
 				const upLoadRes = await this.$chooseImage()
 				// console.log('reqAavatar', upLoadRes)
 				this.$upLoadFile(`/file/upload/${this.openId}/3`, upLoadRes.tempFilePaths[0], {}, res => {
-					console.log('reqAavatar', res.data)
-
+					// console.log('reqAavatar',JSON.parse(res.data))
+					// if(res.data)
+					const imgData=res.data
+					this.studentInfo.imgUrl=JSON.parse(JSON.parse(imgData).data).path
+					// console.log("resdddd")
 				})
 
 			},
@@ -452,11 +455,14 @@
 		computed: {
 			...mapState(['openId', 'userInfo', 'role'])
 		},
+		onLoad(){
+			this.init()
+		},
 		onShow() {
 			uni.$on('loginAllRight',_=>{
 				this.init()
-			})	
-			this.init()
+			})
+				// this.init()
 		},
 	}
 </script>

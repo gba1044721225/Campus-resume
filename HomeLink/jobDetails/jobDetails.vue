@@ -77,7 +77,7 @@
 			</view>
 		</view>
 		
-		<map @click="goToHere" class='map' :latitude="locationXY.latitude" :longitude="locationXY.longitude" :markers="covers" />
+		<map @click="goToHere" class='map-open' :latitude="locationXY.latitude" :longitude="locationXY.longitude" :markers="covers" />
 		
 		<view class="collection" @click="reqCollectResume">
 			收藏
@@ -208,11 +208,9 @@
 <style scoped lang="scss">
 	.job-details {
 		padding: 25rpx 35rpx 46rpx;
+		position: relative;
 
-		.details-box {
-			margin-bottom: calc(60rpx + 80rpx);
-			margin-bottom: calc(env(safe-area-inset-bottom) + 30rpx + 80rpx);
-			
+		.details-box {			
 			.job-title {
 				.title-top {
 					display: flex;
@@ -333,6 +331,8 @@
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
+				padding: 0 0 30rpx;
+				border-bottom: 1rpx solid #aaa;
 
 				.certificate-title {
 					margin-top: 30rpx;
@@ -402,6 +402,13 @@
 			line-height: 120rpx;
 			box-shadow: 0 0 10rpx 5rpx rgba(0,0,0,.2);
 			opacity: 0.7;
+		}
+		
+		.map-open{
+			margin: 0 auto;
+			margin-top: 25rpx;
+			margin-bottom: calc(60rpx + 80rpx);
+			margin-bottom: calc(env(safe-area-inset-bottom) + 30rpx + 80rpx);
 		}
 	}
 </style>

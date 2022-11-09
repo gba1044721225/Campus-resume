@@ -21,6 +21,34 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "HomeLink/jobDetails/jobDetails",
+          "query": "id=17",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLink/resumeOnline/resumeOnline",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "pages/mine/mine",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/enterpriseRelease",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

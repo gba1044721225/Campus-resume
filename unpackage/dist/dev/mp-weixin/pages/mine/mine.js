@@ -445,8 +445,11 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
                   _this2.$chooseImage());case 2:upLoadRes = _context.sent;
                 // console.log('reqAavatar', upLoadRes)
                 _this2.$upLoadFile("/file/upload/".concat(_this2.openId, "/3"), upLoadRes.tempFilePaths[0], {}, function (res) {
-                  console.log('reqAavatar', res.data);
-
+                  // console.log('reqAavatar',JSON.parse(res.data))
+                  // if(res.data)
+                  var imgData = res.data;
+                  _this2.studentInfo.imgUrl = JSON.parse(JSON.parse(imgData).data).path;
+                  // console.log("resdddd")
                 });case 4:case "end":return _context.stop();}}}, _callee);}))();
 
     },
@@ -609,11 +612,14 @@ var _helper = __webpack_require__(/*! ../../common/helper */ 12);function _inter
   computed: _objectSpread({},
   (0, _vuex.mapState)(['openId', 'userInfo', 'role'])),
 
+  onLoad: function onLoad() {
+    this.init();
+  },
   onShow: function onShow() {var _this5 = this;
     uni.$on('loginAllRight', function (_) {
       _this5.init();
     });
-    this.init();
+    // this.init()
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 35));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 35));
 
 
 
@@ -197,6 +197,14 @@ var _helper = __webpack_require__(/*! ../common/helper */ 12);function _interopR
 
     upLoadFile: function upLoadFile(index) {
       var path = this.pdfList[index].fileUrl;
+      if (!path) {
+        uni.showToast({
+          icon: "none",
+          title: "请先选中个文件",
+          duration: 1500 });
+
+        return;
+      }
       this.$upLoadFile('/file/upload/excel', path, {}, function (res) {
         console.log("res", res);
       });
@@ -204,6 +212,14 @@ var _helper = __webpack_require__(/*! ../common/helper */ 12);function _interopR
 
     previewFile: function previewFile(index) {
       var path = this.pdfList[index].fileUrl;
+      if (!path) {
+        uni.showToast({
+          icon: "none",
+          title: "请先选中个文件",
+          duration: 1500 });
+
+        return;
+      }
       wx.openDocument({
         filePath: path,
         success: function success(res) {
@@ -214,7 +230,13 @@ var _helper = __webpack_require__(/*! ../common/helper */ 12);function _interopR
 
     downFile: function downFile(index) {
       // this.$downFile()
+      uni.showToast({
+        icon: "none",
+        title: "改功能尚未开放",
+        duration: 1500 });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

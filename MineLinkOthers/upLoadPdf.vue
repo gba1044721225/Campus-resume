@@ -63,13 +63,29 @@
 
 			upLoadFile(index) {
 				const path = this.pdfList[index].fileUrl
+				if(!path){
+					uni.showToast({
+						icon:"none",
+						title:"请先选中个文件",
+						duration:1500
+					})
+					return
+				}
 				this.$upLoadFile('/file/upload/excel', path, {}, res => {
 					console.log("res", res)
 				})
 			},
 			
-			previewFile(index){
+			previewFile(index){				
 				const path = this.pdfList[index].fileUrl
+				if(!path){
+					uni.showToast({
+						icon:"none",
+						title:"请先选中个文件",
+						duration:1500
+					})
+					return
+				}
 				wx.openDocument({
 				      filePath: path,
 				      success: function (res) {
@@ -80,6 +96,11 @@
 			
 			downFile(index){
 				// this.$downFile()
+				uni.showToast({
+					icon:"none",
+					title:"改功能尚未开放",
+					duration:1500
+				})
 			}
 		}
 	}

@@ -13,7 +13,7 @@
 			<view class="image-box" @click="upLoadCertificate" v-if="!certificate.certImage">
 				<image :src="`${imgSrc}upLoadCertificate.png`" mode=""></image>
 			</view>
-			<image  v-if="certificate.certImage" class="image-box" :src="certificate.certImage" mode=""></image>
+			<image @click="upLoadCertificate"  v-if="certificate.certImage" class="image-box" :src="certificate.certImage" mode=""></image>
 		</view>
 
 		<view class="btns-box">
@@ -96,6 +96,7 @@
 			//新增/修改 简历 
 			reqCertificate() {
 				return new Promise(resolve=>{
+					console.log(111111,this.certificate.certImage)
 					const openId = this.resumeId
 					this.$upLoadFile(`/file/upload/${openId}/1`, this.certificate.certImage, {
 						name: this.certificate.certName
@@ -123,6 +124,13 @@
 						}
 					
 					})
+				})
+			},
+			
+			//还没开放
+			downLoadFile(path){
+				this.$downFile(path,res=>{
+					console.log("res",res)
 				})
 			}
 		}

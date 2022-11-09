@@ -253,6 +253,7 @@ var _default =
     //新增/修改 简历 
     reqCertificate: function reqCertificate() {var _this3 = this;
       return new Promise(function (resolve) {
+        console.log(111111, _this3.certificate.certImage);
         var openId = _this3.resumeId;
         _this3.$upLoadFile("/file/upload/".concat(openId, "/1"), _this3.certificate.certImage, {
           name: _this3.certificate.certName },
@@ -280,6 +281,13 @@ var _default =
           }
 
         });
+      });
+    },
+
+    //还没开放
+    downLoadFile: function downLoadFile(path) {
+      this.$downFile(path, function (res) {
+        console.log("res", res);
       });
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

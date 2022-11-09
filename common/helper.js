@@ -111,7 +111,7 @@ module.exports = {
 			},
 			success: succ,
 			fail: err => {
-				console.log(err)
+				console.log(err,'qqqq')
 			},
 		});
 	},
