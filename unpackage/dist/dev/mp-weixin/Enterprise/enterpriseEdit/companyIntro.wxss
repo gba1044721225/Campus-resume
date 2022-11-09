@@ -37,7 +37,6 @@
   align-items: center;
 }
 .company-intro .intro-box .company-intro-header .header-left.data-v-3358051a {
-  height: 150rpx;
   width: 525rpx;
   display: flex;
   flex-direction: column;
@@ -49,8 +48,7 @@
   font-weight: bold;
   letter-spacing: 5rpx;
   display: inline-block;
-  white-space: nowrap;
-  overflow: auto;
+  white-space: wrap;
 }
 .company-intro .intro-box .company-intro-header .header-left .company-intro-size.data-v-3358051a {
   width: 100%;

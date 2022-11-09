@@ -4,7 +4,7 @@
 			<view class="company-intro-header">
 				<view class="header-left">
 					<view class="company-title">
-						<text>{{dataList.companyName?dataList.companyName:'暂无数据'}}</text>
+						<text>{{dataList.companyName?dataList.companyName:'暂无数据'}}奥术大师大所大所</text>
 						<text style="font-weight: normal;">（{{dataList.alias?dataList.alias:''}}）</text>
 					</view>
 					<view class="company-intro-size">
@@ -160,7 +160,7 @@
 				justify-content: space-between;
 				align-items: center;
 				.header-left{
-					height: 150rpx;
+					// height: 150rpx;
 					width: 525rpx;
 					display: flex;
 					flex-direction: column;
@@ -171,9 +171,9 @@
 						font-weight: bold;
 						letter-spacing: 5rpx;
 						display: inline-block;
-						white-space: nowrap;
-						overflow: auto;
-						
+						white-space: wrap;
+						// overflow: hidden;
+						// text-overflow:ellipsis;
 					}
 					.company-intro-size{
 						width: 100%;

@@ -187,7 +187,7 @@
 
 				//企业界面
 				infoItemEnterprise: [{
-						num: 1,
+						num: 0,
 						label: '收到简历',
 						path:"/Enterprise/enterpriseEdit/deliver"
 					},

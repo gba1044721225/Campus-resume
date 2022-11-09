@@ -56,6 +56,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/companyIntro",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
