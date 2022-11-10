@@ -33,7 +33,10 @@
         "enterpriseEdit/companyIntro",
         "enterpriseEdit/deliver",
         "enterpriseEdit/studentBox",
-        "enterpriseEdit/studentBoxDetails"
+        "enterpriseEdit/studentBoxDetails",
+        "enterpriseEdit/interviewToStu",
+        "enterpriseEdit/interviewStuDetails",
+        "enterpriseEdit/collectionStu"
       ]
     },
     {

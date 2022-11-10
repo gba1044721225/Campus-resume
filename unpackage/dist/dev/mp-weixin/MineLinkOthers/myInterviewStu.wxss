@@ -24,32 +24,32 @@
 /* 垂直间距 */
 /* 透明度 */
 /* 文章场景相关 */
-.my-interview-stu.data-v-01958240 {
-  padding: 20rpx;
-}
-.my-interview-stu .interview-box.data-v-01958240 {
-  padding: 0 20rpx;
-}
-.my-interview-stu .interview-box .interview-tiem.data-v-01958240 {
-  padding: 20rpx 0;
-  display: flex;
-  align-items: center;
+.my-interview-stu .interview-box .box-item.data-v-01958240 {
   border-bottom: 1rpx solid #1296db;
 }
-.my-interview-stu .interview-box .interview-tiem image.data-v-01958240 {
+.my-interview-stu .interview-box .box-item .item-time-box.data-v-01958240 {
+  padding: 25rpx;
+  background-color: #eee;
+}
+.my-interview-stu .interview-box .box-item .interview-item.data-v-01958240 {
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+}
+.my-interview-stu .interview-box .box-item .interview-item image.data-v-01958240 {
   margin-right: 20rpx;
   width: 150rpx;
   height: 150rpx;
   border: 1rpx solid #1296db;
   border-radius: 50%;
 }
-.my-interview-stu .interview-box .interview-tiem .item-content .content-top.data-v-01958240, .my-interview-stu .interview-box .interview-tiem .item-content .content-bottom.data-v-01958240 {
+.my-interview-stu .interview-box .box-item .interview-item .item-content .content-top.data-v-01958240, .my-interview-stu .interview-box .box-item .interview-item .item-content .content-bottom.data-v-01958240 {
   width: 450rpx;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
-.my-interview-stu .interview-box .interview-tiem .right-btn.data-v-01958240 {
+.my-interview-stu .interview-box .box-item .interview-item .right-btn.data-v-01958240 {
   color: #1296db;
   font-weight: bold;
   font-size: 50rpx;

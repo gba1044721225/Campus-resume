@@ -77,6 +77,20 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/interviewToStu",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "MineLinkOthers/myCollection",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

@@ -137,6 +137,24 @@
 				"style": {
 					"navigationBarTitleText": "简历详情"
 				}
+			},
+			{
+				"path":"enterpriseEdit/interviewToStu",
+				"style": {
+					"navigationBarTitleText": "约谈面试"
+				}
+			},
+			{
+				"path":"enterpriseEdit/interviewStuDetails",
+				"style": {
+					"navigationBarTitleText": "约谈面试学生详情"
+				}
+			},
+			{
+				"path":"enterpriseEdit/collectionStu",
+				"style": {
+					"navigationBarTitleText": "人才收藏"
+				}
 			}
 			]
 		},

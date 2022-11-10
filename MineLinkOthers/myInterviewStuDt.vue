@@ -66,7 +66,8 @@
 			}
 		},
 		methods:{
-			linkToJobDetails(id=17) {
+			linkToJobDetails() {
+				const id=17
 				uni.navigateTo({
 					url: `/HomeLink/jobDetails/jobDetails?id=${id}&from='myCollection'`
 				})

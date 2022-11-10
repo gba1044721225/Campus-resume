@@ -239,7 +239,7 @@
 					{
 						num: 0,
 						label: '约谈面试',
-						path:""
+						path:"/Enterprise/enterpriseEdit/interviewToStu"
 					},
 					// {
 					// 	num: 0,
@@ -249,7 +249,7 @@
 					{
 						num: 0,
 						label: '人才收藏',
-						path:""
+						path:"/MineLinkOthers/myCollection"
 					},
 				],
 

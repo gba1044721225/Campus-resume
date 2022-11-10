@@ -114,6 +114,36 @@
 				</view>
 			</view>
 			
+			<view class="enterprise-item none-border">
+				<view class="title">
+					联系人名字
+				</view>
+				<view class="input">
+					<u-input placeholder="请填写联系人名字" border="surround" v-model="enterpriseMsg.linkManName">
+					</u-input>
+				</view>
+			</view>
+			
+			<view class="enterprise-item none-border">
+				<view class="title">
+					联系人岗位
+				</view>
+				<view class="input">
+					<u-input placeholder="请填写联系人岗位" border="surround" v-model="enterpriseMsg.linkManPosition">
+					</u-input>
+				</view>
+			</view>
+			
+			<view class="enterprise-item none-border">
+				<view class="title">
+					联系人电话
+				</view>
+				<view class="input">
+					<u-input type="number" placeholder="请填写联系人电话" border="surround" v-model="enterpriseMsg.linkManPhone">
+					</u-input>
+				</view>
+			</view>
+			
 			
 			<!-- 			<view class="enterprise-item">
 				<view class="title">
@@ -197,6 +227,9 @@
 					major: "",
 					requirements: "",
 					duties: "",
+					linkManName:"",
+					linkManPosition:"",
+					linkManPhone:"",
 					flag: 2,
 
 					// workLocation: {
@@ -357,6 +390,9 @@
 						professional: this.enterpriseMsg.major,
 						requirements: this.enterpriseMsg.requirements,
 						duties: this.enterpriseMsg.duties,
+						contact_name:this.enterpriseMsg.linkManName,
+						contact_job:this.enterpriseMsg.linkManPosition,
+						contact_phone:this.enterpriseMsg.linkManPhone,
 						activityId: "2",
 						flag: this.enterpriseMsg.flag,
 						openId: this.$store.state.openId,

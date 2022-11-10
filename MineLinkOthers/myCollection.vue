@@ -69,23 +69,20 @@
 			//学生模块 请求招聘信息
 			reqRecruitmentInformation() {
 				const data = {
-					data: {
-						current: this.pageInfo.pageNum,
-						size: this.pageInfo.pageSize
-					},
+					data: this.$store.state.openId,
 					meta: {
-						openId: "",
+						openId: this.$store.state.openId,
 						role: this.$store.state.role,
 					}
 				}
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/recruit/user/query/msgList", data, res => {
+				this.$http("/recruit/user/query/1", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 					console.log("res",res)
 					if (res.meta.code == 200) {	
-						this.dataList=JSON.parse(res.data).records
+						this.dataList=JSON.parse(res.data)
 						
 						console.log("this.dataList", this.dataList)
 					}
