@@ -137,7 +137,7 @@ module.exports = {
 	
 	downFile(url,succ){
 		wx.downloadFile({
-		  url:  this.$hostname() + url,
+		  url: url,
 		  success:succ
 		})
 	}

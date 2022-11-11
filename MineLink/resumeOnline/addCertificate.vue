@@ -51,6 +51,7 @@
 			if (data) {
 				// console.log(data)
 				this.certificate = JSON.parse(data)
+				this.downLoadFile(this.certificate.certImage)
 			}
 		},
 
@@ -99,7 +100,8 @@
 					console.log(111111,this.certificate.certImage)
 					const openId = this.resumeId
 					this.$upLoadFile(`/file/upload/${openId}/1`, this.certificate.certImage, {
-						name: this.certificate.certName
+						name: this.certificate.certName,
+						id:this.certificate.certId
 					}, res => {
 						console.log("res", res)
 						if (res.statusCode == 200) {
@@ -130,7 +132,8 @@
 			//还没开放
 			downLoadFile(path){
 				this.$downFile(path,res=>{
-					console.log("res",res)
+					// console.log("res",res)
+					this.certificate.certImage=res.tempFilePath
 				})
 			}
 		}
