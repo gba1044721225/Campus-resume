@@ -40,8 +40,9 @@
 					<view class="content-title">
 						联系人
 					</view>
-					<view class="content-info">
-						13631233906<u-icon name="phone-fill" size="30px" color="#1296db"></u-icon>
+					<view class="content-info" @click="callPeople(13631233906)">
+						<text>13631233906</text>
+						<u-icon name="phone-fill" size="30px" color="#1296db"></u-icon>
 					</view>
 				</view>
 				
@@ -75,10 +76,16 @@
 			},
 			
 			
+			callPeople(phone){
+				uni.makePhoneCall({
+					phoneNumber: phone //仅为示例
+				});
+			},
+			
 			//学生模块 请求招聘信息
 			reqRecruitmentInformation() {
 				const data = {
-					data: this.$store.state.openId,
+					data: this.id,
 					meta: {
 						openId: this.$store.state.openId,
 						role: this.$store.state.role,
@@ -167,6 +174,11 @@
 				}
 				.content-info{
 					color: #555;
+					display: flex;
+					align-items: center;
+					text{
+						margin-right: 20rpx;	
+					}
 				}
 			}
 			.item-content:last-child{

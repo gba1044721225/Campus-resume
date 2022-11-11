@@ -84,6 +84,11 @@
 }
 .my-interview-stu .interview-item-box .item-main .item-content .content-info.data-v-178c68f0 {
   color: #555;
+  display: flex;
+  align-items: center;
+}
+.my-interview-stu .interview-item-box .item-main .item-content .content-info text.data-v-178c68f0 {
+  margin-right: 20rpx;
 }
 .my-interview-stu .interview-item-box .item-main .item-content.data-v-178c68f0:last-child {
   margin-bottom: 0;
