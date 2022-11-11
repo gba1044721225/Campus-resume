@@ -36,10 +36,13 @@
 							{{jobList.company.companyName}} · {{jobList.company.addressUrl}}
 						</view>
 						<view class="info-item">
-							位置：{{jobList.company.alias}}
+							联系人：{{jobList.recruitmentInfo.contactName}} · {{jobList.recruitmentInfo.contactJob}}
 						</view>
 						<view class="info-item">
-							微信号：{{jobList.company.weixinCode}}
+							手机号：{{jobList.recruitmentInfo.contactPhone}}
+						</view>
+						<view class="info-item">
+							总公司邮箱：{{jobList.company.email}}
 						</view>
 					</view>
 				</view>
@@ -50,7 +53,7 @@
 					职业详情
 				</view>
 				<view class="tag-box" v-if="jobList.recruitmentInfo!=undefined">
-					<view class="tag-item" v-for="(item,index) in jobList.recruitmentInfo.requirements.split('，')"
+					<view class="tag-item" v-for="(item,index) in jobList.recruitmentInfo.jobLab.split('，')"
 						:key="index">
 						{{item}}
 					</view>
@@ -285,6 +288,8 @@
 							white-space: nowrap;
 							overflow: auto;
 							margin-bottom: 15rpx;
+							font-size:26rpx;
+							color:#555;
 						}
 					}
 
@@ -311,8 +316,8 @@
 						margin-bottom: 15rpx;
 						margin-right: 20rpx;
 						background-color: rgba(0, 0, 0, .1);
-						padding: 20rpx;
-						border-radius: 10rpx;
+						padding:8rpx 20rpx;
+						border-radius: 8rpx;
 					}
 				}
 

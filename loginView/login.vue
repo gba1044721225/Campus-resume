@@ -83,7 +83,7 @@
 								this.$store.commit('reSetOpenId', res.meta.openId)
 								this.$store.commit('setUserInfo',uni.getStorageSync('rawData'))
 								console.log("this.$store.state.openId",this.$store.state.openId)
-								uni.$emit('loginAllRight')
+								
 								this.reqSaveUserInfo()
 							}
 						})
@@ -120,6 +120,7 @@
 				console.log("data", data)
 				this.$http('/recruit/user/add', data, res => {
 					// console.log('reqSaveUserInfo', res)
+					uni.$emit('loginAllRight')
 				}, header)
 			}
 		},

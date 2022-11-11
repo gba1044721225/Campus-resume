@@ -49,7 +49,7 @@
 					<view class="content-main">
 						<view class="main-skills">
 							<scroll-view scroll-x="true" class="skill-scroll">
-								<view class="sill-item" v-for="(skillItem,ind) in item.requirements.split('，')"
+								<view class="sill-item" v-for="(skillItem,ind) in item.jobLab.split('，')"
 									:key="ind">
 									{{skillItem}}
 								</view>
@@ -438,8 +438,8 @@
 									color: #1296db;
 									background-color: #eee;
 									margin-right: 15rpx;
-									padding: 10rpx;
-									border-radius: 15rpx;
+									padding:10rpx 15rpx;
+									border-radius: 8rpx;
 								}
 							}
 

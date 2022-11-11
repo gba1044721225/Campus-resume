@@ -229,18 +229,18 @@
 						<!-- 分割线 -->
 						<view class="line-show"></view>
 
-						<!-- 工作经验 -->
+						<!-- 实习经验 -->
 						<view class="add-modules">
 							<tui-collapse :index="'WorkExpCol'+index" :current="item.WorkExpCol"
 								@click="changeCollapseAdd('WorkExpCol'+index,index,'WorkExpCol')">
 								<template v-slot:title>
 									<view class="item-title" v-if='item.WorkExpCol==-1'>
-										工作经验
+										实习经验
 									</view>
 								</template>
 								<template v-slot:content>
 									<view class="item-title">
-										工作经验
+										实习经验
 									</view>
 									<view class="info-content">
 										<view class="show-item-box" v-if="item.addWorkExp.length!=0"
@@ -1373,7 +1373,7 @@
 				})
 			},
 
-			//请求删除 教育经历/工作经验
+			//请求删除 教育经历/实习经验
 			reqDelItem(type, id) {
 				const data = {
 					"data": {},
@@ -1432,14 +1432,14 @@
 		// onShow() {
 
 		// },
-		watch: {
-			tabList: {
-				deep: true,
-				handler(nw) {
-					console.log("nw", nw)
-				}
-			}
-		}
+		// watch: {
+		// 	tabList: {
+		// 		deep: true,
+		// 		handler(nw) {
+		// 			console.log("nw", nw)
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 

@@ -86,6 +86,8 @@
   white-space: nowrap;
   overflow: auto;
   margin-bottom: 15rpx;
+  font-size: 26rpx;
+  color: #555;
 }
 .job-details .details-box .company-position.data-v-059cb0e7 {
   margin-top: 30rpx;
@@ -105,8 +107,8 @@
   margin-bottom: 15rpx;
   margin-right: 20rpx;
   background-color: rgba(0, 0, 0, 0.1);
-  padding: 20rpx;
-  border-radius: 10rpx;
+  padding: 8rpx 20rpx;
+  border-radius: 8rpx;
 }
 .job-details .details-box .company-position .position-duty.data-v-059cb0e7 {
   font-size: 36rpx;

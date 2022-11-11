@@ -86,8 +86,8 @@
   color: #1296db;
   background-color: #eee;
   margin-right: 15rpx;
-  padding: 10rpx;
-  border-radius: 15rpx;
+  padding: 10rpx 15rpx;
+  border-radius: 8rpx;
 }
 .content .job-box .job-item .job-item-content .content-main .main-company.data-v-92bb8f34 {
   display: flex;

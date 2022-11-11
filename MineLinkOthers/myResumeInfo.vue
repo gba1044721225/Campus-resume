@@ -7,7 +7,7 @@
 					{{dataList.sysuserInfoVO.userName}}
 				</view>
 				<view class="item first">
-					{{getWorkYear}}年经验 · {{getAge}}岁 · {{dataList.sysuserInfoVO.leve?dataList.sysuserInfoVO.leve:'暂无数据'}}
+					年纪： {{getAge}}岁 · {{dataList.sysuserInfoVO.leve?dataList.sysuserInfoVO.leve:'暂无数据'}}
 				</view>
 				<view class="item">
 					电话：{{dataList.sysuserInfoVO.phone?dataList.sysuserInfoVO.phone:'暂无数据'}}
@@ -37,11 +37,11 @@
 			</view>
 		</view>
 		
-		<!-- 工作经验 -->
+		<!-- 实习经验 -->
 		<view class="work-exp">
 			<!-- {{JSON.stringify(dataList.shixi)}} -->
 			<view class="title">
-				工作经验	
+				实习经验	
 			</view>
 			<view v-if="dataList.shixi.length>0">
 				<view class="exp-item" v-for="(expItem,expIndex) in dataList.shixi" :key="expIndex">
