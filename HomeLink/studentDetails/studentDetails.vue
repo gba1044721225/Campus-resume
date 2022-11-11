@@ -194,6 +194,12 @@ import { header } from '../../common/helper'
 				}
 				this.$http("/recruit/user/delivery",data,res=>{
 					console.log("res",res)
+					if(res.meta.code==200){
+						uni.showToast({
+							icon:"none",
+							title:"收藏成功",
+						})
+					}
 				},header)
 			}
 		},

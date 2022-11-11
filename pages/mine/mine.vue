@@ -559,14 +559,14 @@
 		computed: {
 			...mapState(['openId', 'userInfo', 'role'])
 		},
-		onLoad(){
-			this.init()
-		},
+		// onLoad(){
+		// 	this.init()
+		// },
 		onShow() {
 			uni.$on('loginAllRight',_=>{
 				this.init()
 			})
-				// this.init()
+				this.init()
 			this.reqSettingResumeMsg()
 		},
 	}

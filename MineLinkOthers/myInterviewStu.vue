@@ -5,7 +5,7 @@
 				<view class="item-time-box">
 					2022年11月10日 23:00
 				</view>
-				<view class="interview-item" @click="linkToJobDetails(item.id)">
+				<view class="interview-item" @click="linkToJobDetails(20)">
 					<image src="../static/deliver.png" mode=""></image>
 					<view class="item-content">
 						<view class="content-top">
@@ -25,7 +25,7 @@
 				<view class="item-time-box">
 					2022年11月10日 23:00
 				</view>
-				<view class="interview-item" @click="linkToJobDetails(item.id)">
+				<view class="interview-item" @click="linkToJobDetails(20)">
 					<image src="../static/deliver.png" mode=""></image>
 					<view class="item-content">
 						<view class="content-top">
