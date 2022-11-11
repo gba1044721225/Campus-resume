@@ -41,7 +41,7 @@
 						联系人
 					</view>
 					<view class="content-info">
-						xxxxxxxxxxxxx
+						13631233906<u-icon name="phone-fill" size="30px" color="#1296db"></u-icon>
 					</view>
 				</view>
 				
@@ -62,21 +62,47 @@
 	export default{
 		data(){
 			return {
+				dataList:{},
 				id:"",
 				from:"",
 			}
 		},
 		methods:{
 			linkToJobDetails() {
-				const id=17
 				uni.navigateTo({
 					url: `/HomeLink/jobDetails/jobDetails?id=${this.id}&from='myInterviewStuDt'`
 				})
 			},
+			
+			
+			//学生模块 请求招聘信息
+			reqRecruitmentInformation() {
+				const data = {
+					data: this.$store.state.openId,
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http("/recruit/user/query/detailAddress", data, res => {
+					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
+					console.log("res",res)
+					if (res.meta.code == 200) {	
+						this.dataList=JSON.parse(res.data)
+						
+						console.log("this.dataList", this.dataList)
+					}
+				}, header)
+			},
+			
 		},
 		onLoad(payload){
 			this.id=payload.id
 			console.log("payload",payload)
+			this.reqRecruitmentInformation()
 		}
 	}
 	
