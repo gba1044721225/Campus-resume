@@ -5,7 +5,7 @@
 		</view>
 		<view class="interview-item-box" @click="linkToJobDetails">
 			<view class="item-header">
-				<image src="../static/major.png" mode=""></image>
+				<image :src="item.logo" mode=""></image>
 				<view class="header-content">
 					<view class="header-title">
 						xxxx公司的面试邀请xxxxxxxxxxxxxxxxxxxxxxxx
