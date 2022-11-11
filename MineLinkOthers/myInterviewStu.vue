@@ -6,7 +6,7 @@
 					{{item.interviewDate}}
 				</view>
 				<view class="interview-item" @click="linkToJobDetails(item.id)">
-					<image src="../static/deliver.png" mode=""></image>
+					<image :src="item.logo" mode=""></image>
 					<view class="item-content">
 						<view class="content-top">
 							{{item.companyName}}
