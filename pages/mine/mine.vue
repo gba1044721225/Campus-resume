@@ -28,7 +28,7 @@
 							</view>
 						</view>
 					</view>
-					<image @click="settingOpenOrNot" class="setting-btns" :src="`${imgSrc}setting.png`" mode=""></image>
+<!-- 					<image @click="settingOpenOrNot" class="setting-btns" :src="`${imgSrc}setting.png`" mode=""></image> -->
 				</view>
 
 				<view class="mine-info">
