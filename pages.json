@@ -192,6 +192,12 @@
 					}
 				},
 				{
+					"path":"myInterviewStuDt",
+					"style": {
+						"navigationBarTitleText": "我的面试"
+					}
+				},
+				{
 					"path":"myCollection",
 					"style": {
 						"navigationBarTitleText": "我的收藏"

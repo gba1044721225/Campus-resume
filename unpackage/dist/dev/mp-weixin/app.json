@@ -47,6 +47,7 @@
         "myResumeInfo",
         "deliveryInfo",
         "myInterviewStu",
+        "myInterviewStuDt",
         "myCollection"
       ]
     }

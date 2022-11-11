@@ -1,18 +1,18 @@
 <template>
 	<view class="my-interview-stu">
 		<view class="interview-box">
-			<view class="box-item">
+			<view class="box-item" v-for="(item,index) in dataList" :key="index">
 				<view class="item-time-box">
 					2022年11月10日 23:00
 				</view>
-				<view class="interview-item" @click="linkToJobDetails(20)">
+				<view class="interview-item" @click="linkToJobDetails(item.id)">
 					<image src="../static/deliver.png" mode=""></image>
 					<view class="item-content">
 						<view class="content-top">
-							xxxxx公司
+							{{item.companyName}}
 						</view>
 						<view class="content-bottom">
-							java开发工程师 · 13K-15K
+							{{item.jobName}} · {{item.treatment}}
 						</view>
 					</view>
 					<view class="right-btn">
@@ -21,25 +21,6 @@
 				</view>
 			</view>
 		
-			<view class="box-item">
-				<view class="item-time-box">
-					2022年11月10日 23:00
-				</view>
-				<view class="interview-item" @click="linkToJobDetails(20)">
-					<image src="../static/deliver.png" mode=""></image>
-					<view class="item-content">
-						<view class="content-top">
-							xxxxx公司
-						</view>
-						<view class="content-bottom">
-							java开发工程师 · 13K-15K
-						</view>
-					</view>
-					<view class="right-btn">
-						〉
-					</view>
-				</view>
-			</view>
 		</view>
 	</view>
 </template>
@@ -59,7 +40,7 @@ export default{
 	methods:{
 			linkToJobDetails(id) {
 				uni.navigateTo({
-					url: `/HomeLink/jobDetails/jobDetails?id=${id}&from='myCollection'`
+					url: `/MineLinkOthers/myInterviewStuDt?id=${id}`
 				})
 			},
 		
@@ -75,7 +56,7 @@ export default{
 			const header = {
 				'content-type': 'application/json'
 			}
-			this.$http("/recruit/user/query/2", data, res => {
+			this.$http("/recruit/user/query/3", data, res => {
 				// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 				console.log("res",res)
 				if (res.meta.code == 200) {	
