@@ -25,77 +25,83 @@
 /* 透明度 */
 /* 文章场景相关 */
 .my-collection.data-v-03ef73ab {
-  padding-top: 10rpx;
   min-height: 100vh;
+  padding: 20rpx 0;
   background-color: #eee;
-  min-height: calc(100vh - 400rpx);
-  padding: 20rpx;
 }
-.my-collection .student-item.data-v-03ef73ab {
-  margin-bottom: 20rpx;
+.my-collection .job-item.data-v-03ef73ab {
+  padding: 5px 20rpx;
+}
+.my-collection .job-item .job-item-content.data-v-03ef73ab {
   background-color: #fff;
-  padding: 25rpx 30rpx;
+  padding: 15px;
+  border-radius: 20rpx;
+}
+.my-collection .job-item .job-item-content .content-top.data-v-03ef73ab {
+  display: flex;
+}
+.my-collection .job-item .job-item-content .content-top .top-title.data-v-03ef73ab {
+  flex: 0.6;
+  width: 100px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
   box-sizing: border-box;
-  box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, 0.1);
-  border-radius: 10rpx;
-  position: relative;
-}
-.my-collection .student-item .img-logo-top.data-v-03ef73ab {
-  width: 100rpx;
-  height: 100rpx;
-  position: absolute;
-  top: -25rpx;
-  right: 0;
-}
-.my-collection .student-item .img-logo-bottom.data-v-03ef73ab {
-  width: 100rpx;
-  height: 100rpx;
-  position: absolute;
-  bottom: -25rpx;
-  right: -15rpx;
-}
-.my-collection .student-item .item-content.data-v-03ef73ab {
-  display: flex;
-  flex-wrap: nowrap;
-}
-.my-collection .student-item .item-content image.data-v-03ef73ab {
-  width: 200rpx;
-  height: 250rpx;
-  border-radius: 10rpx;
-  margin-right: 50rpx;
-}
-.my-collection .student-item .item-content .content.data-v-03ef73ab {
-  background-color: #fff;
-  width: 400rpx;
-  height: 250rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.my-collection .student-item .item-content .content .name.data-v-03ef73ab {
-  font-size: 36rpx;
+  margin-right: 15px;
   font-weight: bold;
 }
-.my-collection .student-item .item-content .content .item-info.data-v-03ef73ab {
-  margin-top: 15rpx;
-  width: 100%;
-  font-size: 26rpx;
-  color: #666;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.my-collection .job-item .job-item-content .content-top .top-salary.data-v-03ef73ab {
+  flex: 0.4;
+  text-align: right;
+  color: #1296db;
+  font-size: 30rpx;
 }
-.my-collection .student-item .item-content .content .item-info text.data-v-03ef73ab {
+.my-collection .job-item .job-item-content .content-main.data-v-03ef73ab {
+  margin-top: 20rpx;
+}
+.my-collection .job-item .job-item-content .content-main .main-skills .skill-scroll.data-v-03ef73ab {
+  white-space: nowrap;
+  width: 100%;
+}
+.my-collection .job-item .job-item-content .content-main .main-skills .skill-scroll .sill-item.data-v-03ef73ab {
+  display: inline-block;
+  font-size: 24rpx;
+  color: #1296db;
+  background-color: #eee;
   margin-right: 15rpx;
   padding: 10rpx 15rpx;
-  border-radius: 2rpx;
-  background-color: #eee;
+  border-radius: 8rpx;
 }
-.my-collection .content-tag.data-v-03ef73ab {
-  padding: 20rpx 10rpx 0;
-  font-size: 26rpx;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+.my-collection .job-item .job-item-content .content-main .main-company.data-v-03ef73ab {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15rpx;
+  font-size: 28rpx;
+}
+.my-collection .job-item .job-item-content .content-bottom.data-v-03ef73ab {
+  margin-top: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.my-collection .job-item .job-item-content .content-bottom .botom-recruiters.data-v-03ef73ab {
+  display: flex;
+  align-items: center;
+}
+.my-collection .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic.data-v-03ef73ab {
+  margin-right: 15rpx;
+}
+.my-collection .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-pic image.data-v-03ef73ab {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%;
+}
+.my-collection .job-item .job-item-content .content-bottom .botom-recruiters .recruiters-name.data-v-03ef73ab {
+  margin-left: 15rpx;
+  font-size: 24rpx;
+}
+.my-collection .job-item .job-item-content .content-bottom .content-place.data-v-03ef73ab {
+  font-size: 28rpx;
 }
 

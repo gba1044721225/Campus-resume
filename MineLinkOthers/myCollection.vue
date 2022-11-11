@@ -1,33 +1,51 @@
 <template>
 	<view class="my-collection">
-		<view @click="linkToStudentDetails(item.id)" class="student-item" v-for="(item,index) in dataList" :key="index">
-			<view class="item-content">
-				<image :src="item.imgUrl" mode=""></image>
-				<view class="content">
-					<view class="name">
-						{{item.position?item.position:'暂无岗位信息'}}
+			<view @click="linkToJobDetails(item.id)" class="job-item" v-for="(item,index) in dataList" :key="index">
+				<view class="job-item-content">
+					<view class="content-top">
+						<view class="top-title">
+							{{item.jobName}}（{{item.leve}}）
+						</view>
+						<view class="top-salary">
+							{{item.treatment}}
+						</view>
 					</view>
-					<view class="item-info">
-						{{item.userName}}（{{item.sex}}）
+
+					<view class="content-main">
+						<view class="main-skills">
+							<scroll-view scroll-x="true" class="skill-scroll">
+								<view class="sill-item" v-for="(skillItem,ind) in item.jobLab.split('，')"
+									:key="ind">
+									{{skillItem}}
+								</view>
+							</scroll-view>
+						</view>
+						<view class="main-company">
+							<view class="item">
+								{{item.num}}人
+							</view>
+							<view class="item">
+								{{item.workNature}}
+							</view>
+						</view>
 					</view>
-					<view class="item-info">
-						 {{item.school}} {{item.professional}}
-					</view>
-					<view class="item-info">
-						期望薪资:{{item.expectedSalary?item.expectedSalary:"面议"}}
-					</view>
-					<view class="item-info">
-						<text>{{item.leve}}</text>
-						<text>{{item.identity}}</text>
+
+					<view class="content-bottom">
+						<view class="botom-recruiters">
+							<view class="recruiters-pic">
+								<image :src="item.logo" mode=""></image>
+							</view>
+							<view class="recruiters-name">
+								{{item.companyName}}
+							</view>
+						</view>
+						<view class="content-place">
+							{{item.workAddress}}
+						</view>
 					</view>
 				</view>
 			</view>
-		<!-- 				<view class="content-tag">
-							{{item.introduction}}
-						</view> -->
-			<image v-if="showTag('top',item)" class="img-logo-top" :src="`${imgSrc}hot.png`" mode=""></image>
-			<image class="img-logo-bottom" :src="`${imgSrc}boshi.png`" mode=""></image>
-		</view>
+			
 	</view>
 </template>
 
@@ -62,7 +80,7 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/company/resume/list/byId", data, res => {
+				this.$http("/recruit/user/query/1", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 					console.log("res",res)
 					if (res.meta.code == 200) {	
@@ -74,26 +92,7 @@
 			},
 		},
 		computed:{
-			showTag(){
-				return function(val,item){
-					if(val=='top'){
-						const t=(new Date().getTime()-item.createTime)/1000/60/60/24
-						if(Math.floor(t)){
-							return true
-						}
-						return false
-					}
-					
-					if(val=='bottom'){
-						if(item.leve=='博士'||item.leve=='研究生'){
-							return true
-						}
-						return false
-					}
-					
-					return false
-				}
-			}
+
 		},
 		onShow(){
 			this.reqRecruitmentInformation()
@@ -103,88 +102,103 @@
 
 <style lang="scss" scoped>
 .my-collection{
-	padding-top: 10rpx;
 	min-height: 100vh;
-	// margin-top: 10rpx;
+	padding: 20rpx 0 ;
 	background-color: #eee;
-	
-	min-height: calc(100vh - 400rpx);
-	padding: 20rpx;
-	
-	.student-item{
-		margin-bottom: 20rpx;
-		background-color: #fff;
-		padding: 25rpx 30rpx;
-		box-sizing: border-box;
-		box-shadow: 0rpx 0rpx 4rpx 2rpx rgba(0, 0, 0, .1);
-		border-radius: 10rpx;
-		position: relative;
-		
-		.img-logo-top{
-			width: 100rpx;
-			height: 100rpx;
-			position: absolute;
-			top: -25rpx;
-			right: 0;
-		}
-		.img-logo-bottom{
-			width: 100rpx;
-			height: 100rpx;
-			position: absolute;
-			bottom: -25rpx;
-			right: -15rpx;
-		}
-		
-		.item-content{
-			// padding-bottom: 20rpx;
-			// border-bottom: 1rpx solid #ccc;
-			display: flex;
-			flex-wrap: nowrap;
-			image{
-				width: 200rpx;
-				height: 250rpx;
-				border-radius: 10rpx;
-				margin-right: 50rpx;
-			}
-			.content{
-				background-color: #fff;
-				width: 400rpx;
-				height: 250rpx;
+
+	.job-item {
+		padding: 5px 20rpx;
+
+		.job-item-content {
+			background-color: #fff;
+			padding: 15px;
+			border-radius: 20rpx;
+			
+			.content-top {
 				display: flex;
-				flex-direction: column;
-				justify-content	: space-between;
-				.name{
-					font-size: 36rpx;
-					font-weight: bold;
-				}
-				.item-info{
-					margin-top: 15rpx;
-					width: 100%;
-					font-size: 26rpx;
-					color: #666;
+
+				.top-title {
+					flex: 0.6;
+					width: 100px;
+					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;
-					overflow: hidden;
-					
-					text{
-						margin-right: 15rpx;
-						padding: 10rpx 15rpx;
-						border-radius: 2rpx;
-						background-color: #eee;
-					}
+					box-sizing: border-box;
+					margin-right: 15px;
+					font-weight: bold;
+				}
+
+				.top-salary {
+					flex: 0.4;
+					text-align: right;
+					color: #1296db;
+					font-size: 30rpx;
 				}
 			}
 
-		}
-		
+			.content-main {
+				margin-top: 20rpx;
 
-	}
-	.content-tag{
-		padding: 20rpx 10rpx 0;
-		font-size: 26rpx;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		overflow: hidden;
+				.main-skills {
+
+					// white-space: nowrap;
+					.skill-scroll {
+						white-space: nowrap;
+						width: 100%;
+
+						.sill-item {
+							display: inline-block;
+							font-size: 24rpx;
+							color: #1296db;
+							background-color: #eee;
+							margin-right: 15rpx;
+							padding:10rpx 15rpx;
+							border-radius: 8rpx;
+						}
+					}
+
+				}
+
+				.main-company {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin-top: 15rpx;
+					font-size: 28rpx;
+				}
+			}
+
+			.content-bottom {
+				margin-top: 20rpx;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+
+				.botom-recruiters {
+					display: flex;
+					align-items: center;
+
+					.recruiters-pic {
+						margin-right: 15rpx;
+
+						image {
+							width: 100rpx;
+							height: 100rpx;
+							border-radius: 50%;
+						}
+					}
+
+					.recruiters-name {
+						margin-left: 15rpx;
+						font-size: 24rpx;
+					}
+				}
+
+				.content-place {
+					font-size: 28rpx;
+				}
+			}
+		}
 	}
 }
 </style>

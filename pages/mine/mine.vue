@@ -249,7 +249,7 @@
 					{
 						num: 0,
 						label: '人才收藏',
-						path:"/MineLinkOthers/myCollection"
+						path:"/Enterprise/enterpriseEdit/collectionStu"
 					},
 				],
 
