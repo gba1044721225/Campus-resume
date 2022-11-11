@@ -14,7 +14,7 @@
 				<view class="content-main">
 					<view class="main-skills">
 						<scroll-view scroll-x="true" class="skill-scroll">
-							<view class="sill-item" v-for="(skillItem,ind) in item.requirements.split('，')"
+							<view class="sill-item" v-for="(skillItem,ind) in item.jobLab.split('，')"
 								:key="ind">
 								{{skillItem}}
 							</view>
