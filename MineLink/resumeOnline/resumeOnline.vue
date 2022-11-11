@@ -5,6 +5,23 @@
 				<text :class="{'resume-active':currentResume==index}">{{item.label}}{{index+1}}</text>
 				<image :src="`${imageBaseSrc}edit_blue.png`" mode="" v-if="currentResume==index"></image>
 			</view>
+			
+			<view class="open-close-box" v-if="currentResume===0">
+			   <text style="margin:15rpx 0;">简历设置</text>
+			  <u-radio-group
+				v-model="openShow"
+				placement="row"
+			  >
+				<u-radio
+				  :customStyle="{marginBottom: '8px'}"
+				  v-for="(item, index) in openCloseList"
+				  :key="index"
+				  :label="item.name"
+				  :name="item.val"
+				>
+				</u-radio>
+			  </u-radio-group>
+			</view>
 		</view>
 
 		<view class="resume-swiper">
@@ -457,6 +474,18 @@
 				cityLevel1: [],
 				cityLevel2: [],
 				cityLevel3: [],
+				openCloseList: [{
+					  name: '公开',
+					  val:"3",
+					  disabled: false
+					},
+					{
+					  name: '隐藏',
+					  disabled: false,
+					  val:"1"
+					},
+				],
+				openShow:"",
 				tabList: [{
 						label: '简历',
 						resumeId: '',
@@ -1198,6 +1227,9 @@
 
 			//请求提交个人信息，补充信息，求职意向
 			reqAllInfo() {
+				// console.log("openShow",this.openShow)
+				// return
+				
 				if(!this.tabList[this.currentResume].resumeList.intentInfo.job){
 					uni.showToast({
 						icon:"none",
@@ -1237,7 +1269,7 @@
 						"sex": dataList.pnInfo.sex,
 						"sort": this.currentResume,
 						"userName": dataList.pnInfo.name,
-						"view": "1", //1:公开
+						"view": this.openShow, //1:公开
 						"workCate": "",
 						"workType": dataList.intentInfo.jType
 					},
@@ -1448,8 +1480,10 @@
 		// margin-bottom: 5vh;
 
 		.resume-online-tab {
+			height: 150rpx;
 			display: flex;
 			align-items: center;
+			position: relative;
 
 			.tab-item {
 				padding: 15rpx 20rpx;
@@ -1469,6 +1503,24 @@
 				image {
 					width: 36rpx;
 					height: 36rpx;
+				}
+			}
+			
+			.open-close-box{
+				border: 1rpx solid #1296db;
+				padding: 10rpx;
+				border-radius: 5rpx;
+				box-sizing: border-box;
+				position: absolute;
+				bottom: 50%;
+				transform: translateY(50%);
+				right: 10rpx;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				
+				::v-deep .u-radio{
+					margin-right: 15rpx;
 				}
 			}
 		}
