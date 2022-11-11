@@ -50,7 +50,7 @@
 
 			<view class="company-position">
 				<view class="position-title">
-					职业详情
+					技能标签
 				</view>
 				<view class="tag-box" v-if="jobList.recruitmentInfo!=undefined">
 					<view class="tag-item" v-for="(item,index) in jobList.recruitmentInfo.jobLab.split('，')"
