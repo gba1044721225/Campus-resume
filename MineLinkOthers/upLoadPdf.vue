@@ -61,21 +61,6 @@
 				this.pdfList[index].file = res.tempFiles[0]
 			},
 
-			upLoadFile(index) {
-				const path = this.pdfList[index].fileUrl
-				if(!path){
-					uni.showToast({
-						icon:"none",
-						title:"请先选中个文件",
-						duration:1500
-					})
-					return
-				}
-				this.$upLoadFile('/file/upload/excel', path, {}, res => {
-					console.log("res", res)
-				})
-			},
-			
 			previewFile(index){				
 				const path = this.pdfList[index].fileUrl
 				if(!path){
@@ -100,19 +85,68 @@
 				})
 			},
 			
-			//删除
-			deleteFile(){
-				
+			reqQueryFile(){
+				const data = {
+					data:this.$store.state.openId,
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/file/query/jianli',data,res=>{
+					console.log("res",res)
+				},header)
 			},
 			
-			downFile(index){
-				// this.$downFile()
-				uni.showToast({
-					icon:"none",
-					title:"改功能尚未开放",
-					duration:1500
+			upLoadFile(index) {
+				const path = this.pdfList[index].fileUrl
+				if(!path){
+					uni.showToast({
+						icon:"none",
+						title:"请先选中个文件",
+						duration:1500
+					})
+					return
+				}
+				this.$upLoadFile('/file/upload/excel', path, {}, res => {
+					console.log("res", res)
+				})
+			},
+				
+			//删除文件
+			deleteFile(fileId){
+				return new Promise(resolve=>{
+					const data = {
+						data:this.$store.state.openId,
+						meta: {
+							code:"",
+							serverity:"",
+							openId: this.$store.state.openId,
+							role: this.$store.state.role,
+						}
+					}
+					const header = {
+						'content-type': 'application/json'
+					}
+					this.$http(`/file/delete/${fileId}`,data,res=>{
+						console.log("res",res)
+						resolve()
+					},header)
+				})
+			},
+			
+			//下载文件
+			downFile(filePath){
+				this.$downFile(filePath,res=>{
+					// console.log()
 				})
 			}
+		},
+		onShow(){
+			this.reqQueryFile()
 		}
 	}
 </script>
