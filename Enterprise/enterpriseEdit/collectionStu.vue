@@ -54,9 +54,9 @@
 			}
 		},
 		methods: {
-			linkToStudentBox(id){
+			linkToStudentDetails(id){
 				uni.navigateTo({
-					url:`/Enterprise/enterpriseEdit/studentBox?id=${id}`
+					url:`/HomeLink/studentDetails/studentDetails?stuId=${id}`
 				})	
 			},
 			reqRecruitmentInformation() {

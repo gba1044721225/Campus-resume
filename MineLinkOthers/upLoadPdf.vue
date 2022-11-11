@@ -90,8 +90,19 @@
 				      filePath: path,
 				      success: function (res) {
 				        console.log('打开文档成功')
-				      }
+				      },
+					  fail:res=>{
+						  uni.showToast({
+						  	icon:"none",
+							title:"当前格式不支持"
+						  })
+					  }
 				})
+			},
+			
+			//删除
+			deleteFile(){
+				
 			},
 			
 			downFile(index){

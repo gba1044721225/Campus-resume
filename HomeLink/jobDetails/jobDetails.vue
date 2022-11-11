@@ -75,7 +75,7 @@
 		</view>
 
 		<view class="commit-button-box">
-			<view class="commit-button" @click="reqDeliverResume" v-if="!fromPath">
+			<view class="commit-button" @click="reqDeliverResume" v-if="fromPath!='deliveryInfo'">
 				投递简历
 			</view>
 		</view>

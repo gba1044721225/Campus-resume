@@ -272,13 +272,13 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http('/recruit/user/delivery', data, res => {
+				this.$http('/recruit/user/rejected', data, res => {
 					console.log("res", res)
 					this.showModal=false
 					if (res.meta.code == 200) {
 						uni.showToast({
 							icon:"none",
-							title:"邀请成功",
+							title:"操作成功",
 							duration:1500
 						})
 					}else{

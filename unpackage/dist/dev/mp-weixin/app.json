@@ -36,7 +36,8 @@
         "enterpriseEdit/studentBoxDetails",
         "enterpriseEdit/interviewToStu",
         "enterpriseEdit/interviewStuDetails",
-        "enterpriseEdit/collectionStu"
+        "enterpriseEdit/collectionStu",
+        "enterpriseEdit/collectionStuDetails"
       ]
     },
     {
@@ -46,7 +47,6 @@
         "myResumeInfo",
         "deliveryInfo",
         "myInterviewStu",
-        "myInterviewStuDt",
         "myCollection"
       ]
     }
