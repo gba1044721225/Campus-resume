@@ -47,16 +47,16 @@
 			
 			<view class="job-item-offer">
 				<view class="offer-item">
-					<image :src="`${imgSrc}reject.png`" mode="" v-if="item.status===0"></image>
-					<text v-if="item.status===0">抱歉，您的简历已被驳回，请继续努力！</text>
+					<image :src="`${imgSrc}reject.png`" mode="" v-if="item.status==='0'"></image>
+					<text v-if="item.status==='0'">抱歉，您的简历已被驳回，请继续努力！</text>
 					
-					<image :src="`${imgSrc}offer.png`" mode="" v-if="item.status===1"></image>
-					<text v-if="item.status===1">恭喜你，你已被邀请面试！</text>
+					<image :src="`${imgSrc}offer.png`" mode="" v-if="item.status==='1'"></image>
+					<text v-if="item.status==='1'">恭喜你，你已被邀请面试！</text>
 									 
-					<view v-if="item.status!==0&&item.status!=1">
+					<view v-if="item.status!=='0'&&item.status!=='1'">
 						<text style="font-weight: bold;color:cornflowerblue">......</text>
 						<text style="margin-left: 20rpx;"> 等待中 </text>
-					</view >
+					</view>
 				</view>
 			</view>
 		</view>
