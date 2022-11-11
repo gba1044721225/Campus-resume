@@ -73,11 +73,11 @@
 				</view>
 				<!-- 已登录 -->
 				<view class="login-bar" v-if='openId'>
-					<image class="mine-avatar" :src="enterPriseInfo.logo" mode="" @click="linkToEnterpriseIntro">
+					<image class="mine-avatar" :src="enterPriseInfo.imgUrl" mode="" @click="linkToEnterpriseIntro">
 					</image>
 					<view class="login-tips">
 						<view class="tips-title">
-							{{enterPriseInfo.companyName?enterPriseInfo.companyName:'暂无数据'}}
+							{{enterPriseInfo.name?enterPriseInfo.name:'暂无数据'}}
 						</view>
 						<view class="resume-online" @click="linkToEnterpriseIntro">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
@@ -297,7 +297,8 @@
 			//初始化化数据
 			init() {
 				if (this.$store.state.openId!='' && this.role == 2) {
-					this.reqEnterpriseInfo()
+					// this.reqEnterpriseInfo()
+					this.reqEnterpriseNum() 
 					return
 				}
 				if(this.$store.state.openId!='' && this.role == 1){
@@ -505,28 +506,28 @@
 			},
 			
 			//企业端请求
-			reqEnterpriseInfo() {
-				const data = {
-					"data": '',
-					"meta": {
-						openId: this.openId,
-						role: this.$store.state.role,
-					}
-				}
-				const header = {
-					'content-type': 'application/json'
-				}
-				this.$http('/company/query', data, res => {
-					// console.log("res", res)
-					if (res.meta.code == 200) {
-						const data = JSON.parse(res.data)
-						this.enterPriseInfo = data
-						console.log("this.enterPriseInfo", this.enterPriseInfo)
-					}
-				}, header)
-			},
+			// reqEnterpriseInfo() {
+			// 	const data = {
+			// 		"data": '',
+			// 		"meta": {
+			// 			openId: this.openId,
+			// 			role: this.$store.state.role,
+			// 		}
+			// 	}
+			// 	const header = {
+			// 		'content-type': 'application/json'
+			// 	}
+			// 	this.$http('/company/query', data, res => {
+			// 		// console.log("res", res)
+			// 		if (res.meta.code == 200) {
+			// 			const data = JSON.parse(res.data)
+			// 			this.enterPriseInfo = data
+			// 			console.log("this.enterPriseInfo", this.enterPriseInfo)
+			// 		}
+			// 	}, header)
+			// },
 			
-			//请求收藏/面试/收藏 个数
+			//请求收藏/面试/收藏 个数  企业端请求
 			reqEnterpriseNum() {
 				const data = {
 					"data": this.openId,
@@ -542,6 +543,7 @@
 					console.log("res1111", res)
 					if (res.meta.code == 200) {
 						const data = JSON.parse(res.data)
+						this.enterPriseInfo = data
 						this.infoItemEnterprise[0].num=data.pubNum
 						this.infoItemEnterprise[1].num=data.mianshiNum
 						this.infoItemEnterprise[2].num=data.renNum
@@ -572,7 +574,7 @@
 				},header)
 			},
 			
-			//进来页面获取简历选择信息
+			//进来请求页面获取简历选择信息
 			reqSettingResumeMsg(){
 				this.resumeStateShow="可见"
 				this.resumeItemShow="简历3"
@@ -588,11 +590,8 @@
 			uni.$on('loginAllRight',_=>{
 				this.init()
 			})
-				this.init()
-			this.reqSettingResumeMsg()
-			
-			//收藏 、面试、人才收藏  个数
-			this.reqEnterpriseNum() 
+			this.init()
+			this.reqSettingResumeMsg()	
 		},
 	}
 </script>
