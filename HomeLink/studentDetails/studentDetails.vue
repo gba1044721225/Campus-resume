@@ -181,7 +181,7 @@ import { header } from '../../common/helper'
 						descri: "",
 						flag: "",
 						openId:this.$store.state.openId,
-						recruitId: this.stuId,
+						recruitId: this.dataList.sysuserInfoVO.id,
 						type: "1"
 					},
 					meta: {
@@ -189,7 +189,10 @@ import { header } from '../../common/helper'
 						role: this.$store.state.role,
 					}
 				}
-				this.$http("/recruit/user/",data,res=>{
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http("/recruit/user/delivery",data,res=>{
 					console.log("res",res)
 				},header)
 			}

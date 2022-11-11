@@ -91,6 +91,13 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "HomeLink/studentDetails/studentDetails",
+          "query": "stuId=65",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
