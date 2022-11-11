@@ -3,7 +3,7 @@
 		<view class="interview-box">
 			<view class="box-item" v-for="(item,index) in dataList" :key="index">
 				<view class="item-time-box">
-					2022年11月10日 23:00
+					{{item.interviewDate}}
 				</view>
 				<view class="interview-item" @click="linkToJobDetails(item.id)">
 					<image src="../static/deliver.png" mode=""></image>
