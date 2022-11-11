@@ -149,12 +149,27 @@
 		
 		<tui-modal :show="showModal" custom>
 			<view class="tui-modal-custom">
-				<view class="tui-modal-custom-text">
+				<view class="tui-modal-custom-text" v-if="flag===0">
 					<textarea v-model="rejectReason" placeholder="请填写驳回原因" />
+				</view>
+				<view class="tui-modal-custom-text" v-if="flag===1">
+					<textarea v-model="rejectReason" placeholder="请填写备注信息" />
+				</view>
+				<view class="tui-modal-custom-text" v-if="flag===1">
+					<input type="text" v-model="showDataTime" :disabled="true" @click="openTimerPicker" placeholder="请选择面试时间">
 				</view>
 				<view class="tui-box">
 					<tui-button height="72rpx" :size="28" type="primary" @click="showModal=false">取消</tui-button>
-					<tui-button height="72rpx" :size="28" type="primary" @click="reqHandlerResume(0)">确定</tui-button>
+					<tui-button height="72rpx" :size="28" type="primary" @click="reqHandlerResume">确定</tui-button>
+				</view>
+				<view class="date-time-box">
+					   <u-datetime-picker
+							:show="isDateTime"
+							v-model="dateTime"
+							mode="datetime"
+							@cancel="cancelTimer"
+							@confirm="confirmTimer"
+						></u-datetime-picker>
 				</view>
 			</view>
 		</tui-modal>
@@ -169,28 +184,53 @@
 				recruitId:"",
 				showModal:false,
 				rejectReason:"",
+				flag:"",
+				dateTime:"",
+				showDataTime:"",
+				isDateTime:false,
 				dataList:{},
 			}
 		},
 		methods:{
+			//邀请面试
 			invitInterview(){
 				this.rejectReason=''
-				uni.showModal({
-					title: '邀请面试',
-					content: '确认后将邀请面试',
-					success: res => {
-						if (res.confirm) {
-							this.reqHandlerResume(1)
-						} else if (res.cancel) {
-							// console.log('用户点击取消');
-						}
-					}
-				});	
+				this.showModal=true
+				this.flag=1
 			},
 			
+			//选择时间
+			openTimerPicker(){
+				this.isDateTime=true
+			},
+			
+			//
+			cancelTimer(){
+				// console.log(1111)
+				this.isDateTime=false
+			},
+			
+			//
+			confirmTimer(e){
+				// console.log(e)
+				this.isDateTime=false
+				let date=new Date(e.value)
+				let year=date.getFullYear()
+				let month=date.getMonth()+1
+				let day=date.getDate()
+				
+				let hour=date.getHours()>10?date.getHours():'0'+date.getHours()
+				let minutes=date.getMinutes()>10?date.getMinutes():'0'+date.getMinutes()
+				
+				// console.log(date)
+				this.showDataTime=`${year}-${month}-${day} ${hour}:${minutes}`
+			},
+			
+			//驳回
 			rejectInterview(){
 				this.rejectReason=''
 				this.showModal=true
+				this.flag=0
 			},
 			
 			reqResumeListById(){
@@ -214,14 +254,15 @@
 			},
 			
 			//邀请/驳回
-			reqHandlerResume(flag){
+			reqHandlerResume(){
 				const data = {
 					data: {
-						openId: this.$store.state.openId,
+						openId: this.dataList.sysuserInfoVO.openId,
 						recruitId: this.recruitId,
 						type: "",
 						descri: this.rejectReason,
-						flag,
+						flag:this.flag,
+						interviewDate:this.showDataTime
 					},
 					meta: {
 						openId: this.$store.state.openId,
@@ -408,6 +449,9 @@
 					padding: 20rpx 25rpx;
 					width: 100%;
 				}
+				input{
+					padding: 15rpx;
+				}
 			}
 			
 			.tui-box{
@@ -419,7 +463,10 @@
 					background-color: #1296db !important;
 				}
 			}
-
+			
+			// .date-time-box{
+			// 	min-height: 287rpx;
+			// }
 		}
 	}
 </style>

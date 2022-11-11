@@ -255,7 +255,7 @@
 
 
 				//企业端数据
-				enterPriseInfo: {},
+				enterPriseInfo: {},				
 				//学生端数据
 				studentInfo:{},
 				
@@ -517,7 +517,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/company/query', data, res => {
-					console.log("res", res)
+					// console.log("res", res)
 					if (res.meta.code == 200) {
 						const data = JSON.parse(res.data)
 						this.enterPriseInfo = data
@@ -526,6 +526,28 @@
 				}, header)
 			},
 			
+			//请求收藏/面试/收藏 个数
+			reqEnterpriseNum() {
+				const data = {
+					"data": this.openId,
+					"meta": {
+						openId: this.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/company/query/index', data, res => {
+					console.log("res1111", res)
+					if (res.meta.code == 200) {
+						const data = JSON.parse(res.data)
+						this.infoItemEnterprise[0].num=data.pubNum
+						this.infoItemEnterprise[1].num=data.mianshiNum
+						this.infoItemEnterprise[2].num=data.renNum
+					}
+				}, header)
+			},
 			
 			//学生端请求
 			reqStudentInfo(){
@@ -540,7 +562,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/recruit/user/query/index',data,res=>{
-					console.log("res",res)
+					console.log("resdddd",res)
 					if(res.meta.code==200){
 						this.studentInfo=JSON.parse(res.data)						
 						this.infoItem[0].num=this.studentInfo.toudiNum
@@ -568,6 +590,9 @@
 			})
 				this.init()
 			this.reqSettingResumeMsg()
+			
+			//收藏 、面试、人才收藏  个数
+			this.reqEnterpriseNum() 
 		},
 	}
 </script>
