@@ -48,9 +48,9 @@
 			<view class="job-item-offer">
 				<view class="offer-item">
 					<image :src="`${imgSrc}reject.png`" mode="" v-if="index==0"></image>
-					<text v-if="index==0">抱歉，您的简历已被驳回，请继续努力！</text>
+					<text v-if="item.status===0">抱歉，您的简历已被驳回，请继续努力！</text>
 					<image :src="`${imgSrc}offer.png`" mode="" v-if="index==1"></image>
-					<text v-if="index==1">恭喜你，你已被邀请面试！</text>
+					<text v-if="item.status==1">恭喜你，你已被邀请面试！</text>
 				</view>
 			</view>
 		</view>
@@ -80,23 +80,20 @@
 			//学生模块 请求招聘信息
 			reqRecruitmentInformation() {
 				const data = {
-					data: {
-						current: this.pageInfo.pageNum,
-						size: this.pageInfo.pageSize
-					},
+					data: this.$store.state.openId,
 					meta: {
-						openId: "",
+						openId: this.$store.state.openId,
 						role: this.$store.state.role,
 					}
 				}
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/recruit/user/query/msgList", data, res => {
+				this.$http("/recruit/user/query/3", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-					// console.log("res",res)
+					console.log("res",res)
 					if (res.meta.code == 200) {	
-						this.dataList = JSON.parse(res.data).records
+						this.dataList = JSON.parse(res.data)
 						
 						// console.log("this.dataList", this.dataList)
 					}

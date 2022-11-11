@@ -62,7 +62,7 @@
 			}
 		},
 		methods:{
-			linkToStudentDetails(id) {
+			linkToJobDetails(id) {
 				uni.navigateTo({
 					url: `/HomeLink/jobDetails/jobDetails?id=${id}&from='myCollection'`
 				})
