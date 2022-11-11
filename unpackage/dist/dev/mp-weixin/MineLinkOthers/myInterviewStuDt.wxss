@@ -79,7 +79,7 @@
   align-items: center;
 }
 .my-interview-stu .interview-item-box .item-main .item-content .content-title.data-v-178c68f0 {
-  width: 120rpx;
+  width: 180rpx;
   color: #999;
 }
 .my-interview-stu .interview-item-box .item-main .item-content .content-info.data-v-178c68f0 {

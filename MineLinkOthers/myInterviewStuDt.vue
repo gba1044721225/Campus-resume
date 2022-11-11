@@ -1,17 +1,17 @@
 <template>
 	<view class="my-interview-stu">
 		<view class="interview-state">
-			面试状态
+			{{getStatus}}
 		</view>
 		<view class="interview-item-box" @click="linkToJobDetails">
 			<view class="item-header">
-				<image :src="item.logo" mode=""></image>
+				<image :src="dataList.logo" mode=""></image>
 				<view class="header-content">
 					<view class="header-title">
-						xxxx公司的面试邀请xxxxxxxxxxxxxxxxxxxxxxxx
+						{{dataList.companyName}}公司的面试邀请
 					</view>
 					<view>
-						联系人：xxxx
+						联系人：{{dataList.contactName}}
 					</view>
 				</view>
 			</view>
@@ -22,7 +22,7 @@
 						时间
 					</view>
 					<view class="content-info">
-						xxxxxxxxxxxxx
+						{{dataList.interviewDate}}
 					</view>
 				</view>
 				
@@ -31,16 +31,16 @@
 						职位
 					</view>
 					<view class="content-info">
-						xxxxxxxxxxxxx
+						{{dataList.jobName}}
 					</view>
 				</view>
 				
 				
 				<view class="item-content">
 					<view class="content-title">
-						联系人
+						联系电话
 					</view>
-					<view class="content-info" @click="callPeople(13631233906)">
+					<view class="content-info" @click.stop="callPeople(dataList.contactPhone)" style="margin-left: -9rpx;">
 						<text>13631233906</text>
 						<u-icon name="phone-fill" size="30px" color="#1296db"></u-icon>
 					</view>
@@ -51,7 +51,7 @@
 						地址
 					</view>
 					<view class="content-info">
-						xxxxxxxxxxxxx
+						{{dataList.workAddress}}
 					</view>
 				</view>
 			</view>
@@ -77,6 +77,7 @@
 			
 			
 			callPeople(phone){
+				console.log(1111)
 				uni.makePhoneCall({
 					phoneNumber: phone //仅为示例
 				});
@@ -105,6 +106,19 @@
 				}, header)
 			},
 			
+		},
+		computed:{
+			getStatus(){				
+				if(this.dataList.status==='1'){
+					return '进行中'
+				}
+				
+				if(this.dataList.status==='2'){
+					return '結束'
+				}
+				
+				return '待开始'
+			}
 		},
 		onLoad(payload){
 			this.id=payload.id
@@ -169,7 +183,7 @@
 				display: flex;
 				align-items: center;
 				.content-title{
-					width: 120rpx;
+					width: 180rpx;
 					color: #999;
 				}
 				.content-info{
