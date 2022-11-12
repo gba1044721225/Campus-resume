@@ -94,7 +94,7 @@
 						return '未记录'
 					}
 					
-					return '未记录'
+					return '暂无数据'
 				}
 			}
 		},
