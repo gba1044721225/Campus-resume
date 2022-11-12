@@ -79,7 +79,7 @@
 			callPeople(val){
 				// console.log(1111)
 				uni.makePhoneCall({
-					phoneNumber: '13631233906' 
+					phoneNumber: val
 				});
 			},
 			
@@ -109,15 +109,21 @@
 		},
 		computed:{
 			getStatus(){				
+				if(this.dataList.status==='0'){
+					return '以拒绝'
+				}
+				
 				if(this.dataList.status==='1'){
-					return '进行中'
+					return '已完成'
 				}
 				
 				if(this.dataList.status==='2'){
-					return '結束'
+					return '待开始'
 				}
 				
-				return '待开始'
+				if(this.dataList.status==='3'){
+					return '进行中'
+				}
 			}
 		},
 		onLoad(payload){
