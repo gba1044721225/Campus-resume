@@ -544,6 +544,9 @@
 					if (res.meta.code == 200) {
 						const data = JSON.parse(res.data)
 						this.enterPriseInfo = data
+						// this.$set(this.infoItemEnterprise,0,data.pubNum)
+						// this.$set(this.infoItemEnterprise,1,data.mianshiNum)
+						// this.$set(this.infoItemEnterprise,2,data.renNum)
 						this.infoItemEnterprise[0].num=data.pubNum
 						this.infoItemEnterprise[1].num=data.mianshiNum
 						this.infoItemEnterprise[2].num=data.renNum

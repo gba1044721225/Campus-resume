@@ -12,7 +12,7 @@
 						</view>
 					</view>
 					<view class="interview-state">
-						{{getStatus(item.status)}}
+						{{getStatus(item.status,item.interviewDate)}}
 					</view>
 				</view>
 				<view class="item-main">
@@ -83,6 +83,15 @@
 					
 					if(val==='2'){
 						return '待开始'
+					}
+					
+					if(val==='3'){			
+						//当天
+						return '进行中'
+					}
+					
+					if(val==='4'){
+						return '未记录'
 					}
 					
 					return '未记录'
