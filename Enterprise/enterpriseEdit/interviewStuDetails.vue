@@ -195,9 +195,14 @@
 				}
 				this.$http('/company/setcomplete',data,res=>{
 					console.log("res",res)
-					// if(res.meta.code==200){
-					// 	this.dataList=JSON.parse(res.data)
-					// }else{
+					if(res.meta.code==200){
+						// this.dataList=JSON.parse(res.data)
+						uni.showToast({
+							icon:"none",
+							title:"操作成功"
+						})
+					}
+					//else{
 					// }
 				},header)
 			},

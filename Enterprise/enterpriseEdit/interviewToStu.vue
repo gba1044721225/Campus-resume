@@ -67,11 +67,8 @@
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 					console.log("res",res)
 					if (res.meta.code == 200) {	
-						// this.dataList=JSON.parse(res.data)
-						uni.showToast({
-							icon:"none",
-							title:"操作成功"
-						})
+						this.dataList=JSON.parse(res.data)
+
 						// console.log("this.dataList", this.dataList)
 					}
 				}, header)
