@@ -139,7 +139,7 @@
 		</view>
 		
 		<view class="btns-box">
-			<view class="btn-item" v-if="status==='2'">
+			<view class="btn-item" v-if="status==='2'" @click="setCompleted">
 				面试已完成
 			</view>
 			<view class="btn-item" style="background-color:#555;" v-if="status!=='2'">
@@ -154,7 +154,8 @@
 		data(){
 			return {
 				stuId:"",
-				recruitId:"",
+				// recruitId:"",
+				collecId:"",
 				status:"",
 				dataList:{},
 			}
@@ -180,6 +181,26 @@
 				},header)
 			},
 			
+			
+			setCompleted(){
+				const data = {
+					data:this.collecId,
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http('/company/setcomplete',data,res=>{
+					console.log("res",res)
+					// if(res.meta.code==200){
+					// 	this.dataList=JSON.parse(res.data)
+					// }else{
+					// }
+				},header)
+			},
 		},
 		computed:{
 			getWorkYear(){
@@ -209,10 +230,11 @@
 		onLoad(payload) {
 			this.stuId=payload.stuId
 			this.status=payload.status
+			this.collecId=payload.collecId
 			// this.recruitId=payload.recruitId
 			console.log(payload)
 			console.log("this.stuId",this.stuId)
-			console.log("this.recruitId",this.recruitId)
+			// console.log("this.recruitId",this.recruitId)
 			this.reqResumeListById()
 		}
 	}
