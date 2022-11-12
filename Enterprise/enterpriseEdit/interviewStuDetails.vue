@@ -139,7 +139,7 @@
 		</view>
 		
 		<view class="btns-box">
-			<view class="btn-item" v-if="status==='2'" @click="setCompleted">
+			<view class="btn-item" v-if="status==='3'" @click="setCompleted">
 				面试已完成
 			</view>
 			<view class="btn-item" style="background-color:#555;" v-if="status!=='2'">
