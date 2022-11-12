@@ -1307,6 +1307,7 @@
 						const certData = JSON.parse(res.data).listFile
 						// console.log(data)
 						//pnInfo
+						this.openShow=data.view
 						this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
 						this.$set(this.tabList[this.currentResume], 'viewType', data.view)
 						this.$set(this.tabList[this.currentResume], 'userIntro', data.introduction)

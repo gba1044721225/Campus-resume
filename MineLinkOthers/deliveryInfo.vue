@@ -95,7 +95,7 @@
 				const header = {
 					'content-type': 'application/json'
 				}
-				this.$http("/recruit/user/query/3", data, res => {
+				this.$http("/recruit/user/query/2", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
 					console.log("res",res)
 					if (res.meta.code == 200) {	
