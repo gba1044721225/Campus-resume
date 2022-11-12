@@ -255,6 +255,14 @@
 			
 			//邀请/驳回
 			reqHandlerResume(){
+				if(this.flag==1 && this.showDataTime==''){
+					uni.showToast({
+						icon:"none",
+						title:"时间不能为空",
+					})
+					return;
+				}
+				
 				const data = {
 					data: {
 						openId: this.dataList.sysuserInfoVO.openId,
