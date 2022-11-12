@@ -216,14 +216,14 @@
 				this.isDateTime=false
 				let date=new Date(e.value)
 				let year=date.getFullYear()
-				let month=date.getMonth()+1>10?date.getMonth()+1:'0'+date.getMonth()+1
+				let month=date.getMonth()+1>10?date.getMonth()+1:'0'+(date.getMonth()+1)
 				let day=date.getDate()>10?date.getDate():'0'+date.getDate()
 				
 				let hour=date.getHours()>10?date.getHours():'0'+date.getHours()
 				let minutes=date.getMinutes()>10?date.getMinutes():'0'+date.getMinutes()
 				
 				// console.log(date)
-				this.showDataTime=`${year}-${month}-${day} ${hour}:${minutes}`
+				this.showDataTime=`${year}-${month}-${day} ${hour}:${minutes}:00`
 			},
 			
 			//驳回
