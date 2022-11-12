@@ -1,7 +1,7 @@
 <template>
 	<view class="interview-to-student">
 		<view class="student-box">
-			<view class="student-item" @click="linkToInterviewStuDetails" v-for="(item,index) in dataList" :key="index">
+			<view class="student-item" @click="linkToInterviewStuDetails(item.id,item.status)" v-for="(item,index) in dataList" :key="index">
 				<view class="item-top">
 					<view class="data-time">
 						<view>
@@ -42,12 +42,12 @@
 			}
 		},
 		methods:{
-			linkToInterviewStuDetails(){
-				const stuId=60
-				const recruitId=18
+			linkToInterviewStuDetails(stuId,status){
+				// const stuId=60
+				// const recruitId=18
 				// console.log("stuId",stuId)
 				uni.navigateTo({
-					url:`/Enterprise/enterpriseEdit/interviewStuDetails?stuId=${stuId}&recruitId=${recruitId}`
+					url:`/Enterprise/enterpriseEdit/interviewStuDetails?stuId=${stuId}&status=${status}`
 				})
 			},
 			
@@ -65,7 +65,7 @@
 				}
 				this.$http("/company/query/mianshi", data, res => {
 					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
-					// console.log("res",res)
+					console.log("res",res)
 					if (res.meta.code == 200) {	
 						this.dataList=JSON.parse(res.data)
 						

@@ -139,7 +139,10 @@
 		</view>
 		
 		<view class="btns-box">
-			<view class="btn-item">
+			<view class="btn-item" v-if="status==='2'">
+				面试已完成
+			</view>
+			<view class="btn-item" style="background-color:#555;" v-if="status!=='2'">
 				面试已完成
 			</view>
 		</view>
@@ -152,6 +155,7 @@
 			return {
 				stuId:"",
 				recruitId:"",
+				status:"",
 				dataList:{},
 			}
 		},
@@ -204,7 +208,8 @@
 		},
 		onLoad(payload) {
 			this.stuId=payload.stuId
-			this.recruitId=payload.recruitId
+			this.status=payload.status
+			// this.recruitId=payload.recruitId
 			console.log(payload)
 			console.log("this.stuId",this.stuId)
 			console.log("this.recruitId",this.recruitId)
