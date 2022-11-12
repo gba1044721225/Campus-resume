@@ -5,7 +5,7 @@
 		</view>
 		<view class="interview-item-box" @click="linkToJobDetails">
 			<view class="item-header">
-				<image :src="dataList.logo" mode=""></image>
+				<image :src="dataList.companyLogo" mode=""></image>
 				<view class="header-content">
 					<view class="header-title">
 						{{dataList.companyName}}公司的面试邀请
@@ -22,7 +22,7 @@
 						时间
 					</view>
 					<view class="content-info">
-						{{dataList.interviewDate}}
+						{{dataList.date}}
 					</view>
 				</view>
 				
@@ -31,7 +31,7 @@
 						职位
 					</view>
 					<view class="content-info">
-						{{dataList.jobName}}
+						{{dataList.job}}
 					</view>
 				</view>
 				
@@ -40,8 +40,8 @@
 					<view class="content-title">
 						联系电话
 					</view>
-					<view class="content-info" @click.stop="callPeople(dataList.contactPhone)" style="margin-left: -9rpx;">
-						<text>13631233906</text>
+					<view class="content-info" @click.stop="callPeople(dataList.contactPhone)" style="margin-left: -2rpx;">
+						<text>{{dataList.contactPhone}}</text>
 						<u-icon name="phone-fill" size="30px" color="#1296db"></u-icon>
 					</view>
 				</view>
@@ -51,7 +51,7 @@
 						地址
 					</view>
 					<view class="content-info">
-						{{dataList.workAddress}}
+						{{dataList.adress?dataList.adress:'暂无地址'}}
 					</view>
 				</view>
 			</view>
@@ -76,10 +76,10 @@
 			},
 			
 			
-			callPeople(phone){
-				console.log(1111)
+			callPeople(val){
+				// console.log(1111)
 				uni.makePhoneCall({
-					phoneNumber: phone //仅为示例
+					phoneNumber: '13631233906' 
 				});
 			},
 			
