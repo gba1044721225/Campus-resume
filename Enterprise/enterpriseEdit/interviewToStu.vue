@@ -1,61 +1,31 @@
 <template>
 	<view class="interview-to-student">
 		<view class="student-box">
-			<view class="student-item" @click="linkToInterviewStuDetails">
+			<view class="student-item" @click="linkToInterviewStuDetails" v-for="(item,index) in dataList" :key="index">
 				<view class="item-top">
 					<view class="data-time">
 						<view>
-							2022年11月10日
+							{{item.interviewDate}}
 						</view>
 						<view>
 							面试 （职位）
 						</view>
 					</view>
 					<view class="interview-state">
-						面试状态(已过期/已完成)
+						{{getStatus(item.status)}}
 					</view>
 				</view>
 				<view class="item-main">
 					<image src="../../static/reject.png" mode=""></image>
 					<view class="main-info">
 						<view class="info-name">
-							张新柯（女）
+							{{item.userName}}（{{item.sex}}）
 						</view>
 						<view class="info-msg">
-							本科/计算机专业
+							{{item.leve}}/{{item.professional}}
 						</view>
 						<view class="position">
-							先居 广东省广州市天河区
-						</view>
-					</view>
-				</view>
-			</view>
-			
-			<view class="student-item">
-				<view class="item-top">
-					<view class="data-time">
-						<view>
-							2022年11月10日
-						</view>
-						<view>
-							面试 （职位）
-						</view>
-					</view>
-					<view class="interview-state">
-						面试状态(已过期/已完成)
-					</view>
-				</view>
-				<view class="item-main">
-					<image src="../../static/reject.png" mode=""></image>
-					<view class="main-info">
-						<view class="info-name">
-							张新柯（女）
-						</view>
-						<view class="info-msg">
-							本科/计算机专业
-						</view>
-						<view class="position">
-							先居 广东省广州市天河区
+							先居 {{item.address}}
 						</view>
 					</view>
 				</view>
@@ -66,6 +36,11 @@
 
 <script>
 	export default{
+		data(){
+			return{
+				dataList:null,
+			}
+		},
 		methods:{
 			linkToInterviewStuDetails(){
 				const stuId=60
@@ -74,7 +49,48 @@
 				uni.navigateTo({
 					url:`/Enterprise/enterpriseEdit/interviewStuDetails?stuId=${stuId}&recruitId=${recruitId}`
 				})
+			},
+			
+			//请求面试数据  企业端
+			reqDataList(){
+				const data = {
+					data: this.$store.state.openId,
+					meta: {
+						openId: this.$store.state.openId,
+						role: this.$store.state.role,
+					}
+				}
+				const header = {
+					'content-type': 'application/json'
+				}
+				this.$http("/company/query/mianshi", data, res => {
+					// console.log("JSON.parse(res.data).records", JSON.parse(JSON.parse(res.data).records))
+					// console.log("res",res)
+					if (res.meta.code == 200) {	
+						this.dataList=JSON.parse(res.data)
+						
+						// console.log("this.dataList", this.dataList)
+					}
+				}, header)
+			},
+		},
+		computed:{
+			getStatus(){
+				return function(val){					
+					if(val==='1'){
+						return '已完成'
+					}
+					
+					if(val==='2'){
+						return '待开始'
+					}
+					
+					return '未记录'
+				}
 			}
+		},
+		onShow(){
+			this.reqDataList()
 		}
 	}
 </script>
