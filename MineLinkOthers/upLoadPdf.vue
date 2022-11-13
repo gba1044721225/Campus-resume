@@ -133,7 +133,7 @@
 					id:this.pdfList[index].id || ''
 				}, res => {
 					console.log("res", res)
-					if(res.mate.code==200){
+					if(res.statusCode==200){
 						uni.showToast({
 							icon:"none",
 							title:"上传成功"
