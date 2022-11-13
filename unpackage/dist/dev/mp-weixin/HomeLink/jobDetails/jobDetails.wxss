@@ -173,7 +173,7 @@
 }
 .job-details .collection.data-v-059cb0e7 {
   position: fixed;
-  bottom: 200rpx;
+  bottom: 220rpx;
   right: 0;
   background-color: #1296db;
   color: #fff;

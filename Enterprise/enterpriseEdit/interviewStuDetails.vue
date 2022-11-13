@@ -201,6 +201,9 @@
 							icon:"none",
 							title:"操作成功"
 						})
+						setTimeout(_=>{
+							uni.navigateBack()
+						},1500)
 					}
 					//else{
 					// }

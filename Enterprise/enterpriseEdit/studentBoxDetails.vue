@@ -254,7 +254,7 @@
 			},
 			
 			//邀请/驳回
-			reqHandlerResume(){
+			reqHandlerResume(){				
 				if(this.flag==1 && this.showDataTime==''){
 					uni.showToast({
 						icon:"none",
@@ -287,8 +287,11 @@
 						uni.showToast({
 							icon:"none",
 							title:"操作成功",
-							duration:1500
+							duration:1500,
 						})
+						setTimeout(_=>{
+							uni.navigateBack()
+						},1500)
 					}else{
 						uni.showToast({
 							icon:"none",

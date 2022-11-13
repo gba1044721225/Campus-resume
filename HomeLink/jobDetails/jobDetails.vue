@@ -85,11 +85,17 @@
 		<view class="collection" @click="reqCollectResume">
 			收藏
 		</view>
+		
+		<my-login ref="loginBox"></my-login>
 	</view>
 </template>
 
 <script>
+	import MyLogin from "@/loginView/login.vue"
 	export default {
+		components:{
+			MyLogin
+		},
 		data() {
 			return {
 				imgSrc: this.$imageBaseSrc,
@@ -144,6 +150,19 @@
 			},
 
 			reqDeliverResume() {
+				if(!this.$store.state.openId){
+					uni.showToast({
+						icon:"none",
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					this.$refs.loginBox.showAgreement=true
+					uni.$on('loginAllRight',_=>{
+						this.reqDeliverResume() 
+					})
+					return;
+				}
+				
 				const data = {
 					data: {
 						openId: this.$store.state.openId,
@@ -172,6 +191,19 @@
 			},
 			
 			reqCollectResume() {
+				if(!this.$store.state.openId){
+					uni.showToast({
+						icon:"none",
+						title: "请先登录后使用该功能",
+						duration: 1500
+					})
+					this.$refs.loginBox.showAgreement=true
+					uni.$on('loginAllRight',_=>{
+						this.reqCollectResume()
+					})
+					return;
+				}
+				
 				const data = {
 					data: {
 						openId: this.$store.state.openId,
@@ -400,7 +432,7 @@
 			position: fixed;
 			// top: 50%;
 			// transform: translateY(-50%);
-			bottom: 200rpx;
+			bottom: 220rpx;
 			right: 0;
 			background-color: #1296db ;
 			color: #fff;
