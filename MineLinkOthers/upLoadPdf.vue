@@ -40,19 +40,24 @@
 		data() {
 			return {
 				imgSrc: this.$imageBaseSrc,
+				// showWebView:false,
+				// webViewUrl:"",
 				pdfList: [{
 						fileUrl: "",
 						fileName: "",
+						urlOnline:"",
 						id:"",
 					},
 					{
 						fileUrl: "",
 						fileName: "",
+						urlOnline:"",
 						id:"",
 					},
 					{
 						fileUrl: "",
 						fileName: "",
+						urlOnline:"",
 						id:"",
 					}
 				]
@@ -111,6 +116,7 @@
 							if(dataList[i]){
 								this.downFile(dataList[i].fileUrl).then(new_path=>{
 									const reg=/.(?<=\.)\S+/
+									v.urlOnline=dataList[i].fileUrl
 									v.fileUrl=new_path
 									v.id=dataList[i].id
 									v.fileName=`简历1${reg.exec(new_path)[0]}`
@@ -181,14 +187,38 @@
 			
 			//真正下载接口
 			reqDownFile(index){
-				const FileSystemManager= wx.getFileSystemManager()
-				FileSystemManager.saveFile({
-					tempFilePath:this.pdfList[index].fileUrl,
-					filePath:`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`,
-					success:res=>{
-						console.log("res",res)
-					}
+				// const FileSystemManager= wx.getFileSystemManager()
+				// FileSystemManager.saveFile({
+				// 	tempFilePath:this.pdfList[index].fileUrl,
+				// 	filePath:`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`,
+				// 	success:res=>{
+				// 		console.log("res",res)
+				// 	}
+				// })
+				// console.log(`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`)
+				wx.downloadFile({
+				  url: this.pdfList[index].urlOnline,
+				  filePath:`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`,
+				  success (res) {
+					  console.log("success",res)
+					 wx.openDocument({
+						filePath: res.filePath,
+						// fileType: 'xls',
+						showMenu: true // 关键，这里开启预览页面的右上角菜单，才能另存为
+					 })
+
+				  }
 				})
+				
+				// this.webViewUrl=this.pdfList[index].urlOnline
+				// this.webViewUrl=true
+				
+				// setTimeout(_=>{
+				// 	this.webViewUrl=false
+				// },500)
+				// uni.navigateTo({
+				// 	url:`/MineLinkOthers/webViewUrl?webUrl=${this.pdfList[index].urlOnline}`
+				// })
 			}
 		},
 		mounted(){

@@ -44,6 +44,7 @@
       "root": "MineLinkOthers",
       "pages": [
         "upLoadPdf",
+        "webViewUrl",
         "myResumeInfo",
         "deliveryInfo",
         "myInterviewStu",

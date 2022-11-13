@@ -4,8 +4,9 @@ module.exports = {
 	//设置全局api请求地址h
 	hostname() {
 		// return "http://192.168.43.93:8877"
-		return "http://101.33.210.213:8877"
+		// return "http://101.33.210.213:8877"
 		// return ""
+		return "https://www.lib.gold"
 	},
 
 	//设置全局api请求路径
