@@ -109,12 +109,14 @@
 					if(res.meta.code==200){
 						this.pdfList.forEach((v,i)=>{
 							if(dataList[i]){
-								v.fileUrl=dataList[i].fileUrl
-								v.id=dataList[i].id
+								this.downFile(dataList[i].fileUrl).then(new_path=>{
+									v.fileUrl=new_path
+									v.id=dataList[i].id
+								})
 							}
 						})
 					}
-					console.log(this.pdfList)
+					// console.log(this.pdfList)
 				},header)
 			},
 			
@@ -167,8 +169,11 @@
 			
 			//下载文件
 			downFile(filePath){
-				this.$downFile(filePath,res=>{
-					console.log("downFile",res)
+				return new Promise(resolve=>{
+					this.$downFile(filePath,res=>{
+						console.log("downFile",res)
+						resolve(res.tempFilePath)
+					})
 				})
 			}
 		},
