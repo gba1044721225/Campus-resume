@@ -1436,10 +1436,10 @@
 			reqSetDefaultResume(){				
 				const data={
 					data:{
-						mainOneId:this.tabList[0].resumeId,
-						mainOneSort:this.currentResume==0?0:1,
-						mainTwoId:this.tabList[1].resumeId ,
-						mainTwoSort:this.currentResume==1?0:1,
+						mainOneId:this.tabList[this.currentResume].resumeId,
+						mainOneSort:0,
+						mainTwoId:this.tabList[0].resumeId,
+						mainTwoSort:this.currentResume,
 					},
 					meta: {
 						openId: this.$store.state.openId,

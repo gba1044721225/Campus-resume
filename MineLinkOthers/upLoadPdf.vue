@@ -24,7 +24,7 @@
 				<view class="btns-item" @click="previewFile(index)">
 					预览
 				</view>
-				<view class="btns-item" @click="downFile(index)">
+				<view class="btns-item" @click="reqDownFile(index)">
 					下载
 				</view>
 			</view>
@@ -42,17 +42,17 @@
 				imgSrc: this.$imageBaseSrc,
 				pdfList: [{
 						fileUrl: "",
-						file: null,
+						fileName: "",
 						id:"",
 					},
 					{
 						fileUrl: "",
-						file: null,
+						fileName: "",
 						id:"",
 					},
 					{
 						fileUrl: "",
-						file: null,
+						fileName: "",
 						id:"",
 					}
 				]
@@ -110,8 +110,10 @@
 						this.pdfList.forEach((v,i)=>{
 							if(dataList[i]){
 								this.downFile(dataList[i].fileUrl).then(new_path=>{
+									const reg=/.(?<=\.)\S+/
 									v.fileUrl=new_path
 									v.id=dataList[i].id
+									v.fileName=`简历1${reg.exec(new_path)[0]}`
 								})
 							}
 						})
@@ -138,7 +140,7 @@
 					if(res.statusCode==200){
 						uni.showToast({
 							icon:"none",
-							title:"上传成功"
+							title:"上传成功",
 						})
 						this.reqQueryFile()
 					}
@@ -167,13 +169,25 @@
 				})
 			},
 			
-			//下载文件
+			//下载文件用于转换路径
 			downFile(filePath){
 				return new Promise(resolve=>{
 					this.$downFile(filePath,res=>{
 						console.log("downFile",res)
 						resolve(res.tempFilePath)
 					})
+				})
+			},
+			
+			//真正下载接口
+			reqDownFile(index){
+				const FileSystemManager= wx.getFileSystemManager()
+				FileSystemManager.saveFile({
+					tempFilePath:this.pdfList[index].fileUrl,
+					filePath:`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`,
+					success:res=>{
+						console.log("res",res)
+					}
 				})
 			}
 		},
