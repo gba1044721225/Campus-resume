@@ -8,10 +8,13 @@
 			</view>
 
 			<view class="pdf-item">
+<!-- 				<view class="">
+					{{item.fileUrl}}
+				</view> -->
 				<view v-if="!item.fileUrl" class="none-img" @click="choosePdf(index)">
 					<image :src="`${imgSrc}upLoadCertificate.png`" mode=""></image>
 				</view>
-				<image v-if="item.fileUrl" class="none-img" :src="`${imgSrc}intro_Enterprise.png`" mode=""></image>
+				<image v-if="item.fileUrl" class="none-img" :src="`${imgSrc}intro_Enterprise.png`" mode="" @click="choosePdf(index)"></image>
 				<!-- 				<image :src="enterpriseInfo.businessLicense" mode=""></image> -->
 			</view>
 			<view class="btn-boxs">
@@ -40,14 +43,17 @@
 				pdfList: [{
 						fileUrl: "",
 						file: null,
+						id:"",
 					},
 					{
 						fileUrl: "",
 						file: null,
+						id:"",
 					},
 					{
 						fileUrl: "",
 						file: null,
+						id:"",
 					}
 				]
 			}
@@ -56,9 +62,10 @@
 			async choosePdf(index) {
 				// console.log(index)
 				const res = await this.$chooseFile()
-				console.log("res", res)
+				// console.log("res", res)
 				this.pdfList[index].fileUrl = res.tempFiles[0].path
 				this.pdfList[index].file = res.tempFiles[0]
+				console.log("choosePdf",this.pdfList[index])
 			},
 
 			previewFile(index){				
@@ -98,6 +105,16 @@
 				}
 				this.$http('/file/query/jianli',data,res=>{
 					console.log("res",res)
+					const dataList=JSON.parse(res.data)
+					if(res.meta.code==200){
+						this.pdfList.forEach((v,i)=>{
+							if(dataList[i]){
+								v.fileUrl=dataList[i].fileUrl
+								v.id=dataList[i].id
+							}
+						})
+					}
+					console.log(this.pdfList)
 				},header)
 			},
 			
@@ -111,8 +128,18 @@
 					})
 					return
 				}
-				this.$upLoadFile('/file/upload/excel', path, {}, res => {
+				this.$upLoadFile(`/file/upload/${this.$store.state.openId}/7`, path, {
+					standby1:index,
+					id:this.pdfList[index].id || ''
+				}, res => {
 					console.log("res", res)
+					if(res.mate.code==200){
+						uni.showToast({
+							icon:"none",
+							title:"上传成功"
+						})
+						this.reqQueryFile()
+					}
 				})
 			},
 				
@@ -145,7 +172,7 @@
 				})
 			}
 		},
-		onShow(){
+		mounted(){
 			this.reqQueryFile()
 		}
 	}
