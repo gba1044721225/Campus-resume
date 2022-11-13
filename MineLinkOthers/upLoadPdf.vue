@@ -7,14 +7,14 @@
 				</view>
 			</view>
 
-			<view class="pdf-item">
+			<view class="pdf-item" @click="choosePdf(index)">
 <!-- 				<view class="">
 					{{item.fileUrl}}
 				</view> -->
-				<view v-if="!item.fileUrl" class="none-img" @click="choosePdf(index)">
+				<view v-if="!item.fileUrl" class="none-img">
 					<image :src="`${imgSrc}upLoadCertificate.png`" mode=""></image>
 				</view>
-				<image v-if="item.fileUrl" class="none-img" :src="`${imgSrc}intro_Enterprise.png`" mode="" @click="choosePdf(index)"></image>
+				<image v-if="item.fileUrl" class="none-img" :src="`${imgSrc}intro_Enterprise.png`" mode=""></image>
 				<!-- 				<image :src="enterpriseInfo.businessLicense" mode=""></image> -->
 			</view>
 			<view class="btn-boxs">
@@ -168,7 +168,7 @@
 			//下载文件
 			downFile(filePath){
 				this.$downFile(filePath,res=>{
-					// console.log()
+					console.log("downFile",res)
 				})
 			}
 		},
