@@ -1451,6 +1451,7 @@
 				}
 				this.$http('/recruit/user/set/maset',data,res=>{
 					console.log("res",res)
+					this.reqResumeAllInfo()
 				},header)
 			}
 		},
