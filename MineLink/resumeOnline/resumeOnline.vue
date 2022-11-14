@@ -1461,8 +1461,9 @@
 				this.$http('/recruit/user/set/maset',data,res=>{
 					// console.log("res",res)
 					const currentResumeObj=this.tabList[this.currentResume]
-					this.$set(this.tabList,this.currentResume,this.tabList[0])
+					// this.$set(this.tabList,this.currentResume,this.tabList[0])
 					this.$set(this.tabList,0,currentResumeObj)
+					this.reqResumeAllInfo()
 					// this.tabList[this.currentResume]=this.tabList[0]
 					// this.tabList[0]=currentResumeObj
 				},header)
