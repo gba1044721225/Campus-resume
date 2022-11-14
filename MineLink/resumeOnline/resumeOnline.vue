@@ -729,12 +729,13 @@
 			//切换简历
 			changeTabItem(index) {
 				this.currentResume = index
-				this.reqResumeAllInfo()
+				// this.reqResumeAllInfo()
 			},
 			//切换轮播图关联简历
 			changeTabItemBySwiper(e) {
 				// console.log("e",e)
 				this.currentResume = e.detail.current
+				this.setMinHeight()
 				this.reqResumeAllInfo()
 			},
 			//页面高度初始化
@@ -1295,114 +1296,122 @@
 			},
 
 			//进入页面获取到所有数据
-			reqResumeAllInfo() {
+			reqResumeAllInfo(num) {
 				const openId = this.$store.state.openId
-				this.$getHttp(`/recruit/user/query/${openId}/${this.currentResume}`, {}, res => {
-					console.log("reqResumeAllInfo", res)
-					if (res.meta.code == 200) {
-						const data = JSON.parse(res.data).sysuserInfoVO
-						const eduData = JSON.parse(res.data).eductions
-						const workData = JSON.parse(res.data).shixi
-						const proData = JSON.parse(res.data).projects
-						const certData = JSON.parse(res.data).listFile
-						// console.log(data)
-						//pnInfo
-						this.openShow=data.view
-						this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
-						this.$set(this.tabList[this.currentResume], 'viewType', data.view)
-						this.$set(this.tabList[this.currentResume], 'userIntro', data.introduction)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'name', data.userName)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'phone', data.phone)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'school', data.school)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'education', data.leve)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'major', data
-							.professional)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'graduationTime', data
-							.graduationDate)
-						this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'sex', data
-							.sex)
-						//addInfo
-						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'email', data.email)
-						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'politicalStatus',
-							data.identity)
-						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'birthday', data
-							.birthday)
-						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'hometown', data
-							.nativePlace)
-						this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'dwelling', data
-							.address)
-						//intentInfo
-						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'job', data
-							.position)
-						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'salary', data
-							.expectedSalary)
-						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'city', data
-							.expectCity)
-						this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'jType', data
-							.workType)
-						// console.log("this.tabList[this.currentResume]['resumeId']", this.tabList[this
-						// 	.currentResume]['resumeId'])
-						let handleArr = []
-						eduData.forEach(v => {
-							const obj = {
-								addEduId: v.id,
-								school: v.school, //key
-								education: v.leve,
-								major: v.professional,
-								beginTime: v.startTime,
-								endTime: v.endTime,
-								// allTime:'',
-								discribe: v.described
-							}
-							handleArr.push(obj)
-						})
-						this.$set(this.tabList[this.currentResume], 'addEducation', handleArr)
-
-						handleArr = []
-						workData.forEach(v => {
-							const obj = {
-								addWorkId: v.id,
-								companyName: v.company,
-								jobName: v.jobs,
-								department: v.depart,
-								beginTime: v.startTime,
-								endTime: v.endTime,
-								// allTime: '',
-								discribe: v.workDescribe
-							}
-							handleArr.push(obj)
-						})
-						this.$set(this.tabList[this.currentResume], 'addWorkExp', handleArr)
-
-						handleArr = []
-						proData.forEach(v => {
-							const obj = {
-								addProId: v.id,
-								proName: v.projectName,
-								role: v.projectRole,
-								beginTime: v.startTime,
-								endTime: v.endTime,
-								// allTime: '',
-								discribe: v.described,
-								result: v.results
-							}
-							handleArr.push(obj)
-						})
-						this.$set(this.tabList[this.currentResume], 'addPro', handleArr)
-						// console.log("handleArr",handleArr)
-
-						handleArr = []
-						certData.forEach(v => {
-							const obj = {
-								certId: v.id,
-								certName: v.fileName,
-								certImage: v.fileUrl,
-							}
-							handleArr.push(obj)
-						})
-						this.$set(this.tabList[this.currentResume], 'addCertificate', handleArr)
-						handleArr = null
-					}
+				let currentResume=this.currentResume
+				if(num){
+					currentResume=num
+				}
+				
+				return new Promise(resolve=>{
+					this.$getHttp(`/recruit/user/query/${openId}/${currentResume}`, {}, res => {
+						console.log("reqResumeAllInfo", res)
+						if (res.meta.code == 200) {
+							const data = JSON.parse(res.data).sysuserInfoVO
+							const eduData = JSON.parse(res.data).eductions
+							const workData = JSON.parse(res.data).shixi
+							const proData = JSON.parse(res.data).projects
+							const certData = JSON.parse(res.data).listFile
+							// console.log(data)
+							//pnInfo
+							this.openShow=data.view
+							this.$set(this.tabList[this.currentResume], 'resumeId', data.id)
+							this.$set(this.tabList[this.currentResume], 'viewType', data.view)
+							this.$set(this.tabList[this.currentResume], 'userIntro', data.introduction)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'name', data.userName)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'phone', data.phone)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'school', data.school)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'education', data.leve)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'major', data
+								.professional)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'graduationTime', data
+								.graduationDate)
+							this.$set(this.tabList[this.currentResume]['resumeList']['pnInfo'], 'sex', data
+								.sex)
+							//addInfo
+							this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'email', data.email)
+							this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'politicalStatus',
+								data.identity)
+							this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'birthday', data
+								.birthday)
+							this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'hometown', data
+								.nativePlace)
+							this.$set(this.tabList[this.currentResume]['resumeList']['addInfo'], 'dwelling', data
+								.address)
+							//intentInfo
+							this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'job', data
+								.position)
+							this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'salary', data
+								.expectedSalary)
+							this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'city', data
+								.expectCity)
+							this.$set(this.tabList[this.currentResume]['resumeList']['intentInfo'], 'jType', data
+								.workType)
+							// console.log("this.tabList[this.currentResume]['resumeId']", this.tabList[this
+							// 	.currentResume]['resumeId'])
+							let handleArr = []
+							eduData.forEach(v => {
+								const obj = {
+									addEduId: v.id,
+									school: v.school, //key
+									education: v.leve,
+									major: v.professional,
+									beginTime: v.startTime,
+									endTime: v.endTime,
+									// allTime:'',
+									discribe: v.described
+								}
+								handleArr.push(obj)
+							})
+							this.$set(this.tabList[this.currentResume], 'addEducation', handleArr)
+					
+							handleArr = []
+							workData.forEach(v => {
+								const obj = {
+									addWorkId: v.id,
+									companyName: v.company,
+									jobName: v.jobs,
+									department: v.depart,
+									beginTime: v.startTime,
+									endTime: v.endTime,
+									// allTime: '',
+									discribe: v.workDescribe
+								}
+								handleArr.push(obj)
+							})
+							this.$set(this.tabList[this.currentResume], 'addWorkExp', handleArr)
+					
+							handleArr = []
+							proData.forEach(v => {
+								const obj = {
+									addProId: v.id,
+									proName: v.projectName,
+									role: v.projectRole,
+									beginTime: v.startTime,
+									endTime: v.endTime,
+									// allTime: '',
+									discribe: v.described,
+									result: v.results
+								}
+								handleArr.push(obj)
+							})
+							this.$set(this.tabList[this.currentResume], 'addPro', handleArr)
+							// console.log("handleArr",handleArr)
+					
+							handleArr = []
+							certData.forEach(v => {
+								const obj = {
+									certId: v.id,
+									certName: v.fileName,
+									certImage: v.fileUrl,
+								}
+								handleArr.push(obj)
+							})
+							this.$set(this.tabList[this.currentResume], 'addCertificate', handleArr)
+							handleArr = null
+							resolve()
+						}
+					})
 				})
 			},
 
@@ -1450,10 +1459,27 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/recruit/user/set/maset',data,res=>{
-					console.log("res",res)
-					this.reqResumeAllInfo()
+					// console.log("res",res)
+					const currentResumeObj=this.tabList[this.currentResume]
+					this.$set(this.tabList,this.currentResume,this.tabList[0])
+					this.$set(this.tabList,0,currentResumeObj)
+					// this.tabList[this.currentResume]=this.tabList[0]
+					// this.tabList[0]=currentResumeObj
 				},header)
-			}
+			},
+			
+			// reqAllfromoneToThree(){
+			// 	console.log('000')
+			// 	this.reqResumeAllInfo(0)
+			// 	.then(_=>{
+			// 		console.log('111')
+			// 		this.reqResumeAllInfo(1)
+			// 		.then(_=>{
+			// 			console.log('222')
+			// 			this.reqResumeAllInfo(2)
+			// 		})
+			// 	})
+			// }
 		},
 		onReady() {
 			this.setHeight()
@@ -1466,14 +1492,14 @@
 		// onShow() {
 
 		// },
-		// watch: {
-		// 	tabList: {
-		// 		deep: true,
-		// 		handler(nw) {
-		// 			console.log("nw", nw)
-		// 		}
-		// 	}
-		// }
+		watch: {
+			tabList: {
+				deep: true,
+				handler(nw) {
+					console.log("nw", nw)
+				}
+			}
+		}
 	}
 </script>
 
