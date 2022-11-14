@@ -404,7 +404,11 @@
 				获取暂存数据
 			</view> -->
 			
-			<view class="btns-item" @click="reqSetDefaultResume" v-if="currentResume>0">
+			<view class="btns-item" @click="reqSetDefaultResume" v-if="currentResume>0&&setting">
+				设为默认简历
+			</view>
+			
+			<view class="btns-item" v-if="currentResume>0&&(!setting)">
 				设为默认简历
 			</view>
 			
@@ -464,6 +468,7 @@
 				arr.push(y + 1 + 'k')
 			}
 			return {
+				setting:true,
 				isIos:this.$isIos,
 				imageBaseSrc: this.$imageBaseSrc,
 				salaryList: [
@@ -735,7 +740,7 @@
 			changeTabItemBySwiper(e) {
 				// console.log("e",e)
 				this.currentResume = e.detail.current
-				this.setMinHeight()
+				// this.setMinHeight()
 				this.reqResumeAllInfo()
 			},
 			//页面高度初始化
@@ -1296,15 +1301,10 @@
 			},
 
 			//进入页面获取到所有数据
-			reqResumeAllInfo(num) {
+			reqResumeAllInfo() {
 				const openId = this.$store.state.openId
-				let currentResume=this.currentResume
-				if(num){
-					currentResume=num
-				}
-				
 				return new Promise(resolve=>{
-					this.$getHttp(`/recruit/user/query/${openId}/${currentResume}`, {}, res => {
+					this.$getHttp(`/recruit/user/query/${openId}/${this.currentResume}`, {}, res => {
 						console.log("reqResumeAllInfo", res)
 						if (res.meta.code == 200) {
 							const data = JSON.parse(res.data).sysuserInfoVO
@@ -1442,7 +1442,16 @@
 			},
 			
 			//设置默认简历
-			reqSetDefaultResume(){				
+			reqSetDefaultResume(){
+				if(!this.tabList[this.currentResume].resumeId){
+					uni.showToast({
+						title:"请先填写简历",
+						icon:"none"
+					})
+					return
+				}
+				
+				console.log("6666666")
 				const data={
 					data:{
 						mainOneId:this.tabList[this.currentResume].resumeId,
@@ -1459,28 +1468,19 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/recruit/user/set/maset',data,res=>{
-					// console.log("res",res)
-					const currentResumeObj=this.tabList[this.currentResume]
-					// this.$set(this.tabList,this.currentResume,this.tabList[0])
-					this.$set(this.tabList,0,currentResumeObj)
-					this.reqResumeAllInfo()
-					// this.tabList[this.currentResume]=this.tabList[0]
-					// this.tabList[0]=currentResumeObj
+
+					uni.showToast({
+						title:"设置成功",
+						duration:1500
+					})
+					this.setting=false
+					setTimeout(_=>{
+						uni.navigateBack()
+					},1500)
+
 				},header)
 			},
 			
-			// reqAllfromoneToThree(){
-			// 	console.log('000')
-			// 	this.reqResumeAllInfo(0)
-			// 	.then(_=>{
-			// 		console.log('111')
-			// 		this.reqResumeAllInfo(1)
-			// 		.then(_=>{
-			// 			console.log('222')
-			// 			this.reqResumeAllInfo(2)
-			// 		})
-			// 	})
-			// }
 		},
 		onReady() {
 			this.setHeight()
