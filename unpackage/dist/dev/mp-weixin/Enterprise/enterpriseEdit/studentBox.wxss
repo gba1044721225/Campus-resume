@@ -72,6 +72,27 @@
 .student-box .student-item .item-content .content .name.data-v-35bb8594 {
   font-size: 36rpx;
   font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student-box .student-item .item-content .content .name .job-name.data-v-35bb8594 {
+  width: 220rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.student-box .student-item .item-content .content .name .download-pdf.data-v-35bb8594 {
+  background-color: #1296db;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 15rpx;
+  border-radius: 2rpx;
+}
+.student-box .student-item .item-content .content .name .download-pdf text.data-v-35bb8594 {
+  margin-right: 5rpx;
+  color: #fff;
 }
 .student-box .student-item .item-content .content .item-info.data-v-35bb8594 {
   margin-top: 15rpx;

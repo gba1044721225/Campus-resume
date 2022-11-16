@@ -19,8 +19,12 @@
 		</view>
 		
 		<view class="self-introduction">
-			<view class="title">
-				自我介绍
+			<view class="title introduction">
+				<text class="job-name">自我介绍</text>
+				<view class="download-pdf" @click.stop="downLoadPdf(dataList)">
+					<text>下载简历</text>
+					<tui-icon name="todown" :size="15" color="#fff"></tui-icon>
+				</view>
 			</view>
 			<view class="content">
 				{{dataList.sysuserInfoVO.introduction?dataList.sysuserInfoVO.introduction:'暂无数据'}}
@@ -301,6 +305,33 @@
 					}
 				}, header)
 			},
+			
+			//下载简历
+			downLoadPdf(item){
+				//模拟测试数据
+				item={
+					userName:"廖健聪",
+					downUrl:"http://101.33.210.213/img/1668363619038.doc"
+				}
+				
+				
+				const reg=/.(?<=\.)([a-z|A-Z]+)$/g
+				let fileName=`${item.userName}${reg.exec(item.downUrl)[0]}`
+				console.log("fileName",fileName)
+				wx.downloadFile({
+				  url: item.downUrl,
+				  filePath:`${wx.env.USER_DATA_PATH}/${fileName}`,
+				  success (res) {
+					  // console.log("success",res)
+					 wx.openDocument({
+						filePath: res.filePath,
+						// fileType: 'xls',
+						showMenu: true // 关键，这里开启预览页面的右上角菜单，才能另存为
+					 })
+				
+				  }
+				})
+			}
 		},
 		computed:{
 			getWorkYear(){
@@ -378,6 +409,30 @@
 			.title{
 				font-size: 40rpx;
 				font-weight: bold;
+			}
+			.introduction{
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				.job-name{
+					width: 220rpx;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+				}
+				
+				.download-pdf{
+					background-color: #1296db;
+					font-size: 26rpx;
+					display: flex;
+					align-items: center;
+					padding: 10rpx 15rpx;
+					border-radius: 2rpx;
+					text{
+						margin-right: 5rpx;
+						color:#fff;
+					}
+				}
 			}
 			.content{
 				margin-top: 25rpx;

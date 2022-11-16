@@ -63,6 +63,29 @@
   font-size: 40rpx;
   font-weight: bold;
 }
+.student-box-details .self-introduction .introduction.data-v-66f51584 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student-box-details .self-introduction .introduction .job-name.data-v-66f51584 {
+  width: 220rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.student-box-details .self-introduction .introduction .download-pdf.data-v-66f51584 {
+  background-color: #1296db;
+  font-size: 26rpx;
+  display: flex;
+  align-items: center;
+  padding: 10rpx 15rpx;
+  border-radius: 2rpx;
+}
+.student-box-details .self-introduction .introduction .download-pdf text.data-v-66f51584 {
+  margin-right: 5rpx;
+  color: #fff;
+}
 .student-box-details .self-introduction .content.data-v-66f51584 {
   margin-top: 25rpx;
   font-size: 32rpx;

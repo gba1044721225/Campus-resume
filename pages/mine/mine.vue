@@ -190,7 +190,8 @@
 		data() {
 			return {
 				imgSrc: this.$imageBaseSrc,
-				btnList: [{
+				btnList: [
+					{
 					bgColor: "#16C2C2",
 					//名称
 					text: "学生",
@@ -202,6 +203,14 @@
 					bgColor: "#64B532",
 					//名称
 					text: "企业",
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: "#fff"
+				},{
+					bgColor: "#ff0000",
+					//名称
+					text: "管理员",
 					//字体大小
 					fontSize: 28,
 					//字体颜色
@@ -322,8 +331,7 @@
 					return
 				}
 				
-				// console.log("e",e)
-				this.$store.commit('reSetRole', e.index + 1)
+				// this.$store.commit('reSetRole', e.index + 1)
 				switch (e.index) {
 					case 0:
 						uni.showToast({
@@ -342,6 +350,13 @@
 						uni.setStorageSync('role', 2)
 						this.$store.commit('reSetRole',2)
 						this.init()
+						break;
+					case 2:
+						uni.setStorageSync('role', 3)
+						this.$store.commit('reSetRole',3)
+						uni.redirectTo({
+							url:"/Admin/Admin"
+						})
 						break;
 				}
 			},

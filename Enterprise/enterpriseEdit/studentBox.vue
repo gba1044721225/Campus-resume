@@ -5,7 +5,11 @@
 				<image :src="item.imgUrl" mode=""></image>
 				<view class="content">
 					<view class="name">
-						{{item.position?item.position:'暂无岗位要求'}}
+						<text class="job-name">{{item.position?item.position:'暂无岗位要求'}}</text>
+						<view class="download-pdf" @click.stop="downLoadPdf(item)">
+							<text>下载简历</text>
+							<tui-icon name="todown" :size="15" color="#fff"></tui-icon>
+						</view>
 					</view>
 					<view class="item-info">
 						{{item.userName}}（{{item.sex}}）
@@ -49,6 +53,13 @@
 			// 	this.pageInfo.pageSize = 50
 			// },
 
+
+			linkToStudentBoxDetails(stuId){
+				uni.navigateTo({
+					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${stuId}&recruitId=${this.recruitId}`
+				})
+			},
+			
 			//企业模块 请求学生简历
 			reqResumeList() {
 				const data = {
@@ -73,11 +84,31 @@
 				}, header)
 			},
 			
-			linkToStudentBoxDetails(stuId){
-				uni.navigateTo({
-					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${stuId}&recruitId=${this.recruitId}`
+			//下载简历
+			downLoadPdf(item){
+				//模拟测试数据
+				item={
+					userName:"廖健聪",
+					downUrl:"http://101.33.210.213/img/1668363619038.doc"
+				}
+				
+				const reg=/.(?<=\.)([a-z|A-Z]+)$/g
+				let fileName=`${item.userName}${reg.exec(item.downUrl)[0]}`
+				console.log("fileName",fileName)
+				wx.downloadFile({
+				  url: item.downUrl,
+				  filePath:`${wx.env.USER_DATA_PATH}/${fileName}`,
+				  success (res) {
+					  // console.log("success",res)
+					 wx.openDocument({
+						filePath: res.filePath,
+						// fileType: 'xls',
+						showMenu: true // 关键，这里开启预览页面的右上角菜单，才能另存为
+					 })
+				
+				  }
 				})
-			},
+			}
 		},
 		onLoad(payload){
 			console.log("payload",payload)
@@ -146,6 +177,28 @@
 					.name {
 						font-size: 36rpx;
 						font-weight: bold;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						.job-name{
+							width: 220rpx;
+							white-space: nowrap;
+							overflow: hidden;
+							text-overflow: ellipsis;
+						}
+						
+						.download-pdf{
+							background-color: #1296db;
+							font-size: 26rpx;
+							display: flex;
+							align-items: center;
+							padding: 10rpx 15rpx;
+							border-radius: 2rpx;
+							text{
+								margin-right: 5rpx;
+								color:#fff;
+							}
+						}
 					}
 
 					.item-info {

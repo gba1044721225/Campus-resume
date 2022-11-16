@@ -210,6 +210,17 @@
 					}
 				}
 			]
+		},
+		{
+			"root": "Admin",
+			"pages": [
+				{
+					"path":"Admin",
+					"style": {
+						"navigationBarTitleText": "管理员登录界面"
+					}
+				}
+			]
 		}
 	],
 	"globalStyle": {

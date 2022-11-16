@@ -166,6 +166,14 @@
 					fontSize: 28,
 					//字体颜色
 					color: "#fff"
+				},{
+					bgColor: "#ff0000",
+					//名称
+					text: "管理员",
+					//字体大小
+					fontSize: 28,
+					//字体颜色
+					color: "#fff"
 				}],
 			}
 		},
@@ -188,7 +196,6 @@
 		},
 		methods: {
 			fabClick(e) {
-
 				// console.log(e)
 				if (this.$store.state.openId) {
 					this.init()
@@ -202,6 +209,13 @@
 							uni.setStorageSync('role', 2)
 							this.$store.commit('reSetRole',2)	
 							this.reqResumeList()
+							break;
+						case 2:
+							uni.setStorageSync('role', 3)
+							this.$store.commit('reSetRole',3)	
+							uni.redirectTo({
+								url:"/Admin/Admin"
+							})
 							break;
 					}	
 				} else {

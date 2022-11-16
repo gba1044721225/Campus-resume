@@ -105,6 +105,20 @@
           "query": "stuId=66&recruitId=21",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/studentBox",
+          "query": "id=21",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Admin/Admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }

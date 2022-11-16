@@ -51,6 +51,12 @@
         "myInterviewStuDt",
         "myCollection"
       ]
+    },
+    {
+      "root": "Admin",
+      "pages": [
+        "Admin"
+      ]
     }
   ],
   "window": {
