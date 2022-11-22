@@ -149,14 +149,16 @@
 
 	.tui-collapse-transform {
 		opacity: 0;
-		visibility: hidden;
+		/* visibility: hidden; */
+		display: none;
 		-webkit-transform: translateY(-40%);
 		transform: translateY(-40%);
 	}
 
 	.tui-collapse-body_show {
 		opacity: 1;
-		visibility: visible;
+		/* visibility: visible; */
+		display: block;
 		-webkit-transform: translateY(0);
 		transform: translateY(0);
 	}

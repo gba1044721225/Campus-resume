@@ -7,6 +7,7 @@
     "tui-input": "/components/thorui/tui-input/tui-input",
     "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker",
     "tui-calendar": "/components/thorui/tui-calendar/tui-calendar",
-    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup"
+    "u-popup": "/uni_modules/uview-ui/components/u-popup/u-popup",
+    "tui-modal": "/components/thorui/tui-modal/tui-modal"
   }
 }

@@ -219,6 +219,24 @@
 					"style": {
 						"navigationBarTitleText": "管理员登录界面"
 					}
+				},
+				{
+					"path":"AdminManage",
+					"style": {
+						"navigationBarTitleText": "管理界面"
+					}
+				},
+				{
+					"path":"recruitInfo",
+					"style": {
+						"navigationBarTitleText": "招聘信息"
+					}
+				},
+				{
+					"path":"recruitInfoDetails",
+					"style": {
+						"navigationBarTitleText": "招聘信息详情"
+					}
 				}
 			]
 		}

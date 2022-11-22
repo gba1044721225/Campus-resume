@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "编辑招聘信息",
   "usingComponents": {
+    "tui-modal": "/components/thorui/tui-modal/tui-modal",
     "u-input": "/uni_modules/uview-ui/components/u-input/u-input",
     "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
     "u-picker": "/uni_modules/uview-ui/components/u-picker/u-picker"

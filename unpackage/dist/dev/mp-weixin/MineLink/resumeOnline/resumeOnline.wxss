@@ -232,6 +232,34 @@
 .resume-oneline .sex-box.data-v-94a2068a  .u-radio-group .u-radio {
   margin-right: 20rpx;
 }
+.resume-oneline .tui-modal-custom .modal-title.data-v-94a2068a {
+  color: #ff0f13;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin-bottom: 25rpx;
+}
+.resume-oneline .tui-modal-custom .modal-content.data-v-94a2068a {
+  font-size: 32rpx;
+  color: #747073;
+  margin-bottom: 25rpx;
+}
+.resume-oneline .tui-modal-custom .modal-content text.data-v-94a2068a {
+  text-decoration: underline;
+  color: #000;
+}
+.resume-oneline .tui-modal-custom .modal-btns.data-v-94a2068a {
+  display: flex;
+  justify-content: space-between;
+}
+.resume-oneline .tui-modal-custom .modal-btns .btn-item.data-v-94a2068a {
+  padding: 20rpx 80rpx;
+  background-color: #1296db;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.resume-oneline .tui-modal-custom .modal-btns .btn-cancel.data-v-94a2068a {
+  background: #ff0f13;
+}
 .resume-oneline .bottom-ios.data-v-94a2068a {
   padding-bottom: constant(safe-area-inset-bottom);
   padding-top: constant(safe-area-inset-bottom);

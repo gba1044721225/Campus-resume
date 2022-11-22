@@ -452,6 +452,36 @@
 				</u-radio-group>
 			</view>
 		</u-popup>
+		
+		<tui-modal :show="showModal" custom>
+			<view class="tui-modal-custom">
+				<view class="modal-title">
+					温馨提示
+				</view>
+				<view class="modal-content">
+					<view>
+						欢迎使用校园招聘小程序，我们深知个人信息对您的重要性，我们将按相关法律法规要求，尽力保护您的个人信息安全可控。
+					</view>
+					<view>
+						在注册使用校园招聘服务前，请您务必审慎阅读<text @click="linkToUserAgreement">《用户服务协议》</text>和<text @click="linkToPrivacy">《隐私政策》</text>，并充分理解相关协议条款。为了便于理解协议条款，特向您说明如下：
+					</view>
+					<view>
+						1.我们将严格按照您同意的各项条款使用您的个人信息。未经您的同意，我们不会从第三方获取，共享和向其提供您的个人信息；
+					</view>
+					<view>
+						2.我们提供账户注销的渠道，您可以查询，更正，删除个人信息。
+					</view>
+				</view>
+				<view class="modal-btns">
+					<view class="btn-cancel btn-item" @click="cancelModal">
+						拒绝
+					</view>
+					<view class="btn-agree btn-item"  @click="agreeModal">
+						同意
+					</view>
+				</view>
+			</view>
+		</tui-modal>
 	</view>
 </template>
 
@@ -468,6 +498,7 @@
 				arr.push(y + 1 + 'k')
 			}
 			return {
+				showModal:true,
 				setting:true,
 				isIos:this.$isIos,
 				imageBaseSrc: this.$imageBaseSrc,
@@ -731,6 +762,29 @@
 			}
 		},
 		methods: {
+			linkToUserAgreement() {
+				uni.navigateTo({
+					url: "/HomeLink/rules/userAgreement"
+				})
+			},
+			
+			linkToPrivacy() {
+				uni.navigateTo({
+					url: "/HomeLink/rules/privacy"
+				})
+			},
+			
+			cancelModal(){
+				this.showModal=false
+				uni.switchTab({
+					url:"/pages/mine/mine"
+				})
+			},
+			
+			agreeModal(){
+				this.showModal=false
+			},
+			
 			//切换简历
 			changeTabItem(index) {
 				this.currentResume = index
@@ -1203,33 +1257,33 @@
 			},
 
 			//暂存所有数据
-			saveInfoTemporary() {
-				const data = this.tabList[this.currentResume]
-				uni.setStorageSync('infoTemporary', JSON.stringify(data))
-				uni.setStorageSync('infoTemporaryIndex', this.currentResume)
-				uni.showToast({
-					title: '暂存成功',
-					duration: 2000
-				})
-			},
+			// saveInfoTemporary() {
+			// 	const data = this.tabList[this.currentResume]
+			// 	uni.setStorageSync('infoTemporary', JSON.stringify(data))
+			// 	uni.setStorageSync('infoTemporaryIndex', this.currentResume)
+			// 	uni.showToast({
+			// 		title: '暂存成功',
+			// 		duration: 2000
+			// 	})
+			// },
 
 			//获取暂存
-			getInfoTemporary() {
-				// console.log(111111)
-				const data = uni.getStorageSync('infoTemporary')
-				// console.log(data)
-				if (data) {
-					// console.log(JSON.parse(data))
-					// console.log(22222)
-					const currentResume = uni.getStorageSync('infoTemporaryIndex')
-					this.$set(this.tabList[currentResume], 'resumeList', JSON.parse(data).resumeList)
-					// this.$forceUpdate()
-					this.$nextTick(() => {
-						this.setHeight()
-					})
-				}
-				// console.log("this.tabList",this.tabList)
-			},
+			// getInfoTemporary() {
+			// 	// console.log(111111)
+			// 	const data = uni.getStorageSync('infoTemporary')
+			// 	// console.log(data)
+			// 	if (data) {
+			// 		// console.log(JSON.parse(data))
+			// 		// console.log(22222)
+			// 		const currentResume = uni.getStorageSync('infoTemporaryIndex')
+			// 		this.$set(this.tabList[currentResume], 'resumeList', JSON.parse(data).resumeList)
+			// 		// this.$forceUpdate()
+			// 		this.$nextTick(() => {
+			// 			this.setHeight()
+			// 		})
+			// 	}
+			// 	// console.log("this.tabList",this.tabList)
+			// },
 
 			//请求提交个人信息，补充信息，求职意向
 			reqAllInfo() {
@@ -1306,6 +1360,7 @@
 				return new Promise(resolve=>{
 					this.$getHttp(`/recruit/user/query/${openId}/${this.currentResume}`, {}, res => {
 						console.log("reqResumeAllInfo", res)
+						// uni.hideLoading();
 						if (res.meta.code == 200) {
 							const data = JSON.parse(res.data).sysuserInfoVO
 							const eduData = JSON.parse(res.data).eductions
@@ -1483,9 +1538,14 @@
 			
 		},
 		onReady() {
+			// console.log("加载完成")
+			uni.hideLoading();
 			this.setHeight()
 		},
 		onLoad() {
+			uni.showLoading({
+				title: '加载中'
+			});
 			this.reqResumeAllInfo()
 			this.setMinHeight()
 			this.initCityData()
@@ -1761,6 +1821,43 @@
 				}
 			}
 		}
+		
+		.tui-modal-custom{
+			
+			.modal-title{
+				color: #ff0f13;
+				font-size: 42rpx;
+				font-weight: bold;
+				margin-bottom: 25rpx;
+				
+			}
+			
+			.modal-content{
+				font-size: 32rpx;
+				color: #747073;
+				// border: 1rpx solid #1296db;
+				margin-bottom: 25rpx;
+				text{
+					text-decoration: underline;
+					color: #000;
+				}
+			}
+			
+			.modal-btns{
+				display: flex;
+				justify-content: space-between;
+				.btn-item{
+					padding: 20rpx 80rpx;
+					background-color: #1296db;
+					border-radius: 10rpx;
+					color: #fff;
+				}
+				.btn-cancel{
+					background: #ff0f13;
+				}
+			}
+		}
+		
 		
 		.bottom-ios {
 			padding-bottom: constant(safe-area-inset-bottom);

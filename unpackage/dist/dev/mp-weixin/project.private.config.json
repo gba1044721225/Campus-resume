@@ -4,7 +4,7 @@
   "setting": {
     "compileHotReLoad": true
   },
-  "libVersion": "2.27.1",
+  "libVersion": "2.27.2",
   "condition": {
     "miniprogram": {
       "list": [
@@ -116,6 +116,13 @@
         {
           "name": "",
           "pathName": "Admin/Admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Admin/AdminManage",
           "query": "",
           "launchMode": "default",
           "scene": null

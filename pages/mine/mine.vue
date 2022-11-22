@@ -352,8 +352,8 @@
 						this.init()
 						break;
 					case 2:
-						uni.setStorageSync('role', 3)
-						this.$store.commit('reSetRole',3)
+						// uni.setStorageSync('role', 3)
+						// this.$store.commit('reSetRole',3)
 						uni.redirectTo({
 							url:"/Admin/Admin"
 						})

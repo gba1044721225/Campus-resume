@@ -44,11 +44,21 @@
       "root": "MineLinkOthers",
       "pages": [
         "upLoadPdf",
+        "webViewUrl",
         "myResumeInfo",
         "deliveryInfo",
         "myInterviewStu",
         "myInterviewStuDt",
         "myCollection"
+      ]
+    },
+    {
+      "root": "Admin",
+      "pages": [
+        "Admin",
+        "AdminManage",
+        "recruitInfo",
+        "recruitInfoDetails"
       ]
     }
   ],
@@ -85,8 +95,8 @@
     }
   },
   "requiredPrivateInfos": [
-		"chooseLocation",
-		"getLocation"
-	],
+    "chooseLocation",
+    "getLocation"
+  ],
   "usingComponents": {}
 }

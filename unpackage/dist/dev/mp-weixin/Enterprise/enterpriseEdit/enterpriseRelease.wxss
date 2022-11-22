@@ -114,6 +114,34 @@
   padding: 25rpx;
   width: 350rpx;
 }
+.tui-modal-custom .modal-title.data-v-3853f3dc {
+  color: #ff0f13;
+  font-size: 42rpx;
+  font-weight: bold;
+  margin-bottom: 25rpx;
+}
+.tui-modal-custom .modal-content.data-v-3853f3dc {
+  font-size: 32rpx;
+  color: #747073;
+  margin-bottom: 25rpx;
+}
+.tui-modal-custom .modal-content text.data-v-3853f3dc {
+  text-decoration: underline;
+  color: #000;
+}
+.tui-modal-custom .modal-btns.data-v-3853f3dc {
+  display: flex;
+  justify-content: space-between;
+}
+.tui-modal-custom .modal-btns .btn-item.data-v-3853f3dc {
+  padding: 20rpx 80rpx;
+  background-color: #1296db;
+  border-radius: 10rpx;
+  color: #fff;
+}
+.tui-modal-custom .modal-btns .btn-cancel.data-v-3853f3dc {
+  background: #ff0f13;
+}
 .bottom-ios.data-v-3853f3dc {
   padding-bottom: constant(safe-area-inset-bottom);
   /*兼容 IOS<11.2*/
