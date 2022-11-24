@@ -343,8 +343,9 @@
 				}
 			}
 		},
-		// onLoad() {			
-		// },
+		onLoad() {
+			this.$store.dispatch('getImage')
+		},
 		onHide() {
 			this.init()
 		},
