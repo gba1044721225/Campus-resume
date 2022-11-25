@@ -99,7 +99,7 @@ module.exports = {
 	},
 
 	//上传
-	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.公司Logo
+	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.上传简历 8.公司Logo
 	upLoadFile(url, filePath, data, succ) {
 		console.log("this.hostname()", this.$hostname() + url)
 		console.log("filePath",filePath)

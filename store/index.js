@@ -9,7 +9,7 @@ const store = new Vuex.Store({
 	openId:uni.getStorageSync('openId')||'',
 	role:uni.getStorageSync('role') || 1,
 	userInfo:uni.getStorageSync('rawData')?JSON.parse(uni.getStorageSync('rawData')):null,
-	showImage:false
+	showImage:true //false
   },
   mutations:{
 	  reSetOpenId(state,payload){
@@ -27,8 +27,7 @@ const store = new Vuex.Store({
 		  console.log(2222)
 		let _this = Vue.prototype
 		const data = {
-			data: {
-			},
+			data: '',
 			meta: {
 				openId: context.state.openId,
 				role: context.state.role,
@@ -37,9 +36,10 @@ const store = new Vuex.Store({
 		const header = {
 			'content-type': 'application/json'
 		}
-		_this.$getHttp("/parameter/audit",{},res=>{
-		    console.log("actions",res)
-		})
+		_this.$http("/parameter/audit",{},res=>{
+		    // console.log("actions",res)
+			context.showImage=res.data==='1'?true:false
+		},header)
 	  }
   }
 })

@@ -558,7 +558,7 @@
 				const res = await this.$chooseImage()
 				// console.log("res", res)
 				this.enterpriseInfo.companyLogo = res.tempFilePaths[0]
-				this.$upLoadFile(`/file/upload/${this.$store.state.openId}/7`, res.tempFilePaths[0], {}, res => {
+				this.$upLoadFile(`/file/upload/${this.$store.state.openId}/8`, res.tempFilePaths[0], {}, res => {
 					// console.log("res",res)
 					if (res.statusCode == 200) {
 						const dataList = JSON.parse(JSON.parse(res.data).data)

@@ -21,7 +21,7 @@
 						<view class="tips-title">
 							{{studentInfo.name?studentInfo.name:userInfo.nickName?userInfo.nickName:'暂无数据'}}
 						</view>
-						<view class="resume-online" @click="linkToResumeOnline">
+						<view class="resume-online" @click="linkToResumeOnline" v-if="showImage">
 							<image class="edit-icon" :src="`${imgSrc}edit.png`" mode=""></image>
 							<view class="resume-content">
 								编辑个人简历
@@ -31,7 +31,7 @@
 <!-- 					<image @click="settingOpenOrNot" class="setting-btns" :src="`${imgSrc}setting.png`" mode=""></image> -->
 				</view>
 
-				<view class="mine-info">
+				<view class="mine-info" v-if="showImage">
 					<view class="mine-info-item" v-for='(item,index) in infoItem' :key="index" @click="linkToStudentPath(item.path)">
 						<view class="item-num">
 							{{item.num}}
@@ -42,7 +42,7 @@
 					</view>
 				</view>
 
-				<view class="mine-info-box">
+				<view class="mine-info-box" v-if="showImage">
 					<view class="mine-info-item" @click="linkToResumeDetails">
 						<image src="/static/resume.png" mode=""></image>
 						<view class="item-content">
@@ -123,11 +123,10 @@
 				</view>
 			</view>
 
-
 		</view>
 
 		<my-login ref="loginBox"></my-login>
-		<tui-fab :bottom="10" :right="20" :btnList="btnList" @click="fabClick"></tui-fab>
+		<tui-fab v-if="showImage" :bottom="10" :right="20" :btnList="btnList" @click="fabClick"></tui-fab>
 		
 		<tui-modal maskClosable :show="settingModal" custom @cancel="closeSettingModal">
 			<view class="tui-modal-custom">
@@ -367,10 +366,10 @@
 					content: '您即将授权并登录小程序',
 					success: (res) => {
 						if (res.confirm) {
-							console.log('用户点击确定');
+							// console.log('用户点击确定');
 							this.$refs.loginBox.showAgreement = true
 						} else if (res.cancel) {
-							console.log('用户点击取消');
+							// console.log('用户点击取消');
 							this.$refs.loginBox.showAgreement = false
 						}
 					},
@@ -464,7 +463,7 @@
 			
 			//跳转到企业端 查看 模块
 			linkToEnterprisePath(path){
-				console.log(1111)
+				// console.log(1111)
 				if (!this.$store.state.openId) {
 					uni.showToast({
 						title: "请先登录后使用该功能",
@@ -472,9 +471,9 @@
 					})
 					return
 				}
-				console.log("path",path)
+				// console.log("path",path)
 				if(path){
-					console.log("22222")	
+					// console.log("22222")	
 					uni.navigateTo({
 						url:path
 					})
@@ -491,9 +490,9 @@
 					})
 					return
 				}
-				console.log("path",path)
+				// console.log("path",path)
 				if(path){
-					console.log("22222")	
+					// console.log("22222")	
 					uni.navigateTo({
 						url:path
 					})
@@ -507,13 +506,13 @@
 			
 			//
 			settingChange(e){
-				console.log("e",e)
+				// console.log("e",e)
 				// this.resumeStateShow=e
-				console.log(this.resumeStateShow)
+				// console.log(this.resumeStateShow)
 			},
 			
 			resumeItemChange(e){
-				console.log("e",e)
+				// console.log("e",e)
 			},
 			
 			closeSettingModal(){
@@ -555,7 +554,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/company/query/index', data, res => {
-					console.log("res1111", res)
+					// console.log("res1111", res)
 					if (res.meta.code == 200) {
 						const data = JSON.parse(res.data)
 						this.enterPriseInfo = data
@@ -582,7 +581,7 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/recruit/user/query/index',data,res=>{
-					console.log("resdddd",res)
+					// console.log("resdddd",res)
 					if(res.meta.code==200){
 						this.studentInfo=JSON.parse(res.data)						
 						this.infoItem[0].num=this.studentInfo.toudiNum
@@ -599,7 +598,7 @@
 			}
 		},
 		computed: {
-			...mapState(['openId', 'userInfo', 'role'])
+			...mapState(['openId', 'userInfo', 'role','showImage'])
 		},
 		// onLoad(){
 		// 	this.init()

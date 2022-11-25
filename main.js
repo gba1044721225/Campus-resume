@@ -5,7 +5,10 @@ import Vue from 'vue'
 import helper from "common/helper.js"
 import uView from '@/uni_modules/uview-ui'
 import store from '@/store/index.js'
+import ImageComponent from "imagecomponents/imageComponent.vue"
 // console.log(store)
+Vue.component("image-compt",ImageComponent)
+
 Vue.config.productionTip = false
 Vue.use(uView)
 Object.keys(helper).forEach(v => {
