@@ -107,104 +107,103 @@
 		},
 		{
 			"root": "Enterprise",
-			"pages":[{
-				"path": "enterpriseEdit/enterpriseEdit",
-				"style": {
-					"navigationBarTitleText": "公司档案"
-				}
-			},{
-				"path":"enterpriseEdit/enterpriseRelease",
-				"style": {
-					"navigationBarTitleText": "编辑招聘信息"
-				}
-			},{
-				"path":"enterpriseEdit/companyIntro",
-				"style": {
-					"navigationBarTitleText": "公司简介"
-				}
-			},{
-				"path":"enterpriseEdit/deliver",
-				"style": {
-					"navigationBarTitleText": "发布信息"
-				}
-			},{
-				"path":"enterpriseEdit/studentBox",
-				"style": {
-					"navigationBarTitleText": "已收简历"
-				}
-			},{
-				"path":"enterpriseEdit/studentBoxDetails",
-				"style": {
-					"navigationBarTitleText": "简历详情"
-				}
-			},
-			{
-				"path":"enterpriseEdit/interviewToStu",
-				"style": {
-					"navigationBarTitleText": "约谈面试"
-				}
-			},
-			{
-				"path":"enterpriseEdit/interviewStuDetails",
-				"style": {
-					"navigationBarTitleText": "约谈面试学生详情"
-				}
-			},
-			{
-				"path":"enterpriseEdit/collectionStu",
-				"style": {
-					"navigationBarTitleText": "人才收藏"
-				}
-			},
-			{
-				"path":"enterpriseEdit/collectionStuDetails",
-				"style": {
-					"navigationBarTitleText": "人才收藏详情"
-				}
-			}
-			]
-		},
-		{
-			"root": "MineLinkOthers",
-			"pages": [
-				{
-					"path":"upLoadPdf",
+			"pages": [{
+					"path": "enterpriseEdit/enterpriseEdit",
 					"style": {
-						"navigationBarTitleText": "上传简历"
+						"navigationBarTitleText": "公司档案"
 					}
-				},
-				{
-					"path":"webViewUrl",
+				}, {
+					"path": "enterpriseEdit/enterpriseRelease",
 					"style": {
-						"navigationBarTitleText": "下载简历"
+						"navigationBarTitleText": "编辑招聘信息"
 					}
-				},
-				{
-					"path":"myResumeInfo",
+				}, {
+					"path": "enterpriseEdit/companyIntro",
+					"style": {
+						"navigationBarTitleText": "公司简介"
+					}
+				}, {
+					"path": "enterpriseEdit/deliver",
+					"style": {
+						"navigationBarTitleText": "发布信息"
+					}
+				}, {
+					"path": "enterpriseEdit/studentBox",
+					"style": {
+						"navigationBarTitleText": "已收简历"
+					}
+				}, {
+					"path": "enterpriseEdit/studentBoxDetails",
 					"style": {
 						"navigationBarTitleText": "简历详情"
 					}
 				},
 				{
-					"path":"deliveryInfo",
+					"path": "enterpriseEdit/interviewToStu",
+					"style": {
+						"navigationBarTitleText": "约谈面试"
+					}
+				},
+				{
+					"path": "enterpriseEdit/interviewStuDetails",
+					"style": {
+						"navigationBarTitleText": "约谈面试学生详情"
+					}
+				},
+				{
+					"path": "enterpriseEdit/collectionStu",
+					"style": {
+						"navigationBarTitleText": "人才收藏"
+					}
+				},
+				{
+					"path": "enterpriseEdit/collectionStuDetails",
+					"style": {
+						"navigationBarTitleText": "人才收藏详情"
+						}
+			}
+			]
+		},
+		{
+			"root": "MineLinkOthers",
+			"pages": [{
+					"path": "upLoadPdf",
+					"style": {
+						"navigationBarTitleText": "上传简历"
+					}
+				},
+				{
+					"path": "webViewUrl",
+					"style": {
+						"navigationBarTitleText": "下载简历"
+					}
+				},
+				{
+					"path": "myResumeInfo",
+					"style": {
+						"navigationBarTitleText": "简历详情"
+					}
+				},
+				{
+					"path": "deliveryInfo",
 					"style": {
 						"navigationBarTitleText": "投递情况"
 					}
 				},
 				{
-					"path":"myInterviewStu",
+					"path": "myInterviewStu",
 					"style": {
 						"navigationBarTitleText": "我的面试"
 					}
 				},
 				{
-					"path":"myInterviewStuDt",
+					"path": "myInterviewStuDt",
 					"style": {
 						"navigationBarTitleText": "我的面试"
 					}
 				},
 				{
-					"path":"myCollection",
+					"path": "myCollection",
 					"style": {
 						"navigationBarTitleText": "我的收藏"
 					}
@@ -213,27 +212,38 @@
 		},
 		{
 			"root": "Admin",
-			"pages": [
-				{
-					"path":"Admin",
+			"pages": [{
+					"path": "Admin",
 					"style": {
 						"navigationBarTitleText": "管理员登录界面"
 					}
 				},
 				{
-					"path":"AdminManage",
+					"path": "AdminManage",
 					"style": {
 						"navigationBarTitleText": "管理界面"
 					}
 				},
 				{
-					"path":"recruitInfo",
+					"path": "enterpriseQuery",
+					"style": {
+						"navigationBarTitleText": "企业列表"
+					}
+				},
+				{
+					"path": "enterpriseQueryDetails",
+					"style": {
+						"navigationBarTitleText": "企业列表详情"
+					}
+				},
+				{
+					"path": "recruitInfo",
 					"style": {
 						"navigationBarTitleText": "招聘信息"
 					}
 				},
 				{
-					"path":"recruitInfoDetails",
+					"path": "recruitInfoDetails",
 					"style": {
 						"navigationBarTitleText": "招聘信息详情"
 					}

@@ -66,7 +66,7 @@
 					this.$wxLogin().then(loginData => {
 						// console.log("loginData", loginData)
 						this.$getHttp(`/recruit/user/login/${loginData.code}/1`, {}, (res) => {
-							// console.log('res', res)
+							console.log('res', res)
 							if (res.meta.code === '200') {
 								if(res.data){
 									console.log("loginData",loginData)

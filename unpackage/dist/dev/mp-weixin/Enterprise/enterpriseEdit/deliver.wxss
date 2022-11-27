@@ -55,8 +55,11 @@
 }
 .deliver .deliver-box .job-item .job-item-content.data-v-30ab7351 {
   background-color: #fff;
-  padding: 15px;
+  padding: 15px 15rpx 0;
   border-radius: 20rpx;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 2rpx solid #ccc;
 }
 .deliver .deliver-box .job-item .job-item-content .content-top.data-v-30ab7351 {
   display: flex;
@@ -124,6 +127,36 @@
 }
 .deliver .deliver-box .job-item .job-item-content .content-bottom .content-place.data-v-30ab7351 {
   font-size: 28rpx;
+}
+.deliver .deliver-box .job-item .recruit-stop.data-v-30ab7351 {
+  padding: 20rpx;
+  background-color: #fff;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.deliver .deliver-box .job-item .recruit-stop .recruit-show.data-v-30ab7351 {
+  color: #1296db;
+}
+.deliver .deliver-box .job-item .recruit-stop .stop-btn.data-v-30ab7351 {
+  background-color: #ff4c29;
+  width: 280rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 0;
+  border-radius: 15rpx;
+  box-shadow: 0 0 4rpx 4rpx rgab(0, 0, 0, 0.2);
+}
+.deliver .deliver-box .job-item .recruit-stop .stop-btn text.data-v-30ab7351 {
+  color: #fff;
+}
+.deliver .deliver-box .job-item .recruit-stop .stop-btn .delete-recruit.data-v-30ab7351 {
+  width: 50rpx;
+  height: 50rpx;
+  margin-right: 20rpx;
 }
 .bottom-ios.data-v-30ab7351 {
   padding-bottom: constant(safe-area-inset-bottom);
