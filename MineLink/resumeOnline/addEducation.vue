@@ -96,7 +96,7 @@
 			}
 		},
 		onLoad(payload) {
-			console.log("payload", payload)
+			// console.log("payload", payload)
 			this.index = payload.index
 			this.ind = payload.ind
 			this.resumeId = payload.resumeId
@@ -121,7 +121,7 @@
 			},
 
 			confirmPicker(e) {
-				console.log("e", e)
+				// console.log("e", e)
 				this.educationHistory[this.pickKey] = e.value[0]
 				this.showPicker = false
 				this.pickKey = ''
@@ -138,7 +138,7 @@
 			},
 
 			confirmTimerPicker(e) {
-				console.log("e", e)
+				// console.log("e", e)
 				let month = new Date(e.value).getMonth() + 1
 				let year = new Date(e.value).getFullYear()
 				this.educationHistory[this.pickKey] = `${year}年${month}月`
@@ -160,7 +160,7 @@
 				// 	console.log(infokey)
 				// console.log(value)
 				this.educationHistory[infoType] = value
-				console.log(this.index)
+				// console.log(this.index)
 				// console.log(this.index,this.ind)
 				// console.log(this.educationHistory)
 
@@ -179,7 +179,7 @@
 								if (v.route === 'MineLink/resumeOnline/resumeOnline')
 									curInd = i
 							})
-							console.log(curInd)
+							// console.log(curInd)
 							currentPage[curInd].$vm.comfirmEducationHistory(this.index, this.ind, JSON
 								.stringify(
 									this.educationHistory))
@@ -197,6 +197,7 @@
 			//新增/修改教育经历
 			reqEducation() {
 				return new Promise(resolve => {
+					// console.log("this.educationHistory",this.educationHistory)
 					const data = {
 						"data": {
 							"described": this.educationHistory.discribe,
@@ -239,6 +240,7 @@
 							})
 						}
 					}, header)
+					
 				})
 			},
 		},
