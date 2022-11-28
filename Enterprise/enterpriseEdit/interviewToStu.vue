@@ -16,7 +16,7 @@
 					</view>
 				</view>
 				<view class="item-main">
-					<image src="../../static/reject.png" mode=""></image>
+					<image :src="`${imgSrc}reject.png`" mode=""></image>
 					<view class="main-info">
 						<view class="info-name">
 							{{item.userName}}（{{item.sex}}）
@@ -38,6 +38,7 @@
 	export default{
 		data(){
 			return{
+				imgSrc:this.$imageBaseSrc,
 				dataList:null,
 			}
 		},

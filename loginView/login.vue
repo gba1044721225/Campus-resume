@@ -10,8 +10,8 @@
 						欢迎来打开校园招聘小程序！我们根据最新的法律法规、监管政策要求，更新了《用户协议》和《隐私政策》，请您认真阅读。
 					</view>
 					<view class="agreement-radio">
-						<image src="../static/nochoose.png" v-if="!agreementChoose" @click="agreenIt"></image>
-						<image src="/static/choosen.png" v-else @click="agreenIt"></image>
+						<image :src="`${imgSrc}nochoose.png`" v-if="!agreementChoose" @click="agreenIt"></image>
+						<image :src="`${imgSrc}choosen.png`" v-else @click="agreenIt"></image>
 						<text style="color: #000000;" @click="agreenIt">同意</text>
 						<text @click="linkToPrivacy">《隐私政策》</text>
 						<text @click="linkToUserAgreement">《用户协议》</text>
@@ -32,6 +32,7 @@
 	export default {
 		data() {
 			return {
+				imgSrc:this.$imageBaseSrc,
 				showAgreement: false,
 				maskClosable: true,
 				agreementChoose: false,

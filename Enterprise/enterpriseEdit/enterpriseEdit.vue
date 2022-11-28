@@ -52,7 +52,7 @@
 				</view>
 				<view class="item-right" @click="upLoadBusinessLicense">
 					<view class="none-img" v-if="!enterpriseInfo.businessLicense">
-						<image src="/static/upLoadCertificate.png" mode="">
+						<image :src="`${imgSrc}upLoadCertificate.png`" mode="">
 						</image>
 					</view>
 					<image v-if="enterpriseInfo.businessLicense" :src="enterpriseInfo.businessLicense" mode=""></image>
@@ -187,7 +187,7 @@
 
 				<view class="item-right" @click="upLoadCompanyLogo">
 					<view class="none-img" v-if="!enterpriseInfo.companyLogo">
-						<image src="/static/upLoadCertificate.png" mode="">
+						<image :src="`${imgSrc}upLoadCertificate.png`" mode="">
 						</image>
 					</view>
 					<image v-if="enterpriseInfo.companyLogo" :src="enterpriseInfo.companyLogo" mode=""></image>
@@ -358,6 +358,7 @@
 	export default {
 		data() {
 			return {
+				imgSrc:this.$imageBaseSrc,
 				isIos:this.$isIos,
 				showPicker: false,
 				showSizePicker:false,

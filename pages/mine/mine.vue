@@ -43,15 +43,15 @@
 				</view>
 
 				<view class="mine-info-box" v-if="showImage">
-					<view class="mine-info-item" @click="linkToResumeDetails">
-						<image src="/static/resume.png" mode=""></image>
+					<view class="mine-info-item" @click="linkToResumeDetails">			
+						<image :src="`${imgSrc}resume.png`" mode=""></image>
 						<view class="item-content">
 							在线简历
 						</view>
 					</view>
 					
 					<view class="mine-info-item" @click="linkToUpLoadPdf">
-						<image src="/static/upLoadPdf.png" mode=""></image>
+						<image :src="`${imgSrc}upLoadPdf.png`" mode=""></image>
 						<view class="item-content">
 							上传/下载简历
 						</view>
