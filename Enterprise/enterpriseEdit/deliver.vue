@@ -52,7 +52,19 @@
 						</view>
 					</view>
 				</view>
+				
+				<view class="recruit-stop">
+					<view class="recruit-show">
+						<text style="color:#ff4c29;" v-if="item.flag==='0'">已停止招聘......</text>
+						<text v-if="item.flag!=='0'">招聘中......</text>
+					</view>
+					<view class="stop-btn" v-if="item.flag!=='0'" @click.stop="reqDeleteRecruit(item.id)">
+						<image class="delete-recruit" :src="`${imgSrc}stop.png`" mode=""></image>
+						<text>停止招聘</text>
+					</view>
+				</view>
 			</view>
+			
 		</view>
 	</view>
 </template>
@@ -61,6 +73,7 @@
 	export default {
 		data() {
 			return {
+				imgSrc:this.$imageBaseSrc,
 				isIos:this.$isIos,
 				pageInfo: {
 					pageSize: 50,
@@ -115,6 +128,45 @@
 					}
 				}, header)
 			},
+			
+			//移除招聘信息
+			reqDeleteRecruit(id){
+				// console.log("id",id)
+				uni.showModal({
+					title: '是否停止招聘',
+					content: '确认后将会停止该职位招聘',
+					success: resVal=> {
+						if (resVal.confirm) {
+							console.log('用户点击确定');
+							const data = {
+								data: {
+								},
+								meta: {
+									openId: this.$store.state.openId,
+									role: this.$store.state.role,
+								}
+							}
+							const header = {
+								'content-type': 'application/json'
+							}
+							this.$http(`/company/close/recruit/${id}`, data, res => {
+								console.log("res",res)
+								if (res.meta.code == 200) {	
+									uni.showToast({
+										icon:"none",
+										title:"该职业招聘关闭成功"
+									})
+									this.reqRecruitmentInformation()
+								}
+							}, header)
+						} else if (resVal.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
+				
+
+			}
 		},
 		onShow(){
 			this.reqRecruitmentInformation()
@@ -164,8 +216,12 @@
 			
 				.job-item-content {
 					background-color: #fff;
-					padding: 15px;
+					padding: 15px 15rpx 0;
 					border-radius: 20rpx;
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
+					border-bottom: 2rpx solid #ccc;
+					
 					
 					.content-top {
 						display: flex;
@@ -251,6 +307,40 @@
 							font-size: 28rpx;
 						}
 					}
+					
+				}
+				
+				.recruit-stop{
+					padding: 20rpx;
+					background-color: #fff;
+					border-bottom-left-radius: 20rpx;
+					border-bottom-right-radius: 20rpx;
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					.recruit-show{
+						color: #1296db;
+					}
+					.stop-btn{
+						// border: 5rpx solid #ff4c29;
+						background-color: #ff4c29;
+						width: 280rpx;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						padding: 10rpx 0;
+						border-radius: 15rpx;
+						box-shadow: 0 0 4rpx 4rpx rgab(0,0,0,.2);
+						text{
+							color:#fff;
+						}
+						.delete-recruit{
+							width: 50rpx;
+							height: 50rpx;
+							margin-right: 20rpx;
+						}
+					}
+
 				}
 			}
 		}

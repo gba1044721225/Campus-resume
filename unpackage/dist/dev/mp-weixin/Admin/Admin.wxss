@@ -32,34 +32,49 @@
 .admin .content.data-v-72a86e9e {
   width: 600rpx;
   margin: 0 auto;
-  padding-top: 80rpx;
+  padding-top: 4vh;
   box-sizing: border-box;
 }
 .admin .content .title.data-v-72a86e9e {
   text-align: center;
   font-size: 60rpx;
   font-weight: 500;
-  margin-bottom: 100rpx;
+  margin-bottom: 5vh;
   color: #fff;
 }
-.admin .content .login-box.data-v-72a86e9e {
+.admin .content .login-box.data-v-72a86e9e, .admin .content .change-password-box.data-v-72a86e9e {
   padding: 50rpx 40rpx;
   box-sizing: border-box;
   border: 1rpx solid #fff;
   border-radius: 10rpx;
   box-shadow: 0rpx 0rpx 2rpx 2rpx rgba(0, 0, 0, 0.1);
   background: rgba(166, 168, 156, 0.2);
-  margin-bottom: 150rpx;
+  margin-bottom: 25rpx;
 }
-.admin .content .login-box input.data-v-72a86e9e {
+.admin .content .login-box .title.data-v-72a86e9e, .admin .content .change-password-box .title.data-v-72a86e9e {
+  margin-bottom: 5vh;
+}
+.admin .content .login-box input.data-v-72a86e9e, .admin .content .change-password-box input.data-v-72a86e9e {
   color: #fff;
   border: 1rpx solid #fff;
   padding: 15rpx 20rpx;
   margin-bottom: 50rpx;
   border-radius: 5rpx;
 }
-.admin .content .login-box input.data-v-72a86e9e:last-child {
+.admin .content .login-box input.data-v-72a86e9e:last-child, .admin .content .change-password-box input.data-v-72a86e9e:last-child {
   margin-bottom: 0;
+}
+.admin .content .switch-box.data-v-72a86e9e {
+  text-align: right;
+  color: #fff;
+  margin-bottom: 120rpx;
+}
+.admin .content .switch-box text.data-v-72a86e9e:nth-child(2) {
+  margin: 0 15rpx;
+}
+.admin .content .switch-box .active.data-v-72a86e9e {
+  font-weight: bold;
+  color: #78c9ff;
 }
 .admin .content .btns-box.data-v-72a86e9e {
   box-sizing: border-box;

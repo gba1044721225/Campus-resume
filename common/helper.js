@@ -4,9 +4,9 @@ module.exports = {
 	//设置全局api请求地址h
 	hostname() {
 		// return "http://192.168.43.93:8877"
-		// return "http://101.33.210.213:8877"
+		return "http://101.33.210.213:8877"
 		// return ""
-		return "https://www.lib.gold"
+		// return "https://www.lib.gold"
 	},
 
 	//设置全局api请求路径
@@ -99,7 +99,7 @@ module.exports = {
 	},
 
 	//上传
-	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.公司Logo
+	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.上传简历 8.公司Logo
 	upLoadFile(url, filePath, data, succ) {
 		console.log("this.hostname()", this.$hostname() + url)
 		console.log("filePath",filePath)

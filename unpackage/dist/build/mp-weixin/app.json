@@ -98,5 +98,7 @@
     "chooseLocation",
     "getLocation"
   ],
-  "usingComponents": {}
+  "usingComponents": {
+    "image-compt": "/imagecomponents/imageComponent"
+  }
 }

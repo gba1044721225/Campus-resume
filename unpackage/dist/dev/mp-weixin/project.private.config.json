@@ -126,6 +126,34 @@
           "query": "",
           "launchMode": "default",
           "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Admin/Admin",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Admin/enterpriseQuery",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Admin/enterpriseQueryDetails",
+          "query": "data=%7B%22address%22%3A%22%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81%E5%8F%8C%E9%B8%AD%E5%B1%B1%E5%B8%82%E5%B8%82%E8%BE%96%E5%8C%BA%22%2C%22addressDetail%22%3A%22%22%2C%22addressUrl%22%3A%22www.baidu.com%22%2C%22alias%22%3A%22%E5%85%A8%E8%83%BD%E7%A7%91%E6%8A%80%22%2C%22companyName%22%3A%22%E5%85%A8%E8%83%BD%E7%A7%91%E6%8A%80%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8%22%2C%22companySize%22%3A%2250-100%E4%BA%BA%22%2C%22contact%22%3A%22%E5%BC%B5%E4%B8%89%22%2C%22createTime%22%3A1668155375000%2C%22email%22%3A%22974541%40qq.com%22%2C%22flag%22%3A%220%22%2C%22id%22%3A6%2C%22imgIds%22%3A%22http%3A%2F%2F101.33.210.213%2Fimg%2F1669344617111.jpg%22%2C%22industryCategory%22%3A%22%E4%BA%92%E8%81%AF%E7%B6%B2%E7%A7%91%E6%8A%80%22%2C%22introduce%22%3A%22sdfsadfsad%E7%8A%AF%E5%BE%97%E4%B8%8A%E7%99%BC%E5%B0%84%E9%BB%9E%E8%8C%83%E5%BE%B7%E8%96%A9%E7%99%BC%E5%A3%AB%E5%A4%A7%E5%A4%AB%E6%92%92%E5%9C%B0%E6%96%B9%E5%A3%AB%E5%A4%A7%E5%A4%AB%22%2C%22logo%22%3A%22http%3A%2F%2F101.33.210.213%2Fimg%2F1669344613517.jpg%22%2C%22modifyTime%22%3A1669343443000%2C%22openId%22%3A%22od-gd5DBHyS_DVzCqoiVNXLPc62w%22%2C%22standbyEmail%22%3A%2265445546%22%2C%22standbyPhone%22%3A%221654658%22%2C%22standbyUser%22%3A%22%E5%BC%B58%22%2C%22unitNature%22%3A%22%E7%A7%81%E4%BC%81%22%2C%22unitPhone%22%3A%2256569654%22%2C%22weixinCode%22%3A%22%22%7D",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "",
+          "pathName": "Enterprise/enterpriseEdit/deliver",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
         }
       ]
     }
