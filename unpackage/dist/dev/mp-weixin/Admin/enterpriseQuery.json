@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "企业列表",
-  "usingComponents": {
-    "tui-icon": "/components/thorui/tui-icon/tui-icon"
-  }
-}

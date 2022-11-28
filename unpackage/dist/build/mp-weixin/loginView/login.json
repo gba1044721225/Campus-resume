@@ -1,6 +1,0 @@
-{
-  "usingComponents": {
-    "tui-landscape": "/components/thorui/tui-landscape/tui-landscape"
-  },
-  "component": true
-}

@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "在线简历",
-  "usingComponents": {
-    "tui-searchbar": "/components/thorui/tui-searchbar/tui-searchbar"
-  }
-}

@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "简历详情",
-  "usingComponents": {
-    "tui-icon": "/components/thorui/tui-icon/tui-icon",
-    "tui-modal": "/components/thorui/tui-modal/tui-modal",
-    "tui-button": "/components/thorui/tui-button/tui-button",
-    "u-datetime-picker": "/uni_modules/uview-ui/components/u-datetime-picker/u-datetime-picker"
-  }
-}

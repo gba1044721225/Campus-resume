@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "公司招聘",
-  "usingComponents": {
-    "my-login": "/loginView/login"
-  }
-}
