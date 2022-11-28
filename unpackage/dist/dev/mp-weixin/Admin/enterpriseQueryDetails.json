@@ -1,3 +1,7 @@
 {
-  "navigationBarTitleText": "企业列表详情"
+  "navigationBarTitleText": "企业列表详情",
+  "usingComponents": {
+    "tui-modal": "/components/thorui/tui-modal/tui-modal",
+    "tui-button": "/components/thorui/tui-button/tui-button"
+  }
 }

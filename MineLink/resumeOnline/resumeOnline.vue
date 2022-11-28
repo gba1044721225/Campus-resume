@@ -1553,14 +1553,14 @@
 		// onShow() {
 
 		// },
-		watch: {
-			tabList: {
-				deep: true,
-				handler(nw) {
-					console.log("nw", nw)
-				}
-			}
-		}
+		// watch: {
+		// 	tabList: {
+		// 		deep: true,
+		// 		handler(nw) {
+		// 			console.log("nw", nw)
+		// 		}
+		// 	}
+		// }
 	}
 </script>
 

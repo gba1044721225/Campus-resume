@@ -103,7 +103,7 @@
 			let data = payload.data
 			// console.log("this.resumeId", this.resumeId)
 			if (data) {
-				// console.log(data)
+				console.log(data)
 				this.educationHistory = JSON.parse(data)
 			}
 		},
@@ -222,9 +222,9 @@
 					this.$http('/recruit/user/modifyEducation', data, res => {
 						// console.log("reqEducation", res)
 						if (res.meta.code == 200) {
-							// const data=JSON.parse(res.data)
+							const data=JSON.parse(res.data)
 							this.educationHistory.addEduId = data.id
-							// console.log("this.educationHistory", this.educationHistory)					
+							console.log("this.educationHistory", this.educationHistory)					
 							uni.showToast({
 								title:"保存成功",
 								duration:1500,
