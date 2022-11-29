@@ -82,6 +82,11 @@ export default {
 						uni.setStorageSync('adminA',this.account)
 						uni.setStorageSync('adminP',this.password)
 						resolve()
+					}else{
+						uni.showToast({
+							icon:"none",
+							title:res.meta.description
+						})
 					}
 					
 				})

@@ -1,11 +1,11 @@
 <template>
 	<view class="company-intro" :class="{'bottom-ios':isIos}">
-		<view class="mode-window">
+		<view class="mode-window" v-if="flag==='1'">
 			<text>
 				已认证
 			</text>
 		</view>
-		<view class="intro-box" v-if="flag!=2">
+		<view class="intro-box">
 			<view class="company-intro-header">
 				<view class="header-left">
 					<view class="company-title">
@@ -108,7 +108,7 @@
 			return {
 				isIos:this.$isIos,
 				dataList:{},
-				flag:"",//判断是否已填写
+				flag:"",//判断是否已认证
 			}
 		},
 		methods:{
@@ -128,7 +128,7 @@
 						this.dataList=JSON.parse(res.data)
 						console.log(this.dataList)
 						this.flag=this.dataList.flag
-						if(this.flag==2){
+						if(Object.keys(this.dataList).length==0){
 							uni.showModal({
 								title: '公司简介还没有填报',
 								content: '是否立即跳转到填写页面',

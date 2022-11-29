@@ -148,11 +148,20 @@
 			},
 			reqCommitHandle() {
 				console.log(this.dataList)
+				if(!this.rejectReason){
+					uni.showToast({
+						icon:"none",
+						title:"审批意见不能为空"
+					})
+					return
+				}
+				
 				this.showModal = false
 				const data = {
 					data: {
 						...this.dataList,
-						flag:this.flag
+						flag:this.flag,
+						resultsAudit:this.rejectReason
 					},
 					meta: {
 						openId: this.$store.state.openId,

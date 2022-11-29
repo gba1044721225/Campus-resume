@@ -468,6 +468,15 @@
 					})
 					return
 				}
+				
+				if(this.authStatus!=='1'){
+					uni.showToast({
+						title: "抱歉，您的企业信息还没认证成功，请等待认证",
+						duration: 1500
+					})
+					return
+				}
+				
 				uni.navigateTo({
 					url: '/Enterprise/enterpriseEdit/enterpriseRelease'
 				})
@@ -577,6 +586,7 @@
 						this.infoItemEnterprise[0].num=data.pubNum
 						this.infoItemEnterprise[1].num=data.mianshiNum
 						this.infoItemEnterprise[2].num=data.renNum
+						this.authStatus=data.flag
 					}
 				}, header)
 			},

@@ -311,8 +311,12 @@
 			</view>
 		</view>
 
-		<view class="button-box" @click="reqEnterpriseInfo">
+		<view class="button-box" v-if="this.authStatus!=='1'" @click="reqEnterpriseInfo">
 			提交
+		</view>
+		
+		<view class="button-box" v-if="this.authStatus==='1'" style="background-color: #444;">
+			审核中暂无能提交修改
 		</view>
 
 		<tui-modal :show="showModal" custom>
@@ -371,6 +375,7 @@
 				cityLevel1: [],
 				cityLevel2: [],
 				cityLevel3: [],
+				authStatus:"1",
 				enterpriseInfo: {
 					companyFullName: "",
 					companyShortName: "",
@@ -589,30 +594,28 @@
 					console.log("res",res)
 					const dataList=JSON.parse(res.data)
 					if(res.meta.code==200){
-						if(dataList.flag!=2){
-							this.enterpriseInfo.companyFullName=dataList.companyName
-							this.enterpriseInfo.companyShortName=dataList.alias	
-							this.enterpriseInfo.businessLicenseUrl=dataList.imgIds
-							this.enterpriseInfo.businessLicense=dataList.imgIds
-							this.enterpriseInfo.unitProperties=dataList.unitNature
-							this.enterpriseInfo.industry=dataList.industryCategory
-							this.enterpriseInfo.companySize=dataList.companySize
-							this.enterpriseInfo.linkman=dataList.contact
-							this.enterpriseInfo.locationArea=dataList.address
-							this.enterpriseInfo.linkmanEmail=dataList.email
-							this.enterpriseInfo.companyProfile=dataList.introduce
-							this.enterpriseInfo.companyLogo=dataList.logo
-							this.enterpriseInfo.companyLogoUrl=dataList.logo
-							this.enterpriseInfo.wechatNumber=dataList.weixinCode
-							this.enterpriseInfo.companyWebsite=dataList.addressUrl
-							this.enterpriseInfo.fullAddress=dataList.addressDetail
-							this.enterpriseInfo.companyPhone=dataList.unitPhone
-							this.enterpriseInfo.otherLinkman=dataList.standbyUser
-							this.enterpriseInfo.otherCompanyPhone=dataList.standbyPhone
-							this.enterpriseInfo.otherEmail=dataList.standbyEmail
-							this.companyId=dataList.id
-						
-						}
+						this.enterpriseInfo.companyFullName=dataList.companyName
+						this.enterpriseInfo.companyShortName=dataList.alias	
+						this.enterpriseInfo.businessLicenseUrl=dataList.imgIds
+						this.enterpriseInfo.businessLicense=dataList.imgIds
+						this.enterpriseInfo.unitProperties=dataList.unitNature
+						this.enterpriseInfo.industry=dataList.industryCategory
+						this.enterpriseInfo.companySize=dataList.companySize
+						this.enterpriseInfo.linkman=dataList.contact
+						this.enterpriseInfo.locationArea=dataList.address
+						this.enterpriseInfo.linkmanEmail=dataList.email
+						this.enterpriseInfo.companyProfile=dataList.introduce
+						this.enterpriseInfo.companyLogo=dataList.logo
+						this.enterpriseInfo.companyLogoUrl=dataList.logo
+						this.enterpriseInfo.wechatNumber=dataList.weixinCode
+						this.enterpriseInfo.companyWebsite=dataList.addressUrl
+						this.enterpriseInfo.fullAddress=dataList.addressDetail
+						this.enterpriseInfo.companyPhone=dataList.unitPhone
+						this.enterpriseInfo.otherLinkman=dataList.standbyUser
+						this.enterpriseInfo.otherCompanyPhone=dataList.standbyPhone
+						this.enterpriseInfo.otherEmail=dataList.standbyEmail
+						this.companyId=dataList.id
+						this.authStatus=dataList.flag
 					}
 				},header)
 			},
