@@ -1,5 +1,6 @@
 module.exports = {
-	imageBaseSrc: '/static/',
+	imageBaseSrc: 'http://101.33.210.213/img/static/',	// /static/
+	
 
 	//设置全局api请求地址h
 	hostname() {
@@ -102,7 +103,7 @@ module.exports = {
 	//1:证书 2简历 3头像 4活动宣传图 5. 6.营业执照 7.上传简历 8.公司Logo
 	upLoadFile(url, filePath, data, succ) {
 		console.log("this.hostname()", this.$hostname() + url)
-		console.log("filePath",filePath)
+		console.log("filePath", filePath)
 		wx.uploadFile({
 			url: this.$hostname() + url, //仅为示例，非真实的接口地址
 			filePath, //tempFilePaths[0]
@@ -112,7 +113,7 @@ module.exports = {
 			},
 			success: succ,
 			fail: err => {
-				console.log(err,'qqqq')
+				console.log(err, 'qqqq')
 			},
 		});
 	},
@@ -127,19 +128,21 @@ module.exports = {
 		});
 
 	},
-	
+
 	//获取本地文件
 	chooseFile() {
 		return wx.chooseMessageFile({
-		  count: 1,
-		  type: 'file',
+			count: 1,
+			type: 'file',
 		})
 	},
-	
-	downFile(url,succ){
+
+	downFile(url, succ) {
 		wx.downloadFile({
-		  url: url,
-		  success:succ
+			type: "file",
+			url: url,
+			extension:['pdf','PDF','docx','doc','html'],
+			success: succ,
 		})
 	}
 }

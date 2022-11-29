@@ -66,11 +66,23 @@
 		methods: {
 			async choosePdf(index) {
 				// console.log(index)
+				const reg=/(?<=\.)([a-z|A-Z]*)$/g
+				const needType=['pdf',"PDF",'html','HTML','doc','DOC','docx','DOCX','rtf','RTF','ppt','PPT','pptx','PPTX']
 				const res = await this.$chooseFile()
-				// console.log("res", res)
+				// console.log("res", res['tempFiles'][0])
+				const fileType=reg.exec(res['tempFiles'][0]['path'])[0]
+				// console.log("fileType",fileType)
+				if(!needType.includes(fileType)){
+					uni.showToast({
+						icon:"none",
+						title:`简历格式错误，上传的格式应该为以下类型：${needType.join('，')}`,
+						duration:5000
+					})
+					return;
+				}
 				this.pdfList[index].fileUrl = res.tempFiles[0].path
 				this.pdfList[index].file = res.tempFiles[0]
-				console.log("choosePdf",this.pdfList[index])
+				// console.log("choosePdf",this.pdfList[index])
 			},
 
 			previewFile(index){				
@@ -86,7 +98,7 @@
 				wx.openDocument({
 				      filePath: path,
 				      success: function (res) {
-				        console.log('打开文档成功')
+				        // console.log('打开文档成功')
 				      },
 					  fail:res=>{
 						  uni.showToast({
@@ -109,17 +121,18 @@
 					'content-type': 'application/json'
 				}
 				this.$http('/file/query/jianli',data,res=>{
-					console.log("res",res)
+					// console.log("res",res)
 					const dataList=JSON.parse(res.data)
 					if(res.meta.code==200){
 						this.pdfList.forEach((v,i)=>{
 							if(dataList[i]){
 								this.downFile(dataList[i].fileUrl).then(new_path=>{
-									const reg=/.(?<=\.)\S+/
+									const reg=/(?<=\.)([a-z|A-Z]*)$/g
 									v.urlOnline=dataList[i].fileUrl
 									v.fileUrl=new_path
 									v.id=dataList[i].id
-									v.fileName=`简历1${reg.exec(new_path)[0]}`
+									v.fileName=`简历1.${reg.exec(new_path)[0]}`
+									// console.log("v",v)
 								})
 							}
 						})
@@ -142,7 +155,7 @@
 					standby1:index,
 					id:this.pdfList[index].id || ''
 				}, res => {
-					console.log("res", res)
+					// console.log("res", res)
 					if(res.statusCode==200){
 						uni.showToast({
 							icon:"none",
@@ -169,7 +182,7 @@
 						'content-type': 'application/json'
 					}
 					this.$http(`/file/delete/${fileId}`,data,res=>{
-						console.log("res",res)
+						// console.log("res",res)
 						resolve()
 					},header)
 				})
@@ -179,7 +192,7 @@
 			downFile(filePath){
 				return new Promise(resolve=>{
 					this.$downFile(filePath,res=>{
-						console.log("downFile",res)
+						// console.log("downFile",res)
 						resolve(res.tempFilePath)
 					})
 				})
@@ -200,7 +213,7 @@
 				  url: this.pdfList[index].urlOnline,
 				  filePath:`${wx.env.USER_DATA_PATH}/${this.pdfList[index].fileName}`,
 				  success (res) {
-					  console.log("success",res)
+					  // console.log("success",res)
 					 wx.openDocument({
 						filePath: res.filePath,
 						// fileType: 'xls',
