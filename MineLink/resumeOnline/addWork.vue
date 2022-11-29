@@ -168,7 +168,7 @@
 					this.$http('/recruit/user/modifyWorkExperience', data, res => {
 						// console.log("reqEducation", res)
 						if (res.meta.code == 200) {
-							// const data=JSON.parse(res.data)
+							const data=JSON.parse(res.data)
 							this.workHistory.addWorkId = data.id
 							// console.log("this.workHistory", this.workHistory)
 							uni.showToast({
