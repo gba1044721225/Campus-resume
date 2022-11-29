@@ -108,7 +108,7 @@
 					</view>
 
 					<view class="mine-info-item" @click="linkToEnterpriseRelease">
-						<image :src="`${imgSrc}recruitmentRelease.Png`" mode=""></image>
+						<image :src="`${imgSrc}recruitmentRelease.png`" mode=""></image>
 						<view class="item-content">
 							我要招聘
 						</view>

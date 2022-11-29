@@ -52,7 +52,7 @@
 					<view class="like-input">
 						<view class="input-item" v-for="(item,index) in enterpriseMsg.stationTag" :key="index">
 							<input type="text" v-model="enterpriseMsg.stationTag[index]">
-							<view class="del-btn" @click="delPositionTag">
+							<view class="del-btn" @click="delPositionTag(index)">
 								x
 							</view>
 						</view>
@@ -384,7 +384,8 @@
 			},
 			
 			delPositionTag(index){
-				console.log(11111)
+				// console.log(11111)
+				console.log("index",index)
 				this.enterpriseMsg.stationTag.splice(index,1)
 				console.log("this.enterpriseMsg",this.enterpriseMsg)
 			},
@@ -435,7 +436,7 @@
 				const data = {
 					data: {
 						jobName: this.enterpriseMsg.station,
-						jobLab: this.enterpriseMsg.stationTag.join("，"),
+						jobLab: this.enterpriseMsg.stationTag.filter(v=>{return v!=''}).join("，"),
 						workAddress: this.enterpriseMsg.workCity,
 						workNature: this.enterpriseMsg.workNature,
 						num: this.enterpriseMsg.enterpriseNum,
