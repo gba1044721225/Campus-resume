@@ -316,7 +316,7 @@
 		</view>
 		
 		<view class="button-box" v-if="authStatus==='1'" style="background-color: #444;">
-			审核中暂无能提交修改
+			审核已通过不主持修改！
 		</view>
 
 		<tui-modal :show="showModal" custom>
@@ -646,7 +646,7 @@
 						standbyUser: this.enterpriseInfo.otherLinkman,
 						standbyPhone: this.enterpriseInfo.otherCompanyPhone,
 						standbyEmail: this.enterpriseInfo.otherEmail,
-						flag: 0,
+						flag: 2,
 					},
 					meta: {
 						openId: this.$store.state.openId,
