@@ -798,7 +798,7 @@
 				this.reqResumeAllInfo()
 				.then(_=>{
 					this.$nextTick(()=>{
-						this.setMinHeight()
+						this.setHeight()
 					})
 				})
 			},
