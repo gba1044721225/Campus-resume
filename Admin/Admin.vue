@@ -59,7 +59,7 @@ export default {
 			this.submit()
 			.then(_=>{
 				uni.navigateTo({
-					url:"/Admin/enterpriseQuery"
+					url:"/Admin/AdminManage"
 				})
 			})
 		},

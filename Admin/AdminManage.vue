@@ -3,7 +3,7 @@
 		<view class="manage-ability">
 			<view class="ability-item" @click="linkToRecruitInfo">
 				<image :src="`${imgSrc}examine.png`" mode=""></image>
-				<text>审核</text>
+				<text>企业审批</text>
 			</view>
 			<view class="ability-item">
 				
@@ -25,7 +25,7 @@
 		methods:{
 			linkToRecruitInfo(){
 				uni.navigateTo({
-					url:"/Admin/recruitInfo"
+					url:"/Admin/enterpriseQuery"
 				})
 			}
 		}
@@ -62,7 +62,7 @@
 				}
 				text{
 					margin-top: 10rpx;
-					font-size: 32rpx;
+					font-size: 26rpx;
 					color: #dfdfdf;
 				}
 			}

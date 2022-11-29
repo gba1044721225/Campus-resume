@@ -1,11 +1,16 @@
 <template>
 	<view class="company-intro" :class="{'bottom-ios':isIos}">
+		<view class="mode-window">
+			<text>
+				已认证
+			</text>
+		</view>
 		<view class="intro-box" v-if="flag!=2">
 			<view class="company-intro-header">
 				<view class="header-left">
 					<view class="company-title">
-						<text>{{dataList.companyName?dataList.companyName:'暂无数据'}}奥术大师大所大所</text>
-						<text style="font-weight: normal;">（{{dataList.alias?dataList.alias:''}}）</text>
+						<text>{{dataList.companyName?dataList.companyName:'暂无数据'}}</text>
+						<text style="font-weight: normal;">{{dataList.alias?`(${dataList.alias})`:''}}</text>
 					</view>
 					<view class="company-intro-size">
 						{{dataList.companySize?dataList.companySize:'暂无数据'}}
@@ -152,6 +157,27 @@
 	.company-intro{
 		min-height: 100vh;
 		background-color: #1296db;
+		// position: relative;
+		.mode-window{
+			width: 100%;
+			height: 100%;
+			font-size: 200rpx;
+			color: #fda95e;
+			position: absolute;
+			font-weight: bold;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text{
+				transform: rotate(30deg);
+				letter-spacing: 50rpx;
+			}
+		}
+		
 		.intro-box{
 			padding: 20rpx 35rpx 30rpx;
 			

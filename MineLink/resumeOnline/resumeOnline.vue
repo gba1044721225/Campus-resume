@@ -793,6 +793,9 @@
 			//切换轮播图关联简历
 			changeTabItemBySwiper(e) {
 				// console.log("e",e)
+				uni.showLoading({
+					title: '加载中'
+				});	
 				this.currentResume = e.detail.current
 				
 				this.reqResumeAllInfo()
@@ -808,6 +811,7 @@
 				console.log('11111111111',query.selectAll('.swiper-item'))
 				query.select(`#swiper${this.currentResume}`).boundingClientRect(data => {
 					this.swiperHeight = data.height + 25 + 'px'
+					uni.hideLoading();
 				}).exec();
 			},
 

@@ -86,6 +86,19 @@
 							</view>
 						</view>
 					</view>
+
+					<view class="author-logo" v-if="authStatus=='0'">
+						<image src="/static/no-auth.png" mode=""></image>
+						<text>未认证</text>
+					</view>
+					<view class="author-logo" v-if="authStatus=='2'">
+						<image src="/static/authing.png" mode=""></image>
+						<text>认证中</text>
+					</view>
+					<view class="author-logo" v-if="authStatus=='1'">
+						<image src="/static/authed.png" mode=""></image>
+						<text>已认证</text>
+					</view>
 				</view>
 
 				<view class="mine-info">
@@ -260,8 +273,8 @@
 						path:"/Enterprise/enterpriseEdit/collectionStu"
 					},
 				],
-
-
+				//企业认证状态
+				authStatus:'0',
 				//企业端数据
 				enterPriseInfo: {},				
 				//学生端数据
@@ -677,6 +690,22 @@
 						}
 						
 
+					}
+				}
+				
+				.author-logo{
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					margin-left: 193rpx;
+					image{
+						width: 80rpx;
+						height: 80rpx;
+					}
+					text{
+						margin-top: 15rpx;
+						color:#fda95e;
+						font-weight: bold;
 					}
 				}
 				

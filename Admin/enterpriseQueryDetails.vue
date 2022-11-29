@@ -133,7 +133,7 @@
 			}
 		},
 		methods: {
-			//邀请面试
+			//通过
 			passExamine() {
 				this.rejectReason = ''
 				this.showModal = true

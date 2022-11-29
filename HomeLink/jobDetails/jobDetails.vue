@@ -42,7 +42,7 @@
 							手机号：{{jobList.recruitmentInfo.contactPhone}}
 						</view>
 						<view class="info-item">
-							总公司邮箱：{{jobList.company.email}}
+							公司邮箱：{{jobList.company.email}}
 						</view>
 					</view>
 				</view>
