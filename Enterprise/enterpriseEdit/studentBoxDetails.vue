@@ -309,17 +309,17 @@
 			//下载简历
 			downLoadPdf(item){
 				//模拟测试数据
-				item={
-					userName:"廖健聪",
-					downUrl:"http://101.33.210.213/img/1668363619038.doc"
-				}
+				// item={
+				// 	userName:"廖健聪",
+				// 	downUrl:"http://101.33.210.213/img/1668363619038.doc"
+				// }
 				
 				
 				const reg=/.(?<=\.)([a-z|A-Z]+)$/g
-				let fileName=`${item.userName}${reg.exec(item.downUrl)[0]}`
+				let fileName=`${item.userName}${reg.exec(item.jianliPath)[0]}`
 				console.log("fileName",fileName)
 				wx.downloadFile({
-				  url: item.downUrl,
+				  url: item.jianliPath,
 				  filePath:`${wx.env.USER_DATA_PATH}/${fileName}`,
 				  success (res) {
 					  // console.log("success",res)

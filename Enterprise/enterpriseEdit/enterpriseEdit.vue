@@ -311,11 +311,11 @@
 			</view>
 		</view>
 
-		<view class="button-box" v-if="this.authStatus!=='1'" @click="reqEnterpriseInfo">
+		<view class="button-box" v-if="authStatus!=='1'" @click="reqEnterpriseInfo">
 			提交
 		</view>
 		
-		<view class="button-box" v-if="this.authStatus==='1'" style="background-color: #444;">
+		<view class="button-box" v-if="authStatus==='1'" style="background-color: #444;">
 			审核中暂无能提交修改
 		</view>
 
@@ -593,6 +593,7 @@
 				this.$http('/company/query',data,res=>{
 					console.log("res",res)
 					const dataList=JSON.parse(res.data)
+					console.log("22222222222",dataList.flag)
 					if(res.meta.code==200){
 						this.enterpriseInfo.companyFullName=dataList.companyName
 						this.enterpriseInfo.companyShortName=dataList.alias	
