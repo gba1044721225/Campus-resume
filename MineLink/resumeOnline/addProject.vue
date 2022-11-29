@@ -165,8 +165,9 @@
 						'content-type': 'application/json'
 					}
 					this.$http('/recruit/user/projectExperience',data,res=>{
-						// console.log("reqAddPro",res)
+						console.log("reqAddPro",res)
 						if(res.meta.code==200){
+							const data=JSON.parse(res.data)
 							this.proHistory.addProId=data.id
 							
 							uni.showToast({
