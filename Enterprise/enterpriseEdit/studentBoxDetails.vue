@@ -462,6 +462,7 @@
 					margin-bottom: 10rpx;
 				}
 				.exp-intro{
+					word-wrap:break-word;
 					margin-bottom: 10rpx;
 					text-indent: 2em;
 				}
