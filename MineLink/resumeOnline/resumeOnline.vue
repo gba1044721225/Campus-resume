@@ -794,8 +794,13 @@
 			changeTabItemBySwiper(e) {
 				// console.log("e",e)
 				this.currentResume = e.detail.current
-				// this.setMinHeight()
+				
 				this.reqResumeAllInfo()
+				.then(_=>{
+					this.$nextTick(()=>{
+						this.setMinHeight()
+					})
+				})
 			},
 			//页面高度初始化
 			setHeight() {
@@ -1632,7 +1637,7 @@
 
 					.item-title {
 						margin-left: 25rpx;
-						font-size: 36rpx;
+						font-size: 40rpx;
 						padding: 5rpx 25rpx;
 						box-sizing: border-box;
 						font-weight: bold;
@@ -1661,7 +1666,7 @@
 
 					.item-title {
 						margin-left: 5rpx;
-						font-size: 36rpx;
+						font-size: 40rpx;
 						padding: 5rpx 25rpx;
 						box-sizing: border-box;
 						font-weight: bold;
@@ -1681,6 +1686,11 @@
 
 							.item-content {
 								width: 500rpx;
+								display: -webkit-box;					 
+								-webkit-box-orient: vertical;					 
+								-webkit-line-clamp: 4;
+								overflow: hidden;
+								text-overflow:ellipsis;
 								.image-show {
 									display: flex;
 
