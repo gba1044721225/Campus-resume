@@ -1680,7 +1680,7 @@
 							font-size: 30rpx;
 
 							.item-content {
-								
+								width: 500rpx;
 								.image-show {
 									display: flex;
 
