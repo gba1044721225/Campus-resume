@@ -21,7 +21,7 @@
 		<view class="self-introduction">
 			<view class="title introduction">
 				<text class="job-name">自我介绍</text>
-				<view class="download-pdf" @click.stop="downLoadPdf(dataList)">
+				<view class="download-pdf" @click.stop="downLoadPdf">
 					<text>下载简历</text>
 					<tui-icon name="todown" :size="15" color="#fff"></tui-icon>
 				</view>
@@ -192,6 +192,8 @@
 				dateTime:"",
 				showDataTime:"",
 				isDateTime:false,
+				jianliPath:"",
+				userName:"",
 				dataList:{},
 			}
 		},
@@ -307,7 +309,7 @@
 			},
 			
 			//下载简历
-			downLoadPdf(item){
+			downLoadPdf(){
 				//模拟测试数据
 				// item={
 				// 	userName:"廖健聪",
@@ -316,10 +318,10 @@
 				
 				
 				const reg=/.(?<=\.)([a-z|A-Z]+)$/g
-				let fileName=`${item.userName}${reg.exec(item.jianliPath)[0]}`
-				console.log("fileName",fileName)
+				let fileName=`${this.userName}${reg.exec(this.jianliPath)[0]}`
+				// console.log("fileName",fileName)
 				wx.downloadFile({
-				  url: item.jianliPath,
+				  url: this.jianliPath,
 				  filePath:`${wx.env.USER_DATA_PATH}/${fileName}`,
 				  success (res) {
 					  // console.log("success",res)
@@ -361,8 +363,10 @@
 		onLoad(payload) {
 			this.stuId=payload.stuId
 			this.recruitId=payload.recruitId
-			console.log("this.stuId",this.stuId)
-			console.log("this.recruitId",this.recruitId)
+			this.jianliPath=payload.jianliPath
+			this.userName=payload.userName
+			// console.log("this.stuId",this.stuId)
+			// console.log("this.recruitId",this.recruitId)
 			this.reqResumeListById()
 		}
 	}

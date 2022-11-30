@@ -675,11 +675,18 @@
 
 				.login-tips {
 					margin-left: 36rpx;
-
+					margin-right: 20rpx;
+					width: 381rpx;
+					// overflow: hidden;
+					
 					.tips-title {
 						font-size: 36rpx;
 						font-weight: bold;
 						color: #fff;
+						width: 100%;
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
 					}
 
 					.resume-online {
@@ -707,7 +714,7 @@
 					display: flex;
 					flex-direction: column;
 					align-items: center;
-					margin-left: 193rpx;
+					// margin-left: 193rpx;
 					image{
 						width: 80rpx;
 						height: 80rpx;

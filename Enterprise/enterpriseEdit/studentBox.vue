@@ -1,6 +1,6 @@
 <template>
 	<view class="student-box">
-		<view @click="linkToStudentBoxDetails(item.id)" class="student-item" v-for="(item,index) in dataList" :key="index">
+		<view @click="linkToStudentBoxDetails(item)" class="student-item" v-for="(item,index) in dataList" :key="index">
 			<view class="item-content">
 				<image :src="item.imgUrl" mode=""></image>
 				<view class="content">
@@ -54,9 +54,9 @@
 			// },
 
 
-			linkToStudentBoxDetails(stuId){
+			linkToStudentBoxDetails(item){
 				uni.navigateTo({
-					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${stuId}&recruitId=${this.recruitId}`
+					url: `/Enterprise/enterpriseEdit/studentBoxDetails?stuId=${item.id}&recruitId=${this.recruitId}&jianliPath=${item.jianliPath}&userName=${item.userName}`
 				})
 			},
 			
